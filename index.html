@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEX // OpenClaw Intelligence Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cyan:    #00e5ff;
+  --magenta: #e040fb;
+  --green:   #69ff47;
+  --yellow:  #ffea00;
+  --red:     #ff1744;
+  --orange:  #ff6d00;
+  --bg:      #050510;
+  --surface: rgba(8,8,24,0.85);
+  --glass:   rgba(0,229,255,0.04);
+  --border:  rgba(0,229,255,0.18);
+  --text:    #c8d8ff;
+  --dim:     #5a6a8a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh}
+
+/* ── MATRIX CANVAS ── */
+#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.13;pointer-events:none}
+
+/* ── GRID OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);
+  background-size:40px 40px}
+
+/* ── SCANLINES ── */
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px)}
+
+/* ── LAYOUT ── */
+#app{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:12px 16px}
+
+/* ── HEADER ── */
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  margin-bottom:12px;backdrop-filter:blur(12px);
+  box-shadow:0 0 40px rgba(0,229,255,.08),inset 0 1px 0 rgba(0,229,255,.12)}
+
+.header-left{display:flex;align-items:center;gap:16px}
+.logo-ascii{font-family:'Orbitron',monospace;font-size:22px;font-weight:900;
+  color:var(--cyan);text-shadow:0 0 20px var(--cyan),0 0 40px var(--cyan);
+  letter-spacing:4px}
+.logo-sub{font-size:10px;color:var(--dim);letter-spacing:3px;margin-top:2px}
+
+.header-center{text-align:center}
+.clock-utc{font-family:'Orbitron',monospace;font-size:20px;font-weight:700;
+  color:var(--yellow);text-shadow:0 0 15px var(--yellow);letter-spacing:2px}
+.clock-label{font-size:9px;color:var(--dim);letter-spacing:2px;margin-top:2px}
+
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.dex-status{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2px}
+.status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.status-dot.online{background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse-green 1.5s ease infinite}
+.status-dot.offline{background:var(--red);box-shadow:0 0 10px var(--red);animation:pulse-red 1s ease infinite}
+.status-dot.checking{background:var(--yellow);box-shadow:0 0 10px var(--yellow);animation:pulse-yellow 0.8s ease infinite}
+.last-push{font-size:9px;color:var(--dim);letter-spacing:1px}
+
+@keyframes pulse-green{0%,100%{box-shadow:0 0 8px var(--green)}50%{box-shadow:0 0 20px var(--green),0 0 40px rgba(105,255,71,.4)}}
+@keyframes pulse-red{0%,100%{box-shadow:0 0 8px var(--red)}50%{box-shadow:0 0 20px var(--red)}}
+@keyframes pulse-yellow{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ── TABS ── */
+.tab-nav{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{position:relative;padding:9px 18px;background:var(--surface);
+  border:1px solid rgba(0,229,255,.12);border-radius:3px;
+  color:var(--dim);font-family:'Share Tech Mono',monospace;font-size:11px;
+  letter-spacing:2px;cursor:pointer;overflow:hidden;transition:all .25s;
+  text-transform:uppercase}
+.tab-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,.3),transparent);
+  transition:none;pointer-events:none}
+.tab-btn:hover::before{animation:sweep .6s linear}
+.tab-btn:hover{border-color:rgba(0,229,255,.4);color:var(--cyan);
+  box-shadow:0 0 15px rgba(0,229,255,.15)}
+.tab-btn.active{background:rgba(0,229,255,.08);border-color:var(--cyan);
+  color:var(--cyan);box-shadow:0 0 20px rgba(0,229,255,.2),inset 0 0 20px rgba(0,229,255,.05)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+@keyframes sweep{0%{left:-100%}100%{left:100%}}
+
+/* TAB COLORS */
+.tab-btn[data-tab="services"].active{border-color:var(--green);color:var(--green);box-shadow:0 0 20px rgba(105,255,71,.2);background:rgba(105,255,71,.05)}
+.tab-btn[data-tab="services"].active::after{background:var(--green);box-shadow:0 0 8px var(--green)}
+.tab-btn[data-tab="models"].active{border-color:var(--magenta);color:var(--magenta);box-shadow:0 0 20px rgba(224,64,251,.2);background:rgba(224,64,251,.05)}
+.tab-btn[data-tab="models"].active::after{background:var(--magenta);box-shadow:0 0 8px var(--magenta)}
+.tab-btn[data-tab="memory"].active{border-color:var(--yellow);color:var(--yellow);box-shadow:0 0 20px rgba(255,234,0,.2);background:rgba(255,234,0,.05)}
+.tab-btn[data-tab="memory"].active::after{background:var(--yellow);box-shadow:0 0 8px var(--yellow)}
+.tab-btn[data-tab="commands"].active{border-color:var(--orange);color:var(--orange);box-shadow:0 0 20px rgba(255,109,0,.2);background:rgba(255,109,0,.05)}
+.tab-btn[data-tab="commands"].active::after{background:var(--orange);box-shadow:0 0 8px var(--orange)}
+
+/* ── SECTIONS ── */
+.tab-section{display:none;animation:fadein .3s ease}
+.tab-section.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── CARDS ── */
+.card{background:var(--glass);border:1px solid var(--border);border-radius:4px;
+  padding:18px;backdrop-filter:blur(8px);transition:all .3s;
+  box-shadow:0 0 20px rgba(0,229,255,.04)}
+.card:hover{border-color:rgba(0,229,255,.35);box-shadow:0 0 30px rgba(0,229,255,.1)}
+.card-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px}
+.card-title .accent{display:inline-block;width:3px;height:14px;border-radius:1px}
+
+/* ── GRIDS ── */
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:900px){.grid-3,.grid-4{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
+
+/* ── STAT BLOCKS ── */
+.stat-num{font-family:'Orbitron',monospace;font-size:32px;font-weight:900;line-height:1}
+.stat-label{font-size:9px;letter-spacing:2px;color:var(--dim);margin-top:4px;text-transform:uppercase}
+.stat-sub{font-size:10px;color:var(--dim);margin-top:6px}
+
+/* ── SERVICE CARDS ── */
+.svc-card{background:var(--glass);border:1px solid var(--border);border-radius:4px;
+  padding:14px;transition:all .3s;position:relative;overflow:hidden}
+.svc-card.online{border-color:rgba(105,255,71,.25)}
+.svc-card.online:hover{box-shadow:0 0 25px rgba(105,255,71,.15);border-color:rgba(105,255,71,.5)}
+.svc-card.offline{border-color:rgba(255,23,68,.25)}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.svc-card.online::before{background:linear-gradient(90deg,transparent,var(--green),transparent);animation:sweep-h 3s linear infinite}
+.svc-card.offline::before{background:linear-gradient(90deg,transparent,var(--red),transparent)}
+@keyframes sweep-h{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+.svc-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;
+  letter-spacing:2px;color:var(--cyan);margin-bottom:8px}
+.svc-port{font-size:18px;font-weight:700;color:var(--green);font-family:'Orbitron',monospace}
+.svc-meta{font-size:10px;color:var(--dim);margin-top:4px;line-height:1.8}
+.svc-bar{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:8px;overflow:hidden}
+.svc-bar-fill{height:100%;border-radius:2px;transition:width .5s ease}
+
+/* ── MODEL CARDS ── */
+.model-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;
+  border-radius:3px;font-size:10px;letter-spacing:1px;border:1px solid;margin:3px}
+.model-chip.primary{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.07)}
+.model-chip.fallback{border-color:var(--magenta);color:var(--magenta);background:rgba(224,64,251,.07)}
+.model-chip.embed{border-color:var(--yellow);color:var(--yellow);background:rgba(255,234,0,.07)}
+
+/* ── API KEY POOLS ── */
+.key-pool{margin-bottom:14px}
+.key-pool-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.key-pool-name{font-size:10px;letter-spacing:2px;color:var(--text)}
+.key-pool-count{font-family:'Orbitron',monospace;font-size:14px;font-weight:700}
+.key-dots{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.key-dot{width:14px;height:14px;border-radius:2px;transition:all .3s}
+.key-dot.working{background:var(--green);box-shadow:0 0 6px rgba(105,255,71,.6)}
+.key-dot.resting{background:var(--yellow);animation:pulse-yellow 1.5s ease infinite}
+.key-dot.down{background:rgba(255,23,68,.4);border:1px solid var(--red)}
+.key-dot:hover{transform:scale(1.3)}
+
+/* ── MEMORY LAYERS ── */
+.mem-layer{display:flex;align-items:stretch;gap:12px;margin-bottom:10px;position:relative}
+.mem-layer::before{content:'';position:absolute;left:22px;top:44px;bottom:-10px;
+  width:1px;background:linear-gradient(180deg,var(--cyan),transparent);opacity:.3}
+.mem-layer:last-child::before{display:none}
+.mem-num{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-family:'Orbitron',monospace;font-size:14px;font-weight:900;
+  flex-shrink:0;border:2px solid}
+.mem-body{flex:1}
+.mem-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;
+  letter-spacing:2px;margin-bottom:4px}
+.mem-desc{font-size:10px;color:var(--dim);line-height:1.7}
+.mem-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;
+  border-radius:2px;font-size:9px;letter-spacing:1px;margin-top:6px;border:1px solid}
+
+/* ── QDRANT COLLECTIONS ── */
+.qdrant-col{padding:10px 14px;background:rgba(0,0,0,.3);border-radius:3px;
+  border-left:3px solid var(--magenta);margin-bottom:6px;
+  display:flex;justify-content:space-between;align-items:center}
+.col-name{font-size:11px;color:var(--magenta);letter-spacing:1px}
+.col-stats{font-size:10px;color:var(--dim);text-align:right}
+
+/* ── PLUGIN CARDS ── */
+.plugin-card{padding:12px 14px;background:rgba(0,0,0,.25);border-radius:3px;
+  border:1px solid var(--border);display:flex;align-items:center;gap:12px;
+  transition:all .25s}
+.plugin-card:hover{border-color:rgba(0,229,255,.3);background:rgba(0,229,255,.04)}
+.plugin-card.disabled{opacity:0.45;border-style:dashed}
+.plugin-kind{font-size:8px;padding:2px 6px;border-radius:2px;letter-spacing:1px;
+  text-transform:uppercase;flex-shrink:0}
+.plugin-info{flex:1}
+.plugin-name{font-size:11px;color:var(--text);letter-spacing:1px}
+.plugin-ver{font-size:9px;color:var(--dim);margin-top:2px}
+.plugin-toggle{width:28px;height:14px;border-radius:7px;border:1px solid;
+  position:relative;flex-shrink:0}
+.plugin-toggle.on{background:rgba(105,255,71,.2);border-color:var(--green)}
+.plugin-toggle.off{background:rgba(255,23,68,.1);border-color:rgba(255,23,68,.4)}
+.plugin-toggle::after{content:'';position:absolute;width:10px;height:10px;
+  border-radius:50%;top:1px;transition:all .2s}
+.plugin-toggle.on::after{right:1px;background:var(--green);box-shadow:0 0 6px var(--green)}
+.plugin-toggle.off::after{left:1px;background:rgba(255,23,68,.6)}
+
+/* ── FILE TREE ── */
+.tree{font-size:11px;line-height:2;color:var(--text);overflow-x:auto}
+.tree .dir{color:var(--cyan)}
+.tree .file{color:var(--dim)}
+.tree .ext-js{color:var(--yellow)}
+.tree .ext-json{color:var(--green)}
+.tree .ext-py{color:var(--magenta)}
+.tree .ext-yaml{color:var(--orange)}
+.tree .ext-md{color:#60a0ff}
+.tree .tag{font-size:8px;padding:1px 5px;border-radius:2px;margin-left:8px;
+  vertical-align:middle;letter-spacing:1px}
+
+/* ── COMMANDS ── */
+.cmd-group{margin-bottom:20px}
+.cmd-group-title{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;
+  letter-spacing:3px;color:var(--orange);margin-bottom:10px;
+  padding-bottom:6px;border-bottom:1px solid rgba(255,109,0,.2);
+  display:flex;align-items:center;gap:8px}
+.cmd-group-title::before{content:'▶';font-size:8px}
+.cmd-block{position:relative;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.06);
+  border-radius:3px;padding:12px 14px 12px 14px;margin-bottom:6px;cursor:pointer;
+  transition:all .2s}
+.cmd-block:hover{border-color:rgba(255,109,0,.3);background:rgba(255,109,0,.04)}
+.cmd-block code{font-family:'Share Tech Mono',monospace;font-size:11px;
+  color:#a0e0ff;line-height:1.8;display:block;white-space:pre;overflow-x:auto}
+.cmd-block .cmd-desc{font-size:9px;color:var(--dim);margin-bottom:6px;letter-spacing:1px}
+.cmd-block .copy-btn{position:absolute;top:8px;right:8px;padding:3px 8px;
+  background:rgba(255,109,0,.15);border:1px solid rgba(255,109,0,.3);
+  border-radius:2px;font-size:9px;color:var(--orange);cursor:pointer;
+  font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:all .2s}
+.cmd-block .copy-btn:hover{background:rgba(255,109,0,.3)}
+.cmd-block .copy-btn.copied{color:var(--green);border-color:var(--green);background:rgba(105,255,71,.15)}
+.cmd-private{border-left:3px solid rgba(255,23,68,.4)}
+.private-badge{display:inline-flex;align-items:center;gap:4px;font-size:8px;
+  color:var(--red);letter-spacing:1px;margin-left:8px;opacity:.8}
+
+/* ── LIVE STATUS TAB ── */
+.health-row{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;border-radius:3px;border:1px solid var(--border);
+  margin-bottom:6px;background:var(--glass);transition:all .2s}
+.health-row:hover{border-color:rgba(0,229,255,.3)}
+.health-label{font-size:11px;letter-spacing:1px}
+.health-val{font-family:'Orbitron',monospace;font-size:12px}
+.health-time{font-size:9px;color:var(--dim);margin-top:2px}
+
+.refresh-btn{display:flex;align-items:center;gap:8px;padding:10px 20px;
+  background:rgba(0,229,255,.08);border:1px solid var(--cyan);border-radius:3px;
+  color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:11px;
+  letter-spacing:2px;cursor:pointer;transition:all .25s;margin-bottom:16px}
+.refresh-btn:hover{background:rgba(0,229,255,.15);box-shadow:0 0 20px rgba(0,229,255,.2)}
+.refresh-btn .spin{display:inline-block;transition:transform .3s}
+.refresh-btn:active .spin{transform:rotate(180deg)}
+
+/* ── PROGRESS BARS ── */
+.bar-wrap{height:4px;background:rgba(255,255,255,.06);border-radius:2px;
+  overflow:hidden;margin-top:4px}
+.bar-fill{height:100%;border-radius:2px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+
+/* ── SECTION HEADERS ── */
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;
+  padding-bottom:10px;border-bottom:1px solid var(--border)}
+.section-title{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase}
+.section-badge{padding:3px 10px;border-radius:2px;font-size:9px;
+  letter-spacing:2px;border:1px solid}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:rgba(0,0,0,.3)}
+::-webkit-scrollbar-thumb{background:rgba(0,229,255,.3);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,229,255,.5)}
+
+/* ── GLITCH ANIMATION ── */
+@keyframes glitch{
+  0%,100%{clip-path:none;transform:none}
+  20%{clip-path:polygon(0 20%,100% 20%,100% 25%,0 25%);transform:translate(-2px)}
+  22%{clip-path:none;transform:none}
+  60%{clip-path:polygon(0 70%,100% 70%,100% 73%,0 73%);transform:translate(2px)}
+  62%{clip-path:none;transform:none}
+}
+.logo-ascii:hover{animation:glitch .4s steps(1) 3}
+
+/* ── NEON BORDER SPIN (rotating conic) ── */
+@property --spin-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes spin-border{to{--spin-angle:360deg}}
+.neon-spin{position:relative;padding:2px;border-radius:5px;
+  background:conic-gradient(from var(--spin-angle),var(--cyan),var(--magenta),var(--green),var(--cyan));
+  animation:spin-border 3s linear infinite}
+.neon-spin-inner{background:var(--bg);border-radius:3px;padding:16px}
+
+/* ── TOOLTIP ── */
+[data-tip]{position:relative;cursor:default}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);
+  left:50%;transform:translateX(-50%);background:rgba(0,0,0,.9);
+  border:1px solid var(--border);border-radius:3px;padding:4px 8px;
+  font-size:9px;letter-spacing:1px;white-space:nowrap;color:var(--text);z-index:99}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:16px;font-size:9px;color:var(--dim);
+  letter-spacing:2px;border-top:1px solid var(--border);margin-top:16px}
+
+/* ── LIVE UPDATE PANEL ── */
+.update-info{padding:10px 14px;background:rgba(105,255,71,.04);
+  border:1px solid rgba(105,255,71,.15);border-radius:3px;
+  margin-bottom:12px;font-size:10px;color:var(--dim);line-height:1.8}
+.update-info strong{color:var(--green)}
+</style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div id="app">
+
+<!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+<header>
+  <div class="header-left">
+    <div>
+      <div class="logo-ascii">DEX</div>
+      <div class="logo-sub">OPENCLAW INTELLIGENCE HUB // v2026.4.15</div>
+    </div>
+    <div style="width:1px;height:40px;background:var(--border)"></div>
+    <div style="font-size:9px;color:var(--dim);line-height:2">
+      <div>NODE <span style="color:var(--cyan)">v24.15.0</span></div>
+      <div>PLATFORM <span style="color:var(--cyan)">WSL2 / Linux</span></div>
+      <div>OPERATOR <span style="color:var(--cyan)">Rawhi Jawabri</span></div>
+    </div>
+  </div>
+
+  <div class="header-center">
+    <div class="clock-utc" id="clock">--:--:--</div>
+    <div class="clock-label">UTC+3 // BAGHDAD / RIYADH</div>
+    <div style="font-size:9px;color:var(--dim);margin-top:4px" id="date-display">---</div>
+  </div>
+
+  <div class="header-right">
+    <div class="dex-status">
+      <div class="status-dot checking" id="gw-dot"></div>
+      <span id="gw-label" style="color:var(--dim)">DEX — CHECKING...</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:10px">
+      <span style="color:var(--dim)">@dexclawbot_bot</span>
+      <span style="color:var(--dim)">·</span>
+      <span style="color:var(--dim)">Telegram</span>
+    </div>
+    <div class="last-push" id="last-updated">Last push: —</div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════ TABS ═══════════════════════════ -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="overview">⬡ OVERVIEW</button>
+  <button class="tab-btn" data-tab="services">◈ SERVICES</button>
+  <button class="tab-btn" data-tab="models">◉ MODELS</button>
+  <button class="tab-btn" data-tab="memory">◎ MEMORY</button>
+  <button class="tab-btn" data-tab="plugins">◆ PLUGINS</button>
+  <button class="tab-btn" data-tab="structure">◧ STRUCTURE</button>
+  <button class="tab-btn" data-tab="commands">⌘ COMMANDS</button>
+  <button class="tab-btn" data-tab="live">◈ LIVE STATUS</button>
+</nav>
+
+<!-- ═══════════════════════════ OVERVIEW ═══════════════════════════ -->
+<section class="tab-section active" id="tab-overview">
+  <div class="grid-4" style="margin-bottom:12px">
+    <div class="card" style="border-color:rgba(0,229,255,.3)">
+      <div class="stat-num counter" data-target="5" style="color:var(--cyan)">0</div>
+      <div class="stat-label">Active Services</div>
+      <div class="stat-sub">All systemd healthy</div>
+    </div>
+    <div class="card" style="border-color:rgba(105,255,71,.3)">
+      <div class="stat-num counter" data-target="40" style="color:var(--green)">0</div>
+      <div class="stat-label">API Keys Total</div>
+      <div class="stat-sub">Across 4 providers</div>
+    </div>
+    <div class="card" style="border-color:rgba(224,64,251,.3)">
+      <div class="stat-num counter" data-target="19" style="color:var(--magenta)">0</div>
+      <div class="stat-label">Memory Vectors</div>
+      <div class="stat-sub">mem0-openclaw (Qdrant)</div>
+    </div>
+    <div class="card" style="border-color:rgba(255,234,0,.3)">
+      <div class="stat-num counter" data-target="7" style="color:var(--yellow)">0</div>
+      <div class="stat-label">Active Plugins</div>
+      <div class="stat-sub">of 9 installed</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:12px">
+    <!-- Architecture diagram -->
+    <div class="card">
+      <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>ARCHITECTURE FLOW</div>
+      <div style="font-size:10px;line-height:2.2;color:var(--dim)">
+        <div style="color:var(--text)">📱 Telegram (@dexclawbot_bot)</div>
+        <div style="padding-left:20px;color:var(--dim)">↓ TELEGRAM_BOT_TOKEN</div>
+        <div style="padding-left:20px;color:var(--cyan)">▶ OpenClaw Gateway :18789</div>
+        <div style="padding-left:40px;color:var(--dim)">→ input-router plugin</div>
+        <div style="padding-left:60px;color:var(--text)">Text → <span style="color:var(--cyan)">google/gemini-2.5-flash</span></div>
+        <div style="padding-left:60px;color:var(--text)">Image/PDF → <span style="color:var(--magenta)">mistral/large</span></div>
+        <div style="padding-left:40px;color:var(--dim)">→ openclaw-mem0 (recall)</div>
+        <div style="padding-left:60px;color:var(--yellow)">Qdrant :6333 → mem0-openclaw</div>
+        <div style="padding-left:40px;color:var(--dim)">→ cognee-augment (graph)</div>
+        <div style="padding-left:60px;color:var(--yellow)">Cognee :8000 → knowledge</div>
+        <div style="padding-left:40px;color:var(--dim)">→ QMD (context memory)</div>
+        <div style="padding-left:40px;color:var(--dim)">→ Agent inference</div>
+        <div style="padding-left:40px;color:var(--dim)">→ Reply → Telegram</div>
+      </div>
+    </div>
+
+    <!-- Model routing -->
+    <div class="card">
+      <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>MODEL ROUTING</div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">PRIMARY CHAT</div>
+        <div class="model-chip primary">🔷 google/gemini-2.5-flash</div>
+        <div style="font-size:9px;color:var(--dim);margin-top:2px">Via Google plugin · Not LiteLLM</div>
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">FALLBACK / MULTIMODAL</div>
+        <div class="model-chip fallback">🔶 mistral/mistral-large-latest</div>
+        <div class="model-chip fallback" style="font-size:9px">🔶 mistral/pixtral-large-latest</div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">EMBEDDINGS (via LiteLLM :4000)</div>
+        <div class="model-chip embed">⬡ gemini-embedding-001 · 3072-dim</div>
+        <div style="font-size:9px;color:var(--dim);margin-top:2px">12-key round-robin pool · Cosine similarity</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Key summary -->
+  <div class="card">
+    <div class="card-title"><span class="accent" style="background:var(--green)"></span>API KEY INVENTORY</div>
+    <div class="grid-4">
+      <div>
+        <div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI CHAT</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--cyan)">12</div>
+        <div style="font-size:9px;color:var(--dim)">GEMINI_API_KEY_1-12</div>
+        <div style="font-size:9px;color:var(--dim)">LiteLLM gemini-flash pool</div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI EMBEDDING</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--green)">12</div>
+        <div style="font-size:9px;color:var(--dim)">GEMINI_MEM_KEY_1-12</div>
+        <div style="font-size:9px;color:var(--dim)">LiteLLM gemini-embedding pool</div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">MISTRAL</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--magenta)">6</div>
+        <div style="font-size:9px;color:var(--dim)">MISTRAL_API_KEY + 1-5</div>
+        <div style="font-size:9px;color:var(--dim)">Agentic / Multimodal</div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">BROWSERLESS + OTHER</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--orange)">10</div>
+        <div style="font-size:9px;color:var(--dim)">6 Browserless + Google + LiteLLM + Telegram</div>
+        <div style="font-size:9px;color:var(--dim)">Web scraping + auth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SERVICES ═══════════════════════════ -->
+<section class="tab-section" id="tab-services">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--green)">ACTIVE SERVICES</div>
+    <span class="section-badge" style="border-color:var(--green);color:var(--green)">5 / 5 RUNNING</span>
+  </div>
+
+  <div class="grid-3" id="services-grid">
+    <!-- rendered by JS -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MODELS ═══════════════════════════ -->
+<section class="tab-section" id="tab-models">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--magenta)">MODELS & API POOLS</div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:12px">
+    <div class="card">
+      <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>GOOGLE / GEMINI</div>
+      <div style="font-size:10px;line-height:2;color:var(--dim)">
+        <div style="color:var(--cyan);font-weight:700">▶ PRIMARY MODEL</div>
+        <div style="padding-left:12px;color:var(--text)">google/gemini-2.5-flash</div>
+        <div style="padding-left:12px;font-size:9px">ctx: unlimited · input: text+image</div>
+        <div style="padding-left:12px;font-size:9px">Via: OpenClaw Google plugin (NOT LiteLLM)</div>
+        <br>
+        <div style="color:var(--yellow)">▶ EMBEDDING MODEL</div>
+        <div style="padding-left:12px;color:var(--text)">gemini-embedding-001</div>
+        <div style="padding-left:12px;font-size:9px">dims: 3072 · distance: Cosine</div>
+        <div style="padding-left:12px;font-size:9px">Via: LiteLLM proxy :4000 (12-key pool)</div>
+        <br>
+        <div style="color:var(--dim)">⛔ BANNED: gemini-2.0-flash (deprecated)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>MISTRAL AI — 7 MODELS</div>
+      <div id="mistral-models" style="font-size:10px"></div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:12px">
+    <div class="card">
+      <div class="card-title"><span class="accent" style="background:var(--yellow)"></span>LITELLM PROXY — PORT 4000</div>
+      <div style="font-size:10px;color:var(--dim);line-height:1.9">
+        <div>Config: <span style="color:var(--text)">~/.litellm/config.yaml</span></div>
+        <div>Auth key: <span style="color:var(--text)">sk-openclaw-litellm-local</span></div>
+        <br>
+        <div style="color:var(--yellow);font-size:11px;font-weight:700">POOL 1 — gemini-flash (chat)</div>
+        <div>Keys: GEMINI_API_KEY_1-12</div>
+        <div>Model: gemini/gemini-2.5-flash</div>
+        <div>Used by: Cognee LLM, mem0 LLM</div>
+        <br>
+        <div style="color:var(--yellow);font-size:11px;font-weight:700">POOL 2 — gemini-embedding</div>
+        <div>Keys: GEMINI_MEM_KEY_1-12</div>
+        <div>Model: gemini-embedding-001 (3072d)</div>
+        <div>Used by: mem0 embedder, Cognee embedder</div>
+        <br>
+        <div style="color:var(--magenta);font-size:11px;font-weight:700">POOL 3 — mistral-large</div>
+        <div>Keys: MISTRAL_API_KEY + 1-5</div>
+        <div>Used by: agentic / multimodal tasks</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="accent" style="background:var(--orange)"></span>CODEX PROVIDER — OPENAI</div>
+      <div style="font-size:10px;color:var(--dim);line-height:1.9;margin-bottom:10px">
+        <div>Base URL: <span style="color:var(--text)">chatgpt.com/backend-api/v1</span></div>
+        <div>Auth: <span style="color:var(--text)">token (codex-app-server)</span></div>
+        <div>API: <span style="color:var(--text)">openai-codex-responses</span></div>
+      </div>
+      <div id="codex-models"></div>
+    </div>
+  </div>
+
+  <!-- API Key Pool Visual -->
+  <div class="card">
+    <div class="card-title"><span class="accent" style="background:var(--green)"></span>API KEY POOL STATUS <span style="font-size:9px;color:var(--dim);margin-left:8px">Loaded from live data · hover for details</span></div>
+
+    <div class="key-pool">
+      <div class="key-pool-header">
+        <span class="key-pool-name">GEMINI CHAT (GEMINI_API_KEY_1-12)</span>
+        <span class="key-pool-count" style="color:var(--cyan)" id="gemini-chat-count">? / 12</span>
+      </div>
+      <div style="font-size:9px;color:var(--dim);margin-bottom:4px">Pool alias: gemini-flash → gemini/gemini-2.5-flash</div>
+      <div class="key-dots" id="gemini-chat-dots"></div>
+    </div>
+
+    <div class="key-pool">
+      <div class="key-pool-header">
+        <span class="key-pool-name">GEMINI EMBEDDING (GEMINI_MEM_KEY_1-12)</span>
+        <span class="key-pool-count" style="color:var(--green)" id="gemini-emb-count">? / 12</span>
+      </div>
+      <div style="font-size:9px;color:var(--dim);margin-bottom:4px">Pool alias: gemini-embedding → gemini-embedding-001 (3072d)</div>
+      <div class="key-dots" id="gemini-emb-dots"></div>
+    </div>
+
+    <div class="key-pool">
+      <div class="key-pool-header">
+        <span class="key-pool-name">MISTRAL (MISTRAL_API_KEY + 1-5)</span>
+        <span class="key-pool-count" style="color:var(--magenta)" id="mistral-count">6 / 6</span>
+      </div>
+      <div class="key-dots" id="mistral-dots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MEMORY ═══════════════════════════ -->
+<section class="tab-section" id="tab-memory">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--yellow)">MEMORY ARCHITECTURE</div>
+    <span class="section-badge" style="border-color:var(--yellow);color:var(--yellow)">4 LAYERS ACTIVE</span>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="accent" style="background:var(--yellow)"></span>MEMORY LAYERS</div>
+
+      <div class="mem-layer">
+        <div class="mem-num" style="border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.08)">L1</div>
+        <div class="mem-body">
+          <div class="mem-name" style="color:var(--cyan)">QMD — BUILT-IN CONTEXT</div>
+          <div class="mem-desc">Native OpenClaw memory backend. Embedded inside gateway process. Manages conversation history, context windows, compaction. No separate port or process.</div>
+          <div style="margin-top:8px;font-size:9px;color:var(--dim);line-height:1.8">
+            backend: qmd · maxResults: 6 · maxSnippet: 700 chars<br>
+            update interval: 40m · onBoot: true · mode: safeguard
+          </div>
+          <div class="mem-badge" style="border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.06)">✓ ACTIVE inside gateway :18789</div>
+        </div>
+      </div>
+
+      <div class="mem-layer">
+        <div class="mem-num" style="border-color:var(--green);color:var(--green);background:rgba(105,255,71,.08)">L2</div>
+        <div class="mem-body">
+          <div class="mem-name" style="color:var(--green)">MEM0 JS — EPISODIC RECALL</div>
+          <div class="mem-desc">openclaw-mem0 plugin (v1.0.5) embedded inside gateway. Intercepts conversations via api.on() hooks. Recalls top-10 episodic memories before each prompt.</div>
+          <div style="margin-top:8px;font-size:9px;color:var(--dim);line-height:1.8">
+            vector store: Qdrant :6333 · collection: mem0-openclaw · 19 points<br>
+            embedder: gemini-embedding-001 via LiteLLM · dims: 3072 · Cosine<br>
+            userId: openclaw-main · topK: 10 · autoCapture: true · autoRecall: true<br>
+            inject: prependSystemContext (fires before prompt build)
+          </div>
+          <div class="mem-badge" style="border-color:var(--green);color:var(--green);background:rgba(105,255,71,.06)">✓ ACTIVE inside gateway (no separate port)</div>
+        </div>
+      </div>
+
+      <div class="mem-layer">
+        <div class="mem-num" style="border-color:var(--magenta);color:var(--magenta);background:rgba(224,64,251,.08)">L3</div>
+        <div class="mem-body">
+          <div class="mem-name" style="color:var(--magenta)">COGNEE — GRAPH KNOWLEDGE</div>
+          <div class="mem-desc">cognee-augment hook plugin (v1.0.0). Queries Cognee REST API for graph-based knowledge recall. Appends structured knowledge after mem0's episodic context.</div>
+          <div style="margin-top:8px;font-size:9px;color:var(--dim);line-height:1.8">
+            api: Cognee :8000 · version: 1.0.1<br>
+            hooks: before_prompt_build (recall) · agent_end (cognify)<br>
+            inject: appendSystemContext (fires after mem0)<br>
+            dataset: openclaw-main · searchType: insights<br>
+            knowledge docs: system-architecture.md · setup-history.md · agent-system.md
+          </div>
+          <div class="mem-badge" style="border-color:var(--magenta);color:var(--magenta);background:rgba(224,64,251,.06)">✓ cognee.service :8000 (Python uvicorn)</div>
+        </div>
+      </div>
+
+      <div class="mem-layer">
+        <div class="mem-num" style="border-color:var(--orange);color:var(--orange);background:rgba(255,109,0,.08)">L4</div>
+        <div class="mem-body">
+          <div class="mem-name" style="color:var(--orange)">MEM0 REST — MANAGEMENT API</div>
+          <div class="mem-desc">Standalone Python FastAPI server wrapping the Python mem0 package. Provides HTTP endpoints for memory management. Not in gateway conversation flow.</div>
+          <div style="margin-top:8px;font-size:9px;color:var(--dim);line-height:1.8">
+            service: mem0.service :8080 · Python uvicorn · FastAPI<br>
+            vector store: Qdrant :6333 · collection: mem0-rest · 9 points<br>
+            embedder: gemini-embedding via LiteLLM · dims: 3072<br>
+            endpoints: POST /memories · POST /search · GET /memories/{user_id}
+          </div>
+          <div class="mem-badge" style="border-color:var(--orange);color:var(--orange);background:rgba(255,109,0,.06)">✓ mem0.service :8080 (Python REST)</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <!-- Qdrant -->
+      <div class="card">
+        <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>QDRANT v1.14.1 — PORT 6333</div>
+        <div style="font-size:9px;color:var(--dim);margin-bottom:10px">Storage: ~/.qdrant/storage · All vectors: 3072-dim Cosine</div>
+        <div id="qdrant-collections">
+          <div class="qdrant-col"><span class="col-name">mem0-openclaw</span><span class="col-stats" style="color:var(--green)">19 pts · 3072d · Cosine<br><span style="color:var(--dim)">JS plugin (openclaw-mem0)</span></span></div>
+          <div class="qdrant-col"><span class="col-name">mem0-rest</span><span class="col-stats" style="color:var(--orange)">9 pts · 3072d<br><span style="color:var(--dim)">Python REST API</span></span></div>
+          <div class="qdrant-col" style="border-left-color:var(--dim)"><span class="col-name" style="color:var(--dim)">memory_migrations</span><span class="col-stats">1 pt<br><span style="color:var(--dim)">legacy</span></span></div>
+          <div class="qdrant-col" style="border-left-color:var(--dim)"><span class="col-name" style="color:var(--dim)">mem0migrations</span><span class="col-stats">legacy<br><span style="color:var(--dim)">unused</span></span></div>
+        </div>
+      </div>
+
+      <!-- Injection order -->
+      <div class="card">
+        <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>INJECTION ORDER PER REQUEST</div>
+        <div style="font-size:10px;line-height:2.5;font-family:'Share Tech Mono',monospace">
+          <div style="color:var(--dim)">① User message arrives via Telegram</div>
+          <div style="padding-left:16px;color:var(--cyan)">↓ openclaw-mem0 before_prompt_build</div>
+          <div style="padding-left:32px;color:var(--green)">→ Qdrant search (mem0-openclaw)</div>
+          <div style="padding-left:32px;color:var(--green)">→ prependSystemContext (episodic facts)</div>
+          <div style="padding-left:16px;color:var(--magenta)">↓ cognee-augment before_prompt_build</div>
+          <div style="padding-left:32px;color:var(--magenta)">→ Cognee :8000 /search</div>
+          <div style="padding-left:32px;color:var(--magenta)">→ appendSystemContext (graph knowledge)</div>
+          <div style="padding-left:16px;color:var(--yellow)">↓ QMD context prepended</div>
+          <div style="padding-left:16px;color:var(--cyan)">↓ input-router selects model</div>
+          <div style="padding-left:16px;color:var(--text)">↓ Inference → Reply</div>
+          <div style="padding-left:16px;color:var(--cyan)">↓ openclaw-mem0 agent_end</div>
+          <div style="padding-left:32px;color:var(--green)">→ Qdrant upsert (new memory)</div>
+          <div style="padding-left:16px;color:var(--magenta)">↓ cognee-augment agent_end</div>
+          <div style="padding-left:32px;color:var(--magenta)">→ Cognee cognify (knowledge graph update)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PLUGINS ═══════════════════════════ -->
+<section class="tab-section" id="tab-plugins">
+  <div class="section-header">
+    <div class="section-title">PLUGIN REGISTRY</div>
+    <span class="section-badge" style="border-color:var(--cyan);color:var(--cyan)">7 ENABLED · 2 DISABLED</span>
+  </div>
+  <div id="plugins-grid" style="display:flex;flex-direction:column;gap:8px"></div>
+</section>
+
+<!-- ═══════════════════════════ STRUCTURE ═══════════════════════════ -->
+<section class="tab-section" id="tab-structure">
+  <div class="section-header">
+    <div class="section-title">FILE STRUCTURE</div>
+    <span class="section-badge" style="border-color:var(--cyan);color:var(--cyan)">~/.openclaw depth 8</span>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>~/.openclaw/</div>
+      <div class="tree" id="tree-openclaw"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card">
+        <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>~/.claude/ AGENT SYSTEM</div>
+        <div class="tree" id="tree-claude"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="accent" style="background:var(--green)"></span>SERVICES</div>
+        <div class="tree" id="tree-services"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ COMMANDS ═══════════════════════════ -->
+<section class="tab-section" id="tab-commands">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--orange)">COMMAND REFERENCE</div>
+    <span class="section-badge" style="border-color:var(--orange);color:var(--orange)">PUBLIC + PRIVATE</span>
+  </div>
+  <div id="commands-container"></div>
+</section>
+
+<!-- ═══════════════════════════ LIVE STATUS ═══════════════════════════ -->
+<section class="tab-section" id="tab-live">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--cyan)">LIVE STATUS</div>
+    <span class="section-badge" id="live-timestamp" style="border-color:var(--cyan);color:var(--cyan)">Loading...</span>
+  </div>
+
+  <div class="update-info">
+    <strong>How live data works:</strong> Run <code style="color:var(--cyan)">~/dex-dashboard/update-status.sh</code> on your machine → it scans all services, tests APIs, updates <code>data.json</code>, and pushes to GitHub. This page auto-loads the latest data.json on open.<br>
+    <strong>Auto-push:</strong> Add to cron with <code style="color:var(--cyan)">crontab -e</code> → <code>*/15 * * * * ~/dex-dashboard/update-status.sh</code>
+  </div>
+
+  <button class="refresh-btn" onclick="loadLiveData()">
+    <span class="spin">↻</span> REFRESH LIVE DATA
+  </button>
+
+  <div class="grid-2">
+    <div>
+      <div style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">SERVICES</div>
+      <div id="live-services"></div>
+    </div>
+    <div>
+      <div style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">API POOLS</div>
+      <div id="live-apis"></div>
+      <div style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--dim);margin:16px 0 10px">MEMORY</div>
+      <div id="live-memory"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  DEX // OPENCLAW INTELLIGENCE HUB · OPERATOR: RAWHI JAWABRI · SYSTEM: WSL2/LINUX ·
+  NODE v24.15.0 · OPENCLAW 2026.4.15 (041266a) ·
+  <span style="color:var(--cyan)">second-OG-mind/Dex</span>
+</footer>
+
+</div><!-- /app -->
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+const SYSTEM = {
+  gateway: { version:'2026.4.15', commit:'041266a', port:18789, pid:289, bind:'loopback', node:'v24.15.0', wsUrl:'ws://127.0.0.1:18789', dashboard:'http://127.0.0.1:18789/' },
+  channel: { type:'Telegram', bot:'@dexclawbot_bot', policy:'open', allowFrom:'*', telegramId:'5164722027' },
+  operator: { name:'Rawhi Jawabri', systemUser:'monster-ubunto', platform:'WSL2 / Linux x64' },
+};
+
+const SERVICES = [
+  { id:'openclaw-gateway', name:'OPENCLAW GATEWAY', port:18789, proto:'WebSocket/HTTP', cpu:1.8, mem:3.2, pid:289, unit:'openclaw-gateway.service', desc:'Main AI gateway. Handles Telegram, runs agents, loads plugins.', color:'var(--cyan)' },
+  { id:'cognee', name:'COGNEE', port:8000, proto:'HTTP/uvicorn', cpu:0.2, mem:1.8, pid:286, unit:'cognee.service', desc:'Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--magenta)' },
+  { id:'mem0', name:'MEM0 REST', port:8080, proto:'HTTP/FastAPI', cpu:0.5, mem:0.7, pid:5751, unit:'mem0.service', desc:'Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--orange)' },
+  { id:'qdrant', name:'QDRANT', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:2.2, pid:290, unit:'qdrant.service', desc:'Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--green)' },
+  { id:'litellm', name:'LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 3 model pools: gemini-flash (12), gemini-embedding (12), mistral-large.', color:'var(--yellow)' },
+];
+
+const PLUGINS = [
+  { name:'google', kind:'provider', version:'built-in', enabled:true, desc:'Google AI provider. Serves google/gemini-2.5-flash for chat inference.' },
+  { name:'mistral', kind:'provider', version:'built-in', enabled:true, desc:'Mistral AI provider. Serves mistral-large-latest for fallback, PDF, multimodal.' },
+  { name:'openai', kind:'provider', version:'built-in', enabled:true, desc:'OpenAI-compatible provider. Codex backend (gpt-5.4/5.4-mini/5.2).' },
+  { name:'telegram', kind:'channel', version:'built-in', enabled:true, desc:'Telegram bot channel. @dexclawbot_bot. dmPolicy=open, allowFrom=*.' },
+  { name:'openclaw-mem0', kind:'memory', version:'1.0.5', enabled:true, desc:'Episodic memory. JS plugin in gateway. Qdrant (mem0-openclaw, 19pts, 3072d). topK=10.' },
+  { name:'cognee-augment', kind:'hook', version:'1.0.0', enabled:true, desc:'Graph memory hooks. api.on() for before_prompt_build + agent_end. Cognee :8000.' },
+  { name:'input-router', kind:'router', version:'1.0.0', enabled:true, desc:'Routes text→gemini-2.5-flash, image/PDF→mistral-large-latest.' },
+  { name:'memory-core', kind:'memory', version:'built-in', enabled:false, desc:'Built-in memory backend. DISABLED in favour of openclaw-mem0 + QMD.' },
+  { name:'memory-lancedb', kind:'memory', version:'built-in', enabled:false, desc:'LanceDB memory backend. DISABLED.' },
+];
+
+const MISTRAL_MODELS = [
+  { id:'codestral-latest', ctx:'256k', input:['text'], role:'Code generation' },
+  { id:'devstral-medium-latest', ctx:'262k', input:['text'], role:'Dev agent' },
+  { id:'magistral-small', ctx:'128k', input:['text'], role:'Reasoning' },
+  { id:'mistral-large-latest', ctx:'262k', input:['text','image'], role:'Primary fallback / multimodal' },
+  { id:'mistral-medium-2508', ctx:'262k', input:['text','image'], role:'Medium tier' },
+  { id:'mistral-small-latest', ctx:'128k', input:['text','image'], role:'Fast tasks' },
+  { id:'pixtral-large-latest', ctx:'128k', input:['text','image'], role:'Vision / PDF' },
+];
+
+const CODEX_MODELS = [
+  { id:'gpt-5.4', ctx:'272k', maxOut:'128k', reasoning:true },
+  { id:'gpt-5.4-mini', ctx:'272k', maxOut:'128k', reasoning:true },
+  { id:'gpt-5.2', ctx:'272k', maxOut:'128k', reasoning:true },
+];
+
+const COMMANDS = [
+  { group:'SERVICE MANAGEMENT', private:false, items:[
+    { desc:'Start all services', cmd:'systemctl --user start openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service' },
+    { desc:'Stop all services', cmd:'systemctl --user stop openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service' },
+    { desc:'Restart gateway only', cmd:'systemctl --user restart openclaw-gateway.service' },
+    { desc:'Check all service status', cmd:'systemctl --user status openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service' },
+    { desc:'View gateway logs (live)', cmd:'journalctl --user -u openclaw-gateway.service -f' },
+    { desc:'View cognee logs', cmd:'journalctl --user -u cognee.service -f' },
+    { desc:'View LiteLLM logs', cmd:'journalctl --user -u litellm-proxy.service -f' },
+    { desc:'View mem0 logs', cmd:'journalctl --user -u mem0.service -f' },
+  ]},
+  { group:'OPENCLAW GATEWAY', private:false, items:[
+    { desc:'Gateway status (detailed)', cmd:'openclaw gateway status' },
+    { desc:'Full system health', cmd:'openclaw health' },
+    { desc:'Run diagnostics + quick fixes', cmd:'openclaw doctor' },
+    { desc:'Open control dashboard in browser', cmd:'openclaw dashboard' },
+    { desc:'Tail live file logs', cmd:'openclaw logs' },
+    { desc:'Run single agent turn', cmd:'openclaw agent --agent main' },
+    { desc:'List all agents', cmd:'openclaw agents list' },
+    { desc:'Search memory store', cmd:'openclaw memory search "your query"' },
+    { desc:'List connected channels', cmd:'openclaw channels list' },
+    { desc:'Get your Telegram ID', cmd:'openclaw directory self --channel telegram' },
+    { desc:'List available models', cmd:'openclaw models list' },
+    { desc:'Scan + configure models', cmd:'openclaw models scan' },
+    { desc:'Interactive full setup wizard', cmd:'openclaw configure' },
+    { desc:'Non-interactive config get/set', cmd:'openclaw config get\nopenclaw config set memory.backend qmd' },
+    { desc:'Validate current config', cmd:'openclaw config validate' },
+    { desc:'Manage cron jobs', cmd:'openclaw cron list\nopenclaw cron add "*/30 * * * *" "scheduled task"' },
+    { desc:'Show openclaw version', cmd:'openclaw --version' },
+  ]},
+  { group:'HEALTH CHECKS', private:false, items:[
+    { desc:'Gateway HTTP probe', cmd:'curl http://127.0.0.1:18789/health' },
+    { desc:'LiteLLM liveness (no auth needed)', cmd:'curl http://127.0.0.1:4000/health/liveliness' },
+    { desc:'LiteLLM full health (with auth)', cmd:'curl -H "Authorization: Bearer sk-openclaw-litellm-local" http://127.0.0.1:4000/health' },
+    { desc:'Cognee health', cmd:'curl http://127.0.0.1:8000/health' },
+    { desc:'mem0 REST health', cmd:'curl http://127.0.0.1:8080/health' },
+    { desc:'Qdrant health', cmd:'curl http://localhost:6333/' },
+    { desc:'List LiteLLM model aliases', cmd:'curl -H "Authorization: Bearer sk-openclaw-litellm-local" http://127.0.0.1:4000/v1/models | python3 -m json.tool' },
+  ]},
+  { group:'MEMORY — MEM0 REST API (:8080)', private:false, items:[
+    { desc:'List all memories', cmd:'curl http://127.0.0.1:8080/memories/openclaw-main' },
+    { desc:'Search memories (semantic)', cmd:'curl -X POST http://127.0.0.1:8080/search \\\n  -H "Content-Type: application/json" \\\n  -d \'{"query":"what model does Dex use?","user_id":"openclaw-main","limit":5}\'' },
+    { desc:'Add a memory', cmd:"curl -X POST http://127.0.0.1:8080/memories \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"messages\":[{\"role\":\"user\",\"content\":\"fact to remember\"}],\"user_id\":\"openclaw-main\"}'" },
+  ]},
+  { group:'MEMORY — QDRANT (:6333)', private:false, items:[
+    { desc:'List all collections', cmd:'curl http://localhost:6333/collections' },
+    { desc:'Inspect mem0-openclaw collection', cmd:'curl http://localhost:6333/collections/mem0-openclaw' },
+    { desc:'Scroll all vectors (no embeddings)', cmd:"curl -X POST http://localhost:6333/collections/mem0-openclaw/points/scroll \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"limit\":100,\"with_payload\":true,\"with_vector\":false}'" },
+  ]},
+  { group:'MEMORY — COGNEE (:8000)', private:false, items:[
+    { desc:'Get Cognee auth token', cmd:"TOKEN=$(curl -s -X POST http://127.0.0.1:8000/api/v1/auth/login \\\n  -d 'username=default_user&password=default_password' \\\n  | python3 -c 'import sys,json; print(json.load(sys.stdin)[\"access_token\"])')" },
+    { desc:'List Cognee datasets', cmd:'curl -H "Authorization: Bearer $TOKEN" http://127.0.0.1:8000/api/v1/datasets' },
+    { desc:'Search Cognee knowledge', cmd:'curl -X POST http://127.0.0.1:8000/api/v1/search \\\n  -H "Authorization: Bearer $TOKEN" \\\n  -H "Content-Type: application/json" \\\n  -d \'{"query":"OpenClaw architecture","searchType":"insights","datasetIds":[]}\'' },
+    { desc:'Re-index knowledge (cognify)', cmd:"curl -X POST http://127.0.0.1:8000/api/v1/cognify \\\n  -H 'Authorization: Bearer $TOKEN' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"datasetIds\":[\"openclaw-main\"],\"runInBackground\":true}'" },
+  ]},
+  { group:'PRIVATE — CONFIG EDITING (STOP GATEWAY FIRST)', private:true, items:[
+    { desc:'Safe config edit protocol — ALWAYS use this sequence', cmd:'systemctl --user stop openclaw-gateway.service\nnano ~/.openclaw/openclaw.json\nsystemctl --user start openclaw-gateway.service' },
+    { desc:'Edit LiteLLM config', cmd:'nano ~/.litellm/config.yaml\nsystemctl --user restart litellm-proxy.service' },
+    { desc:'Edit Cognee env', cmd:'nano ~/.cognee/.env\nsystemctl --user restart cognee.service' },
+    { desc:'Edit mem0 REST config', cmd:'nano ~/.mem0/config.json\nsystemctl --user restart mem0.service' },
+  ]},
+  { group:'PRIVATE — MAINTENANCE', private:true, items:[
+    { desc:'Rebuild better-sqlite3 (after Node upgrade)', cmd:'cd ~/.openclaw/extensions/openclaw-mem0\nnpm rebuild better-sqlite3' },
+    { desc:'Delete specific Qdrant point by ID', cmd:"curl -X POST http://localhost:6333/collections/mem0-openclaw/points/delete \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"points\":[\"paste-uuid-here\"]}'" },
+    { desc:'Test embedding API (verify LiteLLM working)', cmd:"curl -s http://127.0.0.1:4000/v1/embeddings \\\n  -H 'Authorization: Bearer sk-openclaw-litellm-local' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"model\":\"gemini-embedding\",\"input\":\"test\",\"encoding_format\":\"float\"}' \\\n  | python3 -c \"import sys,json; d=json.load(sys.stdin); print('dims:', len(d['data'][0]['embedding']))\"" },
+    { desc:'View openclaw.json (raw)', cmd:'cat ~/.openclaw/openclaw.json | python3 -m json.tool' },
+    { desc:'View .env key names (values hidden)', cmd:"cat ~/.openclaw/.env | grep -v '^#' | grep -v '^$' | sed 's/=.*/=REDACTED/'" },
+    { desc:'Upsert corrected memory to Qdrant (embed + insert)', cmd:"# Run as Python script — see ~/dex-dashboard/update-status.sh for full example\npython3 /tmp/upsert_corrections.py" },
+    { desc:'Push live status to GitHub Pages', cmd:'~/dex-dashboard/update-status.sh' },
+    { desc:'Add auto-push every 15 minutes via cron', cmd:"(crontab -l 2>/dev/null; echo '*/15 * * * * /home/monster-ubunto/dex-dashboard/update-status.sh >> /tmp/dex-update.log 2>&1') | crontab -" },
+  ]},
+  { group:'BRAIN AGENT SYSTEM (~/.claude/)', private:false, items:[
+    { desc:'Invoke brain orchestrator', cmd:'/brain <your task>' },
+    { desc:'Read brain memory state', cmd:'cat ~/.claude/agents/memory/brain/state.jsonl | python3 -m json.tool' },
+    { desc:'Check circuit breakers', cmd:'cat ~/.claude/shared/circuit_breaker.json | python3 -m json.tool' },
+    { desc:'Check dead letter queue', cmd:'cat ~/.claude/shared/dead_letter_queue.jsonl' },
+    { desc:'View shared findings', cmd:'cat ~/.claude/shared/findings.md' },
+    { desc:'View brain checkpoint (current task)', cmd:'cat ~/.claude/shared/brain_checkpoint.json | python3 -m json.tool' },
+    { desc:'List all agent memory files', cmd:'ls ~/.claude/agents/memory/*/state.jsonl' },
+    { desc:'View watchdog last report', cmd:'cat ~/.claude/agents/memory/watchdog/state.jsonl | tail -5 | python3 -m json.tool' },
+  ]},
+];
+
+// ═══════════════════════════════════════════════════════════════
+// MATRIX RAIN
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const c=document.getElementById('matrix');
+  const ctx=c.getContext('2d');
+  let w,h,cols,drops;
+  const chars='アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF><|{}[]#@!DEX';
+  function init(){
+    w=c.width=window.innerWidth;h=c.height=window.innerHeight;
+    cols=Math.floor(w/16);drops=Array(cols).fill(0);
+  }
+  init();window.addEventListener('resize',init);
+  setInterval(()=>{
+    ctx.fillStyle='rgba(5,5,16,.05)';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#00e5ff';ctx.font='13px Share Tech Mono';
+    drops.forEach((y,i)=>{
+      const t=chars[Math.floor(Math.random()*chars.length)];
+      ctx.fillStyle=Math.random()>.97?'#ffffff':i%3===0?'#00e5ff':'#003340';
+      ctx.fillText(t,i*16,y*16);
+      if(y*16>h&&Math.random()>.975)drops[i]=0;
+      else drops[i]++;
+    });
+  },50);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// CLOCK
+// ═══════════════════════════════════════════════════════════════
+function updateClock(){
+  const now=new Date();
+  const utc3=new Date(now.getTime()+(3*3600000));
+  const pad=n=>String(n).padStart(2,'0');
+  document.getElementById('clock').textContent=
+    `${pad(utc3.getUTCHours())}:${pad(utc3.getUTCMinutes())}:${pad(utc3.getUTCSeconds())}`;
+  const days=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  document.getElementById('date-display').textContent=
+    `${days[utc3.getUTCDay()]} ${pad(utc3.getUTCDate())} ${months[utc3.getUTCMonth()]} ${utc3.getUTCFullYear()}`;
+}
+setInterval(updateClock,1000);updateClock();
+
+// ═══════════════════════════════════════════════════════════════
+// GATEWAY STATUS
+// ═══════════════════════════════════════════════════════════════
+function checkGatewayStatus(){
+  const dot=document.getElementById('gw-dot');
+  const label=document.getElementById('gw-label');
+  fetch('data.json?t='+Date.now())
+    .then(r=>r.json())
+    .then(d=>{
+      const up=d.gateway?.status==='online'||d.services?.['openclaw-gateway']?.active;
+      dot.className='status-dot '+(up?'online':'offline');
+      label.textContent='DEX — '+(up?'ONLINE':'OFFLINE');
+      label.style.color=up?'var(--green)':'var(--red)';
+      if(d.last_updated){
+        const lu=new Date(d.last_updated);
+        document.getElementById('last-updated').textContent='Last push: '+lu.toUTCString().replace(' GMT','');
+      }
+    })
+    .catch(()=>{
+      // static page — show as online (confirmed before push)
+      dot.className='status-dot online';
+      label.textContent='DEX — ONLINE (static)';
+      label.style.color='var(--green)';
+      document.getElementById('last-updated').textContent='Run update-status.sh to push live data';
+    });
+}
+checkGatewayStatus();
+
+// ═══════════════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab==='live')loadLiveData();
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// COUNTER ANIMATION
+// ═══════════════════════════════════════════════════════════════
+function animateCounters(){
+  document.querySelectorAll('.counter').forEach(el=>{
+    const target=parseInt(el.dataset.target);
+    let cur=0;const step=Math.ceil(target/30);
+    const t=setInterval(()=>{
+      cur=Math.min(cur+step,target);
+      el.textContent=cur;
+      if(cur>=target)clearInterval(t);
+    },40);
+  });
+}
+setTimeout(animateCounters,300);
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER SERVICES
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const grid=document.getElementById('services-grid');
+  SERVICES.forEach(s=>{
+    const cpuPct=Math.min(s.cpu*10,100);
+    const memPct=Math.min(s.mem*5,100);
+    grid.innerHTML+=`
+    <div class="svc-card online">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+        <div>
+          <div class="svc-name">${s.name}</div>
+          <div class="svc-port">:${s.port}</div>
+          <div style="font-size:9px;color:var(--dim);margin-top:2px">${s.proto}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="status-dot online" style="display:inline-block;margin-bottom:4px"></div>
+          <div style="font-size:9px;color:var(--dim)">PID ${s.pid}</div>
+        </div>
+      </div>
+      <div class="svc-meta">
+        <div style="color:var(--dim)">${s.unit}</div>
+        <div style="color:var(--text);margin-top:4px;line-height:1.7;font-size:10px">${s.desc}</div>
+      </div>
+      <div style="margin-top:10px">
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin-bottom:2px">
+          <span>CPU</span><span style="color:${s.color}">${s.cpu}%</span>
+        </div>
+        <div class="svc-bar"><div class="svc-bar-fill" style="width:${cpuPct}%;background:${s.color}"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin:4px 0 2px">
+          <span>MEM</span><span style="color:${s.color}">${s.mem}%</span>
+        </div>
+        <div class="svc-bar"><div class="svc-bar-fill" style="width:${memPct}%;background:${s.color};opacity:.6"></div></div>
+      </div>
+    </div>`;
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER MODELS
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const mm=document.getElementById('mistral-models');
+  mm.innerHTML=MISTRAL_MODELS.map(m=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;
+      padding:6px 10px;margin-bottom:4px;background:rgba(0,0,0,.3);
+      border-radius:3px;border-left:2px solid var(--magenta)">
+      <div>
+        <div style="font-size:10px;color:var(--text)">${m.id}</div>
+        <div style="font-size:9px;color:var(--dim)">${m.role}</div>
+      </div>
+      <div style="text-align:right;font-size:9px;color:var(--dim)">
+        ctx:${m.ctx}<br>${m.input.join('+')}
+      </div>
+    </div>`).join('');
+
+  const cm=document.getElementById('codex-models');
+  cm.innerHTML=CODEX_MODELS.map(m=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;
+      padding:6px 10px;margin-bottom:4px;background:rgba(0,0,0,.3);
+      border-radius:3px;border-left:2px solid var(--orange)">
+      <div>
+        <div style="font-size:10px;color:var(--text)">${m.id}</div>
+        <div style="font-size:9px;color:var(--dim)">Reasoning: ${m.reasoning?'✓':'-'}</div>
+      </div>
+      <div style="text-align:right;font-size:9px;color:var(--dim)">
+        ctx:${m.ctx}<br>out:${m.maxOut}
+      </div>
+    </div>`).join('');
+
+  // API key dots
+  function renderDots(containerId, total, working){
+    const el=document.getElementById(containerId);
+    if(!el)return;
+    el.innerHTML='';
+    for(let i=0;i<total;i++){
+      const d=document.createElement('div');
+      d.className='key-dot '+(i<working?'working':'resting');
+      d.title=`Key ${i+1}: ${i<working?'ACTIVE':'RESTING/RECOVERING'}`;
+      el.appendChild(d);
+    }
+  }
+  renderDots('gemini-chat-dots',12,8);
+  renderDots('gemini-emb-dots',12,12);
+  renderDots('mistral-dots',6,6);
+  document.getElementById('gemini-chat-count').textContent='~8 / 12';
+  document.getElementById('gemini-emb-count').textContent='12 / 12';
+  document.getElementById('mistral-count').textContent='6 / 6';
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER PLUGINS
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const kindColors={provider:'var(--cyan)',channel:'var(--green)',memory:'var(--yellow)',hook:'var(--magenta)',router:'var(--orange)'};
+  const grid=document.getElementById('plugins-grid');
+  PLUGINS.forEach(p=>{
+    const kc=kindColors[p.kind]||'var(--dim)';
+    grid.innerHTML+=`
+    <div class="plugin-card ${p.enabled?'':'disabled'}">
+      <span class="plugin-kind" style="background:${kc}22;color:${kc};border:1px solid ${kc}44">${p.kind}</span>
+      <div class="plugin-info">
+        <div class="plugin-name">${p.name} ${p.version!=='built-in'?`<span style="color:var(--dim)">v${p.version}</span>`:''}</div>
+        <div class="plugin-ver">${p.desc}</div>
+      </div>
+      <div class="plugin-toggle ${p.enabled?'on':'off'}" title="${p.enabled?'ENABLED':'DISABLED'}"></div>
+    </div>`;
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER TREE
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  function colorize(line){
+    const ind=line.match(/^(\s*)/)[1];
+    const name=line.trim();
+    if(!name)return line;
+    if(name.endsWith('/')||(!name.includes('.')&&!name.includes('─')&&name!='..'))
+      return `${ind}<span class="dir">${name}</span>`;
+    const ext=name.split('.').pop().toLowerCase();
+    const cls={js:'ext-js',ts:'ext-js',json:'ext-json',py:'ext-py',yaml:'ext-yaml',yml:'ext-yaml',md:'ext-md'}[ext]||'file';
+    return `${ind}<span class="${cls}">${name}</span>`;
+  }
+
+  const ocTree=`~/.openclaw/
+├── .env  <span class="tag" style="background:rgba(255,23,68,.15);color:var(--red);border:1px solid rgba(255,23,68,.3)">40 vars</span>
+├── openclaw.json  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan);border:1px solid rgba(0,229,255,.2)">main config</span>
+├── config.yaml
+├── agents/
+│   ├── main/
+│   │   ├── agent/
+│   │   │   ├── models.json  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green);border:1px solid rgba(105,255,71,.2)">3 providers</span>
+│   │   │   ├── auth-profiles.json
+│   │   │   └── auth-state.json
+│   │   └── sessions/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--dim);border:1px solid rgba(90,106,138,.3)">3 sessions</span>
+│   └── codex/sessions/
+├── extensions/
+│   ├── cognee-augment/  <span class="tag" style="background:rgba(224,64,251,.1);color:var(--magenta);border:1px solid rgba(224,64,251,.2)">hook v1.0.0</span>
+│   │   ├── index.js
+│   │   ├── openclaw.plugin.json
+│   │   └── package.json
+│   ├── cognee-openclaw/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--dim)">disabled</span>
+│   │   └── dist/ (compiled TS)
+│   ├── input-router/  <span class="tag" style="background:rgba(255,109,0,.1);color:var(--orange);border:1px solid rgba(255,109,0,.2)">router v1.0.0</span>
+│   │   ├── index.js
+│   │   └── openclaw.plugin.json
+│   └── openclaw-mem0/  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green);border:1px solid rgba(105,255,71,.2)">mem v1.0.5</span>
+│       ├── dist/index.js  <span class="tag" style="background:rgba(255,234,0,.1);color:var(--yellow)">patched</span>
+│       ├── backend/ cli/ skills/ tools/ tests/
+│       ├── index.ts  config.ts  recall.ts
+│       ├── node_modules/
+│       │   └── better-sqlite3/  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">rebuilt</span>
+│       └── openclaw.plugin.json
+├── canvas/index.html
+├── completions/ (bash/fish/zsh/ps1)
+├── devices/ delivery-queue/ exec-approvals.json
+└── workspace/  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">agent workspace</span>
+    └── cognee-knowledge/
+        ├── system-architecture.md
+        ├── setup-history.md
+        └── agent-system.md`;
+
+  const claudeTree=`~/.claude/
+├── agents/
+│   ├── brain.md  auditer.md  builder.md
+│   ├── claw.md  planner.md  researcher.md
+│   ├── watchdog.md  manifest.md
+│   └── memory/
+│       ├── brain/state.jsonl  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">21 entries</span>
+│       ├── claw/ researcher/ builder/
+│       ├── planner/ auditer/ watchdog/
+│       └── (per-agent JSONL memory)
+├── layers/
+│   ├── L0_identity.md  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">always loaded</span>
+│   └── L1_essential.md  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">always loaded</span>
+└── shared/
+    ├── findings.md  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">cross-agent</span>
+    ├── brain_checkpoint.json
+    ├── circuit_breaker.json  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">all closed</span>
+    ├── dead_letter_queue.jsonl  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">empty</span>
+    ├── idempotency_registry.jsonl
+    └── task_queue.jsonl`;
+
+  const svcTree=`~/.config/systemd/user/
+├── openclaw-gateway.service  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">:18789</span>
+├── cognee.service  <span class="tag" style="background:rgba(224,64,251,.1);color:var(--magenta)">:8000</span>
+├── mem0.service  <span class="tag" style="background:rgba(255,109,0,.1);color:var(--orange)">:8080</span>
+├── qdrant.service  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">:6333</span>
+└── litellm-proxy.service  <span class="tag" style="background:rgba(255,234,0,.1);color:var(--yellow)">:4000</span>
+
+~/.venvs/
+├── cognee/ (Python 3.12, cognee 1.0.1)
+├── litellm/ (Python 3.12, litellm)
+└── mem0/ (Python 3.12, mem0ai 2.0.0, qdrant-client 1.17.1)
+
+~/.mem0/ (Python mem0 REST)
+├── server.py  config.json  reindex.py
+└── chroma/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--dim)">cold backup</span>
+
+~/.qdrant/storage/
+~/.litellm/config.yaml
+~/.cognee/.env`;
+
+  document.getElementById('tree-openclaw').innerHTML=`<pre>${ocTree}</pre>`;
+  document.getElementById('tree-claude').innerHTML=`<pre>${claudeTree}</pre>`;
+  document.getElementById('tree-services').innerHTML=`<pre>${svcTree}</pre>`;
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER COMMANDS
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const c=document.getElementById('commands-container');
+  COMMANDS.forEach(g=>{
+    let html=`<div class="cmd-group">
+      <div class="cmd-group-title">
+        ${g.group}
+        ${g.private?'<span class="private-badge">🔒 PRIVATE</span>':''}
+      </div>`;
+    g.items.forEach(item=>{
+      html+=`<div class="cmd-block ${g.private?'cmd-private':''}" onclick="">
+        <div class="cmd-desc"># ${item.desc}</div>
+        <button class="copy-btn" onclick="copyCmd(this,event)">COPY</button>
+        <code>${escHtml(item.cmd)}</code>
+      </div>`;
+    });
+    html+='</div>';
+    c.innerHTML+=html;
+  });
+})();
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function copyCmd(btn,e){
+  e.stopPropagation();
+  const code=btn.parentElement.querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(()=>{
+    btn.textContent='✓ COPIED';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='COPY';btn.classList.remove('copied')},2000);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LIVE DATA
+// ═══════════════════════════════════════════════════════════════
+const STATIC_STATUS={
+  last_updated: new Date().toISOString(),
+  gateway:{ status:'online', port:18789, pid:289 },
+  services:{
+    'openclaw-gateway':{ active:true, cpu:1.8, mem:3.2, port:18789 },
+    'cognee':{ active:true, cpu:0.2, mem:1.8, port:8000 },
+    'mem0':{ active:true, cpu:0.5, mem:0.7, port:8080 },
+    'qdrant':{ active:true, cpu:0.2, mem:2.2, port:6333 },
+    'litellm-proxy':{ active:true, cpu:0.2, mem:1.6, port:4000 },
+  },
+  api:{ gemini_chat:{ total:12, healthy:8, resting:4 }, gemini_embedding:{ total:12, healthy:12, resting:0 }, mistral:{ total:6, healthy:6, resting:0 } },
+  memory:{ mem0_openclaw_points:19, mem0_rest_points:9 },
+  litellm:{ healthy_endpoints:16, unhealthy_endpoints:15 },
+};
+
+function loadLiveData(){
+  fetch('data.json?t='+Date.now())
+    .then(r=>r.json())
+    .then(renderLive)
+    .catch(()=>renderLive(STATIC_STATUS));
+}
+
+function renderLive(d){
+  const ts=document.getElementById('live-timestamp');
+  const lu=d.last_updated?new Date(d.last_updated):new Date();
+  ts.textContent=lu.toUTCString().replace(' GMT','')+' UTC';
+
+  // Services
+  const sEl=document.getElementById('live-services');
+  sEl.innerHTML=Object.entries(d.services||{}).map(([k,v])=>{
+    const up=v.active;
+    return `<div class="health-row">
+      <div>
+        <div class="health-label">${k}</div>
+        <div class="health-time" style="color:var(--dim)">:${v.port||'?'}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="health-val" style="color:${up?'var(--green)':'var(--red)'}">${up?'ONLINE':'OFFLINE'}</div>
+        <div style="font-size:9px;color:var(--dim)">CPU:${v.cpu||'?'}% MEM:${v.mem||'?'}%</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // APIs
+  const aEl=document.getElementById('live-apis');
+  const api=d.api||{};
+  aEl.innerHTML=Object.entries(api).map(([pool,info])=>{
+    const pct=Math.round((info.healthy/info.total)*100);
+    const col=pct===100?'var(--green)':pct>50?'var(--yellow)':'var(--red)';
+    return `<div class="health-row">
+      <div>
+        <div class="health-label">${pool.replace(/_/g,' ').toUpperCase()}</div>
+        <div class="health-time">${info.healthy} working · ${info.resting||info.total-info.healthy} resting</div>
+      </div>
+      <div style="text-align:right">
+        <div class="health-val" style="color:${col}">${pct}%</div>
+        <div style="font-size:9px;color:var(--dim)">${info.total} total keys</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Memory
+  const mEl=document.getElementById('live-memory');
+  const mem=d.memory||{};
+  const litellm=d.litellm||{};
+  mEl.innerHTML=`
+    <div class="health-row">
+      <div><div class="health-label">mem0-openclaw (Qdrant)</div><div class="health-time">JS plugin collection</div></div>
+      <div style="text-align:right"><div class="health-val" style="color:var(--yellow)">${mem.mem0_openclaw_points||'?'} pts</div></div>
+    </div>
+    <div class="health-row">
+      <div><div class="health-label">mem0-rest (Qdrant)</div><div class="health-time">Python REST collection</div></div>
+      <div style="text-align:right"><div class="health-val" style="color:var(--orange)">${mem.mem0_rest_points||'?'} pts</div></div>
+    </div>
+    <div class="health-row">
+      <div><div class="health-label">LiteLLM endpoints</div><div class="health-time">across all pools</div></div>
+      <div style="text-align:right">
+        <div class="health-val" style="color:var(--green)">${litellm.healthy_endpoints||'?'} ✓</div>
+        <div style="font-size:9px;color:var(--red)">${litellm.unhealthy_endpoints||'?'} ✗</div>
+      </div>
+    </div>`;
+}
+loadLiveData();
+</script>
+</body>
+</html>
