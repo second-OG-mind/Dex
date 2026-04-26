@@ -128,6 +128,9 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tab-btn[data-tab="watcher"].active{border-color:#7c4dff;color:#7c4dff;box-shadow:0 0 28px rgba(124,77,255,.3);background:rgba(124,77,255,.07)}
 .tab-btn[data-tab="watcher"].active::after{background:#7c4dff;box-shadow:0 0 12px #7c4dff}
 .tab-btn[data-tab="watcher"]:hover{border-color:rgba(124,77,255,.5);color:#7c4dff}
+.tab-btn[data-tab="api-monitoring"].active{border-color:#39ff14;color:#39ff14;box-shadow:0 0 28px rgba(57,255,20,.3);background:rgba(57,255,20,.07)}
+.tab-btn[data-tab="api-monitoring"].active::after{background:#39ff14;box-shadow:0 0 12px #39ff14}
+.tab-btn[data-tab="api-monitoring"]:hover{border-color:rgba(57,255,20,.5);color:#39ff14}
 
 /* ── SECTIONS ── */
 .tab-section{display:none;animation:fadein .35s ease}
@@ -464,6 +467,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
   <button class="tab-btn" data-tab="commands">⌘ COMMANDS</button>
   <button class="tab-btn" data-tab="live">◈ LIVE STATUS</button>
   <button class="tab-btn" data-tab="watcher">⚡ AUTO-PUSH</button>
+  <button class="tab-btn" data-tab="api-monitoring">◈ API MONITORING</button>
 </nav>
 
 <!-- ═══════════════════════════ OVERVIEW ═══════════════════════════ -->
@@ -1114,6 +1118,64 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
   </div>
 </section>
 
+<!-- ═══════════════════════════ API MONITORING ═══════════════════════════ -->
+<section class="tab-section" id="tab-api-monitoring">
+  <div class="section-header">
+    <div class="section-title" style="color:#39ff14">API KEY MONITORING</div>
+    <span class="section-badge" style="border-color:#39ff14;color:#39ff14">LIVE · MIDNIGHT PT AUTO-RESET</span>
+  </div>
+
+  <div class="card-grid" style="margin-bottom:14px">
+    <!-- Pool overview cards rendered by JS -->
+    <div class="card" id="apim-pool-gemini-flash" style="border-color:rgba(57,255,20,.3)">
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMINI FLASH POOL</div>
+      <div id="apim-flash-content" style="color:var(--dim);font-size:16px">Loading…</div>
+    </div>
+    <div class="card" id="apim-pool-gemini-embedding" style="border-color:rgba(57,255,20,.3)">
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMINI EMBEDDING POOL</div>
+      <div id="apim-embed-content" style="color:var(--dim);font-size:16px">Loading…</div>
+    </div>
+    <div class="card" id="apim-pool-mistral" style="border-color:rgba(57,255,20,.3)">
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>MISTRAL LARGE POOL</div>
+      <div id="apim-mistral-content" style="color:var(--dim);font-size:16px">Loading…</div>
+    </div>
+  </div>
+
+  <!-- Resting keys detail -->
+  <div class="card" style="border-color:rgba(57,255,20,.25);margin-bottom:14px">
+    <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>KEYS IN REST</div>
+    <div id="apim-resting-detail" style="color:var(--dim);font-size:16px">Loading…</div>
+  </div>
+
+  <!-- Legend + policy -->
+  <div class="card-grid">
+    <div class="card" style="border-color:rgba(57,255,20,.2)">
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>REST POLICY</div>
+      <div style="font-size:16px;line-height:2;color:var(--text)">
+        <div>When a key hits its <span style="color:#39ff14">daily quota</span>, it is placed on rest automatically.</div>
+        <div style="margin-top:6px">LiteLLM cools it down for 24 h so it is never retried before reset.</div>
+        <div style="margin-top:6px">At <span style="color:#39ff14">midnight Pacific Time</span> (07:00 UTC), the LiteLLM proxy restarts and all daily quotas are released.</div>
+        <div style="margin-top:6px">The pool rotates through remaining active keys with no user impact until all keys in a pool are exhausted.</div>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(57,255,20,.2)">
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>ROUTING RULES</div>
+      <div style="font-size:16px;line-height:2;color:var(--text)">
+        <div><span style="color:#39ff14">Text requests</span> → input-router → openai plugin → LiteLLM → <span style="color:var(--cyan)">Gemini Flash pool (12 keys)</span></div>
+        <div><span style="color:#39ff14">Media / Files / Voice</span> → input-router → mistral plugin → <span style="color:var(--magenta)">Mistral Large pool (5 keys)</span></div>
+        <div><span style="color:#39ff14">Memory embeddings</span> → LiteLLM → <span style="color:var(--yellow)">Gemini Embedding pool (12 keys)</span></div>
+        <div style="margin-top:8px;color:var(--dim)">Mistral is <u>never</u> used as fallback for text. If all Gemini keys are resting, the gateway waits for midnight reset.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;font-size:15px;color:var(--dim);text-align:right">
+    Last refreshed: <span id="apim-timestamp" style="color:#39ff14">—</span>
+    &nbsp;·&nbsp; LiteLLM: <span id="apim-litellm-version" style="color:#39ff14">v1.83.14</span>
+    &nbsp;·&nbsp; <button onclick="loadApiMonitoring()" style="background:none;border:1px solid rgba(57,255,20,.4);color:#39ff14;padding:3px 12px;cursor:pointer;font-family:inherit;font-size:15px;border-radius:3px">↺ REFRESH</button>
+  </div>
+</section>
+
 <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
 <footer>
   DEX // OPENCLAW INTELLIGENCE HUB · OPERATOR: RAWHI JAWABRI · SYSTEM: WSL2/LINUX ·
@@ -1400,6 +1462,7 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     btn.classList.add('active');
     document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
     if(btn.dataset.tab==='live')loadLiveData();
+    if(btn.dataset.tab==='api-monitoring')loadApiMonitoring();
   });
 });
 
@@ -1746,6 +1809,111 @@ function renderLive(d){
         <div style="font-size:16px;color:var(--red)">${litellm.unhealthy_endpoints||'?'} ✗</div>
       </div>
     </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// API MONITORING TAB
+// ═══════════════════════════════════════════════════════════════
+function loadApiMonitoring(){
+  fetch('data.json?t='+Date.now())
+    .then(r=>r.json())
+    .then(renderApiMonitoring)
+    .catch(()=>renderApiMonitoring(STATIC_STATUS));
+}
+
+function renderApiMonitoring(d){
+  const ts=d.last_updated?new Date(d.last_updated):new Date();
+  const tsEl=document.getElementById('apim-timestamp');
+  if(tsEl)tsEl.textContent=ts.toUTCString().replace(' GMT','')+' UTC';
+
+  const ks=d.key_states||{};
+  const pools=ks.pools||{};
+
+  // ── Pool cards ──────────────────────────────────────────────────
+  function renderPool(elId, poolKey, label, litellmModel){
+    const el=document.getElementById(elId);
+    if(!el)return;
+    const p=pools[poolKey]||{};
+    const total=p.total||0;
+    const resting=(p.resting_keys||[]).length;
+    const healthy=p.healthy!==undefined?p.healthy:(total-resting);
+    const pct=total>0?Math.round((healthy/total)*100):100;
+    const col=pct===100?'#39ff14':pct>50?'var(--yellow)':'var(--red)';
+    const barW=Math.max(0,Math.min(100,pct));
+    const restingEntries=p.resting_keys||[];
+    const hasResting=restingEntries.length>0;
+
+    el.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-size:32px;font-weight:700;color:${col};font-family:'Orbitron',monospace">${pct}%</div>
+        <div style="text-align:right;font-size:16px">
+          <div style="color:#39ff14">${healthy} / ${total} active</div>
+          <div style="color:${hasResting?'var(--red)':'var(--dim)'}">${resting} resting</div>
+        </div>
+      </div>
+      <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:10px">
+        <div style="height:100%;width:${barW}%;background:${col};border-radius:3px;transition:width .4s"></div>
+      </div>
+      <div style="font-size:15px;color:var(--dim)">
+        LiteLLM pool: <span style="color:var(--cyan)">${litellmModel}</span>
+        &nbsp;·&nbsp; total endpoints: <span style="color:var(--text)">${(p.unhealthy||0)+(p.healthy||0)||total}</span>
+      </div>
+      ${hasResting?`<div style="margin-top:8px;font-size:15px;color:var(--red)">⚠ ${resting} key(s) in daily-quota rest</div>`:''}`;
+  }
+
+  renderPool('apim-flash-content',   'gemini-flash',     'Gemini Flash',     'gemini-flash (12 keys)');
+  renderPool('apim-embed-content',   'gemini-embedding', 'Gemini Embedding', 'gemini-embedding (12 keys)');
+  renderPool('apim-mistral-content', 'mistral-large',    'Mistral Large',    'mistral-large (5 keys)');
+
+  // ── Resting keys detail ─────────────────────────────────────────
+  const restEl=document.getElementById('apim-resting-detail');
+  if(!restEl)return;
+
+  const allResting=[];
+  Object.entries(pools).forEach(([poolName,p])=>{
+    (p.resting_keys||[]).forEach(rk=>{
+      allResting.push({...rk, pool_name:poolName});
+    });
+  });
+
+  if(allResting.length===0){
+    restEl.innerHTML=`<div style="color:#39ff14;font-size:16px;padding:14px 0">✓ All keys are active — no keys in rest.</div>`;
+    return;
+  }
+
+  const now=Date.now()/1000;
+  restEl.innerHTML=`
+    <table style="width:100%;border-collapse:collapse;font-size:16px">
+      <thead>
+        <tr style="color:var(--dim);border-bottom:1px solid rgba(57,255,20,.2)">
+          <th style="text-align:left;padding:6px 8px">POOL</th>
+          <th style="text-align:left;padding:6px 8px">REASON</th>
+          <th style="text-align:left;padding:6px 8px">RESTING SINCE</th>
+          <th style="text-align:left;padding:6px 8px">RECOVERY (MIDNIGHT PT)</th>
+          <th style="text-align:right;padding:6px 8px">COUNTDOWN</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${allResting.map(rk=>{
+          const recoverEpoch=rk.recover_epoch||0;
+          const secsLeft=Math.max(0,recoverEpoch-now);
+          const h=Math.floor(secsLeft/3600);
+          const m=Math.floor((secsLeft%3600)/60);
+          const countdown=secsLeft>0?`${h}h ${m}m`:'Recovering now…';
+          const countdownCol=secsLeft>3600?'var(--yellow)':secsLeft>0?'var(--orange)':'#39ff14';
+          const since=rk.resting_since?new Date(rk.resting_since).toUTCString().replace(' GMT',''):'-';
+          const recover=rk.recover_at?new Date(rk.recover_at).toUTCString().replace(' GMT',''):'-';
+          const affected=rk.unhealthy_count?`${rk.unhealthy_count} of ${rk.total} endpoints`:(rk.pool_name||'-');
+          return `<tr style="border-bottom:1px solid rgba(57,255,20,.1)">
+            <td style="padding:8px;color:#39ff14">${rk.pool_name||rk.pool||'-'}</td>
+            <td style="padding:8px;color:var(--red)">${(rk.reason||'-').replace(/_/g,' ')}</td>
+            <td style="padding:8px;color:var(--dim);font-size:15px">${since}</td>
+            <td style="padding:8px;color:var(--cyan);font-size:15px">${recover}</td>
+            <td style="padding:8px;text-align:right;color:${countdownCol};font-family:'Orbitron',monospace;font-size:15px">${countdown}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
 }
 loadLiveData();
 </script>
