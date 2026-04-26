@@ -864,18 +864,18 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
   <div class="grid-3" style="margin-bottom:14px">
     <div class="card" style="border-color:rgba(124,77,255,.35);text-align:center">
       <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:#7c4dff;text-shadow:0 0 20px #7c4dff,0 0 40px #7c4dff;line-height:1">3</div>
-      <div style="font-size:12px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">Coverage Layers</div>
-      <div style="font-size:13px;color:var(--dim);margin-top:8px">inotify · poll · heartbeat</div>
+      <div style="font-size:15px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">Coverage Layers</div>
+      <div style="font-size:16px;color:var(--dim);margin-top:8px">inotify · poll · heartbeat</div>
     </div>
     <div class="card" style="border-color:rgba(105,255,71,.35);text-align:center">
       <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:var(--green);text-shadow:0 0 20px var(--green),0 0 40px var(--green);line-height:1">&lt;2s</div>
-      <div style="font-size:12px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">inotify Latency</div>
-      <div style="font-size:13px;color:var(--dim);margin-top:8px">kernel-level, sub-second fire</div>
+      <div style="font-size:15px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">inotify Latency</div>
+      <div style="font-size:16px;color:var(--dim);margin-top:8px">kernel-level, sub-second fire</div>
     </div>
     <div class="card" style="border-color:rgba(255,234,0,.35);text-align:center">
       <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:var(--yellow);text-shadow:0 0 20px var(--yellow),0 0 40px var(--yellow);line-height:1">≤5m</div>
-      <div style="font-size:12px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">Poll Latency</div>
-      <div style="font-size:13px;color:var(--dim);margin-top:8px">service / API state changes</div>
+      <div style="font-size:15px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">Poll Latency</div>
+      <div style="font-size:16px;color:var(--dim);margin-top:8px">service / API state changes</div>
     </div>
   </div>
 
@@ -887,79 +887,79 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 
       <div style="display:flex;align-items:stretch;gap:12px;padding:14px;background:rgba(105,255,71,.06);border:1px solid rgba(105,255,71,.25);border-radius:5px">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:90px">
-          <div style="font-family:'Orbitron',monospace;font-size:11px;color:var(--green);letter-spacing:2px">LAYER 1</div>
+          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--green);letter-spacing:2px">LAYER 1</div>
           <div style="font-size:20px">👁</div>
-          <div style="font-family:'Orbitron',monospace;font-size:10px;color:var(--green);text-align:center;letter-spacing:1px">inotify<br>DAEMON</div>
+          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--green);text-align:center;letter-spacing:1px">inotify<br>DAEMON</div>
         </div>
         <div style="width:1px;background:rgba(105,255,71,.3)"></div>
         <div style="flex:1">
-          <div style="font-size:13px;color:var(--green);font-weight:700;margin-bottom:6px;letter-spacing:1px">Kernel filesystem events — fires in &lt;2 seconds</div>
-          <div style="font-size:13px;color:var(--text);line-height:1.7">
-            The Linux kernel notifies <code style="color:var(--cyan);font-size:12px">dex-watcher.service</code> the instant any file inside
-            <code style="color:var(--cyan);font-size:12px">~/.openclaw/</code> is written or created.
+          <div style="font-size:16px;color:var(--green);font-weight:700;margin-bottom:6px;letter-spacing:1px">Kernel filesystem events — fires in &lt;2 seconds</div>
+          <div style="font-size:16px;color:var(--text);line-height:1.7">
+            The Linux kernel notifies <code style="color:var(--cyan);font-size:15px">dex-watcher.service</code> the instant any file inside
+            <code style="color:var(--cyan);font-size:15px">~/.openclaw/</code> is written or created.
             A <strong style="color:var(--green)">60-second debounce</strong> prevents spam from rapid successive writes
             (e.g. the gateway's own file watcher writing telemetry on startup).
           </div>
           <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:12px;color:var(--green)">dex-watcher.service</span>
-            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:12px;color:var(--green)">Restart=always</span>
-            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:12px;color:var(--green)">debounce 60s</span>
+            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--green)">dex-watcher.service</span>
+            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--green)">Restart=always</span>
+            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--green)">debounce 60s</span>
           </div>
         </div>
         <div style="display:flex;align-items:center;padding:0 8px">
-          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--green);text-shadow:0 0 10px var(--green);letter-spacing:1px">&lt;2s</div>
+          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--green);text-shadow:0 0 10px var(--green);letter-spacing:1px">&lt;2s</div>
         </div>
       </div>
 
       <div style="display:flex;align-items:stretch;gap:12px;padding:14px;background:rgba(255,234,0,.06);border:1px solid rgba(255,234,0,.25);border-radius:5px">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:90px">
-          <div style="font-family:'Orbitron',monospace;font-size:11px;color:var(--yellow);letter-spacing:2px">LAYER 2</div>
+          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--yellow);letter-spacing:2px">LAYER 2</div>
           <div style="font-size:20px">⏱</div>
-          <div style="font-family:'Orbitron',monospace;font-size:10px;color:var(--yellow);text-align:center;letter-spacing:1px">SMART<br>POLLER</div>
+          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--yellow);text-align:center;letter-spacing:1px">SMART<br>POLLER</div>
         </div>
         <div style="width:1px;background:rgba(255,234,0,.3)"></div>
         <div style="flex:1">
-          <div style="font-size:13px;color:var(--yellow);font-weight:700;margin-bottom:6px;letter-spacing:1px">Diff-on-change cron — fires every 5 minutes</div>
-          <div style="font-size:13px;color:var(--text);line-height:1.7">
-            <code style="color:var(--cyan);font-size:12px">watch-changes.sh</code> snapshots service state,
+          <div style="font-size:16px;color:var(--yellow);font-weight:700;margin-bottom:6px;letter-spacing:1px">Diff-on-change cron — fires every 5 minutes</div>
+          <div style="font-size:16px;color:var(--text);line-height:1.7">
+            <code style="color:var(--cyan);font-size:15px">watch-changes.sh</code> snapshots service state,
             LiteLLM healthy/unhealthy endpoint counts, and Qdrant memory point counts.
             It compares the snapshot to the last known state — <strong style="color:var(--yellow)">only pushes if something changed</strong>.
             Covers what inotify cannot: process crashes and API quota exhaustion.
           </div>
           <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:12px;color:var(--yellow)">*/5 cron</span>
-            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:12px;color:var(--yellow)">diff-on-change</span>
-            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:12px;color:var(--yellow)">watch-changes.sh</span>
+            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--yellow)">*/5 cron</span>
+            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--yellow)">diff-on-change</span>
+            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--yellow)">watch-changes.sh</span>
           </div>
         </div>
         <div style="display:flex;align-items:center;padding:0 8px">
-          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--yellow);text-shadow:0 0 10px var(--yellow);letter-spacing:1px">≤5m</div>
+          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--yellow);text-shadow:0 0 10px var(--yellow);letter-spacing:1px">≤5m</div>
         </div>
       </div>
 
       <div style="display:flex;align-items:stretch;gap:12px;padding:14px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);border-radius:5px">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:90px">
-          <div style="font-family:'Orbitron',monospace;font-size:11px;color:var(--cyan);letter-spacing:2px">LAYER 3</div>
+          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--cyan);letter-spacing:2px">LAYER 3</div>
           <div style="font-size:20px">💓</div>
-          <div style="font-family:'Orbitron',monospace;font-size:10px;color:var(--cyan);text-align:center;letter-spacing:1px">HEARTBEAT<br>CRON</div>
+          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--cyan);text-align:center;letter-spacing:1px">HEARTBEAT<br>CRON</div>
         </div>
         <div style="width:1px;background:rgba(0,229,255,.25)"></div>
         <div style="flex:1">
-          <div style="font-size:13px;color:var(--cyan);font-weight:700;margin-bottom:6px;letter-spacing:1px">Always-on full update — fires every 15 minutes</div>
-          <div style="font-size:13px;color:var(--text);line-height:1.7">
-            <code style="color:var(--cyan);font-size:12px">update-status.sh</code> runs unconditionally every 15 minutes,
-            collects the full system snapshot, writes <code style="color:var(--cyan);font-size:12px">data.json</code>,
+          <div style="font-size:16px;color:var(--cyan);font-weight:700;margin-bottom:6px;letter-spacing:1px">Always-on full update — fires every 15 minutes</div>
+          <div style="font-size:16px;color:var(--text);line-height:1.7">
+            <code style="color:var(--cyan);font-size:15px">update-status.sh</code> runs unconditionally every 15 minutes,
+            collects the full system snapshot, writes <code style="color:var(--cyan);font-size:15px">data.json</code>,
             and pushes to GitHub Pages. This is the <strong style="color:var(--cyan)">catch-all floor</strong> — anything missed
             by the layers above is guaranteed to appear within 15 minutes.
           </div>
           <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:12px;color:var(--cyan)">*/15 cron</span>
-            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:12px;color:var(--cyan)">always fires</span>
-            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:12px;color:var(--cyan)">update-status.sh</span>
+            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--cyan)">*/15 cron</span>
+            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--cyan)">always fires</span>
+            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--cyan)">update-status.sh</span>
           </div>
         </div>
         <div style="display:flex;align-items:center;padding:0 8px">
-          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--cyan);text-shadow:0 0 10px var(--cyan);letter-spacing:1px">≤15m</div>
+          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--cyan);text-shadow:0 0 10px var(--cyan);letter-spacing:1px">≤15m</div>
         </div>
       </div>
 
@@ -976,29 +976,29 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
         <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--green);border-radius:3px">
           <span style="color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
           <div>
-            <div style="font-size:13px;color:var(--green);font-weight:700;letter-spacing:1px">API key rotation</div>
-            <div style="font-size:13px;color:var(--dim);margin-top:3px">Any write to <code style="color:var(--cyan);font-size:12px">~/.openclaw/.env</code> — new keys added, existing keys changed or rotated — fires the watcher instantly.</div>
+            <div style="font-size:16px;color:var(--green);font-weight:700;letter-spacing:1px">API key rotation</div>
+            <div style="font-size:16px;color:var(--dim);margin-top:3px">Any write to <code style="color:var(--cyan);font-size:15px">~/.openclaw/.env</code> — new keys added, existing keys changed or rotated — fires the watcher instantly.</div>
           </div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--green);border-radius:3px">
           <span style="color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
           <div>
-            <div style="font-size:13px;color:var(--green);font-weight:700;letter-spacing:1px">Config changes</div>
-            <div style="font-size:13px;color:var(--dim);margin-top:3px">Writes to <code style="color:var(--cyan);font-size:12px">openclaw.json</code> — model routing, dmPolicy, channel config, plugin enable/disable — detected in &lt;2s.</div>
+            <div style="font-size:16px;color:var(--green);font-weight:700;letter-spacing:1px">Config changes</div>
+            <div style="font-size:16px;color:var(--dim);margin-top:3px">Writes to <code style="color:var(--cyan);font-size:15px">openclaw.json</code> — model routing, dmPolicy, channel config, plugin enable/disable — detected in &lt;2s.</div>
           </div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--green);border-radius:3px">
           <span style="color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
           <div>
-            <div style="font-size:13px;color:var(--green);font-weight:700;letter-spacing:1px">Plugin config changes</div>
-            <div style="font-size:13px;color:var(--dim);margin-top:3px">Any <code style="color:var(--cyan);font-size:12px">*.plugin.json</code> write under <code style="color:var(--cyan);font-size:12px">~/.openclaw/extensions/</code> — plugin version bumps, config edits, new plugin installs.</div>
+            <div style="font-size:16px;color:var(--green);font-weight:700;letter-spacing:1px">Plugin config changes</div>
+            <div style="font-size:16px;color:var(--dim);margin-top:3px">Any <code style="color:var(--cyan);font-size:15px">*.plugin.json</code> write under <code style="color:var(--cyan);font-size:15px">~/.openclaw/extensions/</code> — plugin version bumps, config edits, new plugin installs.</div>
           </div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--green);border-radius:3px">
           <span style="color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
           <div>
-            <div style="font-size:13px;color:var(--green);font-weight:700;letter-spacing:1px">Knowledge base changes</div>
-            <div style="font-size:13px;color:var(--dim);margin-top:3px">Any <code style="color:var(--cyan);font-size:12px">*.md</code> file written in the openclaw tree — Cognee indexed docs, agent memory exports added as files.</div>
+            <div style="font-size:16px;color:var(--green);font-weight:700;letter-spacing:1px">Knowledge base changes</div>
+            <div style="font-size:16px;color:var(--dim);margin-top:3px">Any <code style="color:var(--cyan);font-size:15px">*.md</code> file written in the openclaw tree — Cognee indexed docs, agent memory exports added as files.</div>
           </div>
         </div>
       </div>
@@ -1011,29 +1011,29 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
         <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--red);border-radius:3px">
           <span style="color:var(--red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
           <div>
-            <div style="font-size:13px;color:var(--red);font-weight:700;letter-spacing:1px">Service crashes / restarts</div>
-            <div style="font-size:13px;color:var(--dim);margin-top:3px">A process dying is a kernel process event, not a filesystem event. inotify is blind to it. <strong style="color:var(--yellow)">Covered by Layer 2 poller (≤5 min).</strong></div>
+            <div style="font-size:16px;color:var(--red);font-weight:700;letter-spacing:1px">Service crashes / restarts</div>
+            <div style="font-size:16px;color:var(--dim);margin-top:3px">A process dying is a kernel process event, not a filesystem event. inotify is blind to it. <strong style="color:var(--yellow)">Covered by Layer 2 poller (≤5 min).</strong></div>
           </div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--red);border-radius:3px">
           <span style="color:var(--red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
           <div>
-            <div style="font-size:13px;color:var(--red);font-weight:700;letter-spacing:1px">API key quota exhaustion</div>
-            <div style="font-size:13px;color:var(--dim);margin-top:3px">A Gemini key hitting its daily limit is a network / LiteLLM state change — no file is written. <strong style="color:var(--yellow)">Covered by Layer 2 LiteLLM health poll.</strong></div>
+            <div style="font-size:16px;color:var(--red);font-weight:700;letter-spacing:1px">API key quota exhaustion</div>
+            <div style="font-size:16px;color:var(--dim);margin-top:3px">A Gemini key hitting its daily limit is a network / LiteLLM state change — no file is written. <strong style="color:var(--yellow)">Covered by Layer 2 LiteLLM health poll.</strong></div>
           </div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--red);border-radius:3px">
           <span style="color:var(--red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
           <div>
-            <div style="font-size:13px;color:var(--red);font-weight:700;letter-spacing:1px">Memory count changes</div>
-            <div style="font-size:13px;color:var(--dim);margin-top:3px">New vectors added to Qdrant are stored in Qdrant's own data dir, not in <code style="color:var(--cyan);font-size:12px">~/.openclaw/</code>. <strong style="color:var(--yellow)">Covered by Layer 2 Qdrant API poll.</strong></div>
+            <div style="font-size:16px;color:var(--red);font-weight:700;letter-spacing:1px">Memory count changes</div>
+            <div style="font-size:16px;color:var(--dim);margin-top:3px">New vectors added to Qdrant are stored in Qdrant's own data dir, not in <code style="color:var(--cyan);font-size:15px">~/.openclaw/</code>. <strong style="color:var(--yellow)">Covered by Layer 2 Qdrant API poll.</strong></div>
           </div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--red);border-radius:3px">
           <span style="color:var(--red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
           <div>
-            <div style="font-size:13px;color:var(--red);font-weight:700;letter-spacing:1px">Network / port state changes</div>
-            <div style="font-size:13px;color:var(--dim);margin-top:3px">Services binding / unbinding ports, HTTP health endpoint going up or down — these are network events. <strong style="color:var(--yellow)">Covered by Layer 2 service health probes.</strong></div>
+            <div style="font-size:16px;color:var(--red);font-weight:700;letter-spacing:1px">Network / port state changes</div>
+            <div style="font-size:16px;color:var(--dim);margin-top:3px">Services binding / unbinding ports, HTTP health endpoint going up or down — these are network events. <strong style="color:var(--yellow)">Covered by Layer 2 service health probes.</strong></div>
           </div>
         </div>
       </div>
@@ -1046,30 +1046,30 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     <div class="card" style="border-color:rgba(124,77,255,.25)">
       <div class="card-sweep"></div>
       <div class="card-title" style="color:#7c4dff"><span class="accent" style="background:#7c4dff"></span>INOTIFY WATCHED PATHS</div>
-      <div style="font-size:13px;color:var(--dim);margin-bottom:12px">Recursive watch on <code style="color:var(--cyan);font-size:12px">~/.openclaw/</code> — filtered to these patterns:</div>
+      <div style="font-size:16px;color:var(--dim);margin-bottom:12px">Recursive watch on <code style="color:var(--cyan);font-size:15px">~/.openclaw/</code> — filtered to these patterns:</div>
       <div style="display:flex;flex-direction:column;gap:7px">
         <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
-          <span style="color:#7c4dff;font-size:14px">📄</span>
-          <code style="font-size:13px;color:var(--cyan)">~/.openclaw/.env</code>
-          <span style="margin-left:auto;font-size:12px;color:var(--dim)">API keys</span>
+          <span style="color:#7c4dff;font-size:16px">📄</span>
+          <code style="font-size:16px;color:var(--cyan)">~/.openclaw/.env</code>
+          <span style="margin-left:auto;font-size:15px;color:var(--dim)">API keys</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
-          <span style="color:#7c4dff;font-size:14px">📄</span>
-          <code style="font-size:13px;color:var(--cyan)">~/.openclaw/openclaw.json</code>
-          <span style="margin-left:auto;font-size:12px;color:var(--dim)">main config</span>
+          <span style="color:#7c4dff;font-size:16px">📄</span>
+          <code style="font-size:16px;color:var(--cyan)">~/.openclaw/openclaw.json</code>
+          <span style="margin-left:auto;font-size:15px;color:var(--dim)">main config</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
-          <span style="color:#7c4dff;font-size:14px">📁</span>
-          <code style="font-size:13px;color:var(--cyan)">~/.openclaw/extensions/**/*.plugin.json</code>
-          <span style="margin-left:auto;font-size:12px;color:var(--dim)">plugins</span>
+          <span style="color:#7c4dff;font-size:16px">📁</span>
+          <code style="font-size:16px;color:var(--cyan)">~/.openclaw/extensions/**/*.plugin.json</code>
+          <span style="margin-left:auto;font-size:15px;color:var(--dim)">plugins</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
-          <span style="color:#7c4dff;font-size:14px">📁</span>
-          <code style="font-size:13px;color:var(--cyan)">~/.openclaw/**/*.md</code>
-          <span style="margin-left:auto;font-size:12px;color:var(--dim)">knowledge docs</span>
+          <span style="color:#7c4dff;font-size:16px">📁</span>
+          <code style="font-size:16px;color:var(--cyan)">~/.openclaw/**/*.md</code>
+          <span style="margin-left:auto;font-size:15px;color:var(--dim)">knowledge docs</span>
         </div>
         <div style="margin-top:6px;padding:8px 12px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:3px">
-          <div style="font-size:12px;color:var(--dim);line-height:1.6">Events watched: <code style="color:var(--cyan);font-size:11px">close_write, create, moved_to</code><br>Other writes (runtime telemetry, lock files) are silently ignored by the grep filter.</div>
+          <div style="font-size:15px;color:var(--dim);line-height:1.6">Events watched: <code style="color:var(--cyan);font-size:14px">close_write, create, moved_to</code><br>Other writes (runtime telemetry, lock files) are silently ignored by the grep filter.</div>
         </div>
       </div>
     </div>
@@ -1080,34 +1080,34 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
       <div style="display:flex;flex-direction:column;gap:7px">
         <div style="padding:10px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="color:var(--green);font-size:13px">●</span>
-            <code style="font-size:13px;color:var(--cyan)">~/.config/systemd/user/dex-watcher.service</code>
+            <span style="color:var(--green);font-size:16px">●</span>
+            <code style="font-size:16px;color:var(--cyan)">~/.config/systemd/user/dex-watcher.service</code>
           </div>
-          <div style="font-size:13px;color:var(--dim)">Systemd user unit. <code style="font-size:12px;color:var(--cyan)">Restart=always</code> — survives crashes. <code style="font-size:12px;color:var(--cyan)">enabled</code> — auto-starts on login.</div>
+          <div style="font-size:16px;color:var(--dim)">Systemd user unit. <code style="font-size:15px;color:var(--cyan)">Restart=always</code> — survives crashes. <code style="font-size:15px;color:var(--cyan)">enabled</code> — auto-starts on login.</div>
         </div>
         <div style="padding:10px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="color:var(--cyan);font-size:13px">◈</span>
-            <code style="font-size:13px;color:var(--cyan)">~/dex-dashboard/dex-watcher.sh</code>
+            <span style="color:var(--cyan);font-size:16px">◈</span>
+            <code style="font-size:16px;color:var(--cyan)">~/dex-dashboard/dex-watcher.sh</code>
           </div>
-          <div style="font-size:13px;color:var(--dim)">inotifywait loop. Pipes matched events to <code style="font-size:12px;color:var(--cyan)">on-config-change.sh</code>. Runs the grep filter inline.</div>
+          <div style="font-size:16px;color:var(--dim)">inotifywait loop. Pipes matched events to <code style="font-size:15px;color:var(--cyan)">on-config-change.sh</code>. Runs the grep filter inline.</div>
         </div>
         <div style="padding:10px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="color:var(--cyan);font-size:13px">◈</span>
-            <code style="font-size:13px;color:var(--cyan)">~/dex-dashboard/on-config-change.sh</code>
+            <span style="color:var(--cyan);font-size:16px">◈</span>
+            <code style="font-size:16px;color:var(--cyan)">~/dex-dashboard/on-config-change.sh</code>
           </div>
-          <div style="font-size:13px;color:var(--dim)">Debounce handler. Skips if a push ran within 60s. Calls <code style="font-size:12px;color:var(--cyan)">update-status.sh</code> and logs to <code style="font-size:12px;color:var(--cyan)">/tmp/dex-inotify.log</code>.</div>
+          <div style="font-size:16px;color:var(--dim)">Debounce handler. Skips if a push ran within 60s. Calls <code style="font-size:15px;color:var(--cyan)">update-status.sh</code> and logs to <code style="font-size:15px;color:var(--cyan)">/tmp/dex-inotify.log</code>.</div>
         </div>
         <div style="padding:10px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="color:var(--yellow);font-size:13px">◎</span>
-            <code style="font-size:13px;color:var(--cyan)">~/dex-dashboard/watch-changes.sh</code>
+            <span style="color:var(--yellow);font-size:16px">◎</span>
+            <code style="font-size:16px;color:var(--cyan)">~/dex-dashboard/watch-changes.sh</code>
           </div>
-          <div style="font-size:13px;color:var(--dim)">Layer 2 poller. Snapshots service state + LiteLLM health + Qdrant counts. Runs every 5 min via cron, pushes only on diff.</div>
+          <div style="font-size:16px;color:var(--dim)">Layer 2 poller. Snapshots service state + LiteLLM health + Qdrant counts. Runs every 5 min via cron, pushes only on diff.</div>
         </div>
         <div style="margin-top:4px;padding:8px 12px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:3px">
-          <div style="font-size:12px;color:var(--dim)">Logs: <code style="color:var(--cyan);font-size:11px">/tmp/dex-inotify.log</code> · <code style="color:var(--cyan);font-size:11px">/tmp/dex-watch.log</code> · <code style="color:var(--cyan);font-size:11px">/tmp/dex-update.log</code></div>
+          <div style="font-size:15px;color:var(--dim)">Logs: <code style="color:var(--cyan);font-size:14px">/tmp/dex-inotify.log</code> · <code style="color:var(--cyan);font-size:14px">/tmp/dex-watch.log</code> · <code style="color:var(--cyan);font-size:14px">/tmp/dex-update.log</code></div>
         </div>
       </div>
     </div>
