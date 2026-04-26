@@ -34,9 +34,9 @@ get_pid() {
 get_cpu_mem() {
   local pid="$1"
   if [ "$pid" != "0" ] && [ -n "$pid" ]; then
-    ps -p "$pid" -o %cpu=,%mem= 2>/dev/null | awk '{printf "%.1f\t%.1f", $1, $2}' || echo "0.0\t0.0"
+    ps -p "$pid" -o %cpu=,%mem= 2>/dev/null | awk '{printf "%.1f %.1f", $1, $2}' || echo "0.0 0.0"
   else
-    echo "0.0\t0.0"
+    echo "0.0 0.0"
   fi
 }
 
@@ -174,50 +174,71 @@ if [ "$CG_ACTIVE" = "true" ]; then
   fi
 fi
 
-# ── 9. Load key-states.json ──────────────────────────────────────────────────
-KEY_STATES_JSON=$(python3 -c "
-import json, sys
-try:
-    d = json.load(open('/home/monster-ubunto/.openclaw/key-states.json'))
-    print(json.dumps(d))
-except Exception as e:
-    print(json.dumps({'error': str(e)}))
-" 2>/dev/null || echo '{}')
+# ── 9. Write data.json via Python (safe JSON serialization) ──────────────────
+# Passes all primitive values as env vars; Python reads key-states.json
+# directly from disk — no shell string embedding of JSON.
+export DJ_TS="$TS" DJ_FILE="$DATA_FILE"
+export DJ_GW_STATUS="$GW_STATUS" DJ_GW_PID="$GW_PID"
+export DJ_GW_ACTIVE="$GW_ACTIVE" DJ_GW_CPU="$GW_CPU" DJ_GW_MEM="$GW_MEM"
+export DJ_CG_ACTIVE="$CG_ACTIVE" DJ_CG_CPU="$CG_CPU" DJ_CG_MEM="$CG_MEM" DJ_CG_STATUS="$COGNEE_STATUS"
+export DJ_M0_ACTIVE="$M0_ACTIVE" DJ_M0_CPU="$M0_CPU" DJ_M0_MEM="$M0_MEM" DJ_M0_STATUS="$MEM0_REST_STATUS"
+export DJ_QD_ACTIVE="$QD_ACTIVE" DJ_QD_CPU="$QD_CPU" DJ_QD_MEM="$QD_MEM"
+export DJ_LL_ACTIVE="$LL_ACTIVE" DJ_LL_CPU="$LL_CPU" DJ_LL_MEM="$LL_MEM"
+export DJ_LL_H="$LITELLM_HEALTHY"     DJ_LL_U="$LITELLM_UNHEALTHY"
+export DJ_GC_H="$GEMINI_CHAT_HEALTHY" DJ_GC_R="$GEMINI_CHAT_REST"
+export DJ_GE_H="$GEMINI_EMBED_HEALTHY" DJ_GE_R="$GEMINI_EMBED_REST"
+export DJ_MEM_OC="$MEM0_OPENCLAW_PTS" DJ_MEM_R="$MEM0_REST_PTS"
 
-# ── 10. Write data.json ──────────────────────────────────────────────────────
-cat > "$DATA_FILE" << JSONEOF
-{
-  "last_updated": "$TS",
-  "gateway": {
-    "status": "$GW_STATUS",
-    "port": 18789,
-    "pid": $GW_PID,
-    "version": "2026.4.15"
-  },
-  "services": {
-    "openclaw-gateway": { "active": $GW_ACTIVE, "cpu": $GW_CPU, "mem": $GW_MEM, "port": 18789, "pid": $GW_PID },
-    "cognee":           { "active": $CG_ACTIVE, "cpu": $CG_CPU, "mem": $CG_MEM, "port": 8000,  "status": "$COGNEE_STATUS" },
-    "mem0":             { "active": $M0_ACTIVE, "cpu": $M0_CPU, "mem": $M0_MEM, "port": 8080,  "status": "$MEM0_REST_STATUS" },
-    "qdrant":           { "active": $QD_ACTIVE, "cpu": $QD_CPU, "mem": $QD_MEM, "port": 6333  },
-    "litellm-proxy":    { "active": $LL_ACTIVE, "cpu": $LL_CPU, "mem": $LL_MEM, "port": 4000  }
-  },
-  "api": {
-    "gemini_chat":      { "total": 12, "healthy": $GEMINI_CHAT_HEALTHY, "resting": $GEMINI_CHAT_REST },
-    "gemini_embedding": { "total": 12, "healthy": $GEMINI_EMBED_HEALTHY, "resting": $GEMINI_EMBED_REST },
-    "mistral":          { "total": 6,  "healthy": 6,                     "resting": 0 }
-  },
-  "memory": {
-    "mem0_openclaw_points": $MEM0_OPENCLAW_PTS,
-    "mem0_rest_points":     $MEM0_REST_PTS
-  },
-  "litellm": {
-    "healthy_endpoints":   $LITELLM_HEALTHY,
-    "unhealthy_endpoints": $LITELLM_UNHEALTHY,
-    "total_endpoints":     $((LITELLM_HEALTHY + LITELLM_UNHEALTHY))
-  },
-  "key_states": $KEY_STATES_JSON
+python3 << 'DATAEOF'
+import json, os
+e = os.environ.get
+def b(v): return (v or '').lower() == 'true'
+def f(v): return float(v or '0')
+def i(v):
+    try: return int(float(v or '0'))
+    except: return 0
+
+try:
+    ks = json.load(open('/home/monster-ubunto/.openclaw/key-states.json'))
+except Exception as ex:
+    ks = {'schema_version': '1.1', 'pools': {}, 'error': str(ex)}
+
+data = {
+    'last_updated': e('DJ_TS', ''),
+    'gateway': {
+        'status':  e('DJ_GW_STATUS', 'offline'),
+        'port':    18789,
+        'pid':     i(e('DJ_GW_PID', '0')),
+        'version': '2026.4.15',
+    },
+    'services': {
+        'openclaw-gateway': {'active': b(e('DJ_GW_ACTIVE')), 'cpu': f(e('DJ_GW_CPU')), 'mem': f(e('DJ_GW_MEM')), 'port': 18789, 'pid': i(e('DJ_GW_PID'))},
+        'cognee':           {'active': b(e('DJ_CG_ACTIVE')), 'cpu': f(e('DJ_CG_CPU')), 'mem': f(e('DJ_CG_MEM')), 'port': 8000,  'status': e('DJ_CG_STATUS', 'offline')},
+        'mem0':             {'active': b(e('DJ_M0_ACTIVE')), 'cpu': f(e('DJ_M0_CPU')), 'mem': f(e('DJ_M0_MEM')), 'port': 8080,  'status': e('DJ_M0_STATUS', 'offline')},
+        'qdrant':           {'active': b(e('DJ_QD_ACTIVE')), 'cpu': f(e('DJ_QD_CPU')), 'mem': f(e('DJ_QD_MEM')), 'port': 6333},
+        'litellm-proxy':    {'active': b(e('DJ_LL_ACTIVE')), 'cpu': f(e('DJ_LL_CPU')), 'mem': f(e('DJ_LL_MEM')), 'port': 4000},
+    },
+    'api': {
+        'gemini_chat':      {'total': 12, 'healthy': i(e('DJ_GC_H')), 'resting': i(e('DJ_GC_R'))},
+        'gemini_embedding': {'total': 12, 'healthy': i(e('DJ_GE_H')), 'resting': i(e('DJ_GE_R'))},
+        'mistral':          {'total': 5,  'healthy': 5, 'resting': 0},
+    },
+    'memory': {
+        'mem0_openclaw_points': i(e('DJ_MEM_OC')),
+        'mem0_rest_points':     i(e('DJ_MEM_R')),
+    },
+    'litellm': {
+        'healthy_endpoints':   i(e('DJ_LL_H')),
+        'unhealthy_endpoints': i(e('DJ_LL_U')),
+        'total_endpoints':     i(e('DJ_LL_H')) + i(e('DJ_LL_U')),
+    },
+    'key_states': ks,
 }
-JSONEOF
+
+with open(e('DJ_FILE'), 'w') as fh:
+    json.dump(data, fh, indent=2)
+print('data.json written OK')
+DATAEOF
 
 log "data.json written → $DATA_FILE"
 

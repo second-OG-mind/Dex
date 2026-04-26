@@ -1745,10 +1745,15 @@ const STATIC_STATUS={
     schema_version:'1.1',
     pools:{
       'gemini-flash':{
-        total:12, healthy_keys:7, unhealthy_keys:5, last_checked:new Date().toISOString(),
+        total:12, healthy_keys:5, unhealthy_keys:7, last_checked:new Date().toISOString(),
         resting_keys:[
-          {key_name:'GEMINI_API_KEY_1',key_display:'AIzaSy...****mOE',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
-          {key_name:'GEMINI_API_KEY_2',key_display:'AIzaSy...****kow',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+          {key_name:'GEMINI_API_KEY_1', key_display:'AIzaSy...****fmOE',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+          {key_name:'GEMINI_API_KEY_2', key_display:'AIzaSy...****Jkow',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+          {key_name:'GEMINI_API_KEY_3', key_display:'AIzaSy...****kHB4',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+          {key_name:'GEMINI_API_KEY_4', key_display:'AIzaSy...****UMbU',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+          {key_name:'GEMINI_API_KEY_6', key_display:'AIzaSy...****fV1I',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+          {key_name:'GEMINI_API_KEY_8', key_display:'AIzaSy...****mY0E',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+          {key_name:'GEMINI_API_KEY_10',key_display:'AIzaSy...****Imiw',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
         ]
       },
       'gemini-embedding':{total:12, healthy_keys:12, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
@@ -1851,14 +1856,11 @@ function renderApiMonitoring(d){
     const p=pools[poolKey]||{};
     const total=p.total||0;
 
-    // Use per-key counts (not endpoint counts) — never exceeds 100%
+    // Derive active count directly from resting list — always consistent
     const restingKeys=p.resting_keys||[];
     const restingCount=restingKeys.length;
-    // healthy_keys is the authoritative distinct-key count from key-monitor
-    const healthyKeys=p.healthy_keys!==undefined?p.healthy_keys:Math.max(0,total-restingCount);
-    // Cap at total to guarantee ≤ 100%
-    const healthyCapped=Math.min(healthyKeys, total);
-    const pct=total>0?Math.round((healthyCapped/total)*100):100;
+    const activeCount=Math.max(0,total-restingCount);
+    const pct=total>0?Math.round((activeCount/total)*100):100;
     const col=pct===100?'#39ff14':pct>50?'var(--yellow)':'var(--red)';
     const barW=Math.max(0,Math.min(100,pct));
     const hasResting=restingCount>0;
@@ -1867,7 +1869,7 @@ function renderApiMonitoring(d){
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-size:32px;font-weight:700;color:${col};font-family:'Orbitron',monospace">${pct}%</div>
         <div style="text-align:right;font-size:16px">
-          <div style="color:#39ff14">${healthyCapped} / ${total} keys active</div>
+          <div style="color:#39ff14">${activeCount} / ${total} keys active</div>
           <div style="color:${hasResting?'var(--red)':'var(--dim)'}">${restingCount} key${restingCount!==1?'s':''} resting</div>
         </div>
       </div>
