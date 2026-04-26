@@ -1738,9 +1738,24 @@ const STATIC_STATUS={
     'qdrant':{ active:true, cpu:0.2, mem:2.2, port:6333 },
     'litellm-proxy':{ active:true, cpu:0.2, mem:1.6, port:4000 },
   },
-  api:{ gemini_chat:{ total:12, healthy:8, resting:4 }, gemini_embedding:{ total:12, healthy:12, resting:0 }, mistral:{ total:6, healthy:6, resting:0 } },
+  api:{ gemini_chat:{ total:12, healthy:8, resting:4 }, gemini_embedding:{ total:12, healthy:12, resting:0 }, mistral:{ total:5, healthy:5, resting:0 } },
   memory:{ mem0_openclaw_points:19, mem0_rest_points:9 },
-  litellm:{ healthy_endpoints:16, unhealthy_endpoints:15 },
+  litellm:{ healthy_endpoints:29, unhealthy_endpoints:6 },
+  key_states:{
+    schema_version:'1.1',
+    pools:{
+      'gemini-flash':{
+        total:12, healthy_keys:7, unhealthy_keys:5, last_checked:new Date().toISOString(),
+        resting_keys:[
+          {key_name:'GEMINI_API_KEY_1',key_display:'AIzaSy...****mOE',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+          {key_name:'GEMINI_API_KEY_2',key_display:'AIzaSy...****kow',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
+        ]
+      },
+      'gemini-embedding':{total:12, healthy_keys:12, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
+      'mistral-large':{total:5, healthy_keys:5, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]}
+    },
+    last_updated:new Date().toISOString()
+  }
 };
 
 function loadLiveData(){
@@ -1830,40 +1845,44 @@ function renderApiMonitoring(d){
   const pools=ks.pools||{};
 
   // ── Pool cards ──────────────────────────────────────────────────
-  function renderPool(elId, poolKey, label, litellmModel){
+  function renderPool(elId, poolKey, label, poolDesc){
     const el=document.getElementById(elId);
     if(!el)return;
     const p=pools[poolKey]||{};
     const total=p.total||0;
-    const resting=(p.resting_keys||[]).length;
-    const healthy=p.healthy!==undefined?p.healthy:(total-resting);
-    const pct=total>0?Math.round((healthy/total)*100):100;
+
+    // Use per-key counts (not endpoint counts) — never exceeds 100%
+    const restingKeys=p.resting_keys||[];
+    const restingCount=restingKeys.length;
+    // healthy_keys is the authoritative distinct-key count from key-monitor
+    const healthyKeys=p.healthy_keys!==undefined?p.healthy_keys:Math.max(0,total-restingCount);
+    // Cap at total to guarantee ≤ 100%
+    const healthyCapped=Math.min(healthyKeys, total);
+    const pct=total>0?Math.round((healthyCapped/total)*100):100;
     const col=pct===100?'#39ff14':pct>50?'var(--yellow)':'var(--red)';
     const barW=Math.max(0,Math.min(100,pct));
-    const restingEntries=p.resting_keys||[];
-    const hasResting=restingEntries.length>0;
+    const hasResting=restingCount>0;
 
     el.innerHTML=`
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-size:32px;font-weight:700;color:${col};font-family:'Orbitron',monospace">${pct}%</div>
         <div style="text-align:right;font-size:16px">
-          <div style="color:#39ff14">${healthy} / ${total} active</div>
-          <div style="color:${hasResting?'var(--red)':'var(--dim)'}">${resting} resting</div>
+          <div style="color:#39ff14">${healthyCapped} / ${total} keys active</div>
+          <div style="color:${hasResting?'var(--red)':'var(--dim)'}">${restingCount} key${restingCount!==1?'s':''} resting</div>
         </div>
       </div>
       <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:10px">
         <div style="height:100%;width:${barW}%;background:${col};border-radius:3px;transition:width .4s"></div>
       </div>
       <div style="font-size:15px;color:var(--dim)">
-        LiteLLM pool: <span style="color:var(--cyan)">${litellmModel}</span>
-        &nbsp;·&nbsp; total endpoints: <span style="color:var(--text)">${(p.unhealthy||0)+(p.healthy||0)||total}</span>
+        LiteLLM pool: <span style="color:var(--cyan)">${poolDesc}</span>
       </div>
-      ${hasResting?`<div style="margin-top:8px;font-size:15px;color:var(--red)">⚠ ${resting} key(s) in daily-quota rest</div>`:''}`;
+      ${hasResting?`<div style="margin-top:8px;font-size:15px;color:var(--red)">⚠ ${restingCount} key${restingCount!==1?'s':''} at daily quota — resting until midnight PT</div>`:'<div style="margin-top:8px;font-size:15px;color:#39ff14">✓ All keys active</div>'}`;
   }
 
-  renderPool('apim-flash-content',   'gemini-flash',     'Gemini Flash',     'gemini-flash (12 keys)');
-  renderPool('apim-embed-content',   'gemini-embedding', 'Gemini Embedding', 'gemini-embedding (12 keys)');
-  renderPool('apim-mistral-content', 'mistral-large',    'Mistral Large',    'mistral-large (5 keys)');
+  renderPool('apim-flash-content',   'gemini-flash',     'Gemini Flash',     'gemini-flash · 12 keys');
+  renderPool('apim-embed-content',   'gemini-embedding', 'Gemini Embedding', 'gemini-embedding · 12 keys');
+  renderPool('apim-mistral-content', 'mistral-large',    'Mistral Large',    'mistral-large · 5 keys');
 
   // ── Resting keys detail ─────────────────────────────────────────
   const restEl=document.getElementById('apim-resting-detail');
@@ -1872,7 +1891,7 @@ function renderApiMonitoring(d){
   const allResting=[];
   Object.entries(pools).forEach(([poolName,p])=>{
     (p.resting_keys||[]).forEach(rk=>{
-      allResting.push({...rk, pool_name:poolName});
+      allResting.push({...rk, _pool:poolName});
     });
   });
 
@@ -1887,6 +1906,7 @@ function renderApiMonitoring(d){
       <thead>
         <tr style="color:var(--dim);border-bottom:1px solid rgba(57,255,20,.2)">
           <th style="text-align:left;padding:6px 8px">POOL</th>
+          <th style="text-align:left;padding:6px 8px">API KEY</th>
           <th style="text-align:left;padding:6px 8px">REASON</th>
           <th style="text-align:left;padding:6px 8px">RESTING SINCE</th>
           <th style="text-align:left;padding:6px 8px">RECOVERY (MIDNIGHT PT)</th>
@@ -1897,18 +1917,24 @@ function renderApiMonitoring(d){
         ${allResting.map(rk=>{
           const recoverEpoch=rk.recover_epoch||0;
           const secsLeft=Math.max(0,recoverEpoch-now);
-          const h=Math.floor(secsLeft/3600);
-          const m=Math.floor((secsLeft%3600)/60);
-          const countdown=secsLeft>0?`${h}h ${m}m`:'Recovering now…';
+          const hrs=Math.floor(secsLeft/3600);
+          const mins=Math.floor((secsLeft%3600)/60);
+          const countdown=secsLeft>0?`${hrs}h ${mins}m`:'Recovering…';
           const countdownCol=secsLeft>3600?'var(--yellow)':secsLeft>0?'var(--orange)':'#39ff14';
-          const since=rk.resting_since?new Date(rk.resting_since).toUTCString().replace(' GMT',''):'-';
-          const recover=rk.recover_at?new Date(rk.recover_at).toUTCString().replace(' GMT',''):'-';
-          const affected=rk.unhealthy_count?`${rk.unhealthy_count} of ${rk.total} endpoints`:(rk.pool_name||'-');
+          const since=rk.resting_since?new Date(rk.resting_since).toUTCString().replace(' GMT','').replace(/:\d\d GMT/,''):'-';
+          const recover=rk.recover_at?new Date(rk.recover_at).toUTCString().replace(' GMT','').replace(/:\d\d GMT/,''):'-';
+          // key_display from key-monitor (e.g. "AIzaSy...****mOE"), else key_name
+          const keyDisplay=rk.key_display||rk.key_name||'-';
+          const keyName=rk.key_name||'';
           return `<tr style="border-bottom:1px solid rgba(57,255,20,.1)">
-            <td style="padding:8px;color:#39ff14">${rk.pool_name||rk.pool||'-'}</td>
+            <td style="padding:8px;color:#39ff14">${rk._pool||'-'}</td>
+            <td style="padding:8px">
+              <div style="color:var(--cyan);font-family:'Share Tech Mono',monospace">${keyDisplay}</div>
+              <div style="color:var(--dim);font-size:14px">${keyName}</div>
+            </td>
             <td style="padding:8px;color:var(--red)">${(rk.reason||'-').replace(/_/g,' ')}</td>
-            <td style="padding:8px;color:var(--dim);font-size:15px">${since}</td>
-            <td style="padding:8px;color:var(--cyan);font-size:15px">${recover}</td>
+            <td style="padding:8px;color:var(--dim);font-size:14px">${since}</td>
+            <td style="padding:8px;color:var(--cyan);font-size:14px">${recover}</td>
             <td style="padding:8px;text-align:right;color:${countdownCol};font-family:'Orbitron',monospace;font-size:15px">${countdown}</td>
           </tr>`;
         }).join('')}
