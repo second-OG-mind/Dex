@@ -1,31 +1,31 @@
 {
-  "last_updated": "2026-04-26T17:15:01Z",
+  "last_updated": "2026-04-26T17:13:35Z",
   "gateway": {
-    "status": "offline",
+    "status": "running_no_probe",
     "port": 18789,
-    "pid": 0,
+    "pid": 37880,
     "version": "2026.4.15"
   },
   "services": {
-    "openclaw-gateway": { "active": false, "cpu": 0.0t0.0, "mem": , "port": 18789, "pid": 0 },
-    "cognee":           { "active": false, "cpu": 0.0t0.0, "mem": , "port": 8000,  "status": "offline" },
-    "mem0":             { "active": false, "cpu": 0.0t0.0, "mem": , "port": 8080,  "status": "offline" },
-    "qdrant":           { "active": false, "cpu": 0.0t0.0, "mem": , "port": 6333  },
-    "litellm-proxy":    { "active": false, "cpu": 0.0t0.0, "mem": , "port": 4000  }
+    "openclaw-gateway": { "active": true, "cpu": 153.0, "mem": 3.2, "port": 18789, "pid": 37880 },
+    "cognee":           { "active": true, "cpu": 3.0, "mem": 1.7, "port": 8000,  "status": "online" },
+    "mem0":             { "active": true, "cpu": 1.5, "mem": 0.6, "port": 8080,  "status": "online" },
+    "qdrant":           { "active": true, "cpu": 0.2, "mem": 3.1, "port": 6333  },
+    "litellm-proxy":    { "active": true, "cpu": 3.7, "mem": 1.7, "port": 4000  }
   },
   "api": {
-    "gemini_chat":      { "total": 12, "healthy": 0, "resting": 12 },
-    "gemini_embedding": { "total": 12, "healthy": 0, "resting": 12 },
+    "gemini_chat":      { "total": 12, "healthy": 14, "resting": 0 },
+    "gemini_embedding": { "total": 12, "healthy": 12, "resting": 0 },
     "mistral":          { "total": 6,  "healthy": 6,                     "resting": 0 }
   },
   "memory": {
-    "mem0_openclaw_points": 0,
-    "mem0_rest_points":     0
+    "mem0_openclaw_points": 19,
+    "mem0_rest_points":     9
   },
   "litellm": {
-    "healthy_endpoints":   0,
-    "unhealthy_endpoints": 0,
-    "total_endpoints":     0
+    "healthy_endpoints":   28,
+    "unhealthy_endpoints": 7,
+    "total_endpoints":     35
   },
   "key_states": {"schema_version": "1.0", "pools": {"gemini-flash": {"total": 12, "resting_keys": [{"pool": "gemini-flash", "reason": "daily_quota", "resting_since": "2026-04-26T17:13:21Z", "recover_at": "2026-04-27T07:00:00Z", "recover_epoch": 1777273200, "unhealthy_count": 8, "total": 12, "confirmed_daily": true}], "last_checked": "2026-04-26T17:13:21Z", "healthy": 7, "unhealthy": 8}, "gemini-embedding": {"total": 12, "resting_keys": [], "last_checked": "2026-04-26T17:13:21Z", "healthy": 15, "unhealthy": 0}, "mistral-large": {"total": 5, "resting_keys": [], "last_checked": "2026-04-26T17:13:21Z", "healthy": 5, "unhealthy": 0}}, "last_updated": "2026-04-26T17:13:21Z"}
 }
