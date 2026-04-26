@@ -174,7 +174,17 @@ if [ "$CG_ACTIVE" = "true" ]; then
   fi
 fi
 
-# ── 9. Write data.json ───────────────────────────────────────────────────────
+# ── 9. Load key-states.json ──────────────────────────────────────────────────
+KEY_STATES_JSON=$(python3 -c "
+import json, sys
+try:
+    d = json.load(open('/home/monster-ubunto/.openclaw/key-states.json'))
+    print(json.dumps(d))
+except Exception as e:
+    print(json.dumps({'error': str(e)}))
+" 2>/dev/null || echo '{}')
+
+# ── 10. Write data.json ──────────────────────────────────────────────────────
 cat > "$DATA_FILE" << JSONEOF
 {
   "last_updated": "$TS",
@@ -204,13 +214,14 @@ cat > "$DATA_FILE" << JSONEOF
     "healthy_endpoints":   $LITELLM_HEALTHY,
     "unhealthy_endpoints": $LITELLM_UNHEALTHY,
     "total_endpoints":     $((LITELLM_HEALTHY + LITELLM_UNHEALTHY))
-  }
+  },
+  "key_states": $KEY_STATES_JSON
 }
 JSONEOF
 
 log "data.json written → $DATA_FILE"
 
-# ── 10. Git commit + push ────────────────────────────────────────────────────
+# ── 11. Git commit + push ────────────────────────────────────────────────────
 cd "$SCRIPT_DIR"
 
 if ! git rev-parse --git-dir &>/dev/null; then
