@@ -23,7 +23,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow-x:hidden}
 body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;
-  font-size:14px;min-height:100vh}
+  font-size:15px;min-height:100vh}
 
 /* ── CANVASES ── */
 #matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.22;pointer-events:none}
@@ -67,13 +67,13 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .logo-ascii{font-family:'Orbitron',monospace;font-size:38px;font-weight:900;
   color:var(--cyan);letter-spacing:6px;position:relative;
   text-shadow:0 0 20px var(--cyan),0 0 40px var(--cyan),0 0 80px rgba(0,229,255,.5)}
-.logo-sub{font-size:13px;color:var(--dim);letter-spacing:3px;margin-top:4px}
+.logo-sub{font-size:15px;color:var(--dim);letter-spacing:3px;margin-top:4px}
 
 .header-center{text-align:center}
 .clock-utc{font-family:'Orbitron',monospace;font-size:34px;font-weight:700;
   color:var(--yellow);letter-spacing:3px;
   text-shadow:0 0 20px var(--yellow),0 0 40px rgba(255,234,0,.4)}
-.clock-label{font-size:12px;color:var(--dim);letter-spacing:3px;margin-top:4px}
+.clock-label{font-size:14px;color:var(--dim);letter-spacing:3px;margin-top:4px}
 
 .header-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .dex-status{display:flex;align-items:center;gap:10px;font-size:14px;letter-spacing:2px;font-weight:700}
@@ -84,7 +84,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .status-dot.offline{background:var(--red);box-shadow:0 0 16px var(--red)}
 .status-dot.offline::after{border-color:var(--red);animation:ring-pulse-r 1s ease infinite}
 .status-dot.checking{background:var(--yellow);animation:pulse-yellow .8s ease infinite}
-.last-push{font-size:12px;color:var(--dim);letter-spacing:1px}
+.last-push{font-size:14px;color:var(--dim);letter-spacing:1px}
 
 @keyframes pulse-green{0%,100%{box-shadow:0 0 12px var(--green)}50%{box-shadow:0 0 30px var(--green),0 0 60px rgba(105,255,71,.5)}}
 @keyframes pulse-red{0%,100%{box-shadow:0 0 12px var(--red)}50%{box-shadow:0 0 30px var(--red)}}
@@ -165,8 +165,8 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 /* ── STAT BLOCKS ── */
 .stat-num{font-family:'Orbitron',monospace;font-size:54px;font-weight:900;line-height:1;
   text-shadow:0 0 20px currentColor,0 0 40px currentColor}
-.stat-label{font-size:13px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase}
-.stat-sub{font-size:13px;color:var(--dim);margin-top:8px}
+.stat-label{font-size:15px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase}
+.stat-sub{font-size:15px;color:var(--dim);margin-top:8px}
 
 /* ── SERVICE CARDS ── */
 .svc-card{background:var(--glass);border:1px solid var(--border);border-radius:6px;
@@ -191,7 +191,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   text-shadow:0 0 12px var(--cyan)}
 .svc-port{font-size:28px;font-weight:700;color:var(--green);font-family:'Orbitron',monospace;
   text-shadow:0 0 16px var(--green),0 0 32px rgba(105,255,71,.4)}
-.svc-meta{font-size:13px;color:var(--dim);margin-top:6px;line-height:2}
+.svc-meta{font-size:15px;color:var(--dim);margin-top:6px;line-height:2}
 .svc-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:10px;overflow:hidden}
 .svc-bar-fill{height:100%;border-radius:2px;transition:width .6s ease;position:relative}
 .svc-bar-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
@@ -214,7 +214,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 /* ── API KEY DOTS ── */
 .key-pool{margin-bottom:18px}
 .key-pool-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.key-pool-name{font-size:13px;letter-spacing:2px;color:var(--text)}
+.key-pool-name{font-size:15px;letter-spacing:2px;color:var(--text)}
 .key-pool-count{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;
   text-shadow:0 0 10px currentColor}
 .key-dots{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
@@ -237,9 +237,9 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .mem-num::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid;
   opacity:.4;animation:ring-pulse-g 3s ease infinite}
 .mem-body{flex:1}
-.mem-name{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;
+.mem-name{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;
   letter-spacing:2px;margin-bottom:6px;text-shadow:0 0 10px currentColor}
-.mem-desc{font-size:13px;color:var(--dim);line-height:1.8}
+.mem-desc{font-size:15px;color:var(--dim);line-height:1.8}
 .mem-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;
   border-radius:3px;font-size:11px;letter-spacing:1px;margin-top:8px;border:1px solid;
   box-shadow:0 0 8px rgba(0,0,0,.5)}
@@ -251,8 +251,8 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   transition:all .2s}
 .qdrant-col:hover{border-left-color:var(--cyan);background:rgba(0,229,255,.04);
   box-shadow:0 0 15px rgba(0,229,255,.08)}
-.col-name{font-size:13px;color:var(--magenta);letter-spacing:1px}
-.col-stats{font-size:13px;color:var(--dim);text-align:right;line-height:1.8}
+.col-name{font-size:15px;color:var(--magenta);letter-spacing:1px}
+.col-stats{font-size:15px;color:var(--dim);text-align:right;line-height:1.8}
 
 /* ── PLUGINS ── */
 .plugin-card{padding:14px 18px;background:rgba(0,0,0,.3);border-radius:4px;
@@ -264,11 +264,11 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   box-shadow:0 0 20px rgba(0,229,255,.1);transform:translateX(3px)}
 .plugin-card:hover::before{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 .plugin-card.disabled{opacity:.4;border-style:dashed}
-.plugin-kind{font-size:12px;padding:3px 8px;border-radius:3px;letter-spacing:1px;
+.plugin-kind{font-size:14px;padding:3px 8px;border-radius:3px;letter-spacing:1px;
   text-transform:uppercase;flex-shrink:0;font-weight:700}
 .plugin-info{flex:1}
-.plugin-name{font-size:14px;color:var(--text);letter-spacing:1px;font-weight:700}
-.plugin-ver{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.6}
+.plugin-name{font-size:15px;color:var(--text);letter-spacing:1px;font-weight:700}
+.plugin-ver{font-size:14px;color:var(--dim);margin-top:3px;line-height:1.6}
 .plugin-toggle{width:36px;height:18px;border-radius:9px;border:1px solid;
   position:relative;flex-shrink:0;cursor:default}
 .plugin-toggle.on{background:rgba(105,255,71,.2);border-color:var(--green);
@@ -280,7 +280,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .plugin-toggle.off::after{left:2px;background:rgba(255,23,68,.6)}
 
 /* ── FILE TREE ── */
-.tree{font-size:13px;line-height:2.1;color:var(--text);overflow-x:auto}
+.tree{font-size:15px;line-height:2.1;color:var(--text);overflow-x:auto}
 .tree .dir{color:var(--cyan);text-shadow:0 0 6px rgba(0,229,255,.4)}
 .tree .file{color:var(--dim)}
 .tree .ext-js{color:var(--yellow)}
@@ -288,12 +288,12 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tree .ext-py{color:var(--magenta)}
 .tree .ext-yaml{color:var(--orange)}
 .tree .ext-md{color:#70b0ff}
-.tree .tag{font-size:12px;padding:2px 6px;border-radius:2px;margin-left:8px;
+.tree .tag{font-size:14px;padding:2px 6px;border-radius:2px;margin-left:8px;
   vertical-align:middle;letter-spacing:1px}
 
 /* ── COMMANDS ── */
 .cmd-group{margin-bottom:24px}
-.cmd-group-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;
+.cmd-group-title{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;
   letter-spacing:3px;color:var(--orange);margin-bottom:12px;
   padding-bottom:8px;border-bottom:1px solid rgba(255,109,0,.25);
   display:flex;align-items:center;gap:10px;
@@ -307,9 +307,9 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .cmd-block:hover{border-color:rgba(255,109,0,.4);background:rgba(255,109,0,.06);
   transform:translateX(3px)}
 .cmd-block:hover::before{opacity:1;box-shadow:0 0 8px var(--orange)}
-.cmd-block code{font-family:'Share Tech Mono',monospace;font-size:13px;
+.cmd-block code{font-family:'Share Tech Mono',monospace;font-size:15px;
   color:#b8e8ff;line-height:2;display:block;white-space:pre;overflow-x:auto}
-.cmd-block .cmd-desc{font-size:13px;color:var(--dim);margin-bottom:8px;letter-spacing:1px}
+.cmd-block .cmd-desc{font-size:15px;color:var(--dim);margin-bottom:8px;letter-spacing:1px}
 .cmd-block .copy-btn{position:absolute;top:10px;right:10px;padding:4px 12px;
   background:rgba(255,109,0,.18);border:1px solid rgba(255,109,0,.4);
   border-radius:3px;font-size:11px;color:var(--orange);cursor:pointer;
@@ -318,7 +318,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .cmd-block .copy-btn.copied{color:var(--green);border-color:var(--green);background:rgba(105,255,71,.18)}
 .cmd-private{border-left:3px solid rgba(255,23,68,.5)!important}
 .cmd-private::before{background:var(--red)!important}
-.private-badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;
+.private-badge{display:inline-flex;align-items:center;gap:4px;font-size:14px;
   color:var(--red);letter-spacing:1px;margin-left:10px}
 
 /* ── LIVE STATUS ── */
@@ -330,14 +330,14 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .health-row:hover{border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.06);
   box-shadow:0 0 20px rgba(0,229,255,.1)}
 .health-row:hover::before{opacity:1;box-shadow:0 0 8px var(--cyan)}
-.health-label{font-size:14px;letter-spacing:1px;font-weight:700}
+.health-label{font-size:15px;letter-spacing:1px;font-weight:700}
 .health-val{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;
   text-shadow:0 0 10px currentColor}
-.health-time{font-size:12px;color:var(--dim);margin-top:3px}
+.health-time{font-size:14px;color:var(--dim);margin-top:3px}
 
 .refresh-btn{display:flex;align-items:center;gap:10px;padding:12px 24px;
   background:rgba(0,229,255,.1);border:1px solid var(--cyan);border-radius:4px;
-  color:var(--cyan);font-family:'Orbitron',monospace;font-size:13px;
+  color:var(--cyan);font-family:'Orbitron',monospace;font-size:15px;
   letter-spacing:2px;cursor:pointer;transition:all .25s;margin-bottom:18px;
   box-shadow:0 0 20px rgba(0,229,255,.1)}
 .refresh-btn:hover{background:rgba(0,229,255,.2);box-shadow:0 0 30px rgba(0,229,255,.3);
@@ -356,7 +356,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 .section-title{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;
   letter-spacing:4px;text-transform:uppercase;text-shadow:0 0 15px currentColor}
-.section-badge{padding:5px 14px;border-radius:3px;font-size:12px;
+.section-badge{padding:5px 14px;border-radius:3px;font-size:14px;
   letter-spacing:2px;border:1px solid;box-shadow:0 0 12px rgba(0,0,0,.5)}
 
 /* ── SCROLLBAR ── */
@@ -399,7 +399,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
 /* ── LIVE UPDATE PANEL ── */
 .update-info{padding:14px 18px;background:rgba(105,255,71,.05);
   border:1px solid rgba(105,255,71,.2);border-radius:4px;
-  margin-bottom:14px;font-size:13px;color:var(--dim);line-height:2}
+  margin-bottom:14px;font-size:15px;color:var(--dim);line-height:2}
 .update-info strong{color:var(--green);text-shadow:0 0 8px var(--green)}
 
 /* ── INTERACTIVE GLOW ON HOVER for inline divs ── */
@@ -423,7 +423,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
       <div class="logo-sub">OPENCLAW INTELLIGENCE HUB // v2026.4.15</div>
     </div>
     <div style="width:1px;height:40px;background:var(--border)"></div>
-    <div style="font-size:13px;color:var(--dim);line-height:2">
+    <div style="font-size:15px;color:var(--dim);line-height:2">
       <div>NODE <span style="color:var(--cyan)">v24.15.0</span></div>
       <div>PLATFORM <span style="color:var(--cyan)">WSL2 / Linux</span></div>
       <div>OPERATOR <span style="color:var(--cyan)">Rawhi Jawabri</span></div>
@@ -433,7 +433,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
   <div class="header-center">
     <div class="clock-utc" id="clock">--:--:--</div>
     <div class="clock-label">UTC+3 // BAGHDAD / RIYADH</div>
-    <div style="font-size:13px;color:var(--dim);margin-top:4px" id="date-display">---</div>
+    <div style="font-size:15px;color:var(--dim);margin-top:4px" id="date-display">---</div>
   </div>
 
   <div class="header-right">
@@ -441,7 +441,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
       <div class="status-dot checking" id="gw-dot"></div>
       <span id="gw-label" style="color:var(--dim)">DEX — CHECKING...</span>
     </div>
-    <div style="display:flex;align-items:center;gap:6px;font-size:13px">
+    <div style="display:flex;align-items:center;gap:6px;font-size:15px">
       <span style="color:var(--dim)">@dexclawbot_bot</span>
       <span style="color:var(--dim)">·</span>
       <span style="color:var(--dim)">Telegram</span>
@@ -491,7 +491,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
     <!-- Architecture diagram -->
     <div class="card">
       <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>ARCHITECTURE FLOW</div>
-      <div style="font-size:13px;line-height:2.2;color:var(--dim)">
+      <div style="font-size:15px;line-height:2.2;color:var(--dim)">
         <div style="color:var(--text)">📱 Telegram (@dexclawbot_bot)</div>
         <div style="padding-left:20px;color:var(--dim)">↓ TELEGRAM_BOT_TOKEN</div>
         <div style="padding-left:20px;color:var(--cyan)">▶ OpenClaw Gateway :18789</div>
@@ -512,19 +512,19 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
     <div class="card">
       <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>MODEL ROUTING</div>
       <div style="margin-bottom:12px">
-        <div style="font-size:13px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">PRIMARY CHAT</div>
+        <div style="font-size:15px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">PRIMARY CHAT</div>
         <div class="model-chip primary">🔷 google/gemini-2.5-flash</div>
-        <div style="font-size:13px;color:var(--dim);margin-top:2px">Via Google plugin · Not LiteLLM</div>
+        <div style="font-size:15px;color:var(--dim);margin-top:2px">Via Google plugin · Not LiteLLM</div>
       </div>
       <div style="margin-bottom:12px">
-        <div style="font-size:13px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">FALLBACK / MULTIMODAL</div>
+        <div style="font-size:15px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">FALLBACK / MULTIMODAL</div>
         <div class="model-chip fallback">🔶 mistral/mistral-large-latest</div>
-        <div class="model-chip fallback" style="font-size:13px">🔶 mistral/pixtral-large-latest</div>
+        <div class="model-chip fallback" style="font-size:15px">🔶 mistral/pixtral-large-latest</div>
       </div>
       <div>
-        <div style="font-size:13px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">EMBEDDINGS (via LiteLLM :4000)</div>
+        <div style="font-size:15px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">EMBEDDINGS (via LiteLLM :4000)</div>
         <div class="model-chip embed">⬡ gemini-embedding-001 · 3072-dim</div>
-        <div style="font-size:13px;color:var(--dim);margin-top:2px">12-key round-robin pool · Cosine similarity</div>
+        <div style="font-size:15px;color:var(--dim);margin-top:2px">12-key round-robin pool · Cosine similarity</div>
       </div>
     </div>
   </div>
@@ -534,28 +534,28 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
     <div class="card-title"><span class="accent" style="background:var(--green)"></span>API KEY INVENTORY</div>
     <div class="grid-4">
       <div>
-        <div style="font-size:13px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI CHAT</div>
+        <div style="font-size:15px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI CHAT</div>
         <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--cyan)">12</div>
-        <div style="font-size:13px;color:var(--dim)">GEMINI_API_KEY_1-12</div>
-        <div style="font-size:13px;color:var(--dim)">LiteLLM gemini-flash pool</div>
+        <div style="font-size:15px;color:var(--dim)">GEMINI_API_KEY_1-12</div>
+        <div style="font-size:15px;color:var(--dim)">LiteLLM gemini-flash pool</div>
       </div>
       <div>
-        <div style="font-size:13px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI EMBEDDING</div>
+        <div style="font-size:15px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI EMBEDDING</div>
         <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--green)">12</div>
-        <div style="font-size:13px;color:var(--dim)">GEMINI_MEM_KEY_1-12</div>
-        <div style="font-size:13px;color:var(--dim)">LiteLLM gemini-embedding pool</div>
+        <div style="font-size:15px;color:var(--dim)">GEMINI_MEM_KEY_1-12</div>
+        <div style="font-size:15px;color:var(--dim)">LiteLLM gemini-embedding pool</div>
       </div>
       <div>
-        <div style="font-size:13px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">MISTRAL</div>
+        <div style="font-size:15px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">MISTRAL</div>
         <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--magenta)">6</div>
-        <div style="font-size:13px;color:var(--dim)">MISTRAL_API_KEY + 1-5</div>
-        <div style="font-size:13px;color:var(--dim)">Agentic / Multimodal</div>
+        <div style="font-size:15px;color:var(--dim)">MISTRAL_API_KEY + 1-5</div>
+        <div style="font-size:15px;color:var(--dim)">Agentic / Multimodal</div>
       </div>
       <div>
-        <div style="font-size:13px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">BROWSERLESS + OTHER</div>
+        <div style="font-size:15px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">BROWSERLESS + OTHER</div>
         <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--orange)">10</div>
-        <div style="font-size:13px;color:var(--dim)">6 Browserless + Google + LiteLLM + Telegram</div>
-        <div style="font-size:13px;color:var(--dim)">Web scraping + auth</div>
+        <div style="font-size:15px;color:var(--dim)">6 Browserless + Google + LiteLLM + Telegram</div>
+        <div style="font-size:15px;color:var(--dim)">Web scraping + auth</div>
       </div>
     </div>
   </div>
@@ -582,16 +582,16 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
   <div class="grid-2" style="margin-bottom:12px">
     <div class="card">
       <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>GOOGLE / GEMINI</div>
-      <div style="font-size:13px;line-height:2;color:var(--dim)">
+      <div style="font-size:15px;line-height:2;color:var(--dim)">
         <div style="color:var(--cyan);font-weight:700">▶ PRIMARY MODEL</div>
         <div style="padding-left:12px;color:var(--text)">google/gemini-2.5-flash</div>
-        <div style="padding-left:12px;font-size:13px">ctx: unlimited · input: text+image</div>
-        <div style="padding-left:12px;font-size:13px">Via: OpenClaw Google plugin (NOT LiteLLM)</div>
+        <div style="padding-left:12px;font-size:15px">ctx: unlimited · input: text+image</div>
+        <div style="padding-left:12px;font-size:15px">Via: OpenClaw Google plugin (NOT LiteLLM)</div>
         <br>
         <div style="color:var(--yellow)">▶ EMBEDDING MODEL</div>
         <div style="padding-left:12px;color:var(--text)">gemini-embedding-001</div>
-        <div style="padding-left:12px;font-size:13px">dims: 3072 · distance: Cosine</div>
-        <div style="padding-left:12px;font-size:13px">Via: LiteLLM proxy :4000 (12-key pool)</div>
+        <div style="padding-left:12px;font-size:15px">dims: 3072 · distance: Cosine</div>
+        <div style="padding-left:12px;font-size:15px">Via: LiteLLM proxy :4000 (12-key pool)</div>
         <br>
         <div style="color:var(--dim)">⛔ BANNED: gemini-2.0-flash (deprecated)</div>
       </div>
@@ -599,28 +599,28 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
 
     <div class="card">
       <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>MISTRAL AI — 7 MODELS</div>
-      <div id="mistral-models" style="font-size:13px"></div>
+      <div id="mistral-models" style="font-size:15px"></div>
     </div>
   </div>
 
   <div class="grid-2" style="margin-bottom:12px">
     <div class="card">
       <div class="card-title"><span class="accent" style="background:var(--yellow)"></span>LITELLM PROXY — PORT 4000</div>
-      <div style="font-size:13px;color:var(--dim);line-height:1.9">
+      <div style="font-size:15px;color:var(--dim);line-height:1.9">
         <div>Config: <span style="color:var(--text)">~/.litellm/config.yaml</span></div>
         <div>Auth key: <span style="color:var(--text)">sk-openclaw-litellm-local</span></div>
         <br>
-        <div style="color:var(--yellow);font-size:12px;font-weight:700">POOL 1 — gemini-flash (chat)</div>
+        <div style="color:var(--yellow);font-size:14px;font-weight:700">POOL 1 — gemini-flash (chat)</div>
         <div>Keys: GEMINI_API_KEY_1-12</div>
         <div>Model: gemini/gemini-2.5-flash</div>
         <div>Used by: Cognee LLM, mem0 LLM</div>
         <br>
-        <div style="color:var(--yellow);font-size:12px;font-weight:700">POOL 2 — gemini-embedding</div>
+        <div style="color:var(--yellow);font-size:14px;font-weight:700">POOL 2 — gemini-embedding</div>
         <div>Keys: GEMINI_MEM_KEY_1-12</div>
         <div>Model: gemini-embedding-001 (3072d)</div>
         <div>Used by: mem0 embedder, Cognee embedder</div>
         <br>
-        <div style="color:var(--magenta);font-size:12px;font-weight:700">POOL 3 — mistral-large</div>
+        <div style="color:var(--magenta);font-size:14px;font-weight:700">POOL 3 — mistral-large</div>
         <div>Keys: MISTRAL_API_KEY + 1-5</div>
         <div>Used by: agentic / multimodal tasks</div>
       </div>
@@ -628,7 +628,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
 
     <div class="card">
       <div class="card-title"><span class="accent" style="background:var(--orange)"></span>CODEX PROVIDER — OPENAI</div>
-      <div style="font-size:13px;color:var(--dim);line-height:1.9;margin-bottom:10px">
+      <div style="font-size:15px;color:var(--dim);line-height:1.9;margin-bottom:10px">
         <div>Base URL: <span style="color:var(--text)">chatgpt.com/backend-api/v1</span></div>
         <div>Auth: <span style="color:var(--text)">token (codex-app-server)</span></div>
         <div>API: <span style="color:var(--text)">openai-codex-responses</span></div>
@@ -639,14 +639,14 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
 
   <!-- API Key Pool Visual -->
   <div class="card">
-    <div class="card-title"><span class="accent" style="background:var(--green)"></span>API KEY POOL STATUS <span style="font-size:13px;color:var(--dim);margin-left:8px">Loaded from live data · hover for details</span></div>
+    <div class="card-title"><span class="accent" style="background:var(--green)"></span>API KEY POOL STATUS <span style="font-size:15px;color:var(--dim);margin-left:8px">Loaded from live data · hover for details</span></div>
 
     <div class="key-pool">
       <div class="key-pool-header">
         <span class="key-pool-name">GEMINI CHAT (GEMINI_API_KEY_1-12)</span>
         <span class="key-pool-count" style="color:var(--cyan)" id="gemini-chat-count">? / 12</span>
       </div>
-      <div style="font-size:13px;color:var(--dim);margin-bottom:4px">Pool alias: gemini-flash → gemini/gemini-2.5-flash</div>
+      <div style="font-size:15px;color:var(--dim);margin-bottom:4px">Pool alias: gemini-flash → gemini/gemini-2.5-flash</div>
       <div class="key-dots" id="gemini-chat-dots"></div>
     </div>
 
@@ -655,7 +655,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
         <span class="key-pool-name">GEMINI EMBEDDING (GEMINI_MEM_KEY_1-12)</span>
         <span class="key-pool-count" style="color:var(--green)" id="gemini-emb-count">? / 12</span>
       </div>
-      <div style="font-size:13px;color:var(--dim);margin-bottom:4px">Pool alias: gemini-embedding → gemini-embedding-001 (3072d)</div>
+      <div style="font-size:15px;color:var(--dim);margin-bottom:4px">Pool alias: gemini-embedding → gemini-embedding-001 (3072d)</div>
       <div class="key-dots" id="gemini-emb-dots"></div>
     </div>
 
@@ -685,7 +685,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
         <div class="mem-body">
           <div class="mem-name" style="color:var(--cyan)">QMD — BUILT-IN CONTEXT</div>
           <div class="mem-desc">Native OpenClaw memory backend. Embedded inside gateway process. Manages conversation history, context windows, compaction. No separate port or process.</div>
-          <div style="margin-top:8px;font-size:13px;color:var(--dim);line-height:1.8">
+          <div style="margin-top:8px;font-size:15px;color:var(--dim);line-height:1.8">
             backend: qmd · maxResults: 6 · maxSnippet: 700 chars<br>
             update interval: 40m · onBoot: true · mode: safeguard
           </div>
@@ -698,7 +698,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
         <div class="mem-body">
           <div class="mem-name" style="color:var(--green)">MEM0 JS — EPISODIC RECALL</div>
           <div class="mem-desc">openclaw-mem0 plugin (v1.0.5) embedded inside gateway. Intercepts conversations via api.on() hooks. Recalls top-10 episodic memories before each prompt.</div>
-          <div style="margin-top:8px;font-size:13px;color:var(--dim);line-height:1.8">
+          <div style="margin-top:8px;font-size:15px;color:var(--dim);line-height:1.8">
             vector store: Qdrant :6333 · collection: mem0-openclaw · 19 points<br>
             embedder: gemini-embedding-001 via LiteLLM · dims: 3072 · Cosine<br>
             userId: openclaw-main · topK: 10 · autoCapture: true · autoRecall: true<br>
@@ -713,7 +713,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
         <div class="mem-body">
           <div class="mem-name" style="color:var(--magenta)">COGNEE — GRAPH KNOWLEDGE</div>
           <div class="mem-desc">cognee-augment hook plugin (v1.0.0). Queries Cognee REST API for graph-based knowledge recall. Appends structured knowledge after mem0's episodic context.</div>
-          <div style="margin-top:8px;font-size:13px;color:var(--dim);line-height:1.8">
+          <div style="margin-top:8px;font-size:15px;color:var(--dim);line-height:1.8">
             api: Cognee :8000 · version: 1.0.1<br>
             hooks: before_prompt_build (recall) · agent_end (cognify)<br>
             inject: appendSystemContext (fires after mem0)<br>
@@ -729,7 +729,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
         <div class="mem-body">
           <div class="mem-name" style="color:var(--orange)">MEM0 REST — MANAGEMENT API</div>
           <div class="mem-desc">Standalone Python FastAPI server wrapping the Python mem0 package. Provides HTTP endpoints for memory management. Not in gateway conversation flow.</div>
-          <div style="margin-top:8px;font-size:13px;color:var(--dim);line-height:1.8">
+          <div style="margin-top:8px;font-size:15px;color:var(--dim);line-height:1.8">
             service: mem0.service :8080 · Python uvicorn · FastAPI<br>
             vector store: Qdrant :6333 · collection: mem0-rest · 9 points<br>
             embedder: gemini-embedding via LiteLLM · dims: 3072<br>
@@ -744,7 +744,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
       <!-- Qdrant -->
       <div class="card">
         <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>QDRANT v1.14.1 — PORT 6333</div>
-        <div style="font-size:13px;color:var(--dim);margin-bottom:10px">Storage: ~/.qdrant/storage · All vectors: 3072-dim Cosine</div>
+        <div style="font-size:15px;color:var(--dim);margin-bottom:10px">Storage: ~/.qdrant/storage · All vectors: 3072-dim Cosine</div>
         <div id="qdrant-collections">
           <div class="qdrant-col"><span class="col-name">mem0-openclaw</span><span class="col-stats" style="color:var(--green)">19 pts · 3072d · Cosine<br><span style="color:var(--dim)">JS plugin (openclaw-mem0)</span></span></div>
           <div class="qdrant-col"><span class="col-name">mem0-rest</span><span class="col-stats" style="color:var(--orange)">9 pts · 3072d<br><span style="color:var(--dim)">Python REST API</span></span></div>
@@ -756,7 +756,7 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
       <!-- Injection order -->
       <div class="card">
         <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>INJECTION ORDER PER REQUEST</div>
-        <div style="font-size:13px;line-height:2.5;font-family:'Share Tech Mono',monospace">
+        <div style="font-size:15px;line-height:2.5;font-family:'Share Tech Mono',monospace">
           <div style="color:var(--dim)">① User message arrives via Telegram</div>
           <div style="padding-left:16px;color:var(--cyan)">↓ openclaw-mem0 before_prompt_build</div>
           <div style="padding-left:32px;color:var(--green)">→ Qdrant search (mem0-openclaw)</div>
@@ -837,13 +837,13 @@ footer{text-align:center;padding:18px;font-size:11px;color:var(--dim);
 
   <div class="grid-2">
     <div>
-      <div style="font-family:'Orbitron',monospace;font-size:13px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">SERVICES</div>
+      <div style="font-family:'Orbitron',monospace;font-size:15px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">SERVICES</div>
       <div id="live-services"></div>
     </div>
     <div>
-      <div style="font-family:'Orbitron',monospace;font-size:13px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">API POOLS</div>
+      <div style="font-family:'Orbitron',monospace;font-size:15px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">API POOLS</div>
       <div id="live-apis"></div>
-      <div style="font-family:'Orbitron',monospace;font-size:13px;letter-spacing:2px;color:var(--dim);margin:16px 0 10px">MEMORY</div>
+      <div style="font-family:'Orbitron',monospace;font-size:15px;letter-spacing:2px;color:var(--dim);margin:16px 0 10px">MEMORY</div>
       <div id="live-memory"></div>
     </div>
   </div>
@@ -1168,23 +1168,23 @@ setTimeout(animateCounters,300);
         <div>
           <div class="svc-name">${s.name}</div>
           <div class="svc-port">:${s.port}</div>
-          <div style="font-size:13px;color:var(--dim);margin-top:2px">${s.proto}</div>
+          <div style="font-size:15px;color:var(--dim);margin-top:2px">${s.proto}</div>
         </div>
         <div style="text-align:right">
           <div class="status-dot online" style="display:inline-block;margin-bottom:4px"></div>
-          <div style="font-size:13px;color:var(--dim)">PID ${s.pid}</div>
+          <div style="font-size:15px;color:var(--dim)">PID ${s.pid}</div>
         </div>
       </div>
       <div class="svc-meta">
         <div style="color:var(--dim)">${s.unit}</div>
-        <div style="color:var(--text);margin-top:4px;line-height:1.7;font-size:13px">${s.desc}</div>
+        <div style="color:var(--text);margin-top:4px;line-height:1.7;font-size:15px">${s.desc}</div>
       </div>
       <div style="margin-top:10px">
-        <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-bottom:2px">
+        <div style="display:flex;justify-content:space-between;font-size:15px;color:var(--dim);margin-bottom:2px">
           <span>CPU</span><span style="color:${s.color}">${s.cpu}%</span>
         </div>
         <div class="svc-bar"><div class="svc-bar-fill" style="width:${cpuPct}%;background:${s.color}"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin:4px 0 2px">
+        <div style="display:flex;justify-content:space-between;font-size:15px;color:var(--dim);margin:4px 0 2px">
           <span>MEM</span><span style="color:${s.color}">${s.mem}%</span>
         </div>
         <div class="svc-bar"><div class="svc-bar-fill" style="width:${memPct}%;background:${s.color};opacity:.6"></div></div>
@@ -1203,10 +1203,10 @@ setTimeout(animateCounters,300);
       padding:6px 10px;margin-bottom:4px;background:rgba(0,0,0,.3);
       border-radius:3px;border-left:2px solid var(--magenta)">
       <div>
-        <div style="font-size:13px;color:var(--text)">${m.id}</div>
-        <div style="font-size:13px;color:var(--dim)">${m.role}</div>
+        <div style="font-size:15px;color:var(--text)">${m.id}</div>
+        <div style="font-size:15px;color:var(--dim)">${m.role}</div>
       </div>
-      <div style="text-align:right;font-size:13px;color:var(--dim)">
+      <div style="text-align:right;font-size:15px;color:var(--dim)">
         ctx:${m.ctx}<br>${m.input.join('+')}
       </div>
     </div>`).join('');
@@ -1217,10 +1217,10 @@ setTimeout(animateCounters,300);
       padding:6px 10px;margin-bottom:4px;background:rgba(0,0,0,.3);
       border-radius:3px;border-left:2px solid var(--orange)">
       <div>
-        <div style="font-size:13px;color:var(--text)">${m.id}</div>
-        <div style="font-size:13px;color:var(--dim)">Reasoning: ${m.reasoning?'✓':'-'}</div>
+        <div style="font-size:15px;color:var(--text)">${m.id}</div>
+        <div style="font-size:15px;color:var(--dim)">Reasoning: ${m.reasoning?'✓':'-'}</div>
       </div>
-      <div style="text-align:right;font-size:13px;color:var(--dim)">
+      <div style="text-align:right;font-size:15px;color:var(--dim)">
         ctx:${m.ctx}<br>out:${m.maxOut}
       </div>
     </div>`).join('');
@@ -1438,7 +1438,7 @@ function renderLive(d){
       </div>
       <div style="text-align:right">
         <div class="health-val" style="color:${up?'var(--green)':'var(--red)'}">${up?'ONLINE':'OFFLINE'}</div>
-        <div style="font-size:13px;color:var(--dim)">CPU:${v.cpu||'?'}% MEM:${v.mem||'?'}%</div>
+        <div style="font-size:15px;color:var(--dim)">CPU:${v.cpu||'?'}% MEM:${v.mem||'?'}%</div>
       </div>
     </div>`;
   }).join('');
@@ -1456,7 +1456,7 @@ function renderLive(d){
       </div>
       <div style="text-align:right">
         <div class="health-val" style="color:${col}">${pct}%</div>
-        <div style="font-size:13px;color:var(--dim)">${info.total} total keys</div>
+        <div style="font-size:15px;color:var(--dim)">${info.total} total keys</div>
       </div>
     </div>`;
   }).join('');
@@ -1478,7 +1478,7 @@ function renderLive(d){
       <div><div class="health-label">LiteLLM endpoints</div><div class="health-time">across all pools</div></div>
       <div style="text-align:right">
         <div class="health-val" style="color:var(--green)">${litellm.healthy_endpoints||'?'} ✓</div>
-        <div style="font-size:13px;color:var(--red)">${litellm.unhealthy_endpoints||'?'} ✗</div>
+        <div style="font-size:15px;color:var(--red)">${litellm.unhealthy_endpoints||'?'} ✗</div>
       </div>
     </div>`;
 }
