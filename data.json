@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-27T18:42:37Z",
+  "last_updated": "2026-04-27T18:45:01Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -15,29 +15,29 @@
       "pid": 0
     },
     "cognee": {
-      "active": true,
-      "cpu": 0.8,
-      "mem": 1.8,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 8000,
-      "status": "online"
+      "status": "offline"
     },
     "mem0": {
-      "active": true,
-      "cpu": 0.5,
-      "mem": 0.6,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 8080,
-      "status": "online"
+      "status": "offline"
     },
     "qdrant": {
-      "active": true,
-      "cpu": 0.2,
-      "mem": 3.0,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 6333
     },
     "litellm-proxy": {
-      "active": true,
-      "cpu": 1.2,
-      "mem": 2.0,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 4000
     }
   },
@@ -74,13 +74,13 @@
     }
   },
   "memory": {
-    "mem0_openclaw_points": 19,
-    "mem0_rest_points": 9
+    "mem0_openclaw_points": 0,
+    "mem0_rest_points": 0
   },
   "litellm": {
-    "healthy_endpoints": 174,
+    "healthy_endpoints": 0,
     "unhealthy_endpoints": 0,
-    "total_endpoints": 174
+    "total_endpoints": 0
   },
   "key_states": {
     "schema_version": "1.1",
