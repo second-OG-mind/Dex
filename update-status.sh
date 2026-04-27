@@ -75,7 +75,7 @@ LITELLM_HEALTHY=0
 LITELLM_UNHEALTHY=0
 
 if [ "$LL_ACTIVE" = "true" ]; then
-  HEALTH_JSON=$(curl -sf \
+  HEALTH_JSON=$(curl -sf --max-time 30 \
     -H "Authorization: Bearer ${LITELLM_MASTER_KEY:-sk-openclaw-litellm-local}" \
     "http://127.0.0.1:4000/health" 2>/dev/null || echo '{}')
   LITELLM_HEALTHY=$(echo "$HEALTH_JSON" | python3 -c "
