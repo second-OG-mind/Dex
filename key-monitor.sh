@@ -14,6 +14,9 @@
 # Cron: */15 * * * * ~/dex-dashboard/key-monitor.sh >> /tmp/dex-keymon.log 2>&1
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
+# Allow systemctl --user to work from cron (no interactive DBus session in cron)
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ALERT_SH="$SCRIPT_DIR/telegram-alert.sh"
 KEY_STATES="/home/monster-ubunto/.openclaw/key-states.json"

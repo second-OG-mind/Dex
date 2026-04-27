@@ -6,6 +6,9 @@
 # Cron:   */15 * * * * /home/monster-ubunto/dex-dashboard/update-status.sh
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
+# Allow systemctl --user to work from cron (no interactive DBus session in cron)
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 DATA_FILE="$SCRIPT_DIR/data.json"
 LOG_FILE="/tmp/dex-update.log"
