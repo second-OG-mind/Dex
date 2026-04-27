@@ -1,29 +1,29 @@
 {
-  "last_updated": "2026-04-27T18:16:53Z",
+  "last_updated": "2026-04-27T18:27:26Z",
   "gateway": {
-    "status": "offline",
+    "status": "running_no_probe",
     "port": 18789,
-    "pid": 0,
-    "version": "2026.4.15"
+    "pid": 159678,
+    "version": "2026.4.27"
   },
   "services": {
     "openclaw-gateway": {
-      "active": false,
-      "cpu": 0.0,
-      "mem": 0.0,
+      "active": true,
+      "cpu": 148.0,
+      "mem": 1.8,
       "port": 18789,
-      "pid": 0
+      "pid": 159678
     },
     "cognee": {
       "active": true,
-      "cpu": 0.1,
-      "mem": 1.8,
+      "cpu": 2.1,
+      "mem": 1.7,
       "port": 8000,
       "status": "online"
     },
     "mem0": {
       "active": true,
-      "cpu": 0.1,
+      "cpu": 1.1,
       "mem": 0.6,
       "port": 8080,
       "status": "online"
@@ -36,30 +36,40 @@
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 0.1,
-      "mem": 1.7,
+      "cpu": 2.8,
+      "mem": 1.9,
       "port": 4000
     }
   },
   "api": {
     "gemma_chat": {
-      "total": 12,
-      "healthy": 12,
+      "total": 28,
+      "healthy": 28,
       "resting": 0
     },
-    "gemini_chat": {
-      "total": 12,
-      "healthy": 10,
-      "resting": 2
+    "gemma_fallback": {
+      "total": 28,
+      "healthy": 28,
+      "resting": 0
+    },
+    "gemma_internal": {
+      "total": 28,
+      "healthy": 28,
+      "resting": 0
+    },
+    "gemma_agentic": {
+      "total": 28,
+      "healthy": 28,
+      "resting": 0
     },
     "gemini_embedding": {
-      "total": 12,
-      "healthy": 12,
+      "total": 28,
+      "healthy": 28,
       "resting": 0
     },
-    "mistral": {
-      "total": 5,
-      "healthy": 5,
+    "gemini_embedding_2": {
+      "total": 28,
+      "healthy": 28,
       "resting": 0
     }
   },
@@ -68,9 +78,9 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 47,
+    "healthy_endpoints": 174,
     "unhealthy_endpoints": 0,
-    "total_endpoints": 47
+    "total_endpoints": 174
   },
   "key_states": {
     "schema_version": "1.1",
