@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-27T07:05:27Z",
+  "last_updated": "2026-04-27T07:15:03Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -15,29 +15,29 @@
       "pid": 0
     },
     "cognee": {
-      "active": true,
-      "cpu": 37.5,
-      "mem": 1.7,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 8000,
-      "status": "online"
+      "status": "offline"
     },
     "mem0": {
-      "active": true,
-      "cpu": 17.9,
-      "mem": 0.6,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 8080,
-      "status": "online"
+      "status": "offline"
     },
     "qdrant": {
-      "active": true,
-      "cpu": 0.2,
-      "mem": 3.0,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 6333
     },
     "litellm-proxy": {
-      "active": true,
-      "cpu": 37.3,
-      "mem": 1.6,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 4000
     }
   },
@@ -59,8 +59,8 @@
     }
   },
   "memory": {
-    "mem0_openclaw_points": 19,
-    "mem0_rest_points": 9
+    "mem0_openclaw_points": 0,
+    "mem0_rest_points": 0
   },
   "litellm": {
     "healthy_endpoints": 0,
@@ -73,51 +73,6 @@
       "gemini-flash": {
         "total": 12,
         "resting_keys": [
-          {
-            "key_name": "GEMINI_API_KEY_1",
-            "key_display": "AIzaSy...****fmOE",
-            "reason": "daily_quota",
-            "resting_since": "2026-04-26T18:59:23Z",
-            "recover_at": "2026-04-27T07:00:00Z",
-            "recover_epoch": 1777273200,
-            "confirmed_daily": true
-          },
-          {
-            "key_name": "GEMINI_API_KEY_2",
-            "key_display": "AIzaSy...****Jkow",
-            "reason": "daily_quota",
-            "resting_since": "2026-04-26T18:59:23Z",
-            "recover_at": "2026-04-27T07:00:00Z",
-            "recover_epoch": 1777273200,
-            "confirmed_daily": true
-          },
-          {
-            "key_name": "GEMINI_API_KEY_3",
-            "key_display": "AIzaSy...****kHB4",
-            "reason": "daily_quota",
-            "resting_since": "2026-04-26T18:59:23Z",
-            "recover_at": "2026-04-27T07:00:00Z",
-            "recover_epoch": 1777273200,
-            "confirmed_daily": true
-          },
-          {
-            "key_name": "GEMINI_API_KEY_4",
-            "key_display": "AIzaSy...****UMbU",
-            "reason": "daily_quota",
-            "resting_since": "2026-04-26T18:59:23Z",
-            "recover_at": "2026-04-27T07:00:00Z",
-            "recover_epoch": 1777273200,
-            "confirmed_daily": true
-          },
-          {
-            "key_name": "GEMINI_API_KEY_6",
-            "key_display": "AIzaSy...****fV1I",
-            "reason": "daily_quota",
-            "resting_since": "2026-04-26T18:59:23Z",
-            "recover_at": "2026-04-27T07:00:00Z",
-            "recover_epoch": 1777273200,
-            "confirmed_daily": true
-          },
           {
             "key_name": "GEMINI_API_KEY_5",
             "key_display": "AIzaSy...****zoHo",
@@ -139,25 +94,25 @@
             "matched_via": "direct_ping"
           }
         ],
-        "last_checked": "2026-04-27T07:03:17Z",
-        "healthy_keys": 5,
-        "unhealthy_keys": 7
+        "last_checked": "2026-04-27T07:10:33Z",
+        "healthy_keys": 12,
+        "unhealthy_keys": 0
       },
       "gemini-embedding": {
         "total": 12,
         "resting_keys": [],
-        "last_checked": "2026-04-26T18:59:23Z",
+        "last_checked": "2026-04-27T07:10:33Z",
         "healthy_keys": 12,
         "unhealthy_keys": 0
       },
       "mistral-large": {
         "total": 5,
         "resting_keys": [],
-        "last_checked": "2026-04-26T18:59:23Z",
+        "last_checked": "2026-04-27T07:10:33Z",
         "healthy_keys": 5,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-04-27T07:03:17Z"
+    "last_updated": "2026-04-27T07:10:33Z"
   }
 }
