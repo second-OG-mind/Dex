@@ -1,43 +1,43 @@
 {
-  "last_updated": "2026-04-27T07:10:57Z",
+  "last_updated": "2026-04-27T07:30:03Z",
   "gateway": {
-    "status": "running_no_probe",
+    "status": "offline",
     "port": 18789,
-    "pid": 63562,
+    "pid": 0,
     "version": "2026.4.15"
   },
   "services": {
     "openclaw-gateway": {
-      "active": true,
-      "cpu": 156.0,
-      "mem": 2.5,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 18789,
-      "pid": 63562
+      "pid": 0
     },
     "cognee": {
-      "active": true,
-      "cpu": 16.2,
-      "mem": 1.7,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 8000,
-      "status": "online"
+      "status": "offline"
     },
     "mem0": {
-      "active": true,
-      "cpu": 7.7,
-      "mem": 0.6,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 8080,
-      "status": "online"
+      "status": "offline"
     },
     "qdrant": {
-      "active": true,
-      "cpu": 0.2,
-      "mem": 3.0,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 6333
     },
     "litellm-proxy": {
-      "active": true,
-      "cpu": 16.7,
-      "mem": 1.6,
+      "active": false,
+      "cpu": 0.0,
+      "mem": 0.0,
       "port": 4000
     }
   },
@@ -59,8 +59,8 @@
     }
   },
   "memory": {
-    "mem0_openclaw_points": 19,
-    "mem0_rest_points": 9
+    "mem0_openclaw_points": 0,
+    "mem0_rest_points": 0
   },
   "litellm": {
     "healthy_endpoints": 0,
