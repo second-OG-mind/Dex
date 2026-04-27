@@ -1127,8 +1127,12 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 
   <div class="card-grid" style="margin-bottom:14px">
     <!-- Pool overview cards rendered by JS -->
+    <div class="card" id="apim-pool-gemma-chat" style="border-color:rgba(57,255,20,.4)">
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMMA 3 27B CHAT POOL <span style="font-size:13px;color:var(--cyan);font-weight:400">PRIMARY</span></div>
+      <div id="apim-gemma-content" style="color:var(--dim);font-size:16px">Loading…</div>
+    </div>
     <div class="card" id="apim-pool-gemini-flash" style="border-color:rgba(57,255,20,.3)">
-      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMINI FLASH POOL</div>
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMINI FLASH POOL <span style="font-size:13px;color:var(--dim);font-weight:400">Cognee · mem0</span></div>
       <div id="apim-flash-content" style="color:var(--dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemini-embedding" style="border-color:rgba(57,255,20,.3)">
@@ -1136,7 +1140,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
       <div id="apim-embed-content" style="color:var(--dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-mistral" style="border-color:rgba(57,255,20,.3)">
-      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>MISTRAL LARGE POOL</div>
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>MISTRAL LARGE POOL <span style="font-size:13px;color:var(--dim);font-weight:400">media · fallback</span></div>
       <div id="apim-mistral-content" style="color:var(--dim);font-size:16px">Loading…</div>
     </div>
   </div>
@@ -1744,18 +1748,8 @@ const STATIC_STATUS={
   key_states:{
     schema_version:'1.1',
     pools:{
-      'gemini-flash':{
-        total:12, healthy_keys:5, unhealthy_keys:7, last_checked:new Date().toISOString(),
-        resting_keys:[
-          {key_name:'GEMINI_API_KEY_1', key_display:'AIzaSy...****fmOE',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
-          {key_name:'GEMINI_API_KEY_2', key_display:'AIzaSy...****Jkow',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
-          {key_name:'GEMINI_API_KEY_3', key_display:'AIzaSy...****kHB4',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
-          {key_name:'GEMINI_API_KEY_4', key_display:'AIzaSy...****UMbU',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
-          {key_name:'GEMINI_API_KEY_6', key_display:'AIzaSy...****fV1I',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
-          {key_name:'GEMINI_API_KEY_8', key_display:'AIzaSy...****mY0E',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
-          {key_name:'GEMINI_API_KEY_10',key_display:'AIzaSy...****Imiw',reason:'daily_quota',resting_since:new Date(Date.now()-3600000).toISOString(),recover_at:new Date(Date.now()+43200000).toISOString(),recover_epoch:Math.floor(Date.now()/1000)+43200,confirmed_daily:true},
-        ]
-      },
+      'gemma-chat':{total:12, healthy_keys:12, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
+      'gemini-flash':{total:12, healthy_keys:12, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
       'gemini-embedding':{total:12, healthy_keys:12, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
       'mistral-large':{total:5, healthy_keys:5, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]}
     },
@@ -1882,9 +1876,10 @@ function renderApiMonitoring(d){
       ${hasResting?`<div style="margin-top:8px;font-size:15px;color:var(--red)">⚠ ${restingCount} key${restingCount!==1?'s':''} at daily quota — resting until midnight PT</div>`:'<div style="margin-top:8px;font-size:15px;color:#39ff14">✓ All keys active</div>'}`;
   }
 
-  renderPool('apim-flash-content',   'gemini-flash',     'Gemini Flash',     'gemini-flash · 12 keys');
+  renderPool('apim-gemma-content',   'gemma-chat',       'Gemma 3 27B',      'gemma-chat · 12 keys · rpm:28 buffer');
+  renderPool('apim-flash-content',   'gemini-flash',     'Gemini Flash',     'gemini-flash · 12 keys · Cognee + mem0');
   renderPool('apim-embed-content',   'gemini-embedding', 'Gemini Embedding', 'gemini-embedding · 12 keys');
-  renderPool('apim-mistral-content', 'mistral-large',    'Mistral Large',    'mistral-large · 5 keys');
+  renderPool('apim-mistral-content', 'mistral-large',    'Mistral Large',    'mistral-large · 5 keys · media + fallback');
 
   // ── Resting keys detail ─────────────────────────────────────────
   const restEl=document.getElementById('apim-resting-detail');

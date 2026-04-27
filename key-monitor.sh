@@ -104,9 +104,15 @@ first_seen_dir = os.environ['KEY_MON_FIRST_SEEN']
 # "aliases" are additional model_names in config that map the same keys; they are
 # excluded from the distinct-key count to avoid double-counting.
 POOLS = {
+    'gemma-chat': {
+        'models':  ['gemini/gemma-3-27b-it'],
+        'aliases': [],
+        'env_prefix': 'GEMINI_API_KEY_',
+        'key_count': 12,
+    },
     'gemini-flash': {
         'models':  ['gemini/gemini-2.5-flash'],
-        'aliases': ['openai/gemini-flash'],        # same keys, extra entries
+        'aliases': ['openai/gemini-flash'],        # Cognee/mem0 LLM — same keys, extra entries
         'env_prefix': 'GEMINI_API_KEY_',
         'key_count': 12,
     },
