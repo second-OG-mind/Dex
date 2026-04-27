@@ -100,47 +100,60 @@ now_epoch      = int(os.environ['KEY_MON_NOW'])
 first_seen_dir = os.environ['KEY_MON_FIRST_SEEN']
 
 # ── Pool definitions ──────────────────────────────────────────────────────────
-# Maps pool_name → {actual model IDs that belong to this pool, env key prefix, key range}
-# "aliases" are additional model_names in config that map the same keys; they are
-# excluded from the distinct-key count to avoid double-counting.
+# Plan H: 6 pools × 28 keys each (GEMINI_API_KEY_1-12 + GEMINI_MEM_KEY_1-12 + KEY_13-16)
+# key_groups: list of (env_prefix, count) tuples — same key, independent model quota
+# "aliases" are extra model_names in config routing the same keys (excluded from counts)
 POOLS = {
     'gemma-chat': {
         'models':  ['gemini/gemma-3-27b-it'],
         'aliases': [],
-        'env_prefix': 'GEMINI_API_KEY_',
-        'key_count': 12,
+        'key_groups': [('GEMINI_API_KEY_', 16), ('GEMINI_MEM_KEY_', 12)],
+        'total': 28,
     },
-    'gemini-flash': {
-        'models':  ['gemini/gemini-2.5-flash'],
-        'aliases': ['openai/gemini-flash'],        # Cognee/mem0 LLM — same keys, extra entries
-        'env_prefix': 'GEMINI_API_KEY_',
-        'key_count': 12,
+    'gemma-fallback': {
+        'models':  ['gemini/gemma-3-4b-it'],
+        'aliases': [],
+        'key_groups': [('GEMINI_API_KEY_', 16), ('GEMINI_MEM_KEY_', 12)],
+        'total': 28,
+    },
+    'gemma-internal': {
+        'models':  ['gemini/gemma-3-12b-it'],
+        'aliases': ['openai/gemma-internal'],      # Cognee LLM alias
+        'key_groups': [('GEMINI_API_KEY_', 16), ('GEMINI_MEM_KEY_', 12)],
+        'total': 28,
+    },
+    'gemma-agentic': {
+        'models':  ['gemini/gemma-4-31b-it'],
+        'aliases': [],
+        'key_groups': [('GEMINI_API_KEY_', 16), ('GEMINI_MEM_KEY_', 12)],
+        'total': 28,
     },
     'gemini-embedding': {
         'models':  ['gemini/gemini-embedding-001'],
-        'aliases': ['openai/gemini-embedding'],
-        'env_prefix': 'GEMINI_MEM_KEY_',
-        'key_count': 12,
+        'aliases': ['openai/gemini-embedding'],    # Cognee embedder alias
+        'key_groups': [('GEMINI_API_KEY_', 16), ('GEMINI_MEM_KEY_', 12)],
+        'total': 28,
     },
-    'mistral-large': {
-        'models':  ['mistral/mistral-large-latest'],
+    'gemini-embedding-2': {
+        'models':  ['gemini/gemini-embedding-2'],
         'aliases': [],
-        'env_prefix': 'MISTRAL_API_KEY_',
-        'key_count': 5,
+        'key_groups': [('GEMINI_API_KEY_', 16), ('GEMINI_MEM_KEY_', 12)],
+        'total': 28,
     },
 }
 
-# ── Load env keys (keyed by pool) ──────────────────────────────────────────────
-def load_keys(prefix, count):
+# ── Load env keys — supports multiple (prefix, count) groups per pool ──────────
+def load_keys_multi(key_groups):
     keys = {}
-    for i in range(1, count + 1):
-        name = f'{prefix}{i}'
-        val  = os.environ.get(name, '')
-        if val:
-            keys[name] = val
+    for prefix, count in key_groups:
+        for i in range(1, count + 1):
+            name = f'{prefix}{i}'
+            val  = os.environ.get(name, '')
+            if val:
+                keys[name] = val
     return keys  # {key_name: key_value}
 
-pool_keys = {pname: load_keys(pdef['env_prefix'], pdef['key_count'])
+pool_keys = {pname: load_keys_multi(pdef['key_groups'])
              for pname, pdef in POOLS.items()}
 
 # ── Parse health ───────────────────────────────────────────────────────────────

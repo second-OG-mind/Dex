@@ -99,7 +99,7 @@ log "LiteLLM: healthy=$LITELLM_HEALTHY unhealthy=$LITELLM_UNHEALTHY"
 # ── 5. Quick API key test (embedding) ──────────────────────────────────────
 # Tests a small embedding call to determine if the embedding pool is responsive
 EMBED_WORKING=0
-EMBED_TOTAL=12
+EMBED_TOTAL=28
 
 if [ "$LL_ACTIVE" = "true" ]; then
   TEST_RESULT=$(curl -sf \
@@ -117,7 +117,7 @@ except: print(0)
 " 2>/dev/null || echo 0)
 
   if [ "$TEST_RESULT" = "3072" ]; then
-    EMBED_WORKING=$((LITELLM_HEALTHY > 12 ? 12 : LITELLM_HEALTHY))
+    EMBED_WORKING=$((LITELLM_HEALTHY > 28 ? 28 : LITELLM_HEALTHY))
     log "Embedding test: PASS ($TEST_RESULT dims)"
   else
     EMBED_WORKING=0
@@ -125,25 +125,8 @@ except: print(0)
   fi
 fi
 
-# Split healthy endpoints between chat and embedding pools (24 total = 12+12)
-TOTAL_ENDPOINTS=$((LITELLM_HEALTHY + LITELLM_UNHEALTHY))
-GEMINI_CHAT_HEALTHY=0
-GEMINI_EMBED_HEALTHY=0
-
-if [ "$TOTAL_ENDPOINTS" -gt 0 ]; then
-  # Assume roughly half of healthy are chat, half embedding
-  GEMINI_CHAT_HEALTHY=$(( LITELLM_HEALTHY / 2 ))
-  GEMINI_EMBED_HEALTHY=$(( LITELLM_HEALTHY - GEMINI_CHAT_HEALTHY ))
-  # Embed working overrides embedding count if we got a real test
-  if [ "$EMBED_WORKING" -gt 0 ]; then
-    GEMINI_EMBED_HEALTHY=$EMBED_WORKING
-  fi
-fi
-
-GEMINI_CHAT_REST=$((12 - GEMINI_CHAT_HEALTHY))
-GEMINI_EMBED_REST=$((12 - GEMINI_EMBED_HEALTHY))
-[ "$GEMINI_CHAT_REST" -lt 0 ] && GEMINI_CHAT_REST=0
-[ "$GEMINI_EMBED_REST" -lt 0 ] && GEMINI_EMBED_REST=0
+# Per-pool health is derived from key-states.json in the Python block below.
+# Do not compute from raw endpoint counts — those include aliases and are unreliable.
 
 # ── 6. Qdrant collection counts ─────────────────────────────────────────────
 MEM0_OPENCLAW_PTS=0
@@ -184,9 +167,7 @@ export DJ_CG_ACTIVE="$CG_ACTIVE" DJ_CG_CPU="$CG_CPU" DJ_CG_MEM="$CG_MEM" DJ_CG_S
 export DJ_M0_ACTIVE="$M0_ACTIVE" DJ_M0_CPU="$M0_CPU" DJ_M0_MEM="$M0_MEM" DJ_M0_STATUS="$MEM0_REST_STATUS"
 export DJ_QD_ACTIVE="$QD_ACTIVE" DJ_QD_CPU="$QD_CPU" DJ_QD_MEM="$QD_MEM"
 export DJ_LL_ACTIVE="$LL_ACTIVE" DJ_LL_CPU="$LL_CPU" DJ_LL_MEM="$LL_MEM"
-export DJ_LL_H="$LITELLM_HEALTHY"     DJ_LL_U="$LITELLM_UNHEALTHY"
-export DJ_GC_H="$GEMINI_CHAT_HEALTHY" DJ_GC_R="$GEMINI_CHAT_REST"
-export DJ_GE_H="$GEMINI_EMBED_HEALTHY" DJ_GE_R="$GEMINI_EMBED_REST"
+export DJ_LL_H="$LITELLM_HEALTHY" DJ_LL_U="$LITELLM_UNHEALTHY"
 export DJ_MEM_OC="$MEM0_OPENCLAW_PTS" DJ_MEM_R="$MEM0_REST_PTS"
 
 python3 << 'DATAEOF'
@@ -203,13 +184,26 @@ try:
 except Exception as ex:
     ks = {'schema_version': '1.1', 'pools': {}, 'error': str(ex)}
 
+def pool_counts(ks, pool_name, total):
+    p = ks.get('pools', {}).get(pool_name, {})
+    resting = len(p.get('resting_keys', []))
+    healthy = max(0, total - resting)
+    return healthy, resting
+
+gemma_h,   gemma_r   = pool_counts(ks, 'gemma-chat',         28)
+fallbk_h,  fallbk_r  = pool_counts(ks, 'gemma-fallback',     28)
+intern_h,  intern_r  = pool_counts(ks, 'gemma-internal',     28)
+agentc_h,  agentc_r  = pool_counts(ks, 'gemma-agentic',      28)
+embed_h,   embed_r   = pool_counts(ks, 'gemini-embedding',   28)
+embed2_h,  embed2_r  = pool_counts(ks, 'gemini-embedding-2', 28)
+
 data = {
     'last_updated': e('DJ_TS', ''),
     'gateway': {
         'status':  e('DJ_GW_STATUS', 'offline'),
         'port':    18789,
         'pid':     i(e('DJ_GW_PID', '0')),
-        'version': '2026.4.15',
+        'version': '2026.4.27',
     },
     'services': {
         'openclaw-gateway': {'active': b(e('DJ_GW_ACTIVE')), 'cpu': f(e('DJ_GW_CPU')), 'mem': f(e('DJ_GW_MEM')), 'port': 18789, 'pid': i(e('DJ_GW_PID'))},
@@ -219,9 +213,12 @@ data = {
         'litellm-proxy':    {'active': b(e('DJ_LL_ACTIVE')), 'cpu': f(e('DJ_LL_CPU')), 'mem': f(e('DJ_LL_MEM')), 'port': 4000},
     },
     'api': {
-        'gemini_chat':      {'total': 12, 'healthy': i(e('DJ_GC_H')), 'resting': i(e('DJ_GC_R'))},
-        'gemini_embedding': {'total': 12, 'healthy': i(e('DJ_GE_H')), 'resting': i(e('DJ_GE_R'))},
-        'mistral':          {'total': 5,  'healthy': 5, 'resting': 0},
+        'gemma_chat':         {'total': 28, 'healthy': gemma_h,  'resting': gemma_r},
+        'gemma_fallback':     {'total': 28, 'healthy': fallbk_h, 'resting': fallbk_r},
+        'gemma_internal':     {'total': 28, 'healthy': intern_h, 'resting': intern_r},
+        'gemma_agentic':      {'total': 28, 'healthy': agentc_h, 'resting': agentc_r},
+        'gemini_embedding':   {'total': 28, 'healthy': embed_h,  'resting': embed_r},
+        'gemini_embedding_2': {'total': 28, 'healthy': embed2_h, 'resting': embed2_r},
     },
     'memory': {
         'mem0_openclaw_points': i(e('DJ_MEM_OC')),

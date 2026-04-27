@@ -479,9 +479,9 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
       <div class="stat-sub">All systemd healthy</div>
     </div>
     <div class="card" style="border-color:rgba(105,255,71,.3)">
-      <div class="stat-num counter" data-target="40" style="color:var(--green)">0</div>
+      <div class="stat-num counter" data-target="39" style="color:var(--green)">0</div>
       <div class="stat-label">API Keys Total</div>
-      <div class="stat-sub">Across 4 providers</div>
+      <div class="stat-sub">28 Google · 5 Mistral · 6 Browserless</div>
     </div>
     <div class="card" style="border-color:rgba(224,64,251,.3)">
       <div class="stat-num counter" data-target="19" style="color:var(--magenta)">0</div>
@@ -504,7 +504,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
         <div style="padding-left:20px;color:var(--dim)">↓ TELEGRAM_BOT_TOKEN</div>
         <div style="padding-left:20px;color:var(--cyan)">▶ OpenClaw Gateway :18789</div>
         <div style="padding-left:40px;color:var(--dim)">→ input-router plugin</div>
-        <div style="padding-left:60px;color:var(--text)">Text → <span style="color:var(--cyan)">google/gemini-2.5-flash</span></div>
+        <div style="padding-left:60px;color:var(--text)">Text → <span style="color:var(--cyan)">openai/gemma-chat</span> (Gemma 3 27B)</div>
         <div style="padding-left:60px;color:var(--text)">Image/PDF → <span style="color:var(--magenta)">mistral/large</span></div>
         <div style="padding-left:40px;color:var(--dim)">→ openclaw-mem0 (recall)</div>
         <div style="padding-left:60px;color:var(--yellow)">Qdrant :6333 → mem0-openclaw</div>
@@ -521,18 +521,24 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
       <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>MODEL ROUTING</div>
       <div style="margin-bottom:12px">
         <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">PRIMARY CHAT</div>
-        <div class="model-chip primary">🔷 google/gemini-2.5-flash</div>
-        <div style="font-size:16px;color:var(--dim);margin-top:2px">Via Google plugin · Not LiteLLM</div>
+        <div class="model-chip primary">🔷 gemma-chat → Gemma 3 27B (28 keys)</div>
+        <div style="font-size:16px;color:var(--dim);margin-top:2px">Via openai plugin → LiteLLM :4000 · rpm:28 buffer</div>
       </div>
       <div style="margin-bottom:12px">
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">FALLBACK / MULTIMODAL</div>
+        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">HYBRID FALLBACK</div>
+        <div class="model-chip fallback">🔶 gemma-fallback → Gemma 3 4B (28 keys)</div>
+        <div style="font-size:16px;color:var(--dim);margin-top:2px">Auto-activated when all 28 gemma-chat keys exhaust RPD</div>
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">MEDIA / MULTIMODAL</div>
         <div class="model-chip fallback">🔶 mistral/mistral-large-latest</div>
-        <div class="model-chip fallback" style="font-size:16px">🔶 mistral/pixtral-large-latest</div>
+        <div style="font-size:16px;color:var(--dim);margin-top:2px">Via Mistral plugin · Image / PDF tasks</div>
       </div>
       <div>
         <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">EMBEDDINGS (via LiteLLM :4000)</div>
-        <div class="model-chip embed">⬡ gemini-embedding-001 · 3072-dim</div>
-        <div style="font-size:16px;color:var(--dim);margin-top:2px">12-key round-robin pool · Cosine similarity</div>
+        <div class="model-chip embed">⬡ gemini-embedding → 3072-dim (28 keys)</div>
+        <div class="model-chip embed">⬡ gemini-embedding-2 → 3072-dim (28 keys)</div>
+        <div style="font-size:16px;color:var(--dim);margin-top:2px">84,000 RPD total · dual-pool · Cosine similarity</div>
       </div>
     </div>
   </div>
@@ -542,28 +548,28 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     <div class="card-title"><span class="accent" style="background:var(--green)"></span>API KEY INVENTORY</div>
     <div class="grid-4">
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI CHAT</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--cyan)">12</div>
-        <div style="font-size:16px;color:var(--dim)">GEMINI_API_KEY_1-12</div>
-        <div style="font-size:16px;color:var(--dim)">LiteLLM gemini-flash pool</div>
+        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI (MAIN)</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--cyan)">16</div>
+        <div style="font-size:16px;color:var(--dim)">GEMINI_API_KEY_1-16</div>
+        <div style="font-size:16px;color:var(--dim)">Chat + embedding pools</div>
       </div>
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI EMBEDDING</div>
+        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI (MEM)</div>
         <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--green)">12</div>
         <div style="font-size:16px;color:var(--dim)">GEMINI_MEM_KEY_1-12</div>
-        <div style="font-size:16px;color:var(--dim)">LiteLLM gemini-embedding pool</div>
+        <div style="font-size:16px;color:var(--dim)">All 6 LiteLLM pools</div>
       </div>
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">MISTRAL</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--magenta)">6</div>
-        <div style="font-size:16px;color:var(--dim)">MISTRAL_API_KEY + 1-5</div>
-        <div style="font-size:16px;color:var(--dim)">Agentic / Multimodal</div>
+        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">MISTRAL + BROWSERLESS</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--magenta)">11</div>
+        <div style="font-size:16px;color:var(--dim)">5 Mistral + 6 Browserless</div>
+        <div style="font-size:16px;color:var(--dim)">Media / PDF / scraping</div>
       </div>
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">BROWSERLESS + OTHER</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--orange)">10</div>
-        <div style="font-size:16px;color:var(--dim)">6 Browserless + Google + LiteLLM + Telegram</div>
-        <div style="font-size:16px;color:var(--dim)">Web scraping + auth</div>
+        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">TOTAL GOOGLE KEYS</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--yellow)">28</div>
+        <div style="font-size:16px;color:var(--dim)">All in all 6 LiteLLM pools</div>
+        <div style="font-size:16px;color:var(--dim)">403,200 RPD chat capacity</div>
       </div>
     </div>
   </div>
@@ -591,17 +597,28 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     <div class="card">
       <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>GOOGLE / GEMINI</div>
       <div style="font-size:16px;line-height:2;color:var(--dim)">
-        <div style="color:var(--cyan);font-weight:700">▶ PRIMARY MODEL</div>
-        <div style="padding-left:12px;color:var(--text)">google/gemini-2.5-flash</div>
-        <div style="padding-left:12px;font-size:16px">ctx: unlimited · input: text+image</div>
-        <div style="padding-left:12px;font-size:16px">Via: OpenClaw Google plugin (NOT LiteLLM)</div>
+        <div style="color:var(--cyan);font-weight:700">▶ PRIMARY CHAT</div>
+        <div style="padding-left:12px;color:var(--text)">gemma-chat → Gemma 3 27B (gemma-3-27b-it)</div>
+        <div style="padding-left:12px;font-size:16px">28 keys · rpm:28 buffer · 403,200 RPD total</div>
+        <div style="padding-left:12px;font-size:16px">Via: openai plugin → LiteLLM :4000</div>
         <br>
-        <div style="color:var(--yellow)">▶ EMBEDDING MODEL</div>
-        <div style="padding-left:12px;color:var(--text)">gemini-embedding-001</div>
-        <div style="padding-left:12px;font-size:16px">dims: 3072 · distance: Cosine</div>
-        <div style="padding-left:12px;font-size:16px">Via: LiteLLM proxy :4000 (12-key pool)</div>
+        <div style="color:var(--magenta);font-weight:700">▶ HYBRID FALLBACK</div>
+        <div style="padding-left:12px;color:var(--text)">gemma-fallback → Gemma 3 4B (gemma-3-4b-it)</div>
+        <div style="padding-left:12px;font-size:16px">28 keys · Auto-route when primary RPD exhausted</div>
         <br>
-        <div style="color:var(--dim)">⛔ BANNED: gemini-2.0-flash (deprecated)</div>
+        <div style="color:var(--green);font-weight:700">▶ INTERNAL (Cognee + mem0)</div>
+        <div style="padding-left:12px;color:var(--text)">gemma-internal → Gemma 3 12B (gemma-3-12b-it)</div>
+        <div style="padding-left:12px;font-size:16px">28 keys · Independent quota from chat pools</div>
+        <br>
+        <div style="color:var(--orange);font-weight:700">▶ AGENTIC (future subagents)</div>
+        <div style="padding-left:12px;color:var(--text)">gemma-agentic → Gemma 4 31B (gemma-4-31b-it)</div>
+        <div style="padding-left:12px;font-size:16px">28 keys · rpm:13 · 14,000 RPD total</div>
+        <br>
+        <div style="color:var(--yellow)">▶ EMBEDDINGS</div>
+        <div style="padding-left:12px;color:var(--text)">gemini-embedding + gemini-embedding-2</div>
+        <div style="padding-left:12px;font-size:16px">28 keys each · 3072-dim · 84,000 RPD total</div>
+        <br>
+        <div style="color:var(--dim)">⛔ REMOVED: gemini-flash (20 RPD — too low)</div>
       </div>
     </div>
 
@@ -618,19 +635,29 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
         <div>Config: <span style="color:var(--text)">~/.litellm/config.yaml</span></div>
         <div>Auth key: <span style="color:var(--text)">sk-openclaw-litellm-local</span></div>
         <br>
-        <div style="color:var(--yellow);font-size:15px;font-weight:700">POOL 1 — gemini-flash (chat)</div>
-        <div>Keys: GEMINI_API_KEY_1-12</div>
-        <div>Model: gemini/gemini-2.5-flash</div>
-        <div>Used by: Cognee LLM, mem0 LLM</div>
+        <div style="color:var(--cyan);font-size:15px;font-weight:700">POOL 1 — gemma-chat (PRIMARY)</div>
+        <div>Keys: all 28 · Model: gemma-3-27b-it · rpm:28</div>
+        <div>Used by: all text conversations via input-router</div>
         <br>
-        <div style="color:var(--yellow);font-size:15px;font-weight:700">POOL 2 — gemini-embedding</div>
-        <div>Keys: GEMINI_MEM_KEY_1-12</div>
-        <div>Model: gemini-embedding-001 (3072d)</div>
-        <div>Used by: mem0 embedder, Cognee embedder</div>
+        <div style="color:var(--magenta);font-size:15px;font-weight:700">POOL 2 — gemma-fallback (HYBRID)</div>
+        <div>Keys: all 28 · Model: gemma-3-4b-it · rpm:28</div>
+        <div>Auto-triggered when gemma-chat fully exhausts RPD</div>
         <br>
-        <div style="color:var(--magenta);font-size:15px;font-weight:700">POOL 3 — mistral-large</div>
-        <div>Keys: MISTRAL_API_KEY + 1-5</div>
-        <div>Used by: agentic / multimodal tasks</div>
+        <div style="color:var(--green);font-size:15px;font-weight:700">POOL 3 — gemma-internal (COGNEE + MEM0)</div>
+        <div>Keys: all 28 · Model: gemma-3-12b-it · rpm:28</div>
+        <div>Used by: Cognee LLM, mem0 JS plugin, mem0 REST</div>
+        <br>
+        <div style="color:var(--orange);font-size:15px;font-weight:700">POOL 4 — gemma-agentic (FUTURE SUBAGENTS)</div>
+        <div>Keys: all 28 · Model: gemma-4-31b-it · rpm:13</div>
+        <div>Reserved for high-capability agentic tasks</div>
+        <br>
+        <div style="color:var(--yellow);font-size:15px;font-weight:700">POOL 5 — gemini-embedding</div>
+        <div>Keys: all 28 · Model: gemini-embedding-001 (3072d) · rpm:98</div>
+        <div>Used by: mem0 JS, mem0 REST, Cognee embedder</div>
+        <br>
+        <div style="color:var(--yellow);font-size:15px;font-weight:700">POOL 6 — gemini-embedding-2</div>
+        <div>Keys: all 28 · Model: gemini-embedding-2 (3072d) · rpm:98</div>
+        <div>Independent quota from Pool 5 · dual-pool = 84k RPD</div>
       </div>
     </div>
 
@@ -651,28 +678,56 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 
     <div class="key-pool">
       <div class="key-pool-header">
-        <span class="key-pool-name">GEMINI CHAT (GEMINI_API_KEY_1-12)</span>
-        <span class="key-pool-count" style="color:var(--cyan)" id="gemini-chat-count">? / 12</span>
+        <span class="key-pool-name">GEMMA CHAT — Gemma 3 27B (all 28 keys)</span>
+        <span class="key-pool-count" style="color:var(--cyan)" id="gemma-chat-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">Pool alias: gemini-flash → gemini/gemini-2.5-flash</div>
-      <div class="key-dots" id="gemini-chat-dots"></div>
+      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemma-chat · gemini/gemma-3-27b-it · rpm:28 · PRIMARY</div>
+      <div class="key-dots" id="gemma-chat-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
-        <span class="key-pool-name">GEMINI EMBEDDING (GEMINI_MEM_KEY_1-12)</span>
-        <span class="key-pool-count" style="color:var(--green)" id="gemini-emb-count">? / 12</span>
+        <span class="key-pool-name">GEMMA FALLBACK — Gemma 3 4B (all 28 keys)</span>
+        <span class="key-pool-count" style="color:var(--magenta)" id="gemma-fallback-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">Pool alias: gemini-embedding → gemini-embedding-001 (3072d)</div>
+      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemma-fallback · gemini/gemma-3-4b-it · rpm:28 · HYBRID auto-fallback</div>
+      <div class="key-dots" id="gemma-fallback-dots"></div>
+    </div>
+
+    <div class="key-pool">
+      <div class="key-pool-header">
+        <span class="key-pool-name">GEMMA INTERNAL — Gemma 3 12B (all 28 keys)</span>
+        <span class="key-pool-count" style="color:var(--green)" id="gemma-internal-count">? / 28</span>
+      </div>
+      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemma-internal · gemini/gemma-3-12b-it · rpm:28 · Cognee + mem0</div>
+      <div class="key-dots" id="gemma-internal-dots"></div>
+    </div>
+
+    <div class="key-pool">
+      <div class="key-pool-header">
+        <span class="key-pool-name">GEMMA AGENTIC — Gemma 4 31B (all 28 keys)</span>
+        <span class="key-pool-count" style="color:var(--orange)" id="gemma-agentic-count">? / 28</span>
+      </div>
+      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemma-agentic · gemini/gemma-4-31b-it · rpm:13 · future subagents</div>
+      <div class="key-dots" id="gemma-agentic-dots"></div>
+    </div>
+
+    <div class="key-pool">
+      <div class="key-pool-header">
+        <span class="key-pool-name">GEMINI EMBEDDING 1 (all 28 keys)</span>
+        <span class="key-pool-count" style="color:var(--yellow)" id="gemini-emb-count">? / 28</span>
+      </div>
+      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemini-embedding · gemini-embedding-001 · 3072d · rpm:98</div>
       <div class="key-dots" id="gemini-emb-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
-        <span class="key-pool-name">MISTRAL (MISTRAL_API_KEY + 1-5)</span>
-        <span class="key-pool-count" style="color:var(--magenta)" id="mistral-count">6 / 6</span>
+        <span class="key-pool-name">GEMINI EMBEDDING 2 (all 28 keys)</span>
+        <span class="key-pool-count" style="color:var(--yellow)" id="gemini-emb2-count">? / 28</span>
       </div>
-      <div class="key-dots" id="mistral-dots"></div>
+      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemini-embedding-2 · gemini-embedding-2 · 3072d · rpm:98 · independent quota</div>
+      <div class="key-dots" id="gemini-emb2-dots"></div>
     </div>
   </div>
 </section>
@@ -1125,23 +1180,31 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     <span class="section-badge" style="border-color:#39ff14;color:#39ff14">LIVE · MIDNIGHT PT AUTO-RESET</span>
   </div>
 
-  <div class="card-grid" style="margin-bottom:14px">
+  <div class="grid-3" style="margin-bottom:14px">
     <!-- Pool overview cards rendered by JS -->
     <div class="card" id="apim-pool-gemma-chat" style="border-color:rgba(57,255,20,.4)">
-      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMMA 3 27B CHAT POOL <span style="font-size:13px;color:var(--cyan);font-weight:400">PRIMARY</span></div>
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMMA CHAT POOL <span style="font-size:13px;color:var(--cyan);font-weight:400">PRIMARY · 27B</span></div>
       <div id="apim-gemma-content" style="color:var(--dim);font-size:16px">Loading…</div>
     </div>
-    <div class="card" id="apim-pool-gemini-flash" style="border-color:rgba(57,255,20,.3)">
-      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMINI FLASH POOL <span style="font-size:13px;color:var(--dim);font-weight:400">Cognee · mem0</span></div>
-      <div id="apim-flash-content" style="color:var(--dim);font-size:16px">Loading…</div>
+    <div class="card" id="apim-pool-gemma-fallback" style="border-color:rgba(224,64,251,.3)">
+      <div class="card-title" style="color:var(--magenta)"><span class="accent" style="background:var(--magenta)"></span>GEMMA FALLBACK POOL <span style="font-size:13px;color:var(--dim);font-weight:400">HYBRID · 4B</span></div>
+      <div id="apim-fallback-content" style="color:var(--dim);font-size:16px">Loading…</div>
     </div>
-    <div class="card" id="apim-pool-gemini-embedding" style="border-color:rgba(57,255,20,.3)">
-      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMINI EMBEDDING POOL</div>
+    <div class="card" id="apim-pool-gemma-internal" style="border-color:rgba(105,255,71,.3)">
+      <div class="card-title" style="color:var(--green)"><span class="accent" style="background:var(--green)"></span>GEMMA INTERNAL POOL <span style="font-size:13px;color:var(--dim);font-weight:400">Cognee · mem0 · 12B</span></div>
+      <div id="apim-internal-content" style="color:var(--dim);font-size:16px">Loading…</div>
+    </div>
+    <div class="card" id="apim-pool-gemma-agentic" style="border-color:rgba(255,109,0,.3)">
+      <div class="card-title" style="color:var(--orange)"><span class="accent" style="background:var(--orange)"></span>GEMMA AGENTIC POOL <span style="font-size:13px;color:var(--dim);font-weight:400">FUTURE SUBAGENTS · 31B</span></div>
+      <div id="apim-agentic-content" style="color:var(--dim);font-size:16px">Loading…</div>
+    </div>
+    <div class="card" id="apim-pool-gemini-embedding" style="border-color:rgba(255,234,0,.3)">
+      <div class="card-title" style="color:var(--yellow)"><span class="accent" style="background:var(--yellow)"></span>EMBEDDING POOL 1 <span style="font-size:13px;color:var(--dim);font-weight:400">3072d</span></div>
       <div id="apim-embed-content" style="color:var(--dim);font-size:16px">Loading…</div>
     </div>
-    <div class="card" id="apim-pool-mistral" style="border-color:rgba(57,255,20,.3)">
-      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>MISTRAL LARGE POOL <span style="font-size:13px;color:var(--dim);font-weight:400">media · fallback</span></div>
-      <div id="apim-mistral-content" style="color:var(--dim);font-size:16px">Loading…</div>
+    <div class="card" id="apim-pool-gemini-embedding-2" style="border-color:rgba(255,234,0,.2)">
+      <div class="card-title" style="color:var(--yellow)"><span class="accent" style="background:var(--yellow)"></span>EMBEDDING POOL 2 <span style="font-size:13px;color:var(--dim);font-weight:400">3072d · independent quota</span></div>
+      <div id="apim-embed2-content" style="color:var(--dim);font-size:16px">Loading…</div>
     </div>
   </div>
 
@@ -1165,10 +1228,11 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     <div class="card" style="border-color:rgba(57,255,20,.2)">
       <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>ROUTING RULES</div>
       <div style="font-size:16px;line-height:2;color:var(--text)">
-        <div><span style="color:#39ff14">Text requests</span> → input-router → openai plugin → LiteLLM → <span style="color:var(--cyan)">Gemini Flash pool (12 keys)</span></div>
-        <div><span style="color:#39ff14">Media / Files / Voice</span> → input-router → mistral plugin → <span style="color:var(--magenta)">Mistral Large pool (5 keys)</span></div>
-        <div><span style="color:#39ff14">Memory embeddings</span> → LiteLLM → <span style="color:var(--yellow)">Gemini Embedding pool (12 keys)</span></div>
-        <div style="margin-top:8px;color:var(--dim)">Mistral is <u>never</u> used as fallback for text. If all Gemini keys are resting, the gateway waits for midnight reset.</div>
+        <div><span style="color:#39ff14">Text requests</span> → input-router → openai plugin → LiteLLM → <span style="color:var(--cyan)">gemma-chat (28 keys · 27B)</span></div>
+        <div><span style="color:#39ff14">Hybrid fallback</span> → LiteLLM auto-route → <span style="color:var(--magenta)">gemma-fallback (28 keys · 4B)</span> when primary RPD exhausted</div>
+        <div><span style="color:#39ff14">Memory embeddings</span> → LiteLLM → <span style="color:var(--yellow)">gemini-embedding + gemini-embedding-2 (28 keys each)</span></div>
+        <div><span style="color:#39ff14">Cognee / mem0 LLM</span> → LiteLLM → <span style="color:var(--green)">gemma-internal (28 keys · 12B · independent quota)</span></div>
+        <div style="margin-top:8px;color:var(--dim)">Mistral handles image/PDF only. All text fallback stays within LiteLLM Gemma pools until midnight reset.</div>
       </div>
     </div>
   </div>
@@ -1204,7 +1268,7 @@ const SERVICES = [
   { id:'cognee', name:'COGNEE', port:8000, proto:'HTTP/uvicorn', cpu:0.2, mem:1.8, pid:286, unit:'cognee.service', desc:'Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--magenta)' },
   { id:'mem0', name:'MEM0 REST', port:8080, proto:'HTTP/FastAPI', cpu:0.5, mem:0.7, pid:5751, unit:'mem0.service', desc:'Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--orange)' },
   { id:'qdrant', name:'QDRANT', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:2.2, pid:290, unit:'qdrant.service', desc:'Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--green)' },
-  { id:'litellm', name:'LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 3 model pools: gemini-flash (12), gemini-embedding (12), mistral-large.', color:'var(--yellow)' },
+  { id:'litellm', name:'LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 6 pools × 28 keys: gemma-chat, gemma-fallback, gemma-internal, gemma-agentic, gemini-embedding, gemini-embedding-2.', color:'var(--yellow)' },
 ];
 
 const PLUGINS = [
@@ -1214,7 +1278,7 @@ const PLUGINS = [
   { name:'telegram', kind:'channel', version:'built-in', enabled:true, desc:'Telegram bot channel. @dexclawbot_bot. dmPolicy=open, allowFrom=*.' },
   { name:'openclaw-mem0', kind:'memory', version:'1.0.5', enabled:true, desc:'Episodic memory. JS plugin in gateway. Qdrant (mem0-openclaw, 19pts, 3072d). topK=10.' },
   { name:'cognee-augment', kind:'hook', version:'1.0.0', enabled:true, desc:'Graph memory hooks. api.on() for before_prompt_build + agent_end. Cognee :8000.' },
-  { name:'input-router', kind:'router', version:'1.0.0', enabled:true, desc:'Routes text→gemini-2.5-flash, image/PDF→mistral-large-latest.' },
+  { name:'input-router', kind:'router', version:'1.0.0', enabled:true, desc:'Routes text→gemma-chat (Gemma 3 27B via LiteLLM), image/PDF→mistral-large-latest.' },
   { name:'memory-core', kind:'memory', version:'built-in', enabled:false, desc:'Built-in memory backend. DISABLED in favour of openclaw-mem0 + QMD.' },
   { name:'memory-lancedb', kind:'memory', version:'built-in', enabled:false, desc:'LanceDB memory backend. DISABLED.' },
 ];
@@ -1742,16 +1806,25 @@ const STATIC_STATUS={
     'qdrant':{ active:true, cpu:0.2, mem:2.2, port:6333 },
     'litellm-proxy':{ active:true, cpu:0.2, mem:1.6, port:4000 },
   },
-  api:{ gemini_chat:{ total:12, healthy:8, resting:4 }, gemini_embedding:{ total:12, healthy:12, resting:0 }, mistral:{ total:5, healthy:5, resting:0 } },
+  api:{
+    gemma_chat:        { total:28, healthy:28, resting:0 },
+    gemma_fallback:    { total:28, healthy:28, resting:0 },
+    gemma_internal:    { total:28, healthy:28, resting:0 },
+    gemma_agentic:     { total:28, healthy:28, resting:0 },
+    gemini_embedding:  { total:28, healthy:28, resting:0 },
+    gemini_embedding_2:{ total:28, healthy:28, resting:0 },
+  },
   memory:{ mem0_openclaw_points:19, mem0_rest_points:9 },
-  litellm:{ healthy_endpoints:29, unhealthy_endpoints:6 },
+  litellm:{ healthy_endpoints:174, unhealthy_endpoints:0 },
   key_states:{
     schema_version:'1.1',
     pools:{
-      'gemma-chat':{total:12, healthy_keys:12, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
-      'gemini-flash':{total:12, healthy_keys:12, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
-      'gemini-embedding':{total:12, healthy_keys:12, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
-      'mistral-large':{total:5, healthy_keys:5, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]}
+      'gemma-chat':         {total:28, healthy_keys:28, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
+      'gemma-fallback':     {total:28, healthy_keys:28, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
+      'gemma-internal':     {total:28, healthy_keys:28, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
+      'gemma-agentic':      {total:28, healthy_keys:28, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
+      'gemini-embedding':   {total:28, healthy_keys:28, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]},
+      'gemini-embedding-2': {total:28, healthy_keys:28, unhealthy_keys:0, last_checked:new Date().toISOString(), resting_keys:[]}
     },
     last_updated:new Date().toISOString()
   }
@@ -1876,10 +1949,12 @@ function renderApiMonitoring(d){
       ${hasResting?`<div style="margin-top:8px;font-size:15px;color:var(--red)">⚠ ${restingCount} key${restingCount!==1?'s':''} at daily quota — resting until midnight PT</div>`:'<div style="margin-top:8px;font-size:15px;color:#39ff14">✓ All keys active</div>'}`;
   }
 
-  renderPool('apim-gemma-content',   'gemma-chat',       'Gemma 3 27B',      'gemma-chat · 12 keys · rpm:28 buffer');
-  renderPool('apim-flash-content',   'gemini-flash',     'Gemini Flash',     'gemini-flash · 12 keys · Cognee + mem0');
-  renderPool('apim-embed-content',   'gemini-embedding', 'Gemini Embedding', 'gemini-embedding · 12 keys');
-  renderPool('apim-mistral-content', 'mistral-large',    'Mistral Large',    'mistral-large · 5 keys · media + fallback');
+  renderPool('apim-gemma-content',    'gemma-chat',         'Gemma 3 27B',       'gemma-chat · 28 keys · rpm:28 · PRIMARY');
+  renderPool('apim-fallback-content', 'gemma-fallback',     'Gemma 3 4B',        'gemma-fallback · 28 keys · rpm:28 · HYBRID');
+  renderPool('apim-internal-content', 'gemma-internal',     'Gemma 3 12B',       'gemma-internal · 28 keys · rpm:28 · Cognee + mem0');
+  renderPool('apim-agentic-content',  'gemma-agentic',      'Gemma 4 31B',       'gemma-agentic · 28 keys · rpm:13 · future subagents');
+  renderPool('apim-embed-content',    'gemini-embedding',   'Gemini Embedding 1','gemini-embedding · 28 keys · 3072d · rpm:98');
+  renderPool('apim-embed2-content',   'gemini-embedding-2', 'Gemini Embedding 2','gemini-embedding-2 · 28 keys · 3072d · rpm:98');
 
   // ── Resting keys detail ─────────────────────────────────────────
   const restEl=document.getElementById('apim-resting-detail');
