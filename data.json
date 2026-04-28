@@ -1,18 +1,18 @@
 {
-  "last_updated": "2026-04-28T10:30:01Z",
+  "last_updated": "2026-04-28T10:31:31Z",
   "gateway": {
-    "status": "offline",
+    "status": "running_no_probe",
     "port": 18789,
-    "pid": 0,
+    "pid": 208960,
     "version": "2026.4.27"
   },
   "services": {
     "openclaw-gateway": {
-      "active": false,
-      "cpu": 0.0,
-      "mem": 0.0,
+      "active": true,
+      "cpu": 144.0,
+      "mem": 1.8,
       "port": 18789,
-      "pid": 0
+      "pid": 208960
     },
     "cognee": {
       "active": true,
