@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-28T11:15:14Z",
+  "last_updated": "2026-04-28T11:27:34Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -16,8 +16,8 @@
     },
     "cognee": {
       "active": true,
-      "cpu": 0.1,
-      "mem": 1.8,
+      "cpu": 0.2,
+      "mem": 2.6,
       "port": 8000,
       "status": "online"
     },
@@ -31,13 +31,13 @@
     "qdrant": {
       "active": true,
       "cpu": 0.2,
-      "mem": 3.0,
+      "mem": 3.1,
       "port": 6333
     },
     "litellm-proxy": {
       "active": true,
       "cpu": 0.6,
-      "mem": 2.4,
+      "mem": 2.6,
       "port": 4000
     }
   },
