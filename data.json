@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-28T11:30:01Z",
+  "last_updated": "2026-04-28T11:36:24Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -17,7 +17,7 @@
     "cognee": {
       "active": true,
       "cpu": 0.2,
-      "mem": 2.6,
+      "mem": 2.7,
       "port": 8000,
       "status": "online"
     },
@@ -36,7 +36,7 @@
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 0.6,
+      "cpu": 0.7,
       "mem": 2.6,
       "port": 4000
     }
