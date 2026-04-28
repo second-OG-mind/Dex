@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-28T11:04:50Z",
+  "last_updated": "2026-04-28T11:15:01Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -16,7 +16,7 @@
     },
     "cognee": {
       "active": true,
-      "cpu": 0.2,
+      "cpu": 0.1,
       "mem": 1.8,
       "port": 8000,
       "status": "online"
@@ -78,9 +78,9 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 143,
-    "unhealthy_endpoints": 31,
-    "total_endpoints": 174
+    "healthy_endpoints": 0,
+    "unhealthy_endpoints": 0,
+    "total_endpoints": 0
   },
   "key_states": {
     "schema_version": "1.1",
