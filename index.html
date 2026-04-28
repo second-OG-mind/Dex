@@ -3,27 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEX // OpenClaw Intelligence Hub</title>
+<title>⚡ DEX // OpenClaw Intelligence Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --cyan:    #00fff5;
-  --magenta: #ff006e;
-  --green:   #39ff14;
-  --yellow:  #f5ff00;
-  --red:     #ff0044;
-  --orange:  #ff4500;
-  --purple:  #b400ff;
-  --bg:      #020008;
-  --surface: rgba(8,0,20,0.96);
-  --glass:   rgba(180,0,255,0.04);
-  --border:  rgba(180,0,255,0.25);
-  --text:    #e8d0ff;
-  --dim:     #5a4a7a;
+  /* ═══════════════════════════════════════════════════════════
+     CYBERPUNK NEON PALETTE — darker, grittier, more aggressive glow
+     Burple + Crimson + Electric accents
+     ═══════════════════════════════════════════════════════════ */
+  --neon-cyan:    #00f7ff;        /* electric cyan — primary accent */
+  --neon-magenta: #ff2a9c;        /* hot pink/magenta — secondary */
+  --neon-green:   #00ff66;        /* toxic green — success/alert */
+  --neon-yellow:  #fff000;        /* high-vis yellow — warnings */
+  --neon-red:     #ff3366;        /* crimson red — critical/danger */
+  --neon-orange:  #ff6600;        /* burner orange — heat */
+  --neon-purple:  #9d00ff;        /* deep purple — headers/borders */
+  --neon-crimson: #dc143c;        /* true crimson — priority highlights */
+  
+  --bg-dark:     #050505;         /* near-black, not pure */
+  --bg-darker:   #020202;
+  --surface:     rgba(10,0,15,0.92);  /* purple-tinted surface */
+  --glass:       rgba(157,0,255,0.06); /* very subtle purple tint */
+  --border:      rgba(157,0,255,0.35); /* brighter border glow */
+  
+  --text-main:   #f0e6ff;         /* soft white-purple */
+  --text-dim:     #8050a0;         /* dimmed text */
+  --text-bright: #ffffff;         /* pure white for emphasis */
+
+  /* Glow multipliers — heavier than before */
+  --glow-cyan:    0 0 30px rgba(0,247,255,.45), 0 0 60px rgba(0,247,255,.25);
+  --glow-magenta: 0 0 30px rgba(255,42,156,.45), 0 0 60px rgba(255,42,156,.25);
+  --glow-green:   0 0 25px rgba(0,255,102,.45), 0 0 50px rgba(0,255,102,.2);
+  --glow-red:     0 0 30px rgba(255,51,102,.5),  0 0 60px rgba(255,51,102,.3);
+  --glow-purple:  0 0 35px rgba(157,0,255,.5),   0 0 70px rgba(157,0,255,.25);
+  --glow-crimson: 0 0 35px rgba(220,20,60,.55),  0 0 70px rgba(220,20,60,.3);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow-x:hidden}
-body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;
+body{background:var(--bg);color:var(--text-main);font-family:'Share Tech Mono',monospace;
   font-size:16px;min-height:100vh}
 
 /* ── CANVASES ── */
@@ -33,19 +50,19 @@ body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monosp
 /* ── ANIMATED GRID ── */
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(0,229,255,.06) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,229,255,.06) 1px,transparent 1px);
+    linear-gradient(rgba(0,247,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,247,255,.08) 1px,transparent 1px);
   background-size:48px 48px;
   animation:grid-pulse 4s ease-in-out infinite}
 @keyframes grid-pulse{0%,100%{opacity:.6}50%{opacity:1}}
 
 /* ── SCANLINES ── */
 body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.12) 3px,rgba(0,0,0,.12) 4px)}
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.20) 2px,rgba(0,0,0,.20) 3px)}
 
 /* ── VIGNETTE ── */
 #vignette{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,10,.85) 100%)}
+  background:radial-gradient(ellipse at center,transparent 45%,rgba(20,0,30,.95) 100%)}
 
 /* ── LAYOUT ── */
 #app{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:14px 18px}
@@ -53,42 +70,42 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* ── HEADER ── */
 header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;
   background:var(--surface);border:1px solid var(--border);border-radius:6px;
-  margin-bottom:14px;backdrop-filter:blur(16px);position:relative;overflow:hidden;
-  box-shadow:0 0 60px rgba(0,229,255,.12),0 0 120px rgba(0,229,255,.05),inset 0 1px 0 rgba(0,229,255,.2)}
+  margin-bottom:14px;backdrop-filter:blur(20px);position:relative;overflow:hidden;
+  box-shadow:0 0 80px rgba(157,0,255,.25),0 0 140px rgba(0,247,255,.12),inset 0 1px 0 rgba(157,0,255,.3)}
 header::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(0,229,255,.06),transparent);
   animation:header-sweep 6s linear infinite}
 header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--cyan),var(--magenta),var(--cyan),transparent);
+  background:linear-gradient(90deg,transparent,var(--neon-cyan),var(--neon-magenta),var(--neon-cyan),transparent);
   animation:bottom-glow 3s ease-in-out infinite}
 @keyframes header-sweep{0%{left:-60%}100%{left:160%}}
 @keyframes bottom-glow{0%,100%{opacity:.4}50%{opacity:1}}
 
 .header-left{display:flex;align-items:center;gap:20px}
 .logo-ascii{font-family:'Orbitron',monospace;font-size:38px;font-weight:900;
-  color:var(--cyan);letter-spacing:6px;position:relative;
-  text-shadow:0 0 20px var(--cyan),0 0 40px var(--cyan),0 0 80px rgba(0,229,255,.5)}
-.logo-sub{font-size:16px;color:var(--dim);letter-spacing:3px;margin-top:4px}
+  color:var(--neon-cyan);letter-spacing:6px;position:relative;
+  text-shadow:0 0 20px var(--neon-cyan),0 0 40px var(--neon-cyan),0 0 80px rgba(0,229,255,.5)}
+.logo-sub{font-size:16px;color:var(--text-dim);letter-spacing:3px;margin-top:4px}
 
 .header-center{text-align:center}
 .clock-utc{font-family:'Orbitron',monospace;font-size:34px;font-weight:700;
-  color:var(--yellow);letter-spacing:3px;
-  text-shadow:0 0 20px var(--yellow),0 0 40px rgba(255,234,0,.4)}
-.clock-label{font-size:15px;color:var(--dim);letter-spacing:3px;margin-top:4px}
+  color:var(--neon-yellow);letter-spacing:3px;
+  text-shadow:0 0 20px var(--neon-yellow),0 0 40px rgba(255,234,0,.4)}
+.clock-label{font-size:15px;color:var(--text-dim);letter-spacing:3px;margin-top:4px}
 
 .header-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .dex-status{display:flex;align-items:center;gap:10px;font-size:15px;letter-spacing:2px;font-weight:700}
 .status-dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;position:relative}
 .status-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid;animation:ring-pulse 2s ease infinite;opacity:0}
-.status-dot.online{background:var(--green);box-shadow:0 0 16px var(--green),0 0 32px rgba(105,255,71,.5)}
-.status-dot.online::after{border-color:var(--green);animation:ring-pulse-g 2s ease infinite}
-.status-dot.offline{background:var(--red);box-shadow:0 0 16px var(--red)}
-.status-dot.offline::after{border-color:var(--red);animation:ring-pulse-r 1s ease infinite}
-.status-dot.checking{background:var(--yellow);animation:pulse-yellow .8s ease infinite}
-.last-push{font-size:15px;color:var(--dim);letter-spacing:1px}
+.status-dot.online{background:var(--neon-green);box-shadow:0 0 16px var(--neon-green),0 0 32px rgba(105,255,71,.5)}
+.status-dot.online::after{border-color:var(--neon-green);animation:ring-pulse-g 2s ease infinite}
+.status-dot.offline{background:var(--neon-red);box-shadow:0 0 16px var(--neon-red)}
+.status-dot.offline::after{border-color:var(--neon-red);animation:ring-pulse-r 1s ease infinite}
+.status-dot.checking{background:var(--neon-yellow);animation:pulse-yellow .8s ease infinite}
+.last-push{font-size:15px;color:var(--text-dim);letter-spacing:1px}
 
-@keyframes pulse-green{0%,100%{box-shadow:0 0 12px var(--green)}50%{box-shadow:0 0 30px var(--green),0 0 60px rgba(105,255,71,.5)}}
-@keyframes pulse-red{0%,100%{box-shadow:0 0 12px var(--red)}50%{box-shadow:0 0 30px var(--red)}}
+@keyframes pulse-green{0%,100%{box-shadow:0 0 12px var(--neon-green)}50%{box-shadow:0 0 30px var(--neon-green),0 0 60px rgba(105,255,71,.5)}}
+@keyframes pulse-red{0%,100%{box-shadow:0 0 12px var(--neon-red)}50%{box-shadow:0 0 30px var(--neon-red)}}
 @keyframes pulse-yellow{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes ring-pulse-g{0%{inset:-4px;opacity:.8}100%{inset:-14px;opacity:0}}
 @keyframes ring-pulse-r{0%{inset:-4px;opacity:.8}100%{inset:-12px;opacity:0}}
@@ -97,41 +114,42 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tab-nav{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .tab-btn{position:relative;padding:12px 22px;background:var(--surface);
   border:1px solid rgba(0,229,255,.15);border-radius:4px;
-  color:var(--dim);font-family:'Orbitron',monospace;font-size:14px;
+  color:var(--text-dim);font-family:'Orbitron',monospace;font-size:14px;
   letter-spacing:2px;cursor:pointer;overflow:hidden;transition:all .25s;
   text-transform:uppercase;font-weight:700}
 .tab-btn::before{content:'';position:absolute;top:0;left:-100%;width:70%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(0,229,255,.4),transparent);
   pointer-events:none}
 .tab-btn:hover::before{animation:sweep .5s linear}
-.tab-btn:hover{border-color:rgba(0,229,255,.55);color:var(--cyan);
+.tab-btn:hover{border-color:rgba(0,229,255,.55);color:var(--neon-cyan);
   box-shadow:0 0 22px rgba(0,229,255,.25),inset 0 0 12px rgba(0,229,255,.08);
   transform:translateY(-1px)}
-.tab-btn.active{background:rgba(0,229,255,.1);border-color:var(--cyan);
-  color:var(--cyan);box-shadow:0 0 28px rgba(0,229,255,.35),inset 0 0 20px rgba(0,229,255,.08)}
+.tab-btn.active{background:rgba(0,229,255,.1);border-color:var(--neon-cyan);
+  color:var(--neon-cyan);box-shadow:0 0 28px rgba(0,229,255,.35),inset 0 0 20px rgba(0,229,255,.08)}
 .tab-btn.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:var(--cyan);box-shadow:0 0 12px var(--cyan),0 0 24px var(--cyan)}
+  background:var(--neon-cyan);box-shadow:0 0 12px var(--neon-cyan),0 0 24px var(--neon-cyan)}
 @keyframes sweep{0%{left:-70%}100%{left:130%}}
+@keyframes glow-pulse{0%,100%{text-shadow:0 0 12px var(--neon-cyan)}50%{text-shadow:0 0 24px var(--neon-magenta),0 0 12px var(--neon-cyan)}}
 
-.tab-btn[data-tab="services"].active{border-color:var(--green);color:var(--green);box-shadow:0 0 28px rgba(105,255,71,.3);background:rgba(105,255,71,.07)}
-.tab-btn[data-tab="services"].active::after{background:var(--green);box-shadow:0 0 12px var(--green)}
-.tab-btn[data-tab="services"]:hover{border-color:rgba(105,255,71,.5);color:var(--green)}
-.tab-btn[data-tab="models"].active{border-color:var(--magenta);color:var(--magenta);box-shadow:0 0 28px rgba(224,64,251,.3);background:rgba(224,64,251,.07)}
-.tab-btn[data-tab="models"].active::after{background:var(--magenta);box-shadow:0 0 12px var(--magenta)}
-.tab-btn[data-tab="models"]:hover{border-color:rgba(224,64,251,.5);color:var(--magenta)}
-.tab-btn[data-tab="memory"].active{border-color:var(--yellow);color:var(--yellow);box-shadow:0 0 28px rgba(255,234,0,.3);background:rgba(255,234,0,.07)}
-.tab-btn[data-tab="memory"].active::after{background:var(--yellow);box-shadow:0 0 12px var(--yellow)}
-.tab-btn[data-tab="memory"]:hover{border-color:rgba(255,234,0,.5);color:var(--yellow)}
-.tab-btn[data-tab="commands"].active{border-color:var(--orange);color:var(--orange);box-shadow:0 0 28px rgba(255,109,0,.3);background:rgba(255,109,0,.07)}
-.tab-btn[data-tab="commands"].active::after{background:var(--orange);box-shadow:0 0 12px var(--orange)}
-.tab-btn[data-tab="live"].active{border-color:var(--red);color:var(--red);box-shadow:0 0 28px rgba(255,23,68,.3);background:rgba(255,23,68,.07)}
-.tab-btn[data-tab="live"].active::after{background:var(--red);box-shadow:0 0 12px var(--red)}
+.tab-btn[data-tab="services"].active{border-color:var(--neon-green);color:var(--neon-green);box-shadow:0 0 28px rgba(105,255,71,.3);background:rgba(105,255,71,.07)}
+.tab-btn[data-tab="services"].active::after{background:var(--neon-green);box-shadow:0 0 12px var(--neon-green)}
+.tab-btn[data-tab="services"]:hover{border-color:rgba(105,255,71,.5);color:var(--neon-green)}
+.tab-btn[data-tab="models"].active{border-color:var(--neon-magenta);color:var(--neon-magenta);box-shadow:0 0 28px rgba(224,64,251,.3);background:rgba(224,64,251,.07)}
+.tab-btn[data-tab="models"].active::after{background:var(--neon-magenta);box-shadow:0 0 12px var(--neon-magenta)}
+.tab-btn[data-tab="models"]:hover{border-color:rgba(224,64,251,.5);color:var(--neon-magenta)}
+.tab-btn[data-tab="memory"].active{border-color:var(--neon-yellow);color:var(--neon-yellow);box-shadow:0 0 28px rgba(255,234,0,.3);background:rgba(255,234,0,.07)}
+.tab-btn[data-tab="memory"].active::after{background:var(--neon-yellow);box-shadow:0 0 12px var(--neon-yellow)}
+.tab-btn[data-tab="memory"]:hover{border-color:rgba(255,234,0,.5);color:var(--neon-yellow)}
+.tab-btn[data-tab="commands"].active{border-color:var(--neon-orange);color:var(--neon-orange);box-shadow:0 0 28px rgba(255,109,0,.3);background:rgba(255,109,0,.07)}
+.tab-btn[data-tab="commands"].active::after{background:var(--neon-orange);box-shadow:0 0 12px var(--neon-orange)}
+.tab-btn[data-tab="live"].active{border-color:var(--neon-red);color:var(--neon-red);box-shadow:0 0 28px rgba(255,23,68,.3);background:rgba(255,23,68,.07)}
+.tab-btn[data-tab="live"].active::after{background:var(--neon-red);box-shadow:0 0 12px var(--neon-red)}
 .tab-btn[data-tab="watcher"].active{border-color:#7c4dff;color:#7c4dff;box-shadow:0 0 28px rgba(124,77,255,.3);background:rgba(124,77,255,.07)}
 .tab-btn[data-tab="watcher"].active::after{background:#7c4dff;box-shadow:0 0 12px #7c4dff}
 .tab-btn[data-tab="watcher"]:hover{border-color:rgba(124,77,255,.5);color:#7c4dff}
-.tab-btn[data-tab="broker"].active{border-color:var(--purple);color:var(--purple);box-shadow:0 0 28px rgba(180,0,255,.3);background:rgba(180,0,255,.07)}
-.tab-btn[data-tab="broker"].active::after{background:var(--purple);box-shadow:0 0 12px var(--purple)}
-.tab-btn[data-tab="broker"]:hover{border-color:rgba(180,0,255,.5);color:var(--purple)}
+.tab-btn[data-tab="broker"].active{border-color:var(--neon-purple);color:var(--neon-purple);box-shadow:0 0 28px rgba(180,0,255,.3);background:rgba(180,0,255,.07)}
+.tab-btn[data-tab="broker"].active::after{background:var(--neon-purple);box-shadow:0 0 12px var(--neon-purple)}
+.tab-btn[data-tab="broker"]:hover{border-color:rgba(180,0,255,.5);color:var(--neon-purple)}
 .tab-btn[data-tab="api-monitoring"].active{border-color:#39ff14;color:#39ff14;box-shadow:0 0 28px rgba(57,255,20,.3);background:rgba(57,255,20,.07)}
 .tab-btn[data-tab="api-monitoring"].active::after{background:#39ff14;box-shadow:0 0 12px #39ff14}
 .tab-btn[data-tab="api-monitoring"]:hover{border-color:rgba(57,255,20,.5);color:#39ff14}
@@ -148,12 +166,12 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 /* animated corner brackets */
 .card::before,.card::after{content:'';position:absolute;width:16px;height:16px;
   transition:all .3s;opacity:.5}
-.card::before{top:4px;left:4px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan)}
-.card::after{bottom:4px;right:4px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan)}
+.card::before{top:4px;left:4px;border-top:2px solid var(--neon-cyan);border-left:2px solid var(--neon-cyan)}
+.card::after{bottom:4px;right:4px;border-bottom:2px solid var(--neon-cyan);border-right:2px solid var(--neon-cyan)}
 .card:hover{border-color:rgba(0,229,255,.45);
   box-shadow:0 0 40px rgba(0,229,255,.18),0 0 80px rgba(0,229,255,.06),inset 0 0 30px rgba(0,229,255,.04)}
 .card:hover::before,.card:hover::after{width:24px;height:24px;opacity:1;
-  box-shadow:0 0 8px var(--cyan)}
+  box-shadow:0 0 8px var(--neon-cyan)}
 /* top sweep on hover */
 .card .card-sweep{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(0,229,255,.04),transparent);pointer-events:none}
@@ -175,8 +193,8 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 /* ── STAT BLOCKS ── */
 .stat-num{font-family:'Orbitron',monospace;font-size:54px;font-weight:900;line-height:1;
   text-shadow:0 0 20px currentColor,0 0 40px currentColor}
-.stat-label{font-size:16px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase}
-.stat-sub{font-size:16px;color:var(--dim);margin-top:8px}
+.stat-label{font-size:16px;letter-spacing:3px;color:var(--text-dim);margin-top:6px;text-transform:uppercase}
+.stat-sub{font-size:16px;color:var(--text-dim);margin-top:8px}
 
 /* ── SERVICE CARDS ── */
 .svc-card{background:var(--glass);border:1px solid var(--border);border-radius:6px;
@@ -187,21 +205,21 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .svc-card.offline{border-color:rgba(255,23,68,.3)}
 /* top neon line */
 .svc-card::before{content:'';position:absolute;top:0;left:-100%;right:0;height:2px}
-.svc-card.online::before{background:linear-gradient(90deg,transparent,var(--green),rgba(0,229,255,.8),var(--green),transparent);
+.svc-card.online::before{background:linear-gradient(90deg,transparent,var(--neon-green),rgba(0,229,255,.8),var(--neon-green),transparent);
   animation:svc-sweep 2.5s ease-in-out infinite}
-.svc-card.offline::before{background:linear-gradient(90deg,transparent,var(--red),transparent);left:0}
+.svc-card.offline::before{background:linear-gradient(90deg,transparent,var(--neon-red),transparent);left:0}
 @keyframes svc-sweep{0%{left:-100%}100%{left:100%}}
 /* corner glow */
 .svc-card::after{content:'';position:absolute;top:0;right:0;width:60px;height:60px;
   border-radius:0 6px 0 100%;opacity:.15}
-.svc-card.online::after{background:radial-gradient(circle at top right,var(--green),transparent)}
+.svc-card.online::after{background:radial-gradient(circle at top right,var(--neon-green),transparent)}
 
 .svc-name{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;
-  letter-spacing:2px;color:var(--cyan);margin-bottom:10px;
-  text-shadow:0 0 12px var(--cyan)}
-.svc-port{font-size:28px;font-weight:700;color:var(--green);font-family:'Orbitron',monospace;
-  text-shadow:0 0 16px var(--green),0 0 32px rgba(105,255,71,.4)}
-.svc-meta{font-size:16px;color:var(--dim);margin-top:6px;line-height:2}
+  letter-spacing:2px;color:var(--neon-cyan);margin-bottom:10px;
+  text-shadow:0 0 12px var(--neon-cyan)}
+.svc-port{font-size:28px;font-weight:700;color:var(--neon-green);font-family:'Orbitron',monospace;
+  text-shadow:0 0 16px var(--neon-green),0 0 32px rgba(105,255,71,.4)}
+.svc-meta{font-size:16px;color:var(--text-dim);margin-top:6px;line-height:2}
 .svc-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:10px;overflow:hidden}
 .svc-bar-fill{height:100%;border-radius:2px;transition:width .6s ease;position:relative}
 .svc-bar-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
@@ -214,30 +232,30 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   border-radius:4px;font-size:14px;letter-spacing:1px;border:1px solid;margin:4px;
   transition:all .2s}
 .model-chip:hover{transform:scale(1.05)}
-.model-chip.primary{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.09);
+.model-chip.primary{border-color:var(--neon-cyan);color:var(--neon-cyan);background:rgba(0,229,255,.09);
   box-shadow:0 0 12px rgba(0,229,255,.2)}
-.model-chip.fallback{border-color:var(--magenta);color:var(--magenta);background:rgba(224,64,251,.09);
+.model-chip.fallback{border-color:var(--neon-magenta);color:var(--neon-magenta);background:rgba(224,64,251,.09);
   box-shadow:0 0 12px rgba(224,64,251,.2)}
-.model-chip.embed{border-color:var(--yellow);color:var(--yellow);background:rgba(255,234,0,.09);
+.model-chip.embed{border-color:var(--neon-yellow);color:var(--neon-yellow);background:rgba(255,234,0,.09);
   box-shadow:0 0 12px rgba(255,234,0,.2)}
 
 /* ── API KEY DOTS ── */
 .key-pool{margin-bottom:18px}
 .key-pool-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.key-pool-name{font-size:16px;letter-spacing:2px;color:var(--text)}
+.key-pool-name{font-size:16px;letter-spacing:2px;color:var(--text-main)}
 .key-pool-count{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;
   text-shadow:0 0 10px currentColor}
 .key-dots{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
 .key-dot{width:18px;height:18px;border-radius:3px;transition:all .3s;cursor:pointer}
-.key-dot.working{background:var(--green);box-shadow:0 0 10px rgba(105,255,71,.7)}
-.key-dot.resting{background:var(--yellow);animation:pulse-yellow 1.5s ease infinite;box-shadow:0 0 8px rgba(255,234,0,.5)}
-.key-dot.down{background:rgba(255,23,68,.3);border:1px solid var(--red)}
+.key-dot.working{background:var(--neon-green);box-shadow:0 0 10px rgba(105,255,71,.7)}
+.key-dot.resting{background:var(--neon-yellow);animation:pulse-yellow 1.5s ease infinite;box-shadow:0 0 8px rgba(255,234,0,.5)}
+.key-dot.down{background:rgba(255,23,68,.3);border:1px solid var(--neon-red)}
 .key-dot:hover{transform:scale(1.5);z-index:10}
 
 /* ── MEMORY LAYERS ── */
 .mem-layer{display:flex;align-items:stretch;gap:14px;margin-bottom:14px;position:relative}
 .mem-layer::before{content:'';position:absolute;left:25px;top:52px;bottom:-14px;
-  width:2px;background:linear-gradient(180deg,var(--cyan),transparent);opacity:.4;
+  width:2px;background:linear-gradient(180deg,var(--neon-cyan),transparent);opacity:.4;
   animation:mem-pulse 2s ease-in-out infinite}
 .mem-layer:last-child::before{display:none}
 @keyframes mem-pulse{0%,100%{opacity:.3}50%{opacity:.7}}
@@ -249,20 +267,20 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .mem-body{flex:1}
 .mem-name{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;
   letter-spacing:2px;margin-bottom:6px;text-shadow:0 0 10px currentColor}
-.mem-desc{font-size:16px;color:var(--dim);line-height:1.8}
+.mem-desc{font-size:16px;color:var(--text-dim);line-height:1.8}
 .mem-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;
   border-radius:3px;font-size:13px;letter-spacing:1px;margin-top:8px;border:1px solid;
   box-shadow:0 0 8px rgba(0,0,0,.5)}
 
 /* ── QDRANT ── */
 .qdrant-col{padding:12px 16px;background:rgba(0,0,0,.35);border-radius:4px;
-  border-left:3px solid var(--magenta);margin-bottom:8px;
+  border-left:3px solid var(--neon-magenta);margin-bottom:8px;
   display:flex;justify-content:space-between;align-items:center;
   transition:all .2s}
-.qdrant-col:hover{border-left-color:var(--cyan);background:rgba(0,229,255,.04);
+.qdrant-col:hover{border-left-color:var(--neon-cyan);background:rgba(0,229,255,.04);
   box-shadow:0 0 15px rgba(0,229,255,.08)}
-.col-name{font-size:16px;color:var(--magenta);letter-spacing:1px}
-.col-stats{font-size:16px;color:var(--dim);text-align:right;line-height:1.8}
+.col-name{font-size:16px;color:var(--neon-magenta);letter-spacing:1px}
+.col-stats{font-size:16px;color:var(--text-dim);text-align:right;line-height:1.8}
 
 /* ── PLUGINS ── */
 .plugin-card{padding:14px 18px;background:rgba(0,0,0,.3);border-radius:4px;
@@ -272,31 +290,31 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:transparent;transition:all .3s}
 .plugin-card:hover{border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.05);
   box-shadow:0 0 20px rgba(0,229,255,.1);transform:translateX(3px)}
-.plugin-card:hover::before{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.plugin-card:hover::before{background:var(--neon-cyan);box-shadow:0 0 8px var(--neon-cyan)}
 .plugin-card.disabled{opacity:.4;border-style:dashed}
 .plugin-kind{font-size:15px;padding:3px 8px;border-radius:3px;letter-spacing:1px;
   text-transform:uppercase;flex-shrink:0;font-weight:700}
 .plugin-info{flex:1}
-.plugin-name{font-size:16px;color:var(--text);letter-spacing:1px;font-weight:700}
-.plugin-ver{font-size:15px;color:var(--dim);margin-top:3px;line-height:1.6}
+.plugin-name{font-size:16px;color:var(--text-main);letter-spacing:1px;font-weight:700}
+.plugin-ver{font-size:15px;color:var(--text-dim);margin-top:3px;line-height:1.6}
 .plugin-toggle{width:36px;height:18px;border-radius:9px;border:1px solid;
   position:relative;flex-shrink:0;cursor:default}
-.plugin-toggle.on{background:rgba(105,255,71,.2);border-color:var(--green);
+.plugin-toggle.on{background:rgba(105,255,71,.2);border-color:var(--neon-green);
   box-shadow:0 0 10px rgba(105,255,71,.3)}
 .plugin-toggle.off{background:rgba(255,23,68,.1);border-color:rgba(255,23,68,.4)}
 .plugin-toggle::after{content:'';position:absolute;width:12px;height:12px;
   border-radius:50%;top:2px;transition:all .25s}
-.plugin-toggle.on::after{right:2px;background:var(--green);box-shadow:0 0 8px var(--green)}
+.plugin-toggle.on::after{right:2px;background:var(--neon-green);box-shadow:0 0 8px var(--neon-green)}
 .plugin-toggle.off::after{left:2px;background:rgba(255,23,68,.6)}
 
 /* ── FILE TREE ── */
-.tree{font-size:16px;line-height:2.1;color:var(--text);overflow-x:auto}
-.tree .dir{color:var(--cyan);text-shadow:0 0 6px rgba(0,229,255,.4)}
-.tree .file{color:var(--dim)}
-.tree .ext-js{color:var(--yellow)}
-.tree .ext-json{color:var(--green)}
-.tree .ext-py{color:var(--magenta)}
-.tree .ext-yaml{color:var(--orange)}
+.tree{font-size:16px;line-height:2.1;color:var(--text-main);overflow-x:auto}
+.tree .dir{color:var(--neon-cyan);text-shadow:0 0 6px rgba(0,229,255,.4)}
+.tree .file{color:var(--text-dim)}
+.tree .ext-js{color:var(--neon-yellow)}
+.tree .ext-json{color:var(--neon-green)}
+.tree .ext-py{color:var(--neon-magenta)}
+.tree .ext-yaml{color:var(--neon-orange)}
 .tree .ext-md{color:#70b0ff}
 .tree .tag{font-size:15px;padding:2px 6px;border-radius:2px;margin-left:8px;
   vertical-align:middle;letter-spacing:1px}
@@ -304,50 +322,50 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 /* ── COMMANDS ── */
 .cmd-group{margin-bottom:24px}
 .cmd-group-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;
-  letter-spacing:3px;color:var(--orange);margin-bottom:12px;
+  letter-spacing:3px;color:var(--neon-orange);margin-bottom:12px;
   padding-bottom:8px;border-bottom:1px solid rgba(255,109,0,.25);
   display:flex;align-items:center;gap:10px;
-  text-shadow:0 0 10px var(--orange)}
+  text-shadow:0 0 10px var(--neon-orange)}
 .cmd-group-title::before{content:'▶';font-size:10px}
 .cmd-block{position:relative;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.08);
   border-radius:4px;padding:14px 16px;margin-bottom:8px;cursor:pointer;
   transition:all .2s;overflow:hidden}
 .cmd-block::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
-  background:var(--orange);opacity:.4;transition:all .2s}
+  background:var(--neon-orange);opacity:.4;transition:all .2s}
 .cmd-block:hover{border-color:rgba(255,109,0,.4);background:rgba(255,109,0,.06);
   transform:translateX(3px)}
-.cmd-block:hover::before{opacity:1;box-shadow:0 0 8px var(--orange)}
+.cmd-block:hover::before{opacity:1;box-shadow:0 0 8px var(--neon-orange)}
 .cmd-block code{font-family:'Share Tech Mono',monospace;font-size:16px;
   color:#b8e8ff;line-height:2;display:block;white-space:pre;overflow-x:auto}
-.cmd-block .cmd-desc{font-size:16px;color:var(--dim);margin-bottom:8px;letter-spacing:1px}
+.cmd-block .cmd-desc{font-size:16px;color:var(--text-dim);margin-bottom:8px;letter-spacing:1px}
 .cmd-block .copy-btn{position:absolute;top:10px;right:10px;padding:4px 12px;
   background:rgba(255,109,0,.18);border:1px solid rgba(255,109,0,.4);
-  border-radius:3px;font-size:13px;color:var(--orange);cursor:pointer;
+  border-radius:3px;font-size:13px;color:var(--neon-orange);cursor:pointer;
   font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:all .2s}
 .cmd-block .copy-btn:hover{background:rgba(255,109,0,.35);box-shadow:0 0 10px rgba(255,109,0,.3)}
-.cmd-block .copy-btn.copied{color:var(--green);border-color:var(--green);background:rgba(105,255,71,.18)}
+.cmd-block .copy-btn.copied{color:var(--neon-green);border-color:var(--neon-green);background:rgba(105,255,71,.18)}
 .cmd-private{border-left:3px solid rgba(255,23,68,.5)!important}
-.cmd-private::before{background:var(--red)!important}
+.cmd-private::before{background:var(--neon-red)!important}
 .private-badge{display:inline-flex;align-items:center;gap:4px;font-size:15px;
-  color:var(--red);letter-spacing:1px;margin-left:10px}
+  color:var(--neon-red);letter-spacing:1px;margin-left:10px}
 
 /* ── LIVE STATUS ── */
 .health-row{display:flex;align-items:center;justify-content:space-between;
   padding:14px 18px;border-radius:4px;border:1px solid var(--border);
   margin-bottom:8px;background:var(--glass);transition:all .25s;position:relative;overflow:hidden}
 .health-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:var(--cyan);opacity:.3}
+  background:var(--neon-cyan);opacity:.3}
 .health-row:hover{border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.06);
   box-shadow:0 0 20px rgba(0,229,255,.1)}
-.health-row:hover::before{opacity:1;box-shadow:0 0 8px var(--cyan)}
+.health-row:hover::before{opacity:1;box-shadow:0 0 8px var(--neon-cyan)}
 .health-label{font-size:16px;letter-spacing:1px;font-weight:700}
 .health-val{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;
   text-shadow:0 0 10px currentColor}
-.health-time{font-size:15px;color:var(--dim);margin-top:3px}
+.health-time{font-size:15px;color:var(--text-dim);margin-top:3px}
 
 .refresh-btn{display:flex;align-items:center;gap:10px;padding:12px 24px;
-  background:rgba(0,229,255,.1);border:1px solid var(--cyan);border-radius:4px;
-  color:var(--cyan);font-family:'Orbitron',monospace;font-size:16px;
+  background:rgba(0,229,255,.1);border:1px solid var(--neon-cyan);border-radius:4px;
+  color:var(--neon-cyan);font-family:'Orbitron',monospace;font-size:16px;
   letter-spacing:2px;cursor:pointer;transition:all .25s;margin-bottom:18px;
   box-shadow:0 0 20px rgba(0,229,255,.1)}
 .refresh-btn:hover{background:rgba(0,229,255,.2);box-shadow:0 0 30px rgba(0,229,255,.3);
@@ -363,7 +381,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .section-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;
   padding-bottom:12px;border-bottom:1px solid var(--border);position:relative}
 .section-header::after{content:'';position:absolute;bottom:-1px;left:0;width:60px;height:1px;
-  background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+  background:var(--neon-cyan);box-shadow:0 0 8px var(--neon-cyan)}
 .section-title{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;
   letter-spacing:4px;text-transform:uppercase;text-shadow:0 0 15px currentColor}
 .section-badge{padding:5px 14px;border-radius:3px;font-size:15px;
@@ -377,10 +395,10 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 
 /* ── GLITCH ── */
 @keyframes glitch{
-  0%,100%{clip-path:none;transform:none;text-shadow:0 0 20px var(--cyan),0 0 40px var(--cyan)}
-  15%{clip-path:polygon(0 15%,100% 15%,100% 22%,0 22%);transform:translate(-3px,0);text-shadow:-3px 0 var(--magenta),0 0 20px var(--cyan)}
+  0%,100%{clip-path:none;transform:none;text-shadow:0 0 20px var(--neon-cyan),0 0 40px var(--neon-cyan)}
+  15%{clip-path:polygon(0 15%,100% 15%,100% 22%,0 22%);transform:translate(-3px,0);text-shadow:-3px 0 var(--neon-magenta),0 0 20px var(--neon-cyan)}
   17%{clip-path:none;transform:none}
-  55%{clip-path:polygon(0 65%,100% 65%,100% 72%,0 72%);transform:translate(3px,0);text-shadow:3px 0 var(--green),0 0 20px var(--cyan)}
+  55%{clip-path:polygon(0 65%,100% 65%,100% 72%,0 72%);transform:translate(3px,0);text-shadow:3px 0 var(--neon-green),0 0 20px var(--neon-cyan)}
   57%{clip-path:none;transform:none}
 }
 .logo-ascii:hover{animation:glitch .5s steps(1) 3;cursor:crosshair}
@@ -389,7 +407,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 @property --spin-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
 @keyframes spin-border{to{--spin-angle:360deg}}
 .neon-spin{position:relative;padding:2px;border-radius:6px;
-  background:conic-gradient(from var(--spin-angle),var(--cyan),var(--magenta),var(--green),var(--yellow),var(--cyan));
+  background:conic-gradient(from var(--spin-angle),var(--neon-cyan),var(--neon-magenta),var(--neon-green),var(--neon-yellow),var(--neon-cyan));
   animation:spin-border 2.5s linear infinite}
 .neon-spin-inner{background:var(--bg);border-radius:5px;padding:18px}
 
@@ -398,24 +416,28 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 [data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);
   left:50%;transform:translateX(-50%);background:rgba(0,0,15,.95);
   border:1px solid var(--border);border-radius:4px;padding:6px 10px;
-  font-size:13px;letter-spacing:1px;white-space:nowrap;color:var(--text);z-index:99;
+  font-size:13px;letter-spacing:1px;white-space:nowrap;color:var(--text-main);z-index:99;
   box-shadow:0 0 16px rgba(0,229,255,.2)}
 
 /* ── FOOTER ── */
-footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
+footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
   letter-spacing:2px;border-top:1px solid var(--border);margin-top:18px;
   text-shadow:0 0 8px rgba(0,229,255,.2)}
 
 /* ── LIVE UPDATE PANEL ── */
 .update-info{padding:14px 18px;background:rgba(105,255,71,.05);
   border:1px solid rgba(105,255,71,.2);border-radius:4px;
-  margin-bottom:14px;font-size:16px;color:var(--dim);line-height:2}
-.update-info strong{color:var(--green);text-shadow:0 0 8px var(--green)}
+  margin-bottom:14px;font-size:16px;color:var(--text-dim);line-height:2}
+.update-info strong{color:var(--neon-green);text-shadow:0 0 8px var(--neon-green)}
 
 /* ── INTERACTIVE GLOW ON HOVER for inline divs ── */
 .glow-row{transition:all .2s}
-.glow-row:hover{color:var(--text)!important;text-shadow:0 0 8px var(--cyan)}
-</style>
+.glow-row:hover{color:var(--text-main)!important;text-shadow:0 0 8px var(--neon-cyan)}
+
+@keyframes pulse-dot{
+  0%,100%{opacity:.9;transform:translateY(-50%) scale(1)}
+  50%{opacity:1;transform:translateY(-50%) scale(1.15)}
+}</style>
 </head>
 <body>
 
@@ -433,28 +455,28 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
       <div class="logo-sub">OPENCLAW INTELLIGENCE HUB // v2026.4.15</div>
     </div>
     <div style="width:1px;height:40px;background:var(--border)"></div>
-    <div style="font-size:16px;color:var(--dim);line-height:2">
-      <div>NODE <span style="color:var(--cyan)">v24.15.0</span></div>
-      <div>PLATFORM <span style="color:var(--cyan)">WSL2 / Linux</span></div>
-      <div>OPERATOR <span style="color:var(--cyan)">Rawhi Jawabri</span></div>
+    <div style="font-size:16px;color:var(--text-dim);line-height:2">
+      <div>NODE <span style="color:var(--neon-cyan)">v24.15.0</span></div>
+      <div>PLATFORM <span style="color:var(--neon-cyan)">WSL2 / Linux</span></div>
+      <div>OPERATOR <span style="color:var(--neon-cyan)">Rawhi Jawabri</span></div>
     </div>
   </div>
 
   <div class="header-center">
     <div class="clock-utc" id="clock">--:--:--</div>
     <div class="clock-label">UTC+3 // BAGHDAD / RIYADH</div>
-    <div style="font-size:16px;color:var(--dim);margin-top:4px" id="date-display">---</div>
+    <div style="font-size:16px;color:var(--text-dim);margin-top:4px" id="date-display">---</div>
   </div>
 
   <div class="header-right">
     <div class="dex-status">
       <div class="status-dot checking" id="gw-dot"></div>
-      <span id="gw-label" style="color:var(--dim)">DEX — CHECKING...</span>
+      <span id="gw-label" style="color:var(--text-dim)">DEX — CHECKING...</span>
     </div>
     <div style="display:flex;align-items:center;gap:6px;font-size:16px">
-      <span style="color:var(--dim)">@dexclawbot_bot</span>
-      <span style="color:var(--dim)">·</span>
-      <span style="color:var(--dim)">Telegram</span>
+      <span style="color:var(--text-dim)">@dexclawbot_bot</span>
+      <span style="color:var(--text-dim)">·</span>
+      <span style="color:var(--text-dim)">Telegram</span>
     </div>
     <div class="last-push" id="last-updated">Last push: —</div>
   </div>
@@ -463,38 +485,38 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <!-- ═══════════════════════════ TABS ═══════════════════════════ -->
 <nav class="tab-nav">
   <button class="tab-btn active" data-tab="overview">⬡ OVERVIEW</button>
-  <button class="tab-btn" data-tab="services">◈ SERVICES</button>
-  <button class="tab-btn" data-tab="models">◉ MODELS</button>
-  <button class="tab-btn" data-tab="memory">◎ MEMORY</button>
-  <button class="tab-btn" data-tab="plugins">◆ PLUGINS</button>
-  <button class="tab-btn" data-tab="structure">◧ STRUCTURE</button>
-  <button class="tab-btn" data-tab="commands">⌘ COMMANDS</button>
-  <button class="tab-btn" data-tab="live">◈ LIVE STATUS</button>
-  <button class="tab-btn" data-tab="watcher">⚡ AUTO-PUSH</button>
-    <button class="tab-btn" data-tab="broker">◉ BROKER</button>
-  <button class="tab-btn" data-tab="api-monitoring">◈ API MONITORING</button>
+  <button class="tab-btn" data-tab="services">⚡ ◈ SERVICES</button>
+  <button class="tab-btn" data-tab="models">🧠 ◉ MODELS</button>
+  <button class="tab-btn" data-tab="memory">💾 ◎ MEMORY</button>
+  <button class="tab-btn" data-tab="plugins">🔌 ◆ PLUGINS</button>
+  <button class="tab-btn" data-tab="structure">🏗️ ◧ STRUCTURE</button>
+  <button class="tab-btn" data-tab="commands">⌨️ ⌘ COMMANDS</button>
+  <button class="tab-btn" data-tab="live">📡 ◈ LIVE STATUS</button>
+  <button class="tab-btn" data-tab="watcher">👁️ ⚡ AUTO-PUSH</button>
+    <button class="tab-btn" data-tab="broker">🚚 ◉ BROKER</button>
+  <button class="tab-btn" data-tab="api-monitoring">📊 ◈ API MONITORING</button>
 </nav>
 
 <!-- ═══════════════════════════ OVERVIEW ═══════════════════════════ -->
 <section class="tab-section active" id="tab-overview">
   <div class="grid-4" style="margin-bottom:12px">
     <div class="card" style="border-color:rgba(0,229,255,.3)">
-      <div class="stat-num counter" data-target="5" style="color:var(--cyan)">0</div>
+      <div class="stat-num counter" data-target="5" style="color:var(--neon-cyan)">0</div>
       <div class="stat-label">Active Services</div>
       <div class="stat-sub">All systemd healthy</div>
     </div>
     <div class="card" style="border-color:rgba(105,255,71,.3)">
-      <div class="stat-num counter" data-target="39" style="color:var(--green)">0</div>
+      <div class="stat-num counter" data-target="39" style="color:var(--neon-green)">0</div>
       <div class="stat-label">API Keys Total</div>
       <div class="stat-sub">28 Google · 5 Mistral · 6 Browserless</div>
     </div>
     <div class="card" style="border-color:rgba(224,64,251,.3)">
-      <div class="stat-num counter" data-target="19" style="color:var(--magenta)">0</div>
+      <div class="stat-num counter" data-target="19" style="color:var(--neon-magenta)">0</div>
       <div class="stat-label">Memory Vectors</div>
       <div class="stat-sub">mem0-openclaw (Qdrant)</div>
     </div>
     <div class="card" style="border-color:rgba(255,234,0,.3)">
-      <div class="stat-num counter" data-target="7" style="color:var(--yellow)">0</div>
+      <div class="stat-num counter" data-target="7" style="color:var(--neon-yellow)">0</div>
       <div class="stat-label">Active Plugins</div>
       <div class="stat-sub">of 9 installed</div>
     </div>
@@ -503,78 +525,78 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
   <div class="grid-2" style="margin-bottom:12px">
     <!-- Architecture diagram -->
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>ARCHITECTURE FLOW</div>
-      <div style="font-size:16px;line-height:2.2;color:var(--dim)">
-        <div style="color:var(--text)">📱 Telegram (@dexclawbot_bot)</div>
-        <div style="padding-left:20px;color:var(--dim)">↓ TELEGRAM_BOT_TOKEN</div>
-        <div style="padding-left:20px;color:var(--cyan)">▶ OpenClaw Gateway :18789</div>
-        <div style="padding-left:40px;color:var(--dim)">→ input-router plugin</div>
-        <div style="padding-left:60px;color:var(--text)">Text → <span style="color:var(--cyan)">openai/gemma-chat</span> (Gemma 3 27B)</div>
-        <div style="padding-left:60px;color:var(--text)">Image/PDF → <span style="color:var(--magenta)">mistral/large</span></div>
-        <div style="padding-left:40px;color:var(--dim)">→ openclaw-mem0 (recall)</div>
-        <div style="padding-left:60px;color:var(--yellow)">Qdrant :6333 → mem0-openclaw</div>
-        <div style="padding-left:40px;color:var(--dim)">→ cognee-augment (graph)</div>
-        <div style="padding-left:60px;color:var(--yellow)">Cognee :8000 → knowledge</div>
-        <div style="padding-left:40px;color:var(--dim)">→ QMD (context memory)</div>
-        <div style="padding-left:40px;color:var(--dim)">→ Agent inference</div>
-        <div style="padding-left:40px;color:var(--dim)">→ Reply → Telegram</div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-cyan)"></span>ARCHITECTURE FLOW</div>
+      <div style="font-size:16px;line-height:2.2;color:var(--text-dim)">
+        <div style="color:var(--text-main)">📱 Telegram (@dexclawbot_bot)</div>
+        <div style="padding-left:20px;color:var(--text-dim)">↓ TELEGRAM_BOT_TOKEN</div>
+        <div style="padding-left:20px;color:var(--neon-cyan)">▶ OpenClaw Gateway :18789</div>
+        <div style="padding-left:40px;color:var(--text-dim)">→ input-router plugin</div>
+        <div style="padding-left:60px;color:var(--text-main)">Text → <span style="color:var(--neon-cyan)">openai/gemma-chat</span> (Gemma 3 27B)</div>
+        <div style="padding-left:60px;color:var(--text-main)">Image/PDF → <span style="color:var(--neon-magenta)">mistral/large</span></div>
+        <div style="padding-left:40px;color:var(--text-dim)">→ openclaw-mem0 (recall)</div>
+        <div style="padding-left:60px;color:var(--neon-yellow)">Qdrant :6333 → mem0-openclaw</div>
+        <div style="padding-left:40px;color:var(--text-dim)">→ cognee-augment (graph)</div>
+        <div style="padding-left:60px;color:var(--neon-yellow)">Cognee :8000 → knowledge</div>
+        <div style="padding-left:40px;color:var(--text-dim)">→ QMD (context memory)</div>
+        <div style="padding-left:40px;color:var(--text-dim)">→ Agent inference</div>
+        <div style="padding-left:40px;color:var(--text-dim)">→ Reply → Telegram</div>
       </div>
     </div>
 
     <!-- Model routing -->
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>MODEL ROUTING</div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-magenta)"></span>MODEL ROUTING</div>
       <div style="margin-bottom:12px">
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">PRIMARY CHAT</div>
+        <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">PRIMARY CHAT</div>
         <div class="model-chip primary">🔷 gemma-chat → Gemma 3 27B (28 keys)</div>
-        <div style="font-size:16px;color:var(--dim);margin-top:2px">Via openai plugin → LiteLLM :4000 · rpm:28 buffer</div>
+        <div style="font-size:16px;color:var(--text-dim);margin-top:2px">Via openai plugin → LiteLLM :4000 · rpm:28 buffer</div>
       </div>
       <div style="margin-bottom:12px">
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">HYBRID FALLBACK</div>
+        <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">HYBRID FALLBACK</div>
         <div class="model-chip fallback">🔶 gemma-fallback → Gemma 3 4B (28 keys)</div>
-        <div style="font-size:16px;color:var(--dim);margin-top:2px">Auto-activated when all 28 gemma-chat keys exhaust RPD</div>
+        <div style="font-size:16px;color:var(--text-dim);margin-top:2px">Auto-activated when all 28 gemma-chat keys exhaust RPD</div>
       </div>
       <div style="margin-bottom:12px">
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">MEDIA / MULTIMODAL</div>
+        <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">MEDIA / MULTIMODAL</div>
         <div class="model-chip fallback">🔶 mistral/mistral-large-latest</div>
-        <div style="font-size:16px;color:var(--dim);margin-top:2px">Via Mistral plugin · Image / PDF tasks</div>
+        <div style="font-size:16px;color:var(--text-dim);margin-top:2px">Via Mistral plugin · Image / PDF tasks</div>
       </div>
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">EMBEDDINGS (via LiteLLM :4000)</div>
+        <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">EMBEDDINGS (via LiteLLM :4000)</div>
         <div class="model-chip embed">⬡ gemini-embedding → 3072-dim (28 keys)</div>
         <div class="model-chip embed">⬡ gemini-embedding-2 → 3072-dim (28 keys)</div>
-        <div style="font-size:16px;color:var(--dim);margin-top:2px">84,000 RPD total · dual-pool · Cosine similarity</div>
+        <div style="font-size:16px;color:var(--text-dim);margin-top:2px">84,000 RPD total · dual-pool · Cosine similarity</div>
       </div>
     </div>
   </div>
 
   <!-- API Key summary -->
   <div class="card">
-    <div class="card-title"><span class="accent" style="background:var(--green)"></span>API KEY INVENTORY</div>
+    <div class="card-title"><span class="accent" style="background:var(--neon-green)"></span>API KEY INVENTORY</div>
     <div class="grid-4">
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI (MAIN)</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--cyan)">16</div>
-        <div style="font-size:16px;color:var(--dim)">GEMINI_API_KEY_1-16</div>
-        <div style="font-size:16px;color:var(--dim)">Chat + embedding pools</div>
+        <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">GEMINI (MAIN)</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-cyan)">16</div>
+        <div style="font-size:16px;color:var(--text-dim)">GEMINI_API_KEY_1-16</div>
+        <div style="font-size:16px;color:var(--text-dim)">Chat + embedding pools</div>
       </div>
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">GEMINI (MEM)</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--green)">12</div>
-        <div style="font-size:16px;color:var(--dim)">GEMINI_MEM_KEY_1-12</div>
-        <div style="font-size:16px;color:var(--dim)">All 6 LiteLLM pools</div>
+        <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">GEMINI (MEM)</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-green)">12</div>
+        <div style="font-size:16px;color:var(--text-dim)">GEMINI_MEM_KEY_1-12</div>
+        <div style="font-size:16px;color:var(--text-dim)">All 6 LiteLLM pools</div>
       </div>
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">MISTRAL + BROWSERLESS</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--magenta)">11</div>
-        <div style="font-size:16px;color:var(--dim)">5 Mistral + 6 Browserless</div>
-        <div style="font-size:16px;color:var(--dim)">Media / PDF / scraping</div>
+        <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">MISTRAL + BROWSERLESS</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-magenta)">11</div>
+        <div style="font-size:16px;color:var(--text-dim)">5 Mistral + 6 Browserless</div>
+        <div style="font-size:16px;color:var(--text-dim)">Media / PDF / scraping</div>
       </div>
       <div>
-        <div style="font-size:16px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">TOTAL GOOGLE KEYS</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--yellow)">28</div>
-        <div style="font-size:16px;color:var(--dim)">All in all 6 LiteLLM pools</div>
-        <div style="font-size:16px;color:var(--dim)">403,200 RPD chat capacity</div>
+        <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">TOTAL GOOGLE KEYS</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-yellow)">28</div>
+        <div style="font-size:16px;color:var(--text-dim)">All in all 6 LiteLLM pools</div>
+        <div style="font-size:16px;color:var(--text-dim)">403,200 RPD chat capacity</div>
       </div>
     </div>
   </div>
@@ -583,8 +605,8 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <!-- ═══════════════════════════ SERVICES ═══════════════════════════ -->
 <section class="tab-section" id="tab-services">
   <div class="section-header">
-    <div class="section-title" style="color:var(--green)">ACTIVE SERVICES</div>
-    <span class="section-badge" style="border-color:var(--green);color:var(--green)">5 / 5 RUNNING</span>
+    <div class="section-title" style="color:var(--neon-green)">ACTIVE SERVICES</div>
+    <span class="section-badge" style="border-color:var(--neon-green);color:var(--neon-green)">5 / 5 RUNNING</span>
   </div>
 
   <div class="grid-3" id="services-grid">
@@ -595,83 +617,83 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <!-- ═══════════════════════════ MODELS ═══════════════════════════ -->
 <section class="tab-section" id="tab-models">
   <div class="section-header">
-    <div class="section-title" style="color:var(--magenta)">MODELS & API POOLS</div>
+    <div class="section-title" style="color:var(--neon-magenta)">MODELS & API POOLS</div>
   </div>
 
   <div class="grid-2" style="margin-bottom:12px">
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>GOOGLE / GEMINI</div>
-      <div style="font-size:16px;line-height:2;color:var(--dim)">
-        <div style="color:var(--cyan);font-weight:700">▶ PRIMARY CHAT</div>
-        <div style="padding-left:12px;color:var(--text)">gemma-chat → Gemma 3 27B (gemma-3-27b-it)</div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-magenta)"></span>GOOGLE / GEMINI</div>
+      <div style="font-size:16px;line-height:2;color:var(--text-dim)">
+        <div style="color:var(--neon-cyan);font-weight:700">▶ PRIMARY CHAT</div>
+        <div style="padding-left:12px;color:var(--text-main)">gemma-chat → Gemma 3 27B (gemma-3-27b-it)</div>
         <div style="padding-left:12px;font-size:16px">28 keys · rpm:28 buffer · 403,200 RPD total</div>
         <div style="padding-left:12px;font-size:16px">Via: openai plugin → LiteLLM :4000</div>
         <br>
-        <div style="color:var(--magenta);font-weight:700">▶ HYBRID FALLBACK</div>
-        <div style="padding-left:12px;color:var(--text)">gemma-fallback → Gemma 3 4B (gemma-3-4b-it)</div>
+        <div style="color:var(--neon-magenta);font-weight:700">▶ HYBRID FALLBACK</div>
+        <div style="padding-left:12px;color:var(--text-main)">gemma-fallback → Gemma 3 4B (gemma-3-4b-it)</div>
         <div style="padding-left:12px;font-size:16px">28 keys · Auto-route when primary RPD exhausted</div>
         <br>
-        <div style="color:var(--green);font-weight:700">▶ INTERNAL (Cognee + mem0)</div>
-        <div style="padding-left:12px;color:var(--text)">gemma-internal → Gemma 3 12B (gemma-3-12b-it)</div>
+        <div style="color:var(--neon-green);font-weight:700">▶ INTERNAL (Cognee + mem0)</div>
+        <div style="padding-left:12px;color:var(--text-main)">gemma-internal → Gemma 3 12B (gemma-3-12b-it)</div>
         <div style="padding-left:12px;font-size:16px">28 keys · Independent quota from chat pools</div>
         <br>
-        <div style="color:var(--orange);font-weight:700">▶ AGENTIC (future subagents)</div>
-        <div style="padding-left:12px;color:var(--text)">gemma-agentic → Gemma 4 31B (gemma-4-31b-it)</div>
+        <div style="color:var(--neon-orange);font-weight:700">▶ AGENTIC (future subagents)</div>
+        <div style="padding-left:12px;color:var(--text-main)">gemma-agentic → Gemma 4 31B (gemma-4-31b-it)</div>
         <div style="padding-left:12px;font-size:16px">28 keys · rpm:13 · 14,000 RPD total</div>
         <br>
-        <div style="color:var(--yellow)">▶ EMBEDDINGS</div>
-        <div style="padding-left:12px;color:var(--text)">gemini-embedding + gemini-embedding-2</div>
+        <div style="color:var(--neon-yellow)">▶ EMBEDDINGS</div>
+        <div style="padding-left:12px;color:var(--text-main)">gemini-embedding + gemini-embedding-2</div>
         <div style="padding-left:12px;font-size:16px">28 keys each · 3072-dim · 84,000 RPD total</div>
         <br>
-        <div style="color:var(--dim)">⛔ REMOVED: gemini-flash (20 RPD — too low)</div>
+        <div style="color:var(--text-dim)">⛔ REMOVED: gemini-flash (20 RPD — too low)</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>MISTRAL AI — 7 MODELS</div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-cyan)"></span>MISTRAL AI — 7 MODELS</div>
       <div id="mistral-models" style="font-size:16px"></div>
     </div>
   </div>
 
   <div class="grid-2" style="margin-bottom:12px">
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--yellow)"></span>LITELLM PROXY — PORT 4000</div>
-      <div style="font-size:16px;color:var(--dim);line-height:1.9">
-        <div>Config: <span style="color:var(--text)">~/.litellm/config.yaml</span></div>
-        <div>Auth key: <span style="color:var(--text)">sk-openclaw-litellm-local</span></div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-yellow)"></span>LITELLM PROXY — PORT 4000</div>
+      <div style="font-size:16px;color:var(--text-dim);line-height:1.9">
+        <div>Config: <span style="color:var(--text-main)">~/.litellm/config.yaml</span></div>
+        <div>Auth key: <span style="color:var(--text-main)">sk-openclaw-litellm-local</span></div>
         <br>
-        <div style="color:var(--cyan);font-size:15px;font-weight:700">POOL 1 — gemma-chat (PRIMARY)</div>
+        <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOL 1 — gemma-chat (PRIMARY)</div>
         <div>Keys: all 28 · Model: gemma-3-27b-it · rpm:28</div>
         <div>Used by: all text conversations via input-router</div>
         <br>
-        <div style="color:var(--magenta);font-size:15px;font-weight:700">POOL 2 — gemma-fallback (HYBRID)</div>
+        <div style="color:var(--neon-magenta);font-size:15px;font-weight:700">POOL 2 — gemma-fallback (HYBRID)</div>
         <div>Keys: all 28 · Model: gemma-3-4b-it · rpm:28</div>
         <div>Auto-triggered when gemma-chat fully exhausts RPD</div>
         <br>
-        <div style="color:var(--green);font-size:15px;font-weight:700">POOL 3 — gemma-internal (COGNEE + MEM0)</div>
+        <div style="color:var(--neon-green);font-size:15px;font-weight:700">POOL 3 — gemma-internal (COGNEE + MEM0)</div>
         <div>Keys: all 28 · Model: gemma-3-12b-it · rpm:28</div>
         <div>Used by: Cognee LLM, mem0 JS plugin, mem0 REST</div>
         <br>
-        <div style="color:var(--orange);font-size:15px;font-weight:700">POOL 4 — gemma-agentic (FUTURE SUBAGENTS)</div>
+        <div style="color:var(--neon-orange);font-size:15px;font-weight:700">POOL 4 — gemma-agentic (FUTURE SUBAGENTS)</div>
         <div>Keys: all 28 · Model: gemma-4-31b-it · rpm:13</div>
         <div>Reserved for high-capability agentic tasks</div>
         <br>
-        <div style="color:var(--yellow);font-size:15px;font-weight:700">POOL 5 — gemini-embedding</div>
+        <div style="color:var(--neon-yellow);font-size:15px;font-weight:700">POOL 5 — gemini-embedding</div>
         <div>Keys: all 28 · Model: gemini-embedding-001 (3072d) · rpm:98</div>
         <div>Used by: mem0 JS, mem0 REST, Cognee embedder</div>
         <br>
-        <div style="color:var(--yellow);font-size:15px;font-weight:700">POOL 6 — gemini-embedding-2</div>
+        <div style="color:var(--neon-yellow);font-size:15px;font-weight:700">POOL 6 — gemini-embedding-2</div>
         <div>Keys: all 28 · Model: gemini-embedding-2 (3072d) · rpm:98</div>
         <div>Independent quota from Pool 5 · dual-pool = 84k RPD</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--orange)"></span>CODEX PROVIDER — OPENAI</div>
-      <div style="font-size:16px;color:var(--dim);line-height:1.9;margin-bottom:10px">
-        <div>Base URL: <span style="color:var(--text)">chatgpt.com/backend-api/v1</span></div>
-        <div>Auth: <span style="color:var(--text)">token (codex-app-server)</span></div>
-        <div>API: <span style="color:var(--text)">openai-codex-responses</span></div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-orange)"></span>CODEX PROVIDER — OPENAI</div>
+      <div style="font-size:16px;color:var(--text-dim);line-height:1.9;margin-bottom:10px">
+        <div>Base URL: <span style="color:var(--text-main)">chatgpt.com/backend-api/v1</span></div>
+        <div>Auth: <span style="color:var(--text-main)">token (codex-app-server)</span></div>
+        <div>API: <span style="color:var(--text-main)">openai-codex-responses</span></div>
       </div>
       <div id="codex-models"></div>
     </div>
@@ -679,59 +701,59 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 
   <!-- API Key Pool Visual -->
   <div class="card">
-    <div class="card-title"><span class="accent" style="background:var(--green)"></span>API KEY POOL STATUS <span style="font-size:16px;color:var(--dim);margin-left:8px">Loaded from live data · hover for details</span></div>
+    <div class="card-title"><span class="accent" style="background:var(--neon-green)"></span>API KEY POOL STATUS <span style="font-size:16px;color:var(--text-dim);margin-left:8px">Loaded from live data · hover for details</span></div>
 
     <div class="key-pool">
       <div class="key-pool-header">
         <span class="key-pool-name">GEMMA CHAT — Gemma 3 27B (all 28 keys)</span>
-        <span class="key-pool-count" style="color:var(--cyan)" id="gemma-chat-count">? / 28</span>
+        <span class="key-pool-count" style="color:var(--neon-cyan)" id="gemma-chat-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemma-chat · gemini/gemma-3-27b-it · rpm:28 · PRIMARY</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-chat · gemini/gemma-3-27b-it · rpm:28 · PRIMARY</div>
       <div class="key-dots" id="gemma-chat-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
         <span class="key-pool-name">GEMMA FALLBACK — Gemma 3 4B (all 28 keys)</span>
-        <span class="key-pool-count" style="color:var(--magenta)" id="gemma-fallback-count">? / 28</span>
+        <span class="key-pool-count" style="color:var(--neon-magenta)" id="gemma-fallback-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemma-fallback · gemini/gemma-3-4b-it · rpm:28 · HYBRID auto-fallback</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-fallback · gemini/gemma-3-4b-it · rpm:28 · HYBRID auto-fallback</div>
       <div class="key-dots" id="gemma-fallback-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
         <span class="key-pool-name">GEMMA INTERNAL — Gemma 3 12B (all 28 keys)</span>
-        <span class="key-pool-count" style="color:var(--green)" id="gemma-internal-count">? / 28</span>
+        <span class="key-pool-count" style="color:var(--neon-green)" id="gemma-internal-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemma-internal · gemini/gemma-3-12b-it · rpm:28 · Cognee + mem0</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-internal · gemini/gemma-3-12b-it · rpm:28 · Cognee + mem0</div>
       <div class="key-dots" id="gemma-internal-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
         <span class="key-pool-name">GEMMA AGENTIC — Gemma 4 31B (all 28 keys)</span>
-        <span class="key-pool-count" style="color:var(--orange)" id="gemma-agentic-count">? / 28</span>
+        <span class="key-pool-count" style="color:var(--neon-orange)" id="gemma-agentic-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemma-agentic · gemini/gemma-4-31b-it · rpm:13 · future subagents</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-agentic · gemini/gemma-4-31b-it · rpm:13 · future subagents</div>
       <div class="key-dots" id="gemma-agentic-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
         <span class="key-pool-name">GEMINI EMBEDDING 1 (all 28 keys)</span>
-        <span class="key-pool-count" style="color:var(--yellow)" id="gemini-emb-count">? / 28</span>
+        <span class="key-pool-count" style="color:var(--neon-yellow)" id="gemini-emb-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemini-embedding · gemini-embedding-001 · 3072d · rpm:98</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemini-embedding · gemini-embedding-001 · 3072d · rpm:98</div>
       <div class="key-dots" id="gemini-emb-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
         <span class="key-pool-name">GEMINI EMBEDDING 2 (all 28 keys)</span>
-        <span class="key-pool-count" style="color:var(--yellow)" id="gemini-emb2-count">? / 28</span>
+        <span class="key-pool-count" style="color:var(--neon-yellow)" id="gemini-emb2-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:4px">gemini-embedding-2 · gemini-embedding-2 · 3072d · rpm:98 · independent quota</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemini-embedding-2 · gemini-embedding-2 · 3072d · rpm:98 · independent quota</div>
       <div class="key-dots" id="gemini-emb2-dots"></div>
     </div>
   </div>
@@ -740,70 +762,70 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <!-- ═══════════════════════════ MEMORY ═══════════════════════════ -->
 <section class="tab-section" id="tab-memory">
   <div class="section-header">
-    <div class="section-title" style="color:var(--yellow)">MEMORY ARCHITECTURE</div>
-    <span class="section-badge" style="border-color:var(--yellow);color:var(--yellow)">4 LAYERS ACTIVE</span>
+    <div class="section-title" style="color:var(--neon-yellow)">MEMORY ARCHITECTURE</div>
+    <span class="section-badge" style="border-color:var(--neon-yellow);color:var(--neon-yellow)">4 LAYERS ACTIVE</span>
   </div>
 
   <div class="grid-2">
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--yellow)"></span>MEMORY LAYERS</div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-yellow)"></span>MEMORY LAYERS</div>
 
       <div class="mem-layer">
-        <div class="mem-num" style="border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.08)">L1</div>
+        <div class="mem-num" style="border-color:var(--neon-cyan);color:var(--neon-cyan);background:rgba(0,229,255,.08)">L1</div>
         <div class="mem-body">
-          <div class="mem-name" style="color:var(--cyan)">QMD — BUILT-IN CONTEXT</div>
+          <div class="mem-name" style="color:var(--neon-cyan)">QMD — BUILT-IN CONTEXT</div>
           <div class="mem-desc">Native OpenClaw memory backend. Embedded inside gateway process. Manages conversation history, context windows, compaction. No separate port or process.</div>
-          <div style="margin-top:8px;font-size:16px;color:var(--dim);line-height:1.8">
+          <div style="margin-top:8px;font-size:16px;color:var(--text-dim);line-height:1.8">
             backend: qmd · maxResults: 6 · maxSnippet: 700 chars<br>
             update interval: 40m · onBoot: true · mode: safeguard
           </div>
-          <div class="mem-badge" style="border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.06)">✓ ACTIVE inside gateway :18789</div>
+          <div class="mem-badge" style="border-color:var(--neon-cyan);color:var(--neon-cyan);background:rgba(0,229,255,.06)">✓ ACTIVE inside gateway :18789</div>
         </div>
       </div>
 
       <div class="mem-layer">
-        <div class="mem-num" style="border-color:var(--green);color:var(--green);background:rgba(105,255,71,.08)">L2</div>
+        <div class="mem-num" style="border-color:var(--neon-green);color:var(--neon-green);background:rgba(105,255,71,.08)">L2</div>
         <div class="mem-body">
-          <div class="mem-name" style="color:var(--green)">MEM0 JS — EPISODIC RECALL</div>
+          <div class="mem-name" style="color:var(--neon-green)">MEM0 JS — EPISODIC RECALL</div>
           <div class="mem-desc">openclaw-mem0 plugin (v1.0.5) embedded inside gateway. Intercepts conversations via api.on() hooks. Recalls top-10 episodic memories before each prompt.</div>
-          <div style="margin-top:8px;font-size:16px;color:var(--dim);line-height:1.8">
+          <div style="margin-top:8px;font-size:16px;color:var(--text-dim);line-height:1.8">
             vector store: Qdrant :6333 · collection: mem0-openclaw · 19 points<br>
             embedder: gemini-embedding-001 via LiteLLM · dims: 3072 · Cosine<br>
             userId: openclaw-main · topK: 10 · autoCapture: true · autoRecall: true<br>
             inject: prependSystemContext (fires before prompt build)
           </div>
-          <div class="mem-badge" style="border-color:var(--green);color:var(--green);background:rgba(105,255,71,.06)">✓ ACTIVE inside gateway (no separate port)</div>
+          <div class="mem-badge" style="border-color:var(--neon-green);color:var(--neon-green);background:rgba(105,255,71,.06)">✓ ACTIVE inside gateway (no separate port)</div>
         </div>
       </div>
 
       <div class="mem-layer">
-        <div class="mem-num" style="border-color:var(--magenta);color:var(--magenta);background:rgba(224,64,251,.08)">L3</div>
+        <div class="mem-num" style="border-color:var(--neon-magenta);color:var(--neon-magenta);background:rgba(224,64,251,.08)">L3</div>
         <div class="mem-body">
-          <div class="mem-name" style="color:var(--magenta)">COGNEE — GRAPH KNOWLEDGE</div>
+          <div class="mem-name" style="color:var(--neon-magenta)">COGNEE — GRAPH KNOWLEDGE</div>
           <div class="mem-desc">cognee-augment hook plugin (v1.0.0). Queries Cognee REST API for graph-based knowledge recall. Appends structured knowledge after mem0's episodic context.</div>
-          <div style="margin-top:8px;font-size:16px;color:var(--dim);line-height:1.8">
+          <div style="margin-top:8px;font-size:16px;color:var(--text-dim);line-height:1.8">
             api: Cognee :8000 · version: 1.0.1<br>
             hooks: before_prompt_build (recall) · agent_end (cognify)<br>
             inject: appendSystemContext (fires after mem0)<br>
             dataset: openclaw-main · searchType: insights<br>
             knowledge docs: system-architecture.md · setup-history.md · agent-system.md
           </div>
-          <div class="mem-badge" style="border-color:var(--magenta);color:var(--magenta);background:rgba(224,64,251,.06)">✓ cognee.service :8000 (Python uvicorn)</div>
+          <div class="mem-badge" style="border-color:var(--neon-magenta);color:var(--neon-magenta);background:rgba(224,64,251,.06)">✓ cognee.service :8000 (Python uvicorn)</div>
         </div>
       </div>
 
       <div class="mem-layer">
-        <div class="mem-num" style="border-color:var(--orange);color:var(--orange);background:rgba(255,109,0,.08)">L4</div>
+        <div class="mem-num" style="border-color:var(--neon-orange);color:var(--neon-orange);background:rgba(255,109,0,.08)">L4</div>
         <div class="mem-body">
-          <div class="mem-name" style="color:var(--orange)">MEM0 REST — MANAGEMENT API</div>
+          <div class="mem-name" style="color:var(--neon-orange)">MEM0 REST — MANAGEMENT API</div>
           <div class="mem-desc">Standalone Python FastAPI server wrapping the Python mem0 package. Provides HTTP endpoints for memory management. Not in gateway conversation flow.</div>
-          <div style="margin-top:8px;font-size:16px;color:var(--dim);line-height:1.8">
+          <div style="margin-top:8px;font-size:16px;color:var(--text-dim);line-height:1.8">
             service: mem0.service :8080 · Python uvicorn · FastAPI<br>
             vector store: Qdrant :6333 · collection: mem0-rest · 9 points<br>
             embedder: gemini-embedding via LiteLLM · dims: 3072<br>
             endpoints: POST /memories · POST /search · GET /memories/{user_id}
           </div>
-          <div class="mem-badge" style="border-color:var(--orange);color:var(--orange);background:rgba(255,109,0,.06)">✓ mem0.service :8080 (Python REST)</div>
+          <div class="mem-badge" style="border-color:var(--neon-orange);color:var(--neon-orange);background:rgba(255,109,0,.06)">✓ mem0.service :8080 (Python REST)</div>
         </div>
       </div>
     </div>
@@ -811,34 +833,34 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     <div style="display:flex;flex-direction:column;gap:12px">
       <!-- Qdrant -->
       <div class="card">
-        <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>QDRANT v1.14.1 — PORT 6333</div>
-        <div style="font-size:16px;color:var(--dim);margin-bottom:10px">Storage: ~/.qdrant/storage · All vectors: 3072-dim Cosine</div>
+        <div class="card-title"><span class="accent" style="background:var(--neon-magenta)"></span>QDRANT v1.14.1 — PORT 6333</div>
+        <div style="font-size:16px;color:var(--text-dim);margin-bottom:10px">Storage: ~/.qdrant/storage · All vectors: 3072-dim Cosine</div>
         <div id="qdrant-collections">
-          <div class="qdrant-col"><span class="col-name">mem0-openclaw</span><span class="col-stats" style="color:var(--green)">19 pts · 3072d · Cosine<br><span style="color:var(--dim)">JS plugin (openclaw-mem0)</span></span></div>
-          <div class="qdrant-col"><span class="col-name">mem0-rest</span><span class="col-stats" style="color:var(--orange)">9 pts · 3072d<br><span style="color:var(--dim)">Python REST API</span></span></div>
-          <div class="qdrant-col" style="border-left-color:var(--dim)"><span class="col-name" style="color:var(--dim)">memory_migrations</span><span class="col-stats">1 pt<br><span style="color:var(--dim)">legacy</span></span></div>
-          <div class="qdrant-col" style="border-left-color:var(--dim)"><span class="col-name" style="color:var(--dim)">mem0migrations</span><span class="col-stats">legacy<br><span style="color:var(--dim)">unused</span></span></div>
+          <div class="qdrant-col"><span class="col-name">mem0-openclaw</span><span class="col-stats" style="color:var(--neon-green)">19 pts · 3072d · Cosine<br><span style="color:var(--text-dim)">JS plugin (openclaw-mem0)</span></span></div>
+          <div class="qdrant-col"><span class="col-name">mem0-rest</span><span class="col-stats" style="color:var(--neon-orange)">9 pts · 3072d<br><span style="color:var(--text-dim)">Python REST API</span></span></div>
+          <div class="qdrant-col" style="border-left-color:var(--text-dim)"><span class="col-name" style="color:var(--text-dim)">memory_migrations</span><span class="col-stats">1 pt<br><span style="color:var(--text-dim)">legacy</span></span></div>
+          <div class="qdrant-col" style="border-left-color:var(--text-dim)"><span class="col-name" style="color:var(--text-dim)">mem0migrations</span><span class="col-stats">legacy<br><span style="color:var(--text-dim)">unused</span></span></div>
         </div>
       </div>
 
       <!-- Injection order -->
       <div class="card">
-        <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>INJECTION ORDER PER REQUEST</div>
+        <div class="card-title"><span class="accent" style="background:var(--neon-cyan)"></span>INJECTION ORDER PER REQUEST</div>
         <div style="font-size:16px;line-height:2.5;font-family:'Share Tech Mono',monospace">
-          <div style="color:var(--dim)">① User message arrives via Telegram</div>
-          <div style="padding-left:16px;color:var(--cyan)">↓ openclaw-mem0 before_prompt_build</div>
-          <div style="padding-left:32px;color:var(--green)">→ Qdrant search (mem0-openclaw)</div>
-          <div style="padding-left:32px;color:var(--green)">→ prependSystemContext (episodic facts)</div>
-          <div style="padding-left:16px;color:var(--magenta)">↓ cognee-augment before_prompt_build</div>
-          <div style="padding-left:32px;color:var(--magenta)">→ Cognee :8000 /search</div>
-          <div style="padding-left:32px;color:var(--magenta)">→ appendSystemContext (graph knowledge)</div>
-          <div style="padding-left:16px;color:var(--yellow)">↓ QMD context prepended</div>
-          <div style="padding-left:16px;color:var(--cyan)">↓ input-router selects model</div>
-          <div style="padding-left:16px;color:var(--text)">↓ Inference → Reply</div>
-          <div style="padding-left:16px;color:var(--cyan)">↓ openclaw-mem0 agent_end</div>
-          <div style="padding-left:32px;color:var(--green)">→ Qdrant upsert (new memory)</div>
-          <div style="padding-left:16px;color:var(--magenta)">↓ cognee-augment agent_end</div>
-          <div style="padding-left:32px;color:var(--magenta)">→ Cognee cognify (knowledge graph update)</div>
+          <div style="color:var(--text-dim)">① User message arrives via Telegram</div>
+          <div style="padding-left:16px;color:var(--neon-cyan)">↓ openclaw-mem0 before_prompt_build</div>
+          <div style="padding-left:32px;color:var(--neon-green)">→ Qdrant search (mem0-openclaw)</div>
+          <div style="padding-left:32px;color:var(--neon-green)">→ prependSystemContext (episodic facts)</div>
+          <div style="padding-left:16px;color:var(--neon-magenta)">↓ cognee-augment before_prompt_build</div>
+          <div style="padding-left:32px;color:var(--neon-magenta)">→ Cognee :8000 /search</div>
+          <div style="padding-left:32px;color:var(--neon-magenta)">→ appendSystemContext (graph knowledge)</div>
+          <div style="padding-left:16px;color:var(--neon-yellow)">↓ QMD context prepended</div>
+          <div style="padding-left:16px;color:var(--neon-cyan)">↓ input-router selects model</div>
+          <div style="padding-left:16px;color:var(--text-main)">↓ Inference → Reply</div>
+          <div style="padding-left:16px;color:var(--neon-cyan)">↓ openclaw-mem0 agent_end</div>
+          <div style="padding-left:32px;color:var(--neon-green)">→ Qdrant upsert (new memory)</div>
+          <div style="padding-left:16px;color:var(--neon-magenta)">↓ cognee-augment agent_end</div>
+          <div style="padding-left:32px;color:var(--neon-magenta)">→ Cognee cognify (knowledge graph update)</div>
         </div>
       </div>
     </div>
@@ -849,7 +871,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <section class="tab-section" id="tab-plugins">
   <div class="section-header">
     <div class="section-title">PLUGIN REGISTRY</div>
-    <span class="section-badge" style="border-color:var(--cyan);color:var(--cyan)">7 ENABLED · 2 DISABLED</span>
+    <span class="section-badge" style="border-color:var(--neon-cyan);color:var(--neon-cyan)">7 ENABLED · 2 DISABLED</span>
   </div>
   <div id="plugins-grid" style="display:flex;flex-direction:column;gap:8px"></div>
 </section>
@@ -858,20 +880,20 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <section class="tab-section" id="tab-structure">
   <div class="section-header">
     <div class="section-title">FILE STRUCTURE</div>
-    <span class="section-badge" style="border-color:var(--cyan);color:var(--cyan)">~/.openclaw depth 8</span>
+    <span class="section-badge" style="border-color:var(--neon-cyan);color:var(--neon-cyan)">~/.openclaw depth 8</span>
   </div>
   <div class="grid-2">
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--cyan)"></span>~/.openclaw/</div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-cyan)"></span>~/.openclaw/</div>
       <div class="tree" id="tree-openclaw"></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px">
       <div class="card">
-        <div class="card-title"><span class="accent" style="background:var(--magenta)"></span>~/.claude/ AGENT SYSTEM</div>
+        <div class="card-title"><span class="accent" style="background:var(--neon-magenta)"></span>~/.claude/ AGENT SYSTEM</div>
         <div class="tree" id="tree-claude"></div>
       </div>
       <div class="card">
-        <div class="card-title"><span class="accent" style="background:var(--green)"></span>SERVICES</div>
+        <div class="card-title"><span class="accent" style="background:var(--neon-green)"></span>SERVICES</div>
         <div class="tree" id="tree-services"></div>
       </div>
     </div>
@@ -881,8 +903,8 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <!-- ═══════════════════════════ COMMANDS ═══════════════════════════ -->
 <section class="tab-section" id="tab-commands">
   <div class="section-header">
-    <div class="section-title" style="color:var(--orange)">COMMAND REFERENCE</div>
-    <span class="section-badge" style="border-color:var(--orange);color:var(--orange)">PUBLIC + PRIVATE</span>
+    <div class="section-title" style="color:var(--neon-orange)">COMMAND REFERENCE</div>
+    <span class="section-badge" style="border-color:var(--neon-orange);color:var(--neon-orange)">PUBLIC + PRIVATE</span>
   </div>
   <div id="commands-container"></div>
 </section>
@@ -890,13 +912,13 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <!-- ═══════════════════════════ LIVE STATUS ═══════════════════════════ -->
 <section class="tab-section" id="tab-live">
   <div class="section-header">
-    <div class="section-title" style="color:var(--cyan)">LIVE STATUS</div>
-    <span class="section-badge" id="live-timestamp" style="border-color:var(--cyan);color:var(--cyan)">Loading...</span>
+    <div class="section-title" style="color:var(--neon-cyan)">LIVE STATUS</div>
+    <span class="section-badge" id="live-timestamp" style="border-color:var(--neon-cyan);color:var(--neon-cyan)">Loading...</span>
   </div>
 
   <div class="update-info">
-    <strong>How live data works:</strong> Run <code style="color:var(--cyan)">~/dex-dashboard/update-status.sh</code> on your machine → it scans all services, tests APIs, updates <code>data.json</code>, and pushes to GitHub. This page auto-loads the latest data.json on open.<br>
-    <strong>Auto-push:</strong> Add to cron with <code style="color:var(--cyan)">crontab -e</code> → <code>*/15 * * * * ~/dex-dashboard/update-status.sh</code>
+    <strong>How live data works:</strong> Run <code style="color:var(--neon-cyan)">~/dex-dashboard/update-status.sh</code> on your machine → it scans all services, tests APIs, updates <code>data.json</code>, and pushes to GitHub. This page auto-loads the latest data.json on open.<br>
+    <strong>Auto-push:</strong> Add to cron with <code style="color:var(--neon-cyan)">crontab -e</code> → <code>*/15 * * * * ~/dex-dashboard/update-status.sh</code>
   </div>
 
   <button class="refresh-btn" onclick="loadLiveData()">
@@ -905,13 +927,13 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 
   <div class="grid-2">
     <div>
-      <div style="font-family:'Orbitron',monospace;font-size:16px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">SERVICES</div>
+      <div style="font-family:'Orbitron',monospace;font-size:16px;letter-spacing:2px;color:var(--text-dim);margin-bottom:10px">SERVICES</div>
       <div id="live-services"></div>
     </div>
     <div>
-      <div style="font-family:'Orbitron',monospace;font-size:16px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">API POOLS</div>
+      <div style="font-family:'Orbitron',monospace;font-size:16px;letter-spacing:2px;color:var(--text-dim);margin-bottom:10px">API POOLS</div>
       <div id="live-apis"></div>
-      <div style="font-family:'Orbitron',monospace;font-size:16px;letter-spacing:2px;color:var(--dim);margin:16px 0 10px">MEMORY</div>
+      <div style="font-family:'Orbitron',monospace;font-size:16px;letter-spacing:2px;color:var(--text-dim);margin:16px 0 10px">MEMORY</div>
       <div id="live-memory"></div>
     </div>
   </div>
@@ -928,18 +950,18 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
   <div class="grid-3" style="margin-bottom:14px">
     <div class="card" style="border-color:rgba(124,77,255,.35);text-align:center">
       <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:#7c4dff;text-shadow:0 0 20px #7c4dff,0 0 40px #7c4dff;line-height:1">3</div>
-      <div style="font-size:15px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">Coverage Layers</div>
-      <div style="font-size:16px;color:var(--dim);margin-top:8px">inotify · poll · heartbeat</div>
+      <div style="font-size:15px;letter-spacing:3px;color:var(--text-dim);margin-top:6px;text-transform:uppercase">Coverage Layers</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-top:8px">inotify · poll · heartbeat</div>
     </div>
     <div class="card" style="border-color:rgba(105,255,71,.35);text-align:center">
-      <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:var(--green);text-shadow:0 0 20px var(--green),0 0 40px var(--green);line-height:1">&lt;2s</div>
-      <div style="font-size:15px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">inotify Latency</div>
-      <div style="font-size:16px;color:var(--dim);margin-top:8px">kernel-level, sub-second fire</div>
+      <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:var(--neon-green);text-shadow:0 0 20px var(--neon-green),0 0 40px var(--neon-green);line-height:1">&lt;2s</div>
+      <div style="font-size:15px;letter-spacing:3px;color:var(--text-dim);margin-top:6px;text-transform:uppercase">inotify Latency</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-top:8px">kernel-level, sub-second fire</div>
     </div>
     <div class="card" style="border-color:rgba(255,234,0,.35);text-align:center">
-      <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:var(--yellow);text-shadow:0 0 20px var(--yellow),0 0 40px var(--yellow);line-height:1">≤5m</div>
-      <div style="font-size:15px;letter-spacing:3px;color:var(--dim);margin-top:6px;text-transform:uppercase">Poll Latency</div>
-      <div style="font-size:16px;color:var(--dim);margin-top:8px">service / API state changes</div>
+      <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:var(--neon-yellow);text-shadow:0 0 20px var(--neon-yellow),0 0 40px var(--neon-yellow);line-height:1">≤5m</div>
+      <div style="font-size:15px;letter-spacing:3px;color:var(--text-dim);margin-top:6px;text-transform:uppercase">Poll Latency</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-top:8px">service / API state changes</div>
     </div>
   </div>
 
@@ -951,79 +973,79 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 
       <div style="display:flex;align-items:stretch;gap:12px;padding:14px;background:rgba(105,255,71,.06);border:1px solid rgba(105,255,71,.25);border-radius:5px">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:90px">
-          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--green);letter-spacing:2px">LAYER 1</div>
+          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--neon-green);letter-spacing:2px">LAYER 1</div>
           <div style="font-size:20px">👁</div>
-          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--green);text-align:center;letter-spacing:1px">inotify<br>DAEMON</div>
+          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--neon-green);text-align:center;letter-spacing:1px">inotify<br>DAEMON</div>
         </div>
         <div style="width:1px;background:rgba(105,255,71,.3)"></div>
         <div style="flex:1">
-          <div style="font-size:16px;color:var(--green);font-weight:700;margin-bottom:6px;letter-spacing:1px">Kernel filesystem events — fires in &lt;2 seconds</div>
-          <div style="font-size:16px;color:var(--text);line-height:1.7">
-            The Linux kernel notifies <code style="color:var(--cyan);font-size:15px">dex-watcher.service</code> the instant any file inside
-            <code style="color:var(--cyan);font-size:15px">~/.openclaw/</code> is written or created.
-            A <strong style="color:var(--green)">60-second debounce</strong> prevents spam from rapid successive writes
+          <div style="font-size:16px;color:var(--neon-green);font-weight:700;margin-bottom:6px;letter-spacing:1px">Kernel filesystem events — fires in &lt;2 seconds</div>
+          <div style="font-size:16px;color:var(--text-main);line-height:1.7">
+            The Linux kernel notifies <code style="color:var(--neon-cyan);font-size:15px">dex-watcher.service</code> the instant any file inside
+            <code style="color:var(--neon-cyan);font-size:15px">~/.openclaw/</code> is written or created.
+            A <strong style="color:var(--neon-green)">60-second debounce</strong> prevents spam from rapid successive writes
             (e.g. the gateway's own file watcher writing telemetry on startup).
           </div>
           <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--green)">dex-watcher.service</span>
-            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--green)">Restart=always</span>
-            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--green)">debounce 60s</span>
+            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--neon-green)">dex-watcher.service</span>
+            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--neon-green)">Restart=always</span>
+            <span style="padding:3px 10px;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.3);border-radius:3px;font-size:15px;color:var(--neon-green)">debounce 60s</span>
           </div>
         </div>
         <div style="display:flex;align-items:center;padding:0 8px">
-          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--green);text-shadow:0 0 10px var(--green);letter-spacing:1px">&lt;2s</div>
+          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--neon-green);text-shadow:0 0 10px var(--neon-green);letter-spacing:1px">&lt;2s</div>
         </div>
       </div>
 
       <div style="display:flex;align-items:stretch;gap:12px;padding:14px;background:rgba(255,234,0,.06);border:1px solid rgba(255,234,0,.25);border-radius:5px">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:90px">
-          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--yellow);letter-spacing:2px">LAYER 2</div>
+          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--neon-yellow);letter-spacing:2px">LAYER 2</div>
           <div style="font-size:20px">⏱</div>
-          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--yellow);text-align:center;letter-spacing:1px">SMART<br>POLLER</div>
+          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--neon-yellow);text-align:center;letter-spacing:1px">SMART<br>POLLER</div>
         </div>
         <div style="width:1px;background:rgba(255,234,0,.3)"></div>
         <div style="flex:1">
-          <div style="font-size:16px;color:var(--yellow);font-weight:700;margin-bottom:6px;letter-spacing:1px">Diff-on-change cron — fires every 5 minutes</div>
-          <div style="font-size:16px;color:var(--text);line-height:1.7">
-            <code style="color:var(--cyan);font-size:15px">watch-changes.sh</code> snapshots service state,
+          <div style="font-size:16px;color:var(--neon-yellow);font-weight:700;margin-bottom:6px;letter-spacing:1px">Diff-on-change cron — fires every 5 minutes</div>
+          <div style="font-size:16px;color:var(--text-main);line-height:1.7">
+            <code style="color:var(--neon-cyan);font-size:15px">watch-changes.sh</code> snapshots service state,
             LiteLLM healthy/unhealthy endpoint counts, and Qdrant memory point counts.
-            It compares the snapshot to the last known state — <strong style="color:var(--yellow)">only pushes if something changed</strong>.
+            It compares the snapshot to the last known state — <strong style="color:var(--neon-yellow)">only pushes if something changed</strong>.
             Covers what inotify cannot: process crashes and API quota exhaustion.
           </div>
           <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--yellow)">*/5 cron</span>
-            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--yellow)">diff-on-change</span>
-            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--yellow)">watch-changes.sh</span>
+            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--neon-yellow)">*/5 cron</span>
+            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--neon-yellow)">diff-on-change</span>
+            <span style="padding:3px 10px;background:rgba(255,234,0,.1);border:1px solid rgba(255,234,0,.3);border-radius:3px;font-size:15px;color:var(--neon-yellow)">watch-changes.sh</span>
           </div>
         </div>
         <div style="display:flex;align-items:center;padding:0 8px">
-          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--yellow);text-shadow:0 0 10px var(--yellow);letter-spacing:1px">≤5m</div>
+          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--neon-yellow);text-shadow:0 0 10px var(--neon-yellow);letter-spacing:1px">≤5m</div>
         </div>
       </div>
 
       <div style="display:flex;align-items:stretch;gap:12px;padding:14px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);border-radius:5px">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:90px">
-          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--cyan);letter-spacing:2px">LAYER 3</div>
+          <div style="font-family:'Orbitron',monospace;font-size:14px;color:var(--neon-cyan);letter-spacing:2px">LAYER 3</div>
           <div style="font-size:20px">💓</div>
-          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--cyan);text-align:center;letter-spacing:1px">HEARTBEAT<br>CRON</div>
+          <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--neon-cyan);text-align:center;letter-spacing:1px">HEARTBEAT<br>CRON</div>
         </div>
         <div style="width:1px;background:rgba(0,229,255,.25)"></div>
         <div style="flex:1">
-          <div style="font-size:16px;color:var(--cyan);font-weight:700;margin-bottom:6px;letter-spacing:1px">Always-on full update — fires every 15 minutes</div>
-          <div style="font-size:16px;color:var(--text);line-height:1.7">
-            <code style="color:var(--cyan);font-size:15px">update-status.sh</code> runs unconditionally every 15 minutes,
-            collects the full system snapshot, writes <code style="color:var(--cyan);font-size:15px">data.json</code>,
-            and pushes to GitHub Pages. This is the <strong style="color:var(--cyan)">catch-all floor</strong> — anything missed
+          <div style="font-size:16px;color:var(--neon-cyan);font-weight:700;margin-bottom:6px;letter-spacing:1px">Always-on full update — fires every 15 minutes</div>
+          <div style="font-size:16px;color:var(--text-main);line-height:1.7">
+            <code style="color:var(--neon-cyan);font-size:15px">update-status.sh</code> runs unconditionally every 15 minutes,
+            collects the full system snapshot, writes <code style="color:var(--neon-cyan);font-size:15px">data.json</code>,
+            and pushes to GitHub Pages. This is the <strong style="color:var(--neon-cyan)">catch-all floor</strong> — anything missed
             by the layers above is guaranteed to appear within 15 minutes.
           </div>
           <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--cyan)">*/15 cron</span>
-            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--cyan)">always fires</span>
-            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--cyan)">update-status.sh</span>
+            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--neon-cyan)">*/15 cron</span>
+            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--neon-cyan)">always fires</span>
+            <span style="padding:3px 10px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:3px;font-size:15px;color:var(--neon-cyan)">update-status.sh</span>
           </div>
         </div>
         <div style="display:flex;align-items:center;padding:0 8px">
-          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--cyan);text-shadow:0 0 10px var(--cyan);letter-spacing:1px">≤15m</div>
+          <div style="font-family:'Orbitron',monospace;font-size:16px;color:var(--neon-cyan);text-shadow:0 0 10px var(--neon-cyan);letter-spacing:1px">≤15m</div>
         </div>
       </div>
 
@@ -1035,34 +1057,34 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 
     <div class="card" style="border-color:rgba(105,255,71,.3)">
       <div class="card-sweep"></div>
-      <div class="card-title" style="color:var(--green)"><span class="accent" style="background:var(--green)"></span>inotify CAN DETECT</div>
+      <div class="card-title" style="color:var(--neon-green)"><span class="accent" style="background:var(--neon-green)"></span>inotify CAN DETECT</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--green);border-radius:3px">
-          <span style="color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--neon-green);border-radius:3px">
+          <span style="color:var(--neon-green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
           <div>
-            <div style="font-size:16px;color:var(--green);font-weight:700;letter-spacing:1px">API key rotation</div>
-            <div style="font-size:16px;color:var(--dim);margin-top:3px">Any write to <code style="color:var(--cyan);font-size:15px">~/.openclaw/.env</code> — new keys added, existing keys changed or rotated — fires the watcher instantly.</div>
+            <div style="font-size:16px;color:var(--neon-green);font-weight:700;letter-spacing:1px">API key rotation</div>
+            <div style="font-size:16px;color:var(--text-dim);margin-top:3px">Any write to <code style="color:var(--neon-cyan);font-size:15px">~/.openclaw/.env</code> — new keys added, existing keys changed or rotated — fires the watcher instantly.</div>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--green);border-radius:3px">
-          <span style="color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--neon-green);border-radius:3px">
+          <span style="color:var(--neon-green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
           <div>
-            <div style="font-size:16px;color:var(--green);font-weight:700;letter-spacing:1px">Config changes</div>
-            <div style="font-size:16px;color:var(--dim);margin-top:3px">Writes to <code style="color:var(--cyan);font-size:15px">openclaw.json</code> — model routing, dmPolicy, channel config, plugin enable/disable — detected in &lt;2s.</div>
+            <div style="font-size:16px;color:var(--neon-green);font-weight:700;letter-spacing:1px">Config changes</div>
+            <div style="font-size:16px;color:var(--text-dim);margin-top:3px">Writes to <code style="color:var(--neon-cyan);font-size:15px">openclaw.json</code> — model routing, dmPolicy, channel config, plugin enable/disable — detected in &lt;2s.</div>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--green);border-radius:3px">
-          <span style="color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--neon-green);border-radius:3px">
+          <span style="color:var(--neon-green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
           <div>
-            <div style="font-size:16px;color:var(--green);font-weight:700;letter-spacing:1px">Plugin config changes</div>
-            <div style="font-size:16px;color:var(--dim);margin-top:3px">Any <code style="color:var(--cyan);font-size:15px">*.plugin.json</code> write under <code style="color:var(--cyan);font-size:15px">~/.openclaw/extensions/</code> — plugin version bumps, config edits, new plugin installs.</div>
+            <div style="font-size:16px;color:var(--neon-green);font-weight:700;letter-spacing:1px">Plugin config changes</div>
+            <div style="font-size:16px;color:var(--text-dim);margin-top:3px">Any <code style="color:var(--neon-cyan);font-size:15px">*.plugin.json</code> write under <code style="color:var(--neon-cyan);font-size:15px">~/.openclaw/extensions/</code> — plugin version bumps, config edits, new plugin installs.</div>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--green);border-radius:3px">
-          <span style="color:var(--green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(105,255,71,.06);border-left:3px solid var(--neon-green);border-radius:3px">
+          <span style="color:var(--neon-green);font-size:16px;flex-shrink:0;margin-top:1px">✓</span>
           <div>
-            <div style="font-size:16px;color:var(--green);font-weight:700;letter-spacing:1px">Knowledge base changes</div>
-            <div style="font-size:16px;color:var(--dim);margin-top:3px">Any <code style="color:var(--cyan);font-size:15px">*.md</code> file written in the openclaw tree — Cognee indexed docs, agent memory exports added as files.</div>
+            <div style="font-size:16px;color:var(--neon-green);font-weight:700;letter-spacing:1px">Knowledge base changes</div>
+            <div style="font-size:16px;color:var(--text-dim);margin-top:3px">Any <code style="color:var(--neon-cyan);font-size:15px">*.md</code> file written in the openclaw tree — Cognee indexed docs, agent memory exports added as files.</div>
           </div>
         </div>
       </div>
@@ -1070,34 +1092,34 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 
     <div class="card" style="border-color:rgba(255,23,68,.3)">
       <div class="card-sweep"></div>
-      <div class="card-title" style="color:var(--red)"><span class="accent" style="background:var(--red)"></span>inotify CANNOT DETECT</div>
+      <div class="card-title" style="color:var(--neon-red)"><span class="accent" style="background:var(--neon-red)"></span>inotify CANNOT DETECT</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--red);border-radius:3px">
-          <span style="color:var(--red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--neon-red);border-radius:3px">
+          <span style="color:var(--neon-red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
           <div>
-            <div style="font-size:16px;color:var(--red);font-weight:700;letter-spacing:1px">Service crashes / restarts</div>
-            <div style="font-size:16px;color:var(--dim);margin-top:3px">A process dying is a kernel process event, not a filesystem event. inotify is blind to it. <strong style="color:var(--yellow)">Covered by Layer 2 poller (≤5 min).</strong></div>
+            <div style="font-size:16px;color:var(--neon-red);font-weight:700;letter-spacing:1px">Service crashes / restarts</div>
+            <div style="font-size:16px;color:var(--text-dim);margin-top:3px">A process dying is a kernel process event, not a filesystem event. inotify is blind to it. <strong style="color:var(--neon-yellow)">Covered by Layer 2 poller (≤5 min).</strong></div>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--red);border-radius:3px">
-          <span style="color:var(--red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--neon-red);border-radius:3px">
+          <span style="color:var(--neon-red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
           <div>
-            <div style="font-size:16px;color:var(--red);font-weight:700;letter-spacing:1px">API key quota exhaustion</div>
-            <div style="font-size:16px;color:var(--dim);margin-top:3px">A Gemini key hitting its daily limit is a network / LiteLLM state change — no file is written. <strong style="color:var(--yellow)">Covered by Layer 2 LiteLLM health poll.</strong></div>
+            <div style="font-size:16px;color:var(--neon-red);font-weight:700;letter-spacing:1px">API key quota exhaustion</div>
+            <div style="font-size:16px;color:var(--text-dim);margin-top:3px">A Gemini key hitting its daily limit is a network / LiteLLM state change — no file is written. <strong style="color:var(--neon-yellow)">Covered by Layer 2 LiteLLM health poll.</strong></div>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--red);border-radius:3px">
-          <span style="color:var(--red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--neon-red);border-radius:3px">
+          <span style="color:var(--neon-red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
           <div>
-            <div style="font-size:16px;color:var(--red);font-weight:700;letter-spacing:1px">Memory count changes</div>
-            <div style="font-size:16px;color:var(--dim);margin-top:3px">New vectors added to Qdrant are stored in Qdrant's own data dir, not in <code style="color:var(--cyan);font-size:15px">~/.openclaw/</code>. <strong style="color:var(--yellow)">Covered by Layer 2 Qdrant API poll.</strong></div>
+            <div style="font-size:16px;color:var(--neon-red);font-weight:700;letter-spacing:1px">Memory count changes</div>
+            <div style="font-size:16px;color:var(--text-dim);margin-top:3px">New vectors added to Qdrant are stored in Qdrant's own data dir, not in <code style="color:var(--neon-cyan);font-size:15px">~/.openclaw/</code>. <strong style="color:var(--neon-yellow)">Covered by Layer 2 Qdrant API poll.</strong></div>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--red);border-radius:3px">
-          <span style="color:var(--red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,23,68,.06);border-left:3px solid var(--neon-red);border-radius:3px">
+          <span style="color:var(--neon-red);font-size:16px;flex-shrink:0;margin-top:1px">✗</span>
           <div>
-            <div style="font-size:16px;color:var(--red);font-weight:700;letter-spacing:1px">Network / port state changes</div>
-            <div style="font-size:16px;color:var(--dim);margin-top:3px">Services binding / unbinding ports, HTTP health endpoint going up or down — these are network events. <strong style="color:var(--yellow)">Covered by Layer 2 service health probes.</strong></div>
+            <div style="font-size:16px;color:var(--neon-red);font-weight:700;letter-spacing:1px">Network / port state changes</div>
+            <div style="font-size:16px;color:var(--text-dim);margin-top:3px">Services binding / unbinding ports, HTTP health endpoint going up or down — these are network events. <strong style="color:var(--neon-yellow)">Covered by Layer 2 service health probes.</strong></div>
           </div>
         </div>
       </div>
@@ -1110,30 +1132,30 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     <div class="card" style="border-color:rgba(124,77,255,.25)">
       <div class="card-sweep"></div>
       <div class="card-title" style="color:#7c4dff"><span class="accent" style="background:#7c4dff"></span>INOTIFY WATCHED PATHS</div>
-      <div style="font-size:16px;color:var(--dim);margin-bottom:12px">Recursive watch on <code style="color:var(--cyan);font-size:15px">~/.openclaw/</code> — filtered to these patterns:</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:12px">Recursive watch on <code style="color:var(--neon-cyan);font-size:15px">~/.openclaw/</code> — filtered to these patterns:</div>
       <div style="display:flex;flex-direction:column;gap:7px">
         <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <span style="color:#7c4dff;font-size:16px">📄</span>
-          <code style="font-size:16px;color:var(--cyan)">~/.openclaw/.env</code>
-          <span style="margin-left:auto;font-size:15px;color:var(--dim)">API keys</span>
+          <code style="font-size:16px;color:var(--neon-cyan)">~/.openclaw/.env</code>
+          <span style="margin-left:auto;font-size:15px;color:var(--text-dim)">API keys</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <span style="color:#7c4dff;font-size:16px">📄</span>
-          <code style="font-size:16px;color:var(--cyan)">~/.openclaw/openclaw.json</code>
-          <span style="margin-left:auto;font-size:15px;color:var(--dim)">main config</span>
+          <code style="font-size:16px;color:var(--neon-cyan)">~/.openclaw/openclaw.json</code>
+          <span style="margin-left:auto;font-size:15px;color:var(--text-dim)">main config</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <span style="color:#7c4dff;font-size:16px">📁</span>
-          <code style="font-size:16px;color:var(--cyan)">~/.openclaw/extensions/**/*.plugin.json</code>
-          <span style="margin-left:auto;font-size:15px;color:var(--dim)">plugins</span>
+          <code style="font-size:16px;color:var(--neon-cyan)">~/.openclaw/extensions/**/*.plugin.json</code>
+          <span style="margin-left:auto;font-size:15px;color:var(--text-dim)">plugins</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <span style="color:#7c4dff;font-size:16px">📁</span>
-          <code style="font-size:16px;color:var(--cyan)">~/.openclaw/**/*.md</code>
-          <span style="margin-left:auto;font-size:15px;color:var(--dim)">knowledge docs</span>
+          <code style="font-size:16px;color:var(--neon-cyan)">~/.openclaw/**/*.md</code>
+          <span style="margin-left:auto;font-size:15px;color:var(--text-dim)">knowledge docs</span>
         </div>
         <div style="margin-top:6px;padding:8px 12px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:3px">
-          <div style="font-size:15px;color:var(--dim);line-height:1.6">Events watched: <code style="color:var(--cyan);font-size:14px">close_write, create, moved_to</code><br>Other writes (runtime telemetry, lock files) are silently ignored by the grep filter.</div>
+          <div style="font-size:15px;color:var(--text-dim);line-height:1.6">Events watched: <code style="color:var(--neon-cyan);font-size:14px">close_write, create, moved_to</code><br>Other writes (runtime telemetry, lock files) are silently ignored by the grep filter.</div>
         </div>
       </div>
     </div>
@@ -1144,34 +1166,34 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
       <div style="display:flex;flex-direction:column;gap:7px">
         <div style="padding:10px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="color:var(--green);font-size:16px">●</span>
-            <code style="font-size:16px;color:var(--cyan)">~/.config/systemd/user/dex-watcher.service</code>
+            <span style="color:var(--neon-green);font-size:16px">●</span>
+            <code style="font-size:16px;color:var(--neon-cyan)">~/.config/systemd/user/dex-watcher.service</code>
           </div>
-          <div style="font-size:16px;color:var(--dim)">Systemd user unit. <code style="font-size:15px;color:var(--cyan)">Restart=always</code> — survives crashes. <code style="font-size:15px;color:var(--cyan)">enabled</code> — auto-starts on login.</div>
+          <div style="font-size:16px;color:var(--text-dim)">Systemd user unit. <code style="font-size:15px;color:var(--neon-cyan)">Restart=always</code> — survives crashes. <code style="font-size:15px;color:var(--neon-cyan)">enabled</code> — auto-starts on login.</div>
         </div>
         <div style="padding:10px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="color:var(--cyan);font-size:16px">◈</span>
-            <code style="font-size:16px;color:var(--cyan)">~/dex-dashboard/dex-watcher.sh</code>
+            <span style="color:var(--neon-cyan);font-size:16px">◈</span>
+            <code style="font-size:16px;color:var(--neon-cyan)">~/dex-dashboard/dex-watcher.sh</code>
           </div>
-          <div style="font-size:16px;color:var(--dim)">inotifywait loop. Pipes matched events to <code style="font-size:15px;color:var(--cyan)">on-config-change.sh</code>. Runs the grep filter inline.</div>
+          <div style="font-size:16px;color:var(--text-dim)">inotifywait loop. Pipes matched events to <code style="font-size:15px;color:var(--neon-cyan)">on-config-change.sh</code>. Runs the grep filter inline.</div>
         </div>
         <div style="padding:10px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="color:var(--cyan);font-size:16px">◈</span>
-            <code style="font-size:16px;color:var(--cyan)">~/dex-dashboard/on-config-change.sh</code>
+            <span style="color:var(--neon-cyan);font-size:16px">◈</span>
+            <code style="font-size:16px;color:var(--neon-cyan)">~/dex-dashboard/on-config-change.sh</code>
           </div>
-          <div style="font-size:16px;color:var(--dim)">Debounce handler. Skips if a push ran within 60s. Calls <code style="font-size:15px;color:var(--cyan)">update-status.sh</code> and logs to <code style="font-size:15px;color:var(--cyan)">/tmp/dex-inotify.log</code>.</div>
+          <div style="font-size:16px;color:var(--text-dim)">Debounce handler. Skips if a push ran within 60s. Calls <code style="font-size:15px;color:var(--neon-cyan)">update-status.sh</code> and logs to <code style="font-size:15px;color:var(--neon-cyan)">/tmp/dex-inotify.log</code>.</div>
         </div>
         <div style="padding:10px 12px;background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.2);border-radius:3px">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-            <span style="color:var(--yellow);font-size:16px">◎</span>
-            <code style="font-size:16px;color:var(--cyan)">~/dex-dashboard/watch-changes.sh</code>
+            <span style="color:var(--neon-yellow);font-size:16px">◎</span>
+            <code style="font-size:16px;color:var(--neon-cyan)">~/dex-dashboard/watch-changes.sh</code>
           </div>
-          <div style="font-size:16px;color:var(--dim)">Layer 2 poller. Snapshots service state + LiteLLM health + Qdrant counts. Runs every 5 min via cron, pushes only on diff.</div>
+          <div style="font-size:16px;color:var(--text-dim)">Layer 2 poller. Snapshots service state + LiteLLM health + Qdrant counts. Runs every 5 min via cron, pushes only on diff.</div>
         </div>
         <div style="margin-top:4px;padding:8px 12px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:3px">
-          <div style="font-size:15px;color:var(--dim)">Logs: <code style="color:var(--cyan);font-size:14px">/tmp/dex-inotify.log</code> · <code style="color:var(--cyan);font-size:14px">/tmp/dex-watch.log</code> · <code style="color:var(--cyan);font-size:14px">/tmp/dex-update.log</code></div>
+          <div style="font-size:15px;color:var(--text-dim)">Logs: <code style="color:var(--neon-cyan);font-size:14px">/tmp/dex-inotify.log</code> · <code style="color:var(--neon-cyan);font-size:14px">/tmp/dex-watch.log</code> · <code style="color:var(--neon-cyan);font-size:14px">/tmp/dex-update.log</code></div>
         </div>
       </div>
     </div>
@@ -1179,25 +1201,25 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 </section>
 <section class="tab-section" id="tab-broker">
   <div style="padding:20px">
-    <h2 style="color:var(--cyan);font-family:Orbitron;margin-bottom:16px">◉ BROKER AGENT — WhatsApp Logistics Coordinator</h2>
+    <h2 style="color:var(--neon-cyan);font-family:Orbitron;margin-bottom:16px">◉ BROKER AGENT — WhatsApp Logistics Coordinator</h2>
 
     <div class="grid-2" style="gap:16px;margin-bottom:20px">
-      <div class="card" style="border-color:var(--cyan)">
-        <div class="card-title" style="color:var(--cyan)"><span class="accent" style="background:var(--cyan)"></span>Overview</div>
-        <div style="line-height:1.8;color:var(--text);font-size:16px">
+      <div class="card" style="border-color:var(--neon-cyan)">
+        <div class="card-title" style="color:var(--neon-cyan)"><span class="accent" style="background:var(--neon-cyan)"></span>Overview</div>
+        <div style="line-height:1.8;color:var(--text-main);font-size:16px">
           Manages two WhatsApp groups: <strong>Customers</strong> (requests) and <strong>Drivers</strong> (offers). <br>
           Collects customer data via private DM, stores missions, broadcasts anonymized job details to drivers, collects offers, and routes final coordination to human endpoint.<br>
-          <span style="color:var(--green)">✓ Privacy firewall: customer PII never leaves endpoint</span>
+          <span style="color:var(--neon-green)">✓ Privacy firewall: customer PII never leaves endpoint</span>
         </div>
       </div>
 
-      <div class="card" style="border-color:var(--magenta)">
-        <div class="card-title" style="color:var(--magenta)"><span class="accent" style="background:var(--magenta)"></span>Model Routing (Smart)</div>
-        <div style="line-height:1.8;color:var(--text);font-size:16px">
-          <div style="margin-bottom:8px"><span style="color:var(--green)">● Default:</span> <code>litellm/gemma-chat</code> (Gemma 3 27B, 0.7–1.9s)</div>
-          <div style="margin-bottom:8px"><span style="color:var(--orange)">● Heavy ops:</span> <code>litellm/gemma-agentic</code> (Gemma 4 31B, 5–11s, unlimited TPM)</div>
-          <div><span style="color:var(--red)">● Bypassed:</span> gemma-fallback (4B) not in critical path</div>
-          <div style="margin-top:8px;font-size:15px;color:var(--dim)">
+      <div class="card" style="border-color:var(--neon-magenta)">
+        <div class="card-title" style="color:var(--neon-magenta)"><span class="accent" style="background:var(--neon-magenta)"></span>Model Routing (Smart)</div>
+        <div style="line-height:1.8;color:var(--text-main);font-size:16px">
+          <div style="margin-bottom:8px"><span style="color:var(--neon-green)">● Default:</span> <code>litellm/gemma-chat</code> (Gemma 3 27B, 0.7–1.9s)</div>
+          <div style="margin-bottom:8px"><span style="color:var(--neon-orange)">● Heavy ops:</span> <code>litellm/gemma-agentic</code> (Gemma 4 31B, 5–11s, unlimited TPM)</div>
+          <div><span style="color:var(--neon-red)">● Bypassed:</span> gemma-fallback (4B) not in critical path</div>
+          <div style="margin-top:8px;font-size:15px;color:var(--text-dim)">
             Light tasks (<6K tokens) → gemma-chat.<br>
             Heavy RAG/benchmark (≥6K tokens) → gemma-agentic directly.<br>
             Avoids TPM cascade, eliminates 4B pool 429 surprises.
@@ -1206,10 +1228,10 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
       </div>
     </div>
 
-    <div class="card" style="border-color:var(--yellow);margin-bottom:16px">
-      <div class="card-title" style="color:var(--yellow)"><span class="accent" style="background:var(--yellow)"></span>Capacity & Performance (Realistic, Human-in-the-Loop)</div>
+    <div class="card" style="border-color:var(--neon-yellow);margin-bottom:16px">
+      <div class="card-title" style="color:var(--neon-yellow)"><span class="accent" style="background:var(--neon-yellow)"></span>Capacity & Performance (Realistic, Human-in-the-Loop)</div>
       <div style="overflow-x:auto">
-        <table style="width:100%;border-collapse:collapse;color:var(--text);font-size:16px">
+        <table style="width:100%;border-collapse:collapse;color:var(--text-main);font-size:16px">
           <tr style="border-bottom:1px solid var(--border)">
             <th style="padding:8px;text-align:left">Workload</th>
             <th style="padding:8px;text-align:right">Tokens/Mission</th>
@@ -1218,38 +1240,38 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
             <th style="padding:8px;text-align:left">Limiting Factor</th>
           </tr>
           <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px;color:var(--green)">Lightweight<br><span style="font-size:13px;color:var(--dim)">(no price benchmark)</span></td>
+            <td style="padding:8px;color:var(--neon-green)">Lightweight<br><span style="font-size:13px;color:var(--text-dim)">(no price benchmark)</span></td>
             <td style="padding:8px;text-align:right">~3,400</td>
-            <td style="padding:8px;text-align:right;color:var(--cyan)">120/hr</td>
+            <td style="padding:8px;text-align:right;color:var(--neon-cyan)">120/hr</td>
             <td style="padding:8px;text-align:right">~180</td>
             <td style="padding:8px;font-size:15px">gemma-chat TPM (15K/key)</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px;color:var(--yellow)">Mixed (70/30)<br><span style="font-size:13px;color:var(--dim)">30% with benchmark</span></td>
+            <td style="padding:8px;color:var(--neon-yellow)">Mixed (70/30)<br><span style="font-size:13px;color:var(--text-dim)">30% with benchmark</span></td>
             <td style="padding:8px;text-align:right">~6,800 avg</td>
-            <td style="padding:8px;text-align:right;color:var(--cyan)">97/hr</td>
+            <td style="padding:8px;text-align:right;color:var(--neon-cyan)">97/hr</td>
             <td style="padding:8px;text-align:right">~150</td>
             <td style="padding:8px;font-size:15px">gemma-agentic RPM (13/key) + human selection speed</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:8px;color:var(--red)">Heavy<br><span style="font-size:13px;color:var(--dim)">100% benchmark</span></td>
+            <td style="padding:8px;color:var(--neon-red)">Heavy<br><span style="font-size:13px;color:var(--text-dim)">100% benchmark</span></td>
             <td style="padding:8px;text-align:right">~11,400</td>
-            <td style="padding:8px;text-align:right;color:var(--cyan)">50/hr</td>
+            <td style="padding:8px;text-align:right;color:var(--neon-cyan)">50/hr</td>
             <td style="padding:8px;text-align:right">~80</td>
             <td style="padding:8px;font-size:15px">gemma-agentic RPM ceiling</td>
           </tr>
         </table>
       </div>
-      <div style="margin-top:12px;font-size:16px;color:var(--dim)">
+      <div style="margin-top:12px;font-size:16px;color:var(--text-dim)">
         <strong>Concurrent active missions:</strong> 65–105 (typical 8h day)<br>
         <strong>99%-ile response latency:</strong> 0.7–1.9s (routine) / 5–11s (heavy)<br>
         <strong>System availability target:</strong> 98% (after LiteLLM fixes applied)
       </div>
     </div>
 
-    <div class="card" style="border-color:var(--magenta);margin-bottom:16px">
-      <div class="card-title" style="color:var(--magenta)"><span class="accent" style="background:var(--magenta)"></span>Privacy Firewall</div>
-      <div style="line-height:1.8;font-size:16px;color:var(--text)">
+    <div class="card" style="border-color:var(--neon-magenta);margin-bottom:16px">
+      <div class="card-title" style="color:var(--neon-magenta)"><span class="accent" style="background:var(--neon-magenta)"></span>Privacy Firewall</div>
+      <div style="line-height:1.8;font-size:16px;color:var(--text-main)">
         <div style="margin-bottom:8px">Every outbound message to drivers group or driver DMs runs <code>sanitize_for_drivers()</code> which strips:</div>
         <ul style="margin-left:20px;margin-bottom:12px">
           <li>customer_name, customer_phone, customer_whatsapp_id</li>
@@ -1257,24 +1279,24 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
           <li>exact_address (street number) — only area/landmark allowed</li>
           <li>payment_details, personal_notes, internal_comments</li>
         </ul>
-        <div style="color:var(--red)">Any blocked field detected → send rejected, security event logged, human alerted immediately.</div>
+        <div style="color:var(--neon-red)">Any blocked field detected → send rejected, security event logged, human alerted immediately.</div>
       </div>
     </div>
 
-    <div class="card" style="border-color:var(--green);margin-bottom:16px">
-      <div class="card-title" style="color:var(--green)"><span class="accent" style="background:var(--green)"></span>Available Commands (DM to broker)</div>
+    <div class="card" style="border-color:var(--neon-green);margin-bottom:16px">
+      <div class="card-title" style="color:var(--neon-green)"><span class="accent" style="background:var(--neon-green)"></span>Available Commands (DM to broker)</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px,1fr));gap:8px;font-size:16px">
-        <div><code style="color:var(--cyan)">/list-missions [status]</code><br><span style="color:var(--dim);font-size:15px">List missions by status</span></div>
-        <div><code style="color:var(--cyan)">/mission MIG-ID</code><br><span style="color:var(--dim);font-size:15px">Full mission details (PII visible only to endpoint)</span></div>
-        <div><code style="color:var(--cyan)">/driver-profile NAME</code><br><span style="color:var(--dim);font-size:15px">Driver history, ratings, past missions</span></div>
-        <div><code style="color:var(--cyan)">/price-benchmark PRODUCT WEIGHT</code><br><span style="color:var(--dim);font-size:15px">Price range from similar past missions (uses gemma-agentic)</span></div>
-        <div><code style="color:var(--cyan)">/new-mission</code><br><span style="color:var(--dim);font-size:15px">Manual mission creation (bypasses group detection)</span></div>
-        <div><code style="color:var(--cyan)">/help</code><br><span style="color:var(--dim);font-size:15px">Show available commands</span></div>
+        <div><code style="color:var(--neon-cyan)">/list-missions [status]</code><br><span style="color:var(--text-dim);font-size:15px">List missions by status</span></div>
+        <div><code style="color:var(--neon-cyan)">/mission MIG-ID</code><br><span style="color:var(--text-dim);font-size:15px">Full mission details (PII visible only to endpoint)</span></div>
+        <div><code style="color:var(--neon-cyan)">/driver-profile NAME</code><br><span style="color:var(--text-dim);font-size:15px">Driver history, ratings, past missions</span></div>
+        <div><code style="color:var(--neon-cyan)">/price-benchmark PRODUCT WEIGHT</code><br><span style="color:var(--text-dim);font-size:15px">Price range from similar past missions (uses gemma-agentic)</span></div>
+        <div><code style="color:var(--neon-cyan)">/new-mission</code><br><span style="color:var(--text-dim);font-size:15px">Manual mission creation (bypasses group detection)</span></div>
+        <div><code style="color:var(--neon-cyan)">/help</code><br><span style="color:var(--text-dim);font-size:15px">Show available commands</span></div>
       </div>
     </div>
 
-    <div class="card" style="border-color:var(--orange);margin-bottom:16px">
-      <div class="card-title" style="color:var(--orange)"><span class="accent" style="background:var(--orange)"></span>Filesystem Layout</div>
+    <div class="card" style="border-color:var(--neon-orange);margin-bottom:16px">
+      <div class="card-title" style="color:var(--neon-orange)"><span class="accent" style="background:var(--neon-orange)"></span>Filesystem Layout</div>
       <pre style="background:rgba(0,0,0,0.4);padding:12px;border-radius:4px;font-size:15px;overflow:auto;color:#e8d0ff">
 ~/.openclaw/workspace/broker/
 ├── missions/
@@ -1295,8 +1317,8 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
       </pre>
     </div>
 
-    <div style="font-size:15px;color:var(--dim);padding:8px 0;border-top:1px solid var(--border);margin-top:12px">
-      <strong>Note:</strong> Broker agent requires WhatsApp MCP integration (not yet installed). Connect via WhatsApp Business Cloud API or WhatsApp MCP server. Current status: <span style="color:var(--yellow)">ready for deployment</span>.
+    <div style="font-size:15px;color:var(--text-dim);padding:8px 0;border-top:1px solid var(--border);margin-top:12px">
+      <strong>Note:</strong> Broker agent requires WhatsApp MCP integration (not yet installed). Connect via WhatsApp Business Cloud API or WhatsApp MCP server. Current status: <span style="color:var(--neon-yellow)">ready for deployment</span>.
     </div>
   </div>
 </section>
@@ -1312,42 +1334,42 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
   <div class="grid-3" style="margin-bottom:14px">
     <!-- Pool overview cards rendered by JS -->
     <div class="card" id="apim-pool-gemma-chat" style="border-color:rgba(57,255,20,.4)">
-      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMMA CHAT POOL <span style="font-size:13px;color:var(--cyan);font-weight:400">PRIMARY · 27B</span></div>
-      <div id="apim-gemma-content" style="color:var(--dim);font-size:16px">Loading…</div>
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMMA CHAT POOL <span style="font-size:13px;color:var(--neon-cyan);font-weight:400">PRIMARY · 27B</span></div>
+      <div id="apim-gemma-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemma-fallback" style="border-color:rgba(224,64,251,.3)">
-      <div class="card-title" style="color:var(--magenta)"><span class="accent" style="background:var(--magenta)"></span>GEMMA FALLBACK POOL <span style="font-size:13px;color:var(--dim);font-weight:400">HYBRID · 4B</span></div>
-      <div id="apim-fallback-content" style="color:var(--dim);font-size:16px">Loading…</div>
+      <div class="card-title" style="color:var(--neon-magenta)"><span class="accent" style="background:var(--neon-magenta)"></span>GEMMA FALLBACK POOL <span style="font-size:13px;color:var(--text-dim);font-weight:400">HYBRID · 4B</span></div>
+      <div id="apim-fallback-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemma-internal" style="border-color:rgba(105,255,71,.3)">
-      <div class="card-title" style="color:var(--green)"><span class="accent" style="background:var(--green)"></span>GEMMA INTERNAL POOL <span style="font-size:13px;color:var(--dim);font-weight:400">Cognee · mem0 · 12B</span></div>
-      <div id="apim-internal-content" style="color:var(--dim);font-size:16px">Loading…</div>
+      <div class="card-title" style="color:var(--neon-green)"><span class="accent" style="background:var(--neon-green)"></span>GEMMA INTERNAL POOL <span style="font-size:13px;color:var(--text-dim);font-weight:400">Cognee · mem0 · 12B</span></div>
+      <div id="apim-internal-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemma-agentic" style="border-color:rgba(255,109,0,.3)">
-      <div class="card-title" style="color:var(--orange)"><span class="accent" style="background:var(--orange)"></span>GEMMA AGENTIC POOL <span style="font-size:13px;color:var(--dim);font-weight:400">FUTURE SUBAGENTS · 31B</span></div>
-      <div id="apim-agentic-content" style="color:var(--dim);font-size:16px">Loading…</div>
+      <div class="card-title" style="color:var(--neon-orange)"><span class="accent" style="background:var(--neon-orange)"></span>GEMMA AGENTIC POOL <span style="font-size:13px;color:var(--text-dim);font-weight:400">FUTURE SUBAGENTS · 31B</span></div>
+      <div id="apim-agentic-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemini-embedding" style="border-color:rgba(255,234,0,.3)">
-      <div class="card-title" style="color:var(--yellow)"><span class="accent" style="background:var(--yellow)"></span>EMBEDDING POOL 1 <span style="font-size:13px;color:var(--dim);font-weight:400">3072d</span></div>
-      <div id="apim-embed-content" style="color:var(--dim);font-size:16px">Loading…</div>
+      <div class="card-title" style="color:var(--neon-yellow)"><span class="accent" style="background:var(--neon-yellow)"></span>EMBEDDING POOL 1 <span style="font-size:13px;color:var(--text-dim);font-weight:400">3072d</span></div>
+      <div id="apim-embed-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemini-embedding-2" style="border-color:rgba(255,234,0,.2)">
-      <div class="card-title" style="color:var(--yellow)"><span class="accent" style="background:var(--yellow)"></span>EMBEDDING POOL 2 <span style="font-size:13px;color:var(--dim);font-weight:400">3072d · independent quota</span></div>
-      <div id="apim-embed2-content" style="color:var(--dim);font-size:16px">Loading…</div>
+      <div class="card-title" style="color:var(--neon-yellow)"><span class="accent" style="background:var(--neon-yellow)"></span>EMBEDDING POOL 2 <span style="font-size:13px;color:var(--text-dim);font-weight:400">3072d · independent quota</span></div>
+      <div id="apim-embed2-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
   </div>
 
   <!-- Resting keys detail -->
   <div class="card" style="border-color:rgba(57,255,20,.25);margin-bottom:14px">
     <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>KEYS IN REST</div>
-    <div id="apim-resting-detail" style="color:var(--dim);font-size:16px">Loading…</div>
+    <div id="apim-resting-detail" style="color:var(--text-dim);font-size:16px">Loading…</div>
   </div>
 
   <!-- Legend + policy -->
   <div class="card-grid">
     <div class="card" style="border-color:rgba(57,255,20,.2)">
       <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>REST POLICY</div>
-      <div style="font-size:16px;line-height:2;color:var(--text)">
+      <div style="font-size:16px;line-height:2;color:var(--text-main)">
         <div>When a key hits its <span style="color:#39ff14">daily quota</span>, it is placed on rest automatically.</div>
         <div style="margin-top:6px">LiteLLM cools it down for 24 h so it is never retried before reset.</div>
         <div style="margin-top:6px">At <span style="color:#39ff14">midnight Pacific Time</span> (07:00 UTC), the LiteLLM proxy restarts and all daily quotas are released.</div>
@@ -1356,17 +1378,17 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     </div>
     <div class="card" style="border-color:rgba(57,255,20,.2)">
       <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>ROUTING RULES</div>
-      <div style="font-size:16px;line-height:2;color:var(--text)">
-        <div><span style="color:#39ff14">Text requests</span> → input-router → openai plugin → LiteLLM → <span style="color:var(--cyan)">gemma-chat (28 keys · 27B)</span></div>
-        <div><span style="color:#39ff14">Hybrid fallback</span> → LiteLLM auto-route → <span style="color:var(--magenta)">gemma-fallback (28 keys · 4B)</span> when primary RPD exhausted</div>
-        <div><span style="color:#39ff14">Memory embeddings</span> → LiteLLM → <span style="color:var(--yellow)">gemini-embedding + gemini-embedding-2 (28 keys each)</span></div>
-        <div><span style="color:#39ff14">Cognee / mem0 LLM</span> → LiteLLM → <span style="color:var(--green)">gemma-internal (28 keys · 12B · independent quota)</span></div>
-        <div style="margin-top:8px;color:var(--dim)">Mistral handles image/PDF only. All text fallback stays within LiteLLM Gemma pools until midnight reset.</div>
+      <div style="font-size:16px;line-height:2;color:var(--text-main)">
+        <div><span style="color:#39ff14">Text requests</span> → input-router → openai plugin → LiteLLM → <span style="color:var(--neon-cyan)">gemma-chat (28 keys · 27B)</span></div>
+        <div><span style="color:#39ff14">Hybrid fallback</span> → LiteLLM auto-route → <span style="color:var(--neon-magenta)">gemma-fallback (28 keys · 4B)</span> when primary RPD exhausted</div>
+        <div><span style="color:#39ff14">Memory embeddings</span> → LiteLLM → <span style="color:var(--neon-yellow)">gemini-embedding + gemini-embedding-2 (28 keys each)</span></div>
+        <div><span style="color:#39ff14">Cognee / mem0 LLM</span> → LiteLLM → <span style="color:var(--neon-green)">gemma-internal (28 keys · 12B · independent quota)</span></div>
+        <div style="margin-top:8px;color:var(--text-dim)">Mistral handles image/PDF only. All text fallback stays within LiteLLM Gemma pools until midnight reset.</div>
       </div>
     </div>
   </div>
 
-  <div style="margin-top:12px;font-size:15px;color:var(--dim);text-align:right">
+  <div style="margin-top:12px;font-size:15px;color:var(--text-dim);text-align:right">
     Last refreshed: <span id="apim-timestamp" style="color:#39ff14">—</span>
     &nbsp;·&nbsp; LiteLLM: <span id="apim-litellm-version" style="color:#39ff14">v1.83.14</span>
     &nbsp;·&nbsp; <button onclick="loadApiMonitoring()" style="background:none;border:1px solid rgba(57,255,20,.4);color:#39ff14;padding:3px 12px;cursor:pointer;font-family:inherit;font-size:15px;border-radius:3px">↺ REFRESH</button>
@@ -1377,7 +1399,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
 <footer>
   DEX // OPENCLAW INTELLIGENCE HUB · OPERATOR: RAWHI JAWABRI · SYSTEM: WSL2/LINUX ·
   NODE v24.15.0 · OPENCLAW 2026.4.15 (041266a) ·
-  <span style="color:var(--cyan)">second-OG-mind/Dex</span>
+  <span style="color:var(--neon-cyan)">second-OG-mind/Dex</span>
 </footer>
 
 </div><!-- /app -->
@@ -1393,11 +1415,11 @@ const SYSTEM = {
 };
 
 const SERVICES = [
-  { id:'openclaw-gateway', name:'OPENCLAW GATEWAY', port:18789, proto:'WebSocket/HTTP', cpu:1.8, mem:3.2, pid:289, unit:'openclaw-gateway.service', desc:'Main AI gateway. Handles Telegram, runs agents, loads plugins.', color:'var(--cyan)' },
-  { id:'cognee', name:'COGNEE', port:8000, proto:'HTTP/uvicorn', cpu:0.2, mem:1.8, pid:286, unit:'cognee.service', desc:'Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--magenta)' },
-  { id:'mem0', name:'MEM0 REST', port:8080, proto:'HTTP/FastAPI', cpu:0.5, mem:0.7, pid:5751, unit:'mem0.service', desc:'Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--orange)' },
-  { id:'qdrant', name:'QDRANT', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:2.2, pid:290, unit:'qdrant.service', desc:'Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--green)' },
-  { id:'litellm', name:'LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 6 pools × 28 keys: gemma-chat, gemma-fallback, gemma-internal, gemma-agentic, gemini-embedding, gemini-embedding-2.', color:'var(--yellow)' },
+  { id:'openclaw-gateway', name:'🌐 OPENCLAW GATEWAY', emoji:'🌐', port:18789, proto:'WebSocket/HTTP', cpu:1.8, mem:3.2, pid:289, unit:'openclaw-gateway.service', desc:'🤖 Main AI gateway. Handles Telegram, runs agents, loads plugins.', color:'var(--neon-cyan)' },
+  { id:'cognee', name:'COGNEE', emoji:'🧠', port:8000, proto:'HTTP/uvicorn', cpu:0.2, mem:1.8, pid:286, unit:'cognee.service', desc:'🧠 Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--neon-magenta)' },
+  { id:'mem0', name:'MEM0 REST', emoji:'💾', port:8080, proto:'HTTP/FastAPI', cpu:0.5, mem:0.7, pid:5751, unit:'mem0.service', desc:'💾 Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--neon-orange)' },
+  { id:'qdrant', name:'QDRANT', emoji:'🗄️', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:2.2, pid:290, unit:'qdrant.service', desc:'🗄️ Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--neon-green)' },
+  { id:'litellm', name:'LITELLM PROXY', emoji:'🔗', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'🔗 LiteLLM proxy. 6 pools × 28 keys: gemma-chat, gemma-fallback, gemma-internal, gemma-agentic, gemini-embedding, gemini-embedding-2.', color:'var(--neon-yellow)' },
 ];
 
 const PLUGINS = [
@@ -1429,7 +1451,7 @@ const CODEX_MODELS = [
 ];
 
 const COMMANDS = [
-  { group:'SERVICE MANAGEMENT', private:false, items:[
+  { group:'🛠️ SERVICE MANAGEMENT', private:false, items:[
     { desc:'Start all services', cmd:'systemctl --user start openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service' },
     { desc:'Stop all services', cmd:'systemctl --user stop openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service' },
     { desc:'Restart gateway only', cmd:'systemctl --user restart openclaw-gateway.service' },
@@ -1439,7 +1461,7 @@ const COMMANDS = [
     { desc:'View LiteLLM logs', cmd:'journalctl --user -u litellm-proxy.service -f' },
     { desc:'View mem0 logs', cmd:'journalctl --user -u mem0.service -f' },
   ]},
-  { group:'OPENCLAW GATEWAY', private:false, items:[
+  { group:'🌐 OPENCLAW GATEWAY', private:false, items:[
     { desc:'Gateway status (detailed)', cmd:'openclaw gateway status' },
     { desc:'Full system health', cmd:'openclaw health' },
     { desc:'Run diagnostics + quick fixes', cmd:'openclaw doctor' },
@@ -1633,7 +1655,7 @@ function checkGatewayStatus(){
       const up=d.gateway?.status==='online'||d.services?.['openclaw-gateway']?.active;
       dot.className='status-dot '+(up?'online':'offline');
       label.textContent='DEX — '+(up?'ONLINE':'OFFLINE');
-      label.style.color=up?'var(--green)':'var(--red)';
+      label.style.color=up?'var(--neon-green)':'var(--neon-red)';
       if(d.last_updated){
         const lu=new Date(d.last_updated);
         document.getElementById('last-updated').textContent='Last push: '+lu.toUTCString().replace(' GMT','');
@@ -1643,7 +1665,7 @@ function checkGatewayStatus(){
       // static page — show as online (confirmed before push)
       dot.className='status-dot online';
       label.textContent='DEX — ONLINE (static)';
-      label.style.color='var(--green)';
+      label.style.color='var(--neon-green)';
       document.getElementById('last-updated').textContent='Run update-status.sh to push live data';
     });
 }
@@ -1693,23 +1715,23 @@ setTimeout(animateCounters,300);
         <div>
           <div class="svc-name">${s.name}</div>
           <div class="svc-port">:${s.port}</div>
-          <div style="font-size:16px;color:var(--dim);margin-top:2px">${s.proto}</div>
+          <div style="font-size:16px;color:var(--text-dim);margin-top:2px">${s.proto}</div>
         </div>
         <div style="text-align:right">
           <div class="status-dot online" style="display:inline-block;margin-bottom:4px"></div>
-          <div style="font-size:16px;color:var(--dim)">PID ${s.pid}</div>
+          <div style="font-size:16px;color:var(--text-dim)">PID ${s.pid}</div>
         </div>
       </div>
       <div class="svc-meta">
-        <div style="color:var(--dim)">${s.unit}</div>
-        <div style="color:var(--text);margin-top:4px;line-height:1.7;font-size:16px">${s.desc}</div>
+        <div style="color:var(--text-dim)">${s.unit}</div>
+        <div style="color:var(--text-main);margin-top:4px;line-height:1.7;font-size:16px">${s.desc}</div>
       </div>
       <div style="margin-top:10px">
-        <div style="display:flex;justify-content:space-between;font-size:16px;color:var(--dim);margin-bottom:2px">
+        <div style="display:flex;justify-content:space-between;font-size:16px;color:var(--text-dim);margin-bottom:2px">
           <span>CPU</span><span style="color:${s.color}">${s.cpu}%</span>
         </div>
         <div class="svc-bar"><div class="svc-bar-fill" style="width:${cpuPct}%;background:${s.color}"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:16px;color:var(--dim);margin:4px 0 2px">
+        <div style="display:flex;justify-content:space-between;font-size:16px;color:var(--text-dim);margin:4px 0 2px">
           <span>MEM</span><span style="color:${s.color}">${s.mem}%</span>
         </div>
         <div class="svc-bar"><div class="svc-bar-fill" style="width:${memPct}%;background:${s.color};opacity:.6"></div></div>
@@ -1726,12 +1748,12 @@ setTimeout(animateCounters,300);
   mm.innerHTML=MISTRAL_MODELS.map(m=>`
     <div style="display:flex;justify-content:space-between;align-items:center;
       padding:6px 10px;margin-bottom:4px;background:rgba(0,0,0,.3);
-      border-radius:3px;border-left:2px solid var(--magenta)">
+      border-radius:3px;border-left:2px solid var(--neon-magenta)">
       <div>
-        <div style="font-size:16px;color:var(--text)">${m.id}</div>
-        <div style="font-size:16px;color:var(--dim)">${m.role}</div>
+        <div style="font-size:16px;color:var(--text-main)">${m.id}</div>
+        <div style="font-size:16px;color:var(--text-dim)">${m.role}</div>
       </div>
-      <div style="text-align:right;font-size:16px;color:var(--dim)">
+      <div style="text-align:right;font-size:16px;color:var(--text-dim)">
         ctx:${m.ctx}<br>${m.input.join('+')}
       </div>
     </div>`).join('');
@@ -1740,12 +1762,12 @@ setTimeout(animateCounters,300);
   cm.innerHTML=CODEX_MODELS.map(m=>`
     <div style="display:flex;justify-content:space-between;align-items:center;
       padding:6px 10px;margin-bottom:4px;background:rgba(0,0,0,.3);
-      border-radius:3px;border-left:2px solid var(--orange)">
+      border-radius:3px;border-left:2px solid var(--neon-orange)">
       <div>
-        <div style="font-size:16px;color:var(--text)">${m.id}</div>
-        <div style="font-size:16px;color:var(--dim)">Reasoning: ${m.reasoning?'✓':'-'}</div>
+        <div style="font-size:16px;color:var(--text-main)">${m.id}</div>
+        <div style="font-size:16px;color:var(--text-dim)">Reasoning: ${m.reasoning?'✓':'-'}</div>
       </div>
-      <div style="text-align:right;font-size:16px;color:var(--dim)">
+      <div style="text-align:right;font-size:16px;color:var(--text-dim)">
         ctx:${m.ctx}<br>out:${m.maxOut}
       </div>
     </div>`).join('');
@@ -1774,15 +1796,15 @@ setTimeout(animateCounters,300);
 // RENDER PLUGINS
 // ═══════════════════════════════════════════════════════════════
 (function(){
-  const kindColors={provider:'var(--cyan)',channel:'var(--green)',memory:'var(--yellow)',hook:'var(--magenta)',router:'var(--orange)'};
+  const kindColors={provider:'var(--neon-cyan)',channel:'var(--neon-green)',memory:'var(--neon-yellow)',hook:'var(--neon-magenta)',router:'var(--neon-orange)'};
   const grid=document.getElementById('plugins-grid');
   PLUGINS.forEach(p=>{
-    const kc=kindColors[p.kind]||'var(--dim)';
+    const kc=kindColors[p.kind]||'var(--text-dim)';
     grid.innerHTML+=`
     <div class="plugin-card ${p.enabled?'':'disabled'}">
       <span class="plugin-kind" style="background:${kc}22;color:${kc};border:1px solid ${kc}44">${p.kind}</span>
       <div class="plugin-info">
-        <div class="plugin-name">${p.name} ${p.version!=='built-in'?`<span style="color:var(--dim)">v${p.version}</span>`:''}</div>
+        <div class="plugin-name">${p.name} ${p.version!=='built-in'?`<span style="color:var(--text-dim)">v${p.version}</span>`:''}</div>
         <div class="plugin-ver">${p.desc}</div>
       </div>
       <div class="plugin-toggle ${p.enabled?'on':'off'}" title="${p.enabled?'ENABLED':'DISABLED'}"></div>
@@ -1806,38 +1828,38 @@ setTimeout(animateCounters,300);
   }
 
   const ocTree=`~/.openclaw/
-├── .env  <span class="tag" style="background:rgba(255,23,68,.15);color:var(--red);border:1px solid rgba(255,23,68,.3)">40 vars</span>
-├── openclaw.json  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan);border:1px solid rgba(0,229,255,.2)">main config</span>
+├── .env  <span class="tag" style="background:rgba(255,23,68,.15);color:var(--neon-red);border:1px solid rgba(255,23,68,.3)">40 vars</span>
+├── openclaw.json  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--neon-cyan);border:1px solid rgba(0,229,255,.2)">main config</span>
 ├── config.yaml
 ├── agents/
 │   ├── main/
 │   │   ├── agent/
-│   │   │   ├── models.json  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green);border:1px solid rgba(105,255,71,.2)">3 providers</span>
+│   │   │   ├── models.json  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--neon-green);border:1px solid rgba(105,255,71,.2)">3 providers</span>
 │   │   │   ├── auth-profiles.json
 │   │   │   └── auth-state.json
-│   │   └── sessions/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--dim);border:1px solid rgba(90,106,138,.3)">3 sessions</span>
+│   │   └── sessions/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--text-dim);border:1px solid rgba(90,106,138,.3)">3 sessions</span>
 │   └── codex/sessions/
 ├── extensions/
-│   ├── cognee-augment/  <span class="tag" style="background:rgba(224,64,251,.1);color:var(--magenta);border:1px solid rgba(224,64,251,.2)">hook v1.0.0</span>
+│   ├── cognee-augment/  <span class="tag" style="background:rgba(224,64,251,.1);color:var(--neon-magenta);border:1px solid rgba(224,64,251,.2)">hook v1.0.0</span>
 │   │   ├── index.js
 │   │   ├── openclaw.plugin.json
 │   │   └── package.json
-│   ├── cognee-openclaw/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--dim)">disabled</span>
+│   ├── cognee-openclaw/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--text-dim)">disabled</span>
 │   │   └── dist/ (compiled TS)
-│   ├── input-router/  <span class="tag" style="background:rgba(255,109,0,.1);color:var(--orange);border:1px solid rgba(255,109,0,.2)">router v1.0.0</span>
+│   ├── input-router/  <span class="tag" style="background:rgba(255,109,0,.1);color:var(--neon-orange);border:1px solid rgba(255,109,0,.2)">router v1.0.0</span>
 │   │   ├── index.js
 │   │   └── openclaw.plugin.json
-│   └── openclaw-mem0/  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green);border:1px solid rgba(105,255,71,.2)">mem v1.0.5</span>
-│       ├── dist/index.js  <span class="tag" style="background:rgba(255,234,0,.1);color:var(--yellow)">patched</span>
+│   └── openclaw-mem0/  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--neon-green);border:1px solid rgba(105,255,71,.2)">mem v1.0.5</span>
+│       ├── dist/index.js  <span class="tag" style="background:rgba(255,234,0,.1);color:var(--neon-yellow)">patched</span>
 │       ├── backend/ cli/ skills/ tools/ tests/
 │       ├── index.ts  config.ts  recall.ts
 │       ├── node_modules/
-│       │   └── better-sqlite3/  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">rebuilt</span>
+│       │   └── better-sqlite3/  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--neon-cyan)">rebuilt</span>
 │       └── openclaw.plugin.json
 ├── canvas/index.html
 ├── completions/ (bash/fish/zsh/ps1)
 ├── devices/ delivery-queue/ exec-approvals.json
-└── workspace/  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">agent workspace</span>
+└── workspace/  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--neon-cyan)">agent workspace</span>
     └── cognee-knowledge/
         ├── system-architecture.md
         ├── setup-history.md
@@ -1849,27 +1871,27 @@ setTimeout(animateCounters,300);
 │   ├── claw.md  planner.md  researcher.md
 │   ├── watchdog.md  manifest.md
 │   └── memory/
-│       ├── brain/state.jsonl  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">21 entries</span>
+│       ├── brain/state.jsonl  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--neon-cyan)">21 entries</span>
 │       ├── claw/ researcher/ builder/
 │       ├── planner/ auditer/ watchdog/
 │       └── (per-agent JSONL memory)
 ├── layers/
-│   ├── L0_identity.md  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">always loaded</span>
-│   └── L1_essential.md  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">always loaded</span>
+│   ├── L0_identity.md  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--neon-green)">always loaded</span>
+│   └── L1_essential.md  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--neon-green)">always loaded</span>
 └── shared/
-    ├── findings.md  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">cross-agent</span>
+    ├── findings.md  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--neon-cyan)">cross-agent</span>
     ├── brain_checkpoint.json
-    ├── circuit_breaker.json  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">all closed</span>
-    ├── dead_letter_queue.jsonl  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">empty</span>
+    ├── circuit_breaker.json  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--neon-green)">all closed</span>
+    ├── dead_letter_queue.jsonl  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--neon-green)">empty</span>
     ├── idempotency_registry.jsonl
     └── task_queue.jsonl`;
 
   const svcTree=`~/.config/systemd/user/
-├── openclaw-gateway.service  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--cyan)">:18789</span>
-├── cognee.service  <span class="tag" style="background:rgba(224,64,251,.1);color:var(--magenta)">:8000</span>
-├── mem0.service  <span class="tag" style="background:rgba(255,109,0,.1);color:var(--orange)">:8080</span>
-├── qdrant.service  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--green)">:6333</span>
-└── litellm-proxy.service  <span class="tag" style="background:rgba(255,234,0,.1);color:var(--yellow)">:4000</span>
+├── openclaw-gateway.service  <span class="tag" style="background:rgba(0,229,255,.1);color:var(--neon-cyan)">:18789</span>
+├── cognee.service  <span class="tag" style="background:rgba(224,64,251,.1);color:var(--neon-magenta)">:8000</span>
+├── mem0.service  <span class="tag" style="background:rgba(255,109,0,.1);color:var(--neon-orange)">:8080</span>
+├── qdrant.service  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--neon-green)">:6333</span>
+└── litellm-proxy.service  <span class="tag" style="background:rgba(255,234,0,.1);color:var(--neon-yellow)">:4000</span>
 
 ~/.venvs/
 ├── cognee/ (Python 3.12, cognee 1.0.1)
@@ -1878,7 +1900,7 @@ setTimeout(animateCounters,300);
 
 ~/.mem0/ (Python mem0 REST)
 ├── server.py  config.json  reindex.py
-└── chroma/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--dim)">cold backup</span>
+└── chroma/  <span class="tag" style="background:rgba(90,106,138,.2);color:var(--text-dim)">cold backup</span>
 
 ~/.qdrant/storage/
 ~/.litellm/config.yaml
@@ -1978,11 +2000,11 @@ function renderLive(d){
     return `<div class="health-row">
       <div>
         <div class="health-label">${k}</div>
-        <div class="health-time" style="color:var(--dim)">:${v.port||'?'}</div>
+        <div class="health-time" style="color:var(--text-dim)">:${v.port||'?'}</div>
       </div>
       <div style="text-align:right">
-        <div class="health-val" style="color:${up?'var(--green)':'var(--red)'}">${up?'ONLINE':'OFFLINE'}</div>
-        <div style="font-size:16px;color:var(--dim)">CPU:${v.cpu||'?'}% MEM:${v.mem||'?'}%</div>
+        <div class="health-val" style="color:${up?'var(--neon-green)':'var(--neon-red)'}">${up?'ONLINE':'OFFLINE'}</div>
+        <div style="font-size:16px;color:var(--text-dim)">CPU:${v.cpu||'?'}% MEM:${v.mem||'?'}%</div>
       </div>
     </div>`;
   }).join('');
@@ -1992,7 +2014,7 @@ function renderLive(d){
   const api=d.api||{};
   aEl.innerHTML=Object.entries(api).map(([pool,info])=>{
     const pct=Math.round((info.healthy/info.total)*100);
-    const col=pct===100?'var(--green)':pct>50?'var(--yellow)':'var(--red)';
+    const col=pct===100?'var(--neon-green)':pct>50?'var(--neon-yellow)':'var(--neon-red)';
     return `<div class="health-row">
       <div>
         <div class="health-label">${pool.replace(/_/g,' ').toUpperCase()}</div>
@@ -2000,7 +2022,7 @@ function renderLive(d){
       </div>
       <div style="text-align:right">
         <div class="health-val" style="color:${col}">${pct}%</div>
-        <div style="font-size:16px;color:var(--dim)">${info.total} total keys</div>
+        <div style="font-size:16px;color:var(--text-dim)">${info.total} total keys</div>
       </div>
     </div>`;
   }).join('');
@@ -2012,17 +2034,17 @@ function renderLive(d){
   mEl.innerHTML=`
     <div class="health-row">
       <div><div class="health-label">mem0-openclaw (Qdrant)</div><div class="health-time">JS plugin collection</div></div>
-      <div style="text-align:right"><div class="health-val" style="color:var(--yellow)">${mem.mem0_openclaw_points||'?'} pts</div></div>
+      <div style="text-align:right"><div class="health-val" style="color:var(--neon-yellow)">${mem.mem0_openclaw_points||'?'} pts</div></div>
     </div>
     <div class="health-row">
       <div><div class="health-label">mem0-rest (Qdrant)</div><div class="health-time">Python REST collection</div></div>
-      <div style="text-align:right"><div class="health-val" style="color:var(--orange)">${mem.mem0_rest_points||'?'} pts</div></div>
+      <div style="text-align:right"><div class="health-val" style="color:var(--neon-orange)">${mem.mem0_rest_points||'?'} pts</div></div>
     </div>
     <div class="health-row">
       <div><div class="health-label">LiteLLM endpoints</div><div class="health-time">across all pools</div></div>
       <div style="text-align:right">
-        <div class="health-val" style="color:var(--green)">${litellm.healthy_endpoints||'?'} ✓</div>
-        <div style="font-size:16px;color:var(--red)">${litellm.unhealthy_endpoints||'?'} ✗</div>
+        <div class="health-val" style="color:var(--neon-green)">${litellm.healthy_endpoints||'?'} ✓</div>
+        <div style="font-size:16px;color:var(--neon-red)">${litellm.unhealthy_endpoints||'?'} ✗</div>
       </div>
     </div>`;
 }
@@ -2057,7 +2079,7 @@ function renderApiMonitoring(d){
     const restingCount=restingKeys.length;
     const activeCount=Math.max(0,total-restingCount);
     const pct=total>0?Math.round((activeCount/total)*100):100;
-    const col=pct===100?'#39ff14':pct>50?'var(--yellow)':'var(--red)';
+    const col=pct===100?'#39ff14':pct>50?'var(--neon-yellow)':'var(--neon-red)';
     const barW=Math.max(0,Math.min(100,pct));
     const hasResting=restingCount>0;
 
@@ -2066,16 +2088,16 @@ function renderApiMonitoring(d){
         <div style="font-size:32px;font-weight:700;color:${col};font-family:'Orbitron',monospace">${pct}%</div>
         <div style="text-align:right;font-size:16px">
           <div style="color:#39ff14">${activeCount} / ${total} keys active</div>
-          <div style="color:${hasResting?'var(--red)':'var(--dim)'}">${restingCount} key${restingCount!==1?'s':''} resting</div>
+          <div style="color:${hasResting?'var(--neon-red)':'var(--text-dim)'}">${restingCount} key${restingCount!==1?'s':''} resting</div>
         </div>
       </div>
       <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:10px">
         <div style="height:100%;width:${barW}%;background:${col};border-radius:3px;transition:width .4s"></div>
       </div>
-      <div style="font-size:15px;color:var(--dim)">
-        LiteLLM pool: <span style="color:var(--cyan)">${poolDesc}</span>
+      <div style="font-size:15px;color:var(--text-dim)">
+        LiteLLM pool: <span style="color:var(--neon-cyan)">${poolDesc}</span>
       </div>
-      ${hasResting?`<div style="margin-top:8px;font-size:15px;color:var(--red)">⚠ ${restingCount} key${restingCount!==1?'s':''} at daily quota — resting until midnight PT</div>`:'<div style="margin-top:8px;font-size:15px;color:#39ff14">✓ All keys active</div>'}`;
+      ${hasResting?`<div style="margin-top:8px;font-size:15px;color:var(--neon-red)">⚠ ${restingCount} key${restingCount!==1?'s':''} at daily quota — resting until midnight PT</div>`:'<div style="margin-top:8px;font-size:15px;color:#39ff14">✓ All keys active</div>'}`;
   }
 
   renderPool('apim-gemma-content',    'gemma-chat',         'Gemma 3 27B',       'gemma-chat · 28 keys · rpm:28 · PRIMARY');
@@ -2105,7 +2127,7 @@ function renderApiMonitoring(d){
   restEl.innerHTML=`
     <table style="width:100%;border-collapse:collapse;font-size:16px">
       <thead>
-        <tr style="color:var(--dim);border-bottom:1px solid rgba(57,255,20,.2)">
+        <tr style="color:var(--text-dim);border-bottom:1px solid rgba(57,255,20,.2)">
           <th style="text-align:left;padding:6px 8px">POOL</th>
           <th style="text-align:left;padding:6px 8px">API KEY</th>
           <th style="text-align:left;padding:6px 8px">REASON</th>
@@ -2121,7 +2143,7 @@ function renderApiMonitoring(d){
           const hrs=Math.floor(secsLeft/3600);
           const mins=Math.floor((secsLeft%3600)/60);
           const countdown=secsLeft>0?`${hrs}h ${mins}m`:'Recovering…';
-          const countdownCol=secsLeft>3600?'var(--yellow)':secsLeft>0?'var(--orange)':'#39ff14';
+          const countdownCol=secsLeft>3600?'var(--neon-yellow)':secsLeft>0?'var(--neon-orange)':'#39ff14';
           const since=rk.resting_since?new Date(rk.resting_since).toUTCString().replace(' GMT','').replace(/:\d\d GMT/,''):'-';
           const recover=rk.recover_at?new Date(rk.recover_at).toUTCString().replace(' GMT','').replace(/:\d\d GMT/,''):'-';
           // key_display from key-monitor (e.g. "AIzaSy...****mOE"), else key_name
@@ -2130,12 +2152,12 @@ function renderApiMonitoring(d){
           return `<tr style="border-bottom:1px solid rgba(57,255,20,.1)">
             <td style="padding:8px;color:#39ff14">${rk._pool||'-'}</td>
             <td style="padding:8px">
-              <div style="color:var(--cyan);font-family:'Share Tech Mono',monospace">${keyDisplay}</div>
-              <div style="color:var(--dim);font-size:14px">${keyName}</div>
+              <div style="color:var(--neon-cyan);font-family:'Share Tech Mono',monospace">${keyDisplay}</div>
+              <div style="color:var(--text-dim);font-size:14px">${keyName}</div>
             </td>
-            <td style="padding:8px;color:var(--red)">${(rk.reason||'-').replace(/_/g,' ')}</td>
-            <td style="padding:8px;color:var(--dim);font-size:14px">${since}</td>
-            <td style="padding:8px;color:var(--cyan);font-size:14px">${recover}</td>
+            <td style="padding:8px;color:var(--neon-red)">${(rk.reason||'-').replace(/_/g,' ')}</td>
+            <td style="padding:8px;color:var(--text-dim);font-size:14px">${since}</td>
+            <td style="padding:8px;color:var(--neon-cyan);font-size:14px">${recover}</td>
             <td style="padding:8px;text-align:right;color:${countdownCol};font-family:'Orbitron',monospace;font-size:15px">${countdown}</td>
           </tr>`;
         }).join('')}
