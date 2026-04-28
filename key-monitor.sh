@@ -72,7 +72,7 @@ fi
 
 # ── Fetch health to temp file ─────────────────────────────────────────────────
 HEALTH_TMP=$(mktemp /tmp/dex-health-XXXXXX.json)
-curl -sf --max-time 15 \
+curl -sf --max-time 20 \
   -H "Authorization: Bearer ${LITELLM_MASTER_KEY:-sk-openclaw-litellm-local}" \
   "http://127.0.0.1:4000/health" > "$HEALTH_TMP" 2>/dev/null \
   || echo '{"healthy_endpoints":[],"unhealthy_endpoints":[]}' > "$HEALTH_TMP"

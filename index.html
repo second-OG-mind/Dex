@@ -7,18 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --cyan:    #00e5ff;
-  --magenta: #e040fb;
-  --green:   #69ff47;
-  --yellow:  #ffea00;
-  --red:     #ff1744;
-  --orange:  #ff6d00;
-  --bg:      #030312;
-  --surface: rgba(6,6,22,0.92);
-  --glass:   rgba(0,229,255,0.05);
-  --border:  rgba(0,229,255,0.22);
-  --text:    #d4e8ff;
-  --dim:     #6a7a9a;
+  --cyan:    #00fff5;
+  --magenta: #ff006e;
+  --green:   #39ff14;
+  --yellow:  #f5ff00;
+  --red:     #ff0044;
+  --orange:  #ff4500;
+  --purple:  #b400ff;
+  --bg:      #020008;
+  --surface: rgba(8,0,20,0.96);
+  --glass:   rgba(180,0,255,0.04);
+  --border:  rgba(180,0,255,0.25);
+  --text:    #e8d0ff;
+  --dim:     #5a4a7a;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow-x:hidden}
@@ -128,6 +129,9 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tab-btn[data-tab="watcher"].active{border-color:#7c4dff;color:#7c4dff;box-shadow:0 0 28px rgba(124,77,255,.3);background:rgba(124,77,255,.07)}
 .tab-btn[data-tab="watcher"].active::after{background:#7c4dff;box-shadow:0 0 12px #7c4dff}
 .tab-btn[data-tab="watcher"]:hover{border-color:rgba(124,77,255,.5);color:#7c4dff}
+.tab-btn[data-tab="broker"].active{border-color:var(--purple);color:var(--purple);box-shadow:0 0 28px rgba(180,0,255,.3);background:rgba(180,0,255,.07)}
+.tab-btn[data-tab="broker"].active::after{background:var(--purple);box-shadow:0 0 12px var(--purple)}
+.tab-btn[data-tab="broker"]:hover{border-color:rgba(180,0,255,.5);color:var(--purple)}
 .tab-btn[data-tab="api-monitoring"].active{border-color:#39ff14;color:#39ff14;box-shadow:0 0 28px rgba(57,255,20,.3);background:rgba(57,255,20,.07)}
 .tab-btn[data-tab="api-monitoring"].active::after{background:#39ff14;box-shadow:0 0 12px #39ff14}
 .tab-btn[data-tab="api-monitoring"]:hover{border-color:rgba(57,255,20,.5);color:#39ff14}
@@ -467,6 +471,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
   <button class="tab-btn" data-tab="commands">⌘ COMMANDS</button>
   <button class="tab-btn" data-tab="live">◈ LIVE STATUS</button>
   <button class="tab-btn" data-tab="watcher">⚡ AUTO-PUSH</button>
+    <button class="tab-btn" data-tab="broker">◉ BROKER</button>
   <button class="tab-btn" data-tab="api-monitoring">◈ API MONITORING</button>
 </nav>
 
@@ -1172,6 +1177,130 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--dim);
     </div>
   </div>
 </section>
+<section class="tab-section" id="tab-broker">
+  <div style="padding:20px">
+    <h2 style="color:var(--cyan);font-family:Orbitron;margin-bottom:16px">◉ BROKER AGENT — WhatsApp Logistics Coordinator</h2>
+
+    <div class="grid-2" style="gap:16px;margin-bottom:20px">
+      <div class="card" style="border-color:var(--cyan)">
+        <div class="card-title" style="color:var(--cyan)"><span class="accent" style="background:var(--cyan)"></span>Overview</div>
+        <div style="line-height:1.8;color:var(--text);font-size:16px">
+          Manages two WhatsApp groups: <strong>Customers</strong> (requests) and <strong>Drivers</strong> (offers). <br>
+          Collects customer data via private DM, stores missions, broadcasts anonymized job details to drivers, collects offers, and routes final coordination to human endpoint.<br>
+          <span style="color:var(--green)">✓ Privacy firewall: customer PII never leaves endpoint</span>
+        </div>
+      </div>
+
+      <div class="card" style="border-color:var(--magenta)">
+        <div class="card-title" style="color:var(--magenta)"><span class="accent" style="background:var(--magenta)"></span>Model Routing (Smart)</div>
+        <div style="line-height:1.8;color:var(--text);font-size:16px">
+          <div style="margin-bottom:8px"><span style="color:var(--green)">● Default:</span> <code>litellm/gemma-chat</code> (Gemma 3 27B, 0.7–1.9s)</div>
+          <div style="margin-bottom:8px"><span style="color:var(--orange)">● Heavy ops:</span> <code>litellm/gemma-agentic</code> (Gemma 4 31B, 5–11s, unlimited TPM)</div>
+          <div><span style="color:var(--red)">● Bypassed:</span> gemma-fallback (4B) not in critical path</div>
+          <div style="margin-top:8px;font-size:15px;color:var(--dim)">
+            Light tasks (<6K tokens) → gemma-chat.<br>
+            Heavy RAG/benchmark (≥6K tokens) → gemma-agentic directly.<br>
+            Avoids TPM cascade, eliminates 4B pool 429 surprises.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:var(--yellow);margin-bottom:16px">
+      <div class="card-title" style="color:var(--yellow)"><span class="accent" style="background:var(--yellow)"></span>Capacity & Performance (Realistic, Human-in-the-Loop)</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;color:var(--text);font-size:16px">
+          <tr style="border-bottom:1px solid var(--border)">
+            <th style="padding:8px;text-align:left">Workload</th>
+            <th style="padding:8px;text-align:right">Tokens/Mission</th>
+            <th style="padding:8px;text-align:right">Theoretical Max/hr</th>
+            <th style="padding:8px;text-align:right">Realistic/Day (8h)</th>
+            <th style="padding:8px;text-align:left">Limiting Factor</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:8px;color:var(--green)">Lightweight<br><span style="font-size:13px;color:var(--dim)">(no price benchmark)</span></td>
+            <td style="padding:8px;text-align:right">~3,400</td>
+            <td style="padding:8px;text-align:right;color:var(--cyan)">120/hr</td>
+            <td style="padding:8px;text-align:right">~180</td>
+            <td style="padding:8px;font-size:15px">gemma-chat TPM (15K/key)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:8px;color:var(--yellow)">Mixed (70/30)<br><span style="font-size:13px;color:var(--dim)">30% with benchmark</span></td>
+            <td style="padding:8px;text-align:right">~6,800 avg</td>
+            <td style="padding:8px;text-align:right;color:var(--cyan)">97/hr</td>
+            <td style="padding:8px;text-align:right">~150</td>
+            <td style="padding:8px;font-size:15px">gemma-agentic RPM (13/key) + human selection speed</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:8px;color:var(--red)">Heavy<br><span style="font-size:13px;color:var(--dim)">100% benchmark</span></td>
+            <td style="padding:8px;text-align:right">~11,400</td>
+            <td style="padding:8px;text-align:right;color:var(--cyan)">50/hr</td>
+            <td style="padding:8px;text-align:right">~80</td>
+            <td style="padding:8px;font-size:15px">gemma-agentic RPM ceiling</td>
+          </tr>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:16px;color:var(--dim)">
+        <strong>Concurrent active missions:</strong> 65–105 (typical 8h day)<br>
+        <strong>99%-ile response latency:</strong> 0.7–1.9s (routine) / 5–11s (heavy)<br>
+        <strong>System availability target:</strong> 98% (after LiteLLM fixes applied)
+      </div>
+    </div>
+
+    <div class="card" style="border-color:var(--magenta);margin-bottom:16px">
+      <div class="card-title" style="color:var(--magenta)"><span class="accent" style="background:var(--magenta)"></span>Privacy Firewall</div>
+      <div style="line-height:1.8;font-size:16px;color:var(--text)">
+        <div style="margin-bottom:8px">Every outbound message to drivers group or driver DMs runs <code>sanitize_for_drivers()</code> which strips:</div>
+        <ul style="margin-left:20px;margin-bottom:12px">
+          <li>customer_name, customer_phone, customer_whatsapp_id</li>
+          <li>customer_photo references</li>
+          <li>exact_address (street number) — only area/landmark allowed</li>
+          <li>payment_details, personal_notes, internal_comments</li>
+        </ul>
+        <div style="color:var(--red)">Any blocked field detected → send rejected, security event logged, human alerted immediately.</div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:var(--green);margin-bottom:16px">
+      <div class="card-title" style="color:var(--green)"><span class="accent" style="background:var(--green)"></span>Available Commands (DM to broker)</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px,1fr));gap:8px;font-size:16px">
+        <div><code style="color:var(--cyan)">/list-missions [status]</code><br><span style="color:var(--dim);font-size:15px">List missions by status</span></div>
+        <div><code style="color:var(--cyan)">/mission MIG-ID</code><br><span style="color:var(--dim);font-size:15px">Full mission details (PII visible only to endpoint)</span></div>
+        <div><code style="color:var(--cyan)">/driver-profile NAME</code><br><span style="color:var(--dim);font-size:15px">Driver history, ratings, past missions</span></div>
+        <div><code style="color:var(--cyan)">/price-benchmark PRODUCT WEIGHT</code><br><span style="color:var(--dim);font-size:15px">Price range from similar past missions (uses gemma-agentic)</span></div>
+        <div><code style="color:var(--cyan)">/new-mission</code><br><span style="color:var(--dim);font-size:15px">Manual mission creation (bypasses group detection)</span></div>
+        <div><code style="color:var(--cyan)">/help</code><br><span style="color:var(--dim);font-size:15px">Show available commands</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:var(--orange);margin-bottom:16px">
+      <div class="card-title" style="color:var(--orange)"><span class="accent" style="background:var(--orange)"></span>Filesystem Layout</div>
+      <pre style="background:rgba(0,0,0,0.4);padding:12px;border-radius:4px;font-size:15px;overflow:auto;color:#e8d0ff">
+~/.openclaw/workspace/broker/
+├── missions/
+│   └── MIG-YYYYMMDD-NNN.md      # One file per mission (YAML frontmatter)
+├── drivers/
+│   └── name_vehicle.md           # Driver profiles (public name, vehicle, rating)
+├── templates/
+│   ├── customer_intake.md        # 7-question form template
+│   └── driver_brief.md           # Broadcast template to drivers group
+├── config.md                     # Group IDs, endpoint phone, dry-run flag
+├── MEMORY.md                     # Semantic index for RAG (price history etc.)
+└── security_log.md               # Privacy violation attempts log
+
+~/.openclaw/agents/
+├── broker.md                     # Agent definition (292 lines)
+└── agents/memory/broker/
+    └── state.jsonl               # Event log (mission_created, offer, assigned…)
+      </pre>
+    </div>
+
+    <div style="font-size:15px;color:var(--dim);padding:8px 0;border-top:1px solid var(--border);margin-top:12px">
+      <strong>Note:</strong> Broker agent requires WhatsApp MCP integration (not yet installed). Connect via WhatsApp Business Cloud API or WhatsApp MCP server. Current status: <span style="color:var(--yellow)">ready for deployment</span>.
+    </div>
+  </div>
+</section>
+
 
 <!-- ═══════════════════════════ API MONITORING ═══════════════════════════ -->
 <section class="tab-section" id="tab-api-monitoring">

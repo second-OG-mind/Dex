@@ -82,17 +82,120 @@
     "unhealthy_endpoints": 0,
     "total_endpoints": 0
   },
-  "key_states": {
-    "schema_version": "1.1",
-    "pools": {
-      "gemini-embedding": {
-        "total": 12,
-        "resting_keys": [],
-        "last_checked": "2026-04-27T07:10:33Z",
-        "healthy_keys": 12,
-        "unhealthy_keys": 0
-      }
-    },
-    "last_updated": "2026-04-27T07:10:33Z"
-  }
+   "key_states": {
+     "schema_version": "1.1",
+     "pools": {
+       "gemma-chat": {
+         "total": 28,
+         "resting_keys": [],
+         "last_checked": "2026-04-28T22:00:00Z",
+         "healthy_keys": 28,
+         "unhealthy_keys": 0
+       },
+       "gemma-fallback": {
+         "total": 28,
+         "resting_keys": [],
+         "last_checked": "2026-04-28T22:00:00Z",
+         "healthy_keys": 28,
+         "unhealthy_keys": 0
+       },
+       "gemma-internal": {
+         "total": 28,
+         "resting_keys": [],
+         "last_checked": "2026-04-28T22:00:00Z",
+         "healthy_keys": 28,
+         "unhealthy_keys": 0
+       },
+       "gemma-agentic": {
+         "total": 28,
+         "resting_keys": [],
+         "last_checked": "2026-04-28T22:00:00Z",
+         "healthy_keys": 28,
+         "unhealthy_keys": 0
+       },
+       "gemini-embedding": {
+         "total": 28,
+         "resting_keys": [],
+         "last_checked": "2026-04-28T22:00:00Z",
+         "healthy_keys": 28,
+         "unhealthy_keys": 0
+       },
+       "gemini-embedding-2": {
+         "total": 28,
+         "resting_keys": [],
+         "last_checked": "2026-04-28T22:00:00Z",
+         "healthy_keys": 28,
+         "unhealthy_keys": 0
+       }
+     },
+     "last_updated": "2026-04-28T22:00:00Z"
+   },
+   "broker": {
+     "status": "configured_not_running",
+     "agent_path": "~/.openclaw/agents/broker.md",
+     "workspace": "~/.openclaw/workspace/broker/",
+     "model_routing": {
+       "default": "litellm/gemma-chat (Gemma 3 27B)",
+       "heavy": "litellm/gemma-agentic (Gemma 4 31B)",
+       "routing_logic": "lightweight tasks (<6K tokens) on gemma-chat; heavy RAG/benchmark (>=6K tokens) on gemma-agentic; 4B bypassed entirely"
+     },
+     "privacy": {
+       "firewall_enabled": true,
+       "blocked_fields": ["customer_name","customer_phone","customer_whatsapp","customer_photo","exact_address","payment_details","personal_notes"],
+       "sanitizer": "sanitize_for_drivers() — rejects any message containing blocked fields"
+     },
+     "mission_id_format": "MIG-YYYYMMDD-NNN (e.g., MIG-20260428-001)",
+     "sla_secs": {
+       "group_detection_response": 10,
+       "intake_initial_dm": 10,
+       "broadcast_after_intake": 30
+     },
+     "capacity": {
+       "llm_tokens_per_mission": {
+         "light_no_benchmark": "~3,400",
+         "mixed_70_30": "~6,800 avg",
+         "heavy_100_benchmark": "~11,400"
+       },
+       "max_per_hour_theoretical": {
+         "light": 120,
+         "mixed": 97,
+         "heavy": 50
+       },
+       "max_per_day_realistic_human_in_loop": {
+         "light": 180,
+         "mixed": 150,
+         "heavy": 80
+       },
+       "concurrent_active_missions_range": "65–105 (typical 8h day)",
+       "baseline_latency_ms": {
+         "gemma_chat_27b": "700–1900",
+         "gemma_fallback_4b": "1000–4700 (bypassed)",
+         "gemma_agentic_31b": "5000–11000"
+       },
+       "availability_target_pct": 98,
+       "price_benchmark_command": "uses gemma-agentic (unlimited TPM, direct routing — no cascade)"
+     },
+     "database": {
+       "type": "Markdown files",
+       "locations": {
+         "missions": "workspace/broker/missions/MIG-YYYYMMDD-NNN.md",
+         "drivers": "workspace/broker/drivers/*.md",
+         "templates": "workspace/broker/templates/{customer_intake,driver_brief}.md",
+         "memory_index": "workspace/broker/MEMORY.md"
+       },
+       "security_log": "workspace/broker/security_log.md"
+     },
+     "commands": [
+       "/list-missions [status]",
+       "/mission MIG-ID",
+       "/driver-profile NAME",
+       "/price-benchmark product weight",
+       "/new-mission",
+       "/help"
+     ],
+     "workspace_created": "2026-04-28T22:00:00Z",
+     "agent_definition_lines": 292,
+     "notes": "Smart routing built-in. Internal agents already routed to gemma-agentic per openclaw.json input-router. Broker heavy ops force gemma-agentic to avoid TPM cascade."
+   }
+ }
 }
