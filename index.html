@@ -11,33 +11,33 @@
      CYBERPUNK NOIR — Crimson / Deep Purple / Electric Accents
      Hierarchy: structure(purple) → signal(cyan) → energy(crimson)
      ═══════════════════════════════════════════════════════════ */
-  --neon-crimson: #e8002a;        /* ★ PRIMARY — hot crimson, energy/heat */
-  --neon-purple:  #b400ff;        /* ★ STRUCTURE — deep violet, architecture */
-  --neon-cyan:    #00e5ff;        /* SIGNAL — electric cyan, data display */
-  --neon-magenta: #ff0080;        /* HOT PINK — secondary accent */
-  --neon-green:   #00ff66;        /* SUCCESS — toxic green */
-  --neon-yellow:  #ffe600;        /* WARN — high-vis yellow */
-  --neon-red:     #ff1a3a;        /* CRITICAL — alert red */
-  --neon-orange:  #ff5500;        /* HEAT — burner orange */
-  --neon-blood:   #6b0019;        /* DEEP — dark blood, shadow crimson */
+  --neon-crimson: #c4152d;        /* ★ PRIMARY — deep ruby, authority/heat */
+  --neon-purple:  #7a00e6;        /* ★ STRUCTURE — rich violet, architecture */
+  --neon-cyan:    #00c8ea;        /* SIGNAL — deep aqua, data display */
+  --neon-magenta: #d8008a;        /* ACCENT — controlled magenta */
+  --neon-green:   #00e85a;        /* SUCCESS — clean emerald */
+  --neon-yellow:  #f0d000;        /* WARN — warm gold */
+  --neon-red:     #e8102e;        /* CRITICAL — alert red */
+  --neon-orange:  #e84d00;        /* HEAT — deep orange */
+  --neon-blood:   #5a0014;        /* DEEP — dark blood shadow */
 
-  --bg-dark:     #04000a;         /* near-black, deep purple-black */
-  --bg-darker:   #020005;
-  --surface:     rgba(10,0,18,0.97);   /* deep purple-black surface */
-  --glass:       rgba(180,0,255,0.025); /* subtle purple tint */
-  --border:      rgba(180,0,255,0.45); /* purple structural border */
+  --bg-dark:     #020008;         /* absolute void — near-black indigo */
+  --bg-darker:   #010006;
+  --surface:     rgba(5,0,12,0.97);    /* void surface */
+  --glass:       rgba(122,0,230,0.022); /* ultra-subtle violet tint */
+  --border:      rgba(122,0,230,0.38); /* violet structural border */
 
-  --text-main:   #eedeff;         /* soft white-violet */
-  --text-dim:    #6a3a8a;         /* dimmed purple-grey */
-  --text-bright: #ffffff;
+  --text-main:   #dcd0f0;         /* cool lavender white */
+  --text-dim:    #4e3470;         /* deep authority dim */
+  --text-bright: #f4f0ff;
 
-  /* Glows */
-  --glow-crimson: 0 0 60px rgba(232,0,42,.8),  0 0 120px rgba(232,0,42,.5);
-  --glow-purple:  0 0 70px rgba(180,0,255,.75), 0 0 140px rgba(180,0,255,.5);
-  --glow-cyan:    0 0 60px rgba(0,229,255,.7),  0 0 120px rgba(0,229,255,.45);
-  --glow-magenta: 0 0 60px rgba(255,0,128,.7),  0 0 120px rgba(255,0,128,.45);
-  --glow-green:   0 0 50px rgba(0,255,102,.7),  0 0 100px rgba(0,255,102,.45);
-  --glow-red:     0 0 60px rgba(255,26,58,.75), 0 0 120px rgba(255,26,58,.5);
+  /* Glows — toned down for sophistication */
+  --glow-crimson: 0 0 40px rgba(196,21,45,.65),  0 0 80px rgba(196,21,45,.35);
+  --glow-purple:  0 0 50px rgba(122,0,230,.6),   0 0 100px rgba(122,0,230,.35);
+  --glow-cyan:    0 0 40px rgba(0,200,234,.6),   0 0 80px rgba(0,200,234,.35);
+  --glow-magenta: 0 0 40px rgba(216,0,138,.6),   0 0 80px rgba(216,0,138,.35);
+  --glow-green:   0 0 35px rgba(0,232,90,.6),    0 0 70px rgba(0,232,90,.35);
+  --glow-red:     0 0 40px rgba(232,16,46,.65),  0 0 80px rgba(232,16,46,.4);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow-x:hidden;background:#050505}
@@ -51,10 +51,10 @@ body{background:var(--bg-dark);color:var(--text-main);font-family:'Share Tech Mo
 /* ── ANIMATED GRID ── */
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(180,0,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(180,0,255,.07) 1px,transparent 1px),
-    linear-gradient(rgba(232,0,42,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(232,0,42,.04) 1px,transparent 1px);
+    linear-gradient(rgba(122,0,230,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(122,0,230,.06) 1px,transparent 1px),
+    linear-gradient(rgba(196,21,45,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(196,21,45,.035) 1px,transparent 1px);
   background-size:48px 48px, 48px 48px, 192px 192px, 192px 192px;
   animation:grid-pulse 5s ease-in-out infinite}
 @keyframes grid-pulse{0%,100%{opacity:.5}50%{opacity:.9}}
@@ -70,17 +70,17 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* ── DIM LIGHT SPOTS ── slow-drifting crimson/purple atmosphere glows */
 #spotlights{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .spot{position:absolute;border-radius:50%;filter:blur(140px);will-change:transform}
-.spot-1{width:800px;height:800px;
-  background:radial-gradient(circle,rgba(232,0,42,.13) 0%,transparent 65%);
+.spot-1{width:900px;height:900px;
+  background:radial-gradient(circle,rgba(196,21,45,.10) 0%,transparent 65%);
   animation:spot-drift-1 24s ease-in-out infinite;top:-200px;left:-100px}
-.spot-2{width:600px;height:600px;
-  background:radial-gradient(circle,rgba(180,0,255,.11) 0%,transparent 65%);
+.spot-2{width:700px;height:700px;
+  background:radial-gradient(circle,rgba(122,0,230,.09) 0%,transparent 65%);
   animation:spot-drift-2 31s ease-in-out infinite;top:30%;right:-150px}
-.spot-3{width:500px;height:500px;
-  background:radial-gradient(circle,rgba(107,0,25,.16) 0%,transparent 65%);
+.spot-3{width:550px;height:550px;
+  background:radial-gradient(circle,rgba(90,0,20,.14) 0%,transparent 65%);
   animation:spot-drift-3 19s ease-in-out infinite;bottom:-100px;left:30%}
-.spot-4{width:420px;height:420px;
-  background:radial-gradient(circle,rgba(140,0,200,.09) 0%,transparent 65%);
+.spot-4{width:480px;height:480px;
+  background:radial-gradient(circle,rgba(100,0,180,.08) 0%,transparent 65%);
   animation:spot-drift-4 41s ease-in-out infinite;top:50%;left:55%}
 @keyframes spot-drift-1{
   0%,100%{transform:translate(0,0)}
@@ -105,13 +105,13 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;
   background:var(--surface);border:1px solid var(--border);border-radius:6px;
   margin-bottom:14px;backdrop-filter:blur(24px);position:relative;overflow:hidden;
-  box-shadow:0 0 100px rgba(232,0,42,.25),0 0 160px rgba(180,0,255,.3),inset 0 1px 0 rgba(180,0,255,.4)}
+  box-shadow:0 0 80px rgba(196,21,45,.2),0 0 130px rgba(122,0,230,.25),inset 0 1px 0 rgba(122,0,230,.35)}
 header::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(0,229,255,.06),transparent);
   animation:header-sweep 6s linear infinite}
 header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--neon-crimson),var(--neon-purple),var(--neon-crimson),transparent);
-  animation:bottom-glow 3s ease-in-out infinite}
+  background:linear-gradient(90deg,transparent,var(--neon-crimson),var(--neon-purple),var(--neon-cyan),var(--neon-purple),var(--neon-crimson),transparent);
+  animation:bottom-glow 4s ease-in-out infinite}
 @keyframes header-sweep{0%{left:-60%}100%{left:160%}}
 @keyframes bottom-glow{0%,100%{opacity:.4}50%{opacity:1}}
 
@@ -149,7 +149,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tab-btn{position:relative;padding:12px 22px;background:var(--surface);
   border:1px solid rgba(0,229,255,.15);border-radius:4px;
   color:var(--text-dim);font-family:'Orbitron',monospace;font-size:14px;
-  letter-spacing:2px;cursor:pointer;overflow:hidden;transition:all .25s;
+  letter-spacing:2px;cursor:pointer;overflow:hidden;transition:all .12s ease;
   text-transform:uppercase;font-weight:700}
 .tab-btn::before{content:'';position:absolute;top:0;left:-100%;width:70%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(0,229,255,.4),transparent);
@@ -495,17 +495,9 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
   0%,100%{opacity:.8;transform:translateY(-50%) scale(1); box-shadow: 0 0 10px currentColor}
   50%{opacity:1;transform:translateY(-50%) scale(1.4); box-shadow: 0 0 25px currentColor}
 }
-/* Glitch hover effect for cards */
+/* Card hover — smooth authority glow, no jarring displacement */
 .card:hover {
-  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-@keyframes glitch-skew {
-  0% { transform: translate(0) }
-  20% { transform: translate(-2px, 2px) }
-  40% { transform: translate(-2px, -2px) }
-  60% { transform: translate(2px, 2px) }
-  80% { transform: translate(2px, -2px) }
-  100% { transform: translate(0) }
+  transform: translateY(-1px);
 }
 
 /* Neon text glow for headings */
@@ -526,7 +518,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
   0%,100% { box-shadow: 0 0 22px var(--neon-crimson), inset 0 0 10px rgba(232,0,42,.15); border-color: var(--neon-crimson); }
   50% { box-shadow: 0 0 38px var(--neon-purple), inset 0 0 16px rgba(180,0,255,.15); border-color: var(--neon-purple); }
 }
-.tab-btn.active { animation: pulse-active 3s ease-in-out infinite; }
+/* pulse-active removed — individual tab active states defined per tab above */
 
 /* ── TYPOGRAPHY NORMALIZATION ── */
 .card { font-size: 15px; line-height: 1.75; }
@@ -557,7 +549,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
   content: '';
   position: fixed;
   top: 18px; left: 18px; right: 18px; bottom: 18px;
-  border: 1px solid rgba(180,0,255,0.1);
+  border: 1px solid rgba(122,0,230,0.09);
   pointer-events: none;
   z-index: 0;
 }
@@ -565,15 +557,87 @@ p, div { font-family: 'Share Tech Mono', monospace; }
   content: '';
   position: fixed;
   top: 22px; left: 22px; right: 22px; bottom: 22px;
-  border: 1px solid rgba(232,0,42,0.06);
+  border: 1px solid rgba(196,21,45,0.05);
   pointer-events: none;
   z-index: 0;
-}</style>
+}
+
+/* ── CURSOR-TRACKING SPOTLIGHT ── */
+#cursor-spot {
+  position: fixed;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,21,45,.07) 0%, transparent 65%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  transition: left .08s linear, top .08s linear;
+  will-change: left, top;
+}
+
+/* ── GLOBAL SCANLINE SWEEP ── periodic CRT scan across full screen */
+#scanline {
+  position: fixed;
+  left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(196,21,45,.25) 20%,
+    rgba(122,0,230,.35) 50%,
+    rgba(196,21,45,.25) 80%,
+    transparent 100%);
+  box-shadow: 0 0 18px rgba(196,21,45,.4), 0 0 6px rgba(122,0,230,.5);
+  z-index: 60;
+  pointer-events: none;
+  animation: scan-sweep 10s linear infinite;
+  opacity: 0;
+}
+@keyframes scan-sweep {
+  0%   { top: -3px; opacity: 0; }
+  3%   { opacity: 1; }
+  97%  { opacity: .7; }
+  100% { top: 100vh; opacity: 0; }
+}
+
+/* ── STAT HEARTBEAT — live data feels alive ── */
+@keyframes stat-heartbeat {
+  0%,100% { text-shadow: 0 0 18px currentColor, 0 0 36px currentColor; }
+  50%     { text-shadow: 0 0 28px currentColor, 0 0 56px currentColor, 0 0 80px currentColor; }
+}
+.stat-num { animation: stat-heartbeat 3.5s ease-in-out infinite; }
+
+/* ── SECTION HEADER ACCENT PULSE ── */
+@keyframes accent-grow {
+  from { width: 50px; opacity: .8; }
+  to   { width: 110px; opacity: 1; }
+}
+.section-header::after { animation: accent-grow 2.5s ease-in-out infinite alternate; }
+
+/* ── LIVE INDICATOR — blinking dot on active data ── */
+@keyframes live-blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: .2; }
+}
+.live-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+  animation: live-blink 1.2s ease infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ── DATA ROW HIGHLIGHT on hover ── */
+.data-row { transition: background .12s ease, color .12s ease; cursor: default; }
+.data-row:hover { background: rgba(122,0,230,.07); color: var(--text-bright); }</style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
 <canvas id="beams"></canvas>
+<div id="scanline"></div>
 <div id="spotlights">
   <div class="spot spot-1"></div>
   <div class="spot spot-2"></div>
@@ -1866,7 +1930,7 @@ const COMMANDS = [
   const ctx=c.getContext('2d');
   let w,h,cols,drops,colHue;
   const chars='アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF><|{}[]#@!DEX';
-  const PALETTES=['#e8002a','#b400ff','#e8002a','#ff0080','#b400ff','#6b0019','#e8002a','#b400ff'];
+  const PALETTES=['#c4152d','#7a00e6','#c4152d','#d8008a','#7a00e6','#5a0014','#c4152d','#7a00e6'];
   function init(){
     w=c.width=window.innerWidth;h=c.height=window.innerHeight;
     cols=Math.floor(w/14);
@@ -1875,7 +1939,7 @@ const COMMANDS = [
   }
   init();window.addEventListener('resize',init);
   setInterval(()=>{
-    ctx.fillStyle='rgba(3,3,18,.07)';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='rgba(2,0,8,.07)';ctx.fillRect(0,0,w,h);
     ctx.font='13px Share Tech Mono';
     drops.forEach((y,i)=>{
       const t=chars[Math.floor(Math.random()*chars.length)];
@@ -1902,12 +1966,12 @@ const COMMANDS = [
   resize();window.addEventListener('resize',resize);
 
   const BEAMS=[
-    {x:0,y:0,angle:30, speed:0.40, hue:'rgba(232,0,42,',    len:480, width:2.5},
-    {x:0,y:0,angle:150,speed:0.28, hue:'rgba(180,0,255,',   len:400, width:2},
-    {x:0,y:0,angle:70, speed:0.50, hue:'rgba(232,0,42,',    len:340, width:1.5},
-    {x:0,y:0,angle:20, speed:0.18, hue:'rgba(140,0,200,',   len:300, width:1.5},
-    {x:0,y:0,angle:110,speed:0.35, hue:'rgba(180,0,255,',   len:560, width:3},
-    {x:0,y:0,angle:55, speed:0.22, hue:'rgba(255,0,128,',   len:260, width:1.2},
+    {x:0,y:0,angle:30, speed:0.38, hue:'rgba(196,21,45,',   len:480, width:2.5},
+    {x:0,y:0,angle:150,speed:0.26, hue:'rgba(122,0,230,',   len:400, width:2},
+    {x:0,y:0,angle:70, speed:0.48, hue:'rgba(196,21,45,',   len:340, width:1.5},
+    {x:0,y:0,angle:20, speed:0.17, hue:'rgba(100,0,180,',   len:300, width:1.5},
+    {x:0,y:0,angle:110,speed:0.33, hue:'rgba(122,0,230,',   len:560, width:3},
+    {x:0,y:0,angle:55, speed:0.21, hue:'rgba(216,0,138,',   len:260, width:1.2},
   ];
   // init positions spread across canvas
   BEAMS.forEach((b,i)=>{
@@ -2743,6 +2807,23 @@ loadLiveData();
 
 </section>
 
+
+<script>
+// ── CURSOR SPOTLIGHT ──
+(function(){
+  const spot = document.createElement('div');
+  spot.id = 'cursor-spot';
+  document.body.appendChild(spot);
+  let raf;
+  document.addEventListener('mousemove', e => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      spot.style.left = e.clientX + 'px';
+      spot.style.top  = e.clientY + 'px';
+    });
+  });
+})();
+</script>
 
 <script>
 // Simulated live metrics for broker (replace with real data later)
