@@ -2197,6 +2197,42 @@ loadLiveData();
     <span class="section-badge" style="border-color:#00ffcc;color:#00ffcc">OPENCLAW · SYSTEM TOOLS</span>
   </div>
 
+  <!-- preflight.sh ──────────────────────────────────────────────────── -->
+  <div class="script-card" style="border-color:rgba(0,229,255,.35)">
+    <div class="script-name" style="color:var(--neon-cyan)">preflight.sh &nbsp;<span class="script-tag tag-manual">MANUAL · RUN FIRST</span></div>
+    <div class="script-path">~/.openclaw/preflight.sh &nbsp;—&nbsp; <b style="color:var(--neon-cyan)">must be run with: cd ~/.openclaw &amp;&amp; source .env &amp;&amp; bash preflight.sh</b></div>
+    <div class="script-desc">
+      Full system integrity check — 9 levels, 52 checks. Run this before starting the gateway
+      after any config change, after a service restart, or when something feels off.
+      Covers runtime env, all API keys, ports, OpenClaw config validation,
+      LiteLLM live inference (real API calls), Qdrant/mem0, Cognee, Telegram bot,
+      and an end-to-end chain simulation. Exits with summary: PASS / WARN / FAIL counts.
+      <br><br>
+      <b style="color:var(--neon-yellow)">Why source .env first?</b> preflight reads Gemini/Mistral/Telegram keys directly from
+      <code>~/.openclaw/.env</code> to validate them. Without sourcing, key checks will fail
+      even if the keys are valid.
+    </div>
+    <div class="script-flags">
+      <div style="font-size:14px;color:var(--text-dim);margin-bottom:10px">Levels checked:</div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L1 · Runtime env</span><span class="flag-desc">Node.js, Python 3, OpenClaw binary, curl — version check</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L2 · Env variables</span><span class="flag-desc">All API keys present: LiteLLM, Mistral ×5, Gemini chat ×16, Gemini mem ×12, Telegram token, aliases</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L3 · Ports &amp; procs</span><span class="flag-desc">LiteLLM :4000, Qdrant :6333, Cognee :8000, OpenClaw gateway :18789 — alive with PIDs</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L4 · Filesystem</span><span class="flag-desc">openclaw.json, .env, extensions/, workspace/, mem0 history.db — exist and writable</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L5 · Config deep</span><span class="flag-desc">openclaw.json schema: gateway bind, model routing, fallbacks, LiteLLM catalog, input-router models, mem0 embedder/LLM targets</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L6 · LiteLLM proxy</span><span class="flag-desc">/health + /v1/models — all 8 model pools registered: gemma-chat/fallback/internal/agentic, both embeddings, openai aliases</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L7 · Live inference</span><span class="flag-desc">Real API calls: gemma-chat (27B), gemma-fallback (4B), gemma-internal (12B) → response OK; gemini-embedding → 3072 dims</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L8 · Qdrant / mem0</span><span class="flag-desc">Collections: mem0-openclaw present, dim=3072; history.db exists</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L8B · Cognee</span><span class="flag-desc">Cognee API responding at :8000</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L9 · Telegram</span><span class="flag-desc">Bot token valid, @dexclawbot_bot getMe OK, api.telegram.org reachable</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L9B · E2E chain</span><span class="flag-desc">Simulates: Arabic text → input-router → complexity routing → gemma-chat → LiteLLM → response. Mistral direct API OK.</span></div>
+    </div>
+    <div class="script-examples">
+      <div class="cmd-block" style="border-left-color:var(--neon-cyan)!important"><span class="cmd-desc">Standard run — always use this exact command</span><code>! cd ~/.openclaw &amp;&amp; source .env &amp;&amp; bash preflight.sh</code><button class="copy-btn" onclick="copyCmd(this)" style="border-color:rgba(0,229,255,.4);color:var(--neon-cyan)">COPY</button></div>
+      <div class="cmd-block" style="border-left-color:var(--neon-cyan)!important"><span class="cmd-desc">After any config.yaml or openclaw.json change</span><code>! cd ~/.openclaw &amp;&amp; source .env &amp;&amp; bash preflight.sh 2&gt;&amp;1 | tail -20</code><button class="copy-btn" onclick="copyCmd(this)" style="border-color:rgba(0,229,255,.4);color:var(--neon-cyan)">COPY</button></div>
+      <div class="cmd-block" style="border-left-color:var(--neon-cyan)!important"><span class="cmd-desc">Quick pass/fail summary only</span><code>! cd ~/.openclaw &amp;&amp; source .env &amp;&amp; bash preflight.sh 2&gt;&amp;1 | grep -E "PASS|FAIL|WARN|SUMMARY"</code><button class="copy-btn" onclick="copyCmd(this)" style="border-color:rgba(0,229,255,.4);color:var(--neon-cyan)">COPY</button></div>
+    </div>
+  </div>
+
   <!-- quota-probe.py ─────────────────────────────────────────────────── -->
   <div class="script-card">
     <div class="script-name">quota-probe.py &nbsp;<span class="script-tag tag-manual">MANUAL</span><span class="script-tag tag-new">v2</span></div>
