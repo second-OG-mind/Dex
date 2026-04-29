@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-29T05:45:02Z",
+  "last_updated": "2026-04-29T05:49:52Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -9,8 +9,8 @@
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 18.6,
-      "mem": 3.2,
+      "cpu": 13.4,
+      "mem": 2.6,
       "port": 18789,
       "pid": 310781
     },
@@ -36,7 +36,7 @@
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 0.7,
+      "cpu": 0.8,
       "mem": 2.7,
       "port": 4000
     }
@@ -78,8 +78,8 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 189,
-    "unhealthy_endpoints": 21,
+    "healthy_endpoints": 201,
+    "unhealthy_endpoints": 9,
     "total_endpoints": 210
   },
   "key_states": {
