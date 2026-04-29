@@ -1480,8 +1480,8 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
             <li>Load mission → extract ALLOWED fields only</li>
             <li>Run <code>sanitize_for_drivers()</code> — raises PrivacyError on violation</li>
             <li>Format via driver_brief.md template</li>
-            <li>Post to drivers group → start 2h offer timer</li>
-            <li>Send 15-min reminders if &lt;1h remaining with no offers</li>
+            <li>Post to drivers group → offers remain OPEN until filled or canceled</li>
+            <li>If deadline approaching (15 min left) and &lt;2 offers: post urgency reminder</li>
           </ol>
           <div style="margin-top:8px;font-size:14px;color:var(--text-dim)">
             Allowed fields: mission_id, product_type, weight, size, pickup_area, delivery_area, vehicle_required, deadline, distance_estimate_km
@@ -1495,7 +1495,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
             <li>Parse offer: price + vehicle + ETA</li>
             <li>Validate driver profile (create stub if new)</li>
             <li>Append to mission file under Offers section</li>
-            <li>When ≥2 offers OR 15 min to deadline → rank top 3</li>
+            <li>When ≥2 offers OR 15 min to deadline OR human signals ready → rank top 3</li>
             <li>DM endpoint: table of top 3 (price ↑, rating ↓, speed ↓)</li>
             <li>Wait for SELECT N reply — auto-select cheapest if timeout</li>
           </ol>
@@ -1521,6 +1521,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
       <div style="margin-top:12px;display:flex;gap:24px;flex-wrap:wrap;font-size:15px;padding-top:12px;border-top:1px solid var(--border)">
         <div><strong style="color:var(--neon-green)">Mission ID:</strong> <code>MIG-YYYYMMDD-NNN</code> — resets at midnight UTC, 001–999/day</div>
         <div><strong style="color:var(--neon-yellow)">Dry-run mode:</strong> first 5 missions require APPROVE_MIG-XXX from endpoint before broadcast</div>
+        <div><strong style="color:var(--neon-magenta)">Offer window:</strong> open-ended — offers accepted until mission assigned or canceled (no fixed timer)</div>
         <div><strong style="color:var(--neon-orange)">No-offers fallback:</strong> alert endpoint → suggest repost or adjust requirements</div>
       </div>
     </div>
@@ -1535,7 +1536,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
         </div>
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">Model Routing</div>
-          <div style="color:var(--neon-green)">✓ gemma-chat → mistral-chat → gemma-agentic</div>
+          <div style="color:var(--neon-green)">✓ Smart routing: gemma-chat (light) → gemma-agentic (heavy, bypasses 4B)</div>
         </div>
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">Dry-run Mode</div>
