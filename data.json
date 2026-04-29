@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-29T16:45:01Z",
+  "last_updated": "2026-04-29T16:46:49Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -36,7 +36,7 @@
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 0.8,
+      "cpu": 0.9,
       "mem": 3.4,
       "port": 4000
     }
