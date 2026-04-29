@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-29T13:45:01Z",
+  "last_updated": "2026-04-29T14:00:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -9,7 +9,7 @@
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 5.5,
+      "cpu": 4.6,
       "mem": 3.2,
       "port": 18789,
       "pid": 353896
@@ -37,7 +37,7 @@
     "litellm-proxy": {
       "active": true,
       "cpu": 0.8,
-      "mem": 3.0,
+      "mem": 3.1,
       "port": 4000
     }
   },
@@ -88,46 +88,46 @@
       "gemini-embedding": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T13:45:01Z",
+        "last_checked": "2026-04-29T14:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T13:45:01Z",
+        "last_checked": "2026-04-29T14:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T13:45:01Z",
+        "last_checked": "2026-04-29T14:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T13:45:01Z",
+        "last_checked": "2026-04-29T14:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-agentic": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T13:45:01Z",
+        "last_checked": "2026-04-29T14:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T13:45:01Z",
+        "last_checked": "2026-04-29T14:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-04-29T13:45:01Z"
+    "last_updated": "2026-04-29T14:00:01Z"
   }
 }
