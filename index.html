@@ -153,6 +153,28 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tab-btn[data-tab="api-monitoring"].active{border-color:#39ff14;color:#39ff14;box-shadow:0 0 28px rgba(57,255,20,.3);background:rgba(57,255,20,.07)}
 .tab-btn[data-tab="api-monitoring"].active::after{background:#39ff14;box-shadow:0 0 12px #39ff14}
 .tab-btn[data-tab="api-monitoring"]:hover{border-color:rgba(57,255,20,.5);color:#39ff14}
+.tab-btn[data-tab="scripts"].active{border-color:#00ffcc;color:#00ffcc;box-shadow:0 0 28px rgba(0,255,204,.3);background:rgba(0,255,204,.07)}
+.tab-btn[data-tab="scripts"].active::after{background:#00ffcc;box-shadow:0 0 12px #00ffcc}
+.tab-btn[data-tab="scripts"]:hover{border-color:rgba(0,255,204,.5);color:#00ffcc}
+.script-card{background:rgba(0,0,0,.45);border:1px solid rgba(0,255,204,.18);border-radius:10px;padding:20px 22px;margin-bottom:16px}
+.script-card:hover{border-color:rgba(0,255,204,.45);background:rgba(0,255,204,.04)}
+.script-name{font-family:'Orbitron',monospace;font-size:17px;font-weight:700;color:#00ffcc;margin-bottom:4px;letter-spacing:1px}
+.script-path{font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--text-dim);margin-bottom:10px}
+.script-desc{font-size:15px;color:var(--text-main);margin-bottom:14px;line-height:1.6}
+.script-flags{margin-bottom:14px}
+.flag-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;font-size:14px}
+.flag-key{font-family:'Share Tech Mono',monospace;color:#00ffcc;min-width:220px;flex-shrink:0}
+.flag-desc{color:var(--text-dim)}
+.script-examples .cmd-block{border-left-color:#00ffcc!important}
+.script-examples .cmd-block::before{background:#00ffcc!important}
+.script-examples .cmd-block:hover{border-color:rgba(0,255,204,.4)!important;background:rgba(0,255,204,.05)!important}
+.script-examples .copy-btn{border-color:rgba(0,255,204,.4);color:#00ffcc}
+.script-examples .copy-btn:hover{background:rgba(0,255,204,.2)!important;box-shadow:0 0 8px rgba(0,255,204,.3)!important}
+.script-tag{display:inline-block;padding:2px 9px;border-radius:4px;font-size:12px;font-weight:700;margin-right:6px;letter-spacing:.5px}
+.tag-cron{background:rgba(255,109,0,.18);border:1px solid rgba(255,109,0,.4);color:var(--neon-orange)}
+.tag-manual{background:rgba(0,255,204,.12);border:1px solid rgba(0,255,204,.35);color:#00ffcc}
+.tag-event{background:rgba(224,64,251,.15);border:1px solid rgba(224,64,251,.4);color:var(--neon-magenta)}
+.tag-new{background:rgba(105,255,71,.15);border:1px solid rgba(105,255,71,.4);color:var(--neon-green)}
 
 /* ── SECTIONS ── */
 .tab-section{display:none;animation:fadein .35s ease}
@@ -495,6 +517,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
   <button class="tab-btn" data-tab="watcher">👁️ ⚡ AUTO-PUSH</button>
     <button class="tab-btn" data-tab="broker">🚚 ◉ BROKER</button>
   <button class="tab-btn" data-tab="api-monitoring">📊 ◈ API MONITORING</button>
+  <button class="tab-btn" data-tab="scripts">📜 ◈ SCRIPTS</button>
 </nav>
 
 <!-- ═══════════════════════════ OVERVIEW ═══════════════════════════ -->
@@ -2166,5 +2189,213 @@ function renderApiMonitoring(d){
 }
 loadLiveData();
 </script>
+
+<!-- ═══════════════════════════ SCRIPTS ═══════════════════════════ -->
+<section class="tab-section" id="tab-scripts">
+  <div class="section-header">
+    <div class="section-title" style="color:#00ffcc">SCRIPTS REFERENCE</div>
+    <span class="section-badge" style="border-color:#00ffcc;color:#00ffcc">OPENCLAW · SYSTEM TOOLS</span>
+  </div>
+
+  <!-- quota-probe.py ─────────────────────────────────────────────────── -->
+  <div class="script-card">
+    <div class="script-name">quota-probe.py &nbsp;<span class="script-tag tag-manual">MANUAL</span><span class="script-tag tag-new">v2</span></div>
+    <div class="script-path">~/.openclaw/scripts/quota-probe.py</div>
+    <div class="script-desc">
+      Multi-provider API rate-limit scanner. Directly probes Gemini (28 keys × 6 models) and
+      Mistral (6 keys × 1 model), bypassing LiteLLM. Three test modes:
+      <b style="color:#00ffcc">Health</b> (1 req/key — alive or dead?),
+      <b style="color:var(--neon-yellow)">Burst RPM</b> (N simultaneous — find empirical ceiling),
+      <b style="color:var(--neon-orange)">TPM Stress</b> (16K-token payload — prove the 15K TPM wall).
+      Saves results to <code style="color:#00ffcc">~/dex-dashboard/quota-scan.json</code> after every run.
+    </div>
+    <div class="script-flags">
+      <div class="flag-row"><span class="flag-key">(no flags)</span><span class="flag-desc">Health scan all 28 Gemini + 6 Mistral keys across all models</span></div>
+      <div class="flag-row"><span class="flag-key">--burst</span><span class="flag-desc">+ empirical RPM ceiling — fires burst_n simultaneous requests per model (model-aware: 38 for Gemma-3, 20 for 31B, 110 for embeddings, 10 for Mistral)</span></div>
+      <div class="flag-row"><span class="flag-key">--tpm-stress</span><span class="flag-desc">+ TPM wall test — sends ~16K-token payload on one Gemma-3 key per model. Confirms 15K TPM/min limit. Costs ~16K tokens per tested model.</span></div>
+      <div class="flag-row"><span class="flag-key">--full</span><span class="flag-desc">Run all three tests (health + burst + tpm-stress) in one pass</span></div>
+      <div class="flag-row"><span class="flag-key">--provider gemini|mistral</span><span class="flag-desc">Probe only one provider</span></div>
+      <div class="flag-row"><span class="flag-key">--model MODEL_ID</span><span class="flag-desc">Probe only this model (e.g. gemma-3-27b-it, mistral-large-latest)</span></div>
+      <div class="flag-row"><span class="flag-key">--pool POOL_NAME</span><span class="flag-desc">Probe only this pool (e.g. gemma-chat, gemma-agentic, mistral-multimodal)</span></div>
+      <div class="flag-row"><span class="flag-key">--key KEY_NAME</span><span class="flag-desc">Probe only one key (e.g. GEMINI_API_KEY_5) — useful to debug a specific key</span></div>
+      <div class="flag-row"><span class="flag-key">--samples N</span><span class="flag-desc">Burst-test N keys per model instead of default 3 — use --samples 28 for full pool burst</span></div>
+      <div class="flag-row"><span class="flag-key">--json</span><span class="flag-desc">Machine-readable JSON output only — pipe to jq or redirect to file</span></div>
+    </div>
+    <div class="script-examples">
+      <div class="cmd-block"><span class="cmd-desc">Full health scan — run this first after adding keys or after a 429 storm</span><code>! python3 ~/.openclaw/scripts/quota-probe.py</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Burst RPM test — 3 keys per model, empirical ceiling</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --burst</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">All three tests in one run (takes ~3–4 min)</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --full</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Prove the 15K TPM wall on all Gemma-3 pools</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --tpm-stress --provider gemini</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Check Mistral only with burst RPM</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --provider mistral --burst</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Debug one specific key</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --key GEMINI_API_KEY_5</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Machine-readable — pipe to jq for pool summaries</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --json | jq '.pools["gemma-chat"].summary'</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+    </div>
+  </div>
+
+  <!-- key-monitor.sh ─────────────────────────────────────────────────── -->
+  <div class="script-card">
+    <div class="script-name">key-monitor.sh &nbsp;<span class="script-tag tag-cron">CRON · */15 min</span></div>
+    <div class="script-path">~/dex-dashboard/key-monitor.sh</div>
+    <div class="script-desc">
+      Queries LiteLLM <code>/health</code> endpoint, maps unhealthy endpoints back to
+      <code>GEMINI_API_KEY_N / GEMINI_MEM_KEY_N</code> env vars, writes per-key resting entries
+      to <code>~/.openclaw/key-states.json</code>, and sends Telegram alerts on first detection
+      and full-pool exhaustion. Uses 20s curl timeout (covers slow 31B health probes).
+      Recovery time is midnight Pacific Time (07:00 UTC PDT / 08:00 UTC PST).
+    </div>
+    <div class="script-flags">
+      <div class="flag-row"><span class="flag-key">(no flags)</span><span class="flag-desc">Run a health check cycle — query LiteLLM, update key-states.json, send alerts if needed</span></div>
+    </div>
+    <div class="script-examples">
+      <div class="cmd-block"><span class="cmd-desc">Manual run — force an immediate health check cycle</span><code>! bash ~/dex-dashboard/key-monitor.sh</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Tail the cron log to watch live</span><code>! tail -f /tmp/dex-keymon.log</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Check current key states</span><code>! python3 -c "import json; d=json.load(open('/home/monster-ubunto/.openclaw/key-states.json')); print(json.dumps(d,indent=2))"</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+    </div>
+  </div>
+
+  <!-- dex-watcher.sh ─────────────────────────────────────────────────── -->
+  <div class="script-card">
+    <div class="script-name">dex-watcher.sh &nbsp;<span class="script-tag tag-event">EVENT-DRIVEN</span></div>
+    <div class="script-path">~/dex-dashboard/dex-watcher.sh</div>
+    <div class="script-desc">
+      File watcher that detects changes to <code>data.json</code>, <code>key-states.json</code>,
+      and <code>quota-scan.json</code> and automatically commits + pushes to GitHub Pages.
+      Run as a background process. Debounces pushes by 15 seconds to avoid rapid-fire commits.
+    </div>
+    <div class="script-examples">
+      <div class="cmd-block"><span class="cmd-desc">Check if watcher is running</span><code>! pgrep -a -f dex-watcher</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Manually trigger a push of current state</span><code>! bash ~/dex-dashboard/update-status.sh && git -C ~/dex-dashboard add -A && git -C ~/dex-dashboard commit -m "manual push" && git -C ~/dex-dashboard push origin main</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+    </div>
+  </div>
+
+  <!-- update-status.sh ─────────────────────────────────────────────────── -->
+  <div class="script-card">
+    <div class="script-name">update-status.sh &nbsp;<span class="script-tag tag-cron">CRON · */15 min</span></div>
+    <div class="script-path">~/dex-dashboard/update-status.sh</div>
+    <div class="script-desc">
+      Collects live system state — service statuses, memory stats, plugin health — and writes
+      it to <code>data.json</code>. The DEX dashboard frontend reads this file to populate
+      the LIVE STATUS tab. Runs alongside key-monitor.sh in the same cron window.
+    </div>
+    <div class="script-examples">
+      <div class="cmd-block"><span class="cmd-desc">Force a data.json refresh now</span><code>! bash ~/dex-dashboard/update-status.sh</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Inspect current data.json</span><code>! python3 -c "import json; d=json.load(open('/home/monster-ubunto/dex-dashboard/data.json')); print(json.dumps(d,indent=2))" | head -40</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+    </div>
+  </div>
+
+  <!-- telegram-alert.sh ─────────────────────────────────────────────────── -->
+  <div class="script-card">
+    <div class="script-name">telegram-alert.sh &nbsp;<span class="script-tag tag-manual">MANUAL / CALLED BY OTHERS</span></div>
+    <div class="script-path">~/dex-dashboard/telegram-alert.sh</div>
+    <div class="script-desc">
+      Sends an HTML-formatted message to your Telegram bot. Called by key-monitor.sh on quota
+      events. Can also be called directly to send custom alerts. Uses <code>TELEGRAM_BOT_TOKEN</code>
+      and <code>TELEGRAM_CHAT_ID</code> from <code>~/.openclaw/.env</code>.
+    </div>
+    <div class="script-examples">
+      <div class="cmd-block"><span class="cmd-desc">Send a test alert</span><code>! bash ~/dex-dashboard/telegram-alert.sh "🧪 &lt;b&gt;Test alert&lt;/b&gt; — system is healthy"</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+    </div>
+  </div>
+
+  <!-- on-config-change.sh ─────────────────────────────────────────────────── -->
+  <div class="script-card">
+    <div class="script-name">on-config-change.sh &nbsp;<span class="script-tag tag-event">EVENT-DRIVEN</span></div>
+    <div class="script-path">~/dex-dashboard/on-config-change.sh</div>
+    <div class="script-desc">
+      Triggered when <code>~/.litellm/config.yaml</code> or <code>~/.openclaw/openclaw.json</code>
+      changes. Restarts affected services and pushes an updated DEX snapshot to GitHub.
+      Wired into the inotify watcher chain via watch-changes.sh.
+    </div>
+  </div>
+
+  <!-- Limit reference ─────────────────────────────────────────────────── -->
+  <div class="script-card" style="border-color:rgba(255,234,0,.2)">
+    <div class="script-name" style="color:var(--neon-yellow)">API Limit Reference &nbsp;<span class="script-tag" style="background:rgba(255,234,0,.12);border:1px solid rgba(255,234,0,.4);color:var(--neon-yellow)">VERIFIED 2026-04-28</span></div>
+    <div class="script-desc">Empirically measured limits via quota-probe.py --burst + --tpm-stress. Use these when tuning LiteLLM rpm: values.</div>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;font-family:'Share Tech Mono',monospace">
+      <thead>
+        <tr style="color:var(--neon-yellow);border-bottom:1px solid rgba(255,234,0,.2)">
+          <th style="text-align:left;padding:6px 10px">Pool</th>
+          <th style="text-align:left;padding:6px 10px">Model</th>
+          <th style="text-align:right;padding:6px 10px">Empirical RPM</th>
+          <th style="text-align:right;padding:6px 10px">Google Docs</th>
+          <th style="text-align:right;padding:6px 10px">TPM/key</th>
+          <th style="text-align:right;padding:6px 10px">RPD/key</th>
+          <th style="text-align:left;padding:6px 10px">Config rpm:</th>
+        </tr>
+      </thead>
+      <tbody style="color:var(--text-main)">
+        <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+          <td style="padding:6px 10px;color:var(--neon-cyan)">gemma-chat</td>
+          <td style="padding:6px 10px">Gemma 3 27B</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">33</td>
+          <td style="padding:6px 10px;text-align:right">30</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-red)">15,000</td>
+          <td style="padding:6px 10px;text-align:right">14,400</td>
+          <td style="padding:6px 10px;color:var(--neon-green)">28 ✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+          <td style="padding:6px 10px;color:var(--neon-cyan)">gemma-fallback</td>
+          <td style="padding:6px 10px">Gemma 3 4B</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-yellow)">20</td>
+          <td style="padding:6px 10px;text-align:right">30</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-red)">15,000</td>
+          <td style="padding:6px 10px;text-align:right">14,400</td>
+          <td style="padding:6px 10px;color:var(--neon-green)">18 ✓ fixed</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+          <td style="padding:6px 10px;color:var(--neon-cyan)">gemma-internal</td>
+          <td style="padding:6px 10px">Gemma 3 12B</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">31</td>
+          <td style="padding:6px 10px;text-align:right">30</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-red)">15,000</td>
+          <td style="padding:6px 10px;text-align:right">14,400</td>
+          <td style="padding:6px 10px;color:var(--neon-green)">28 ✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+          <td style="padding:6px 10px;color:var(--neon-cyan)">gemma-agentic</td>
+          <td style="padding:6px 10px">Gemma 4 31B</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">15</td>
+          <td style="padding:6px 10px;text-align:right">15</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">Unlimited</td>
+          <td style="padding:6px 10px;text-align:right">1,500</td>
+          <td style="padding:6px 10px;color:var(--neon-green)">13 ✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+          <td style="padding:6px 10px;color:var(--neon-cyan)">gemini-embedding</td>
+          <td style="padding:6px 10px">Embedding 001</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">&gt;38</td>
+          <td style="padding:6px 10px;text-align:right">100</td>
+          <td style="padding:6px 10px;text-align:right">—</td>
+          <td style="padding:6px 10px;text-align:right">1,000</td>
+          <td style="padding:6px 10px;color:var(--neon-green)">98 ✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+          <td style="padding:6px 10px;color:var(--neon-cyan)">gemini-embedding-2</td>
+          <td style="padding:6px 10px">Embedding 2</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">&gt;38</td>
+          <td style="padding:6px 10px;text-align:right">100</td>
+          <td style="padding:6px 10px;text-align:right">—</td>
+          <td style="padding:6px 10px;text-align:right">1,000</td>
+          <td style="padding:6px 10px;color:var(--neon-green)">98 ✓</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px;color:var(--neon-magenta)">mistral-multimodal</td>
+          <td style="padding:6px 10px">mistral-large</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--text-dim)">TBD</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--text-dim)">?</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--text-dim)">?</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--text-dim)">?</td>
+          <td style="padding:6px 10px;color:var(--neon-yellow)">run --burst</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;font-size:13px;color:var(--text-dim)">
+      TPM wall confirmed by <code style="color:#00ffcc">--tpm-stress</code> test · 4B real RPM=20 (not 30) confirmed by <code style="color:#00ffcc">--burst</code> · Config corrected 2026-04-28
+    </div>
+  </div>
+
+</section>
+
 </body>
 </html>
