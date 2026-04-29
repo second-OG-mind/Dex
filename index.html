@@ -2394,16 +2394,23 @@ function renderApiMonitoring(d){
   const pools=ks.pools||{};
 
   // ── Pool cards ──────────────────────────────────────────────────
+  const apiPools=d.api||{};
   function renderPool(elId, poolKey, label, poolDesc){
     const el=document.getElementById(elId);
     if(!el)return;
     const p=pools[poolKey]||{};
-    const total=p.total||0;
+    // Primary source: key_states.pools (has resting_keys detail)
+    // Fallback: d.api (always populated by update-status.sh, no resting detail)
+    const apiKey=poolKey.replace(/-/g,'_');
+    const apiData=apiPools[apiKey]||{};
+    const total=p.total||apiData.total||28;   // never show 0
 
-    // Derive active count directly from resting list — always consistent
+    // Derive active count from resting list; fall back to d.api.healthy
     const restingKeys=p.resting_keys||[];
     const restingCount=restingKeys.length;
-    const activeCount=Math.max(0,total-restingCount);
+    const activeCount=restingCount>0
+      ? Math.max(0,total-restingCount)
+      : (apiData.healthy!==undefined ? apiData.healthy : total);
     const pct=total>0?Math.round((activeCount/total)*100):100;
     const col=pct===100?'#39ff14':pct>50?'var(--neon-yellow)':'var(--neon-red)';
     const barW=Math.max(0,Math.min(100,pct));

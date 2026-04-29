@@ -253,7 +253,7 @@ new_alerts   = []
 full_exhaust = []
 
 for pname, pdef in POOLS.items():
-    total     = pdef['key_count']
+    total     = pdef['total']
     unhealthy_keys = find_unhealthy_keys_for_pool(pname)
     healthy_key_names = find_healthy_key_names_for_pool(pname)
 
