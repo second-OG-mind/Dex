@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-28T23:00:01Z",
+  "last_updated": "2026-04-29T01:00:02Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -16,7 +16,7 @@
     },
     "cognee": {
       "active": true,
-      "cpu": 0.2,
+      "cpu": 0.3,
       "mem": 2.6,
       "port": 8000,
       "status": "online"
