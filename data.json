@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-29T05:15:02Z",
+  "last_updated": "2026-04-29T05:30:02Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -9,8 +9,8 @@
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 63.0,
-      "mem": 2.2,
+      "cpu": 10.7,
+      "mem": 2.5,
       "port": 18789,
       "pid": 308114
     },
@@ -36,7 +36,7 @@
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 0.8,
+      "cpu": 0.7,
       "mem": 2.7,
       "port": 4000
     }
