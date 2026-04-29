@@ -8,35 +8,36 @@
 <style>
 :root {
   /* ═══════════════════════════════════════════════════════════
-     CYBERPUNK NEON PALETTE — darker, grittier, more aggressive glow
-     Burple + Crimson + Electric accents
+     CYBERPUNK NOIR — Crimson / Deep Purple / Electric Accents
+     Hierarchy: structure(purple) → signal(cyan) → energy(crimson)
      ═══════════════════════════════════════════════════════════ */
-  --neon-cyan:    #00f7ff;        /* electric cyan — primary accent */
-  --neon-magenta: #ff2a9c;        /* hot pink/magenta — secondary */
-  --neon-green:   #00ff66;        /* toxic green — success/alert */
-  --neon-yellow:  #fff000;        /* high-vis yellow — warnings */
-  --neon-red:     #ff3366;        /* crimson red — critical/danger */
-  --neon-orange:  #ff6600;        /* burner orange — heat */
-  --neon-purple:  #9d00ff;        /* deep purple — headers/borders */
-  --neon-crimson: #dc143c;        /* true crimson — priority highlights */
-  
-  --bg-dark:     #000000;         /* near-black, not pure */
-  --bg-darker:   #000000;
-  --surface:     rgba(8,0,12,0.95);  /* purple-tinted surface */
-  --glass:       rgba(157,0,255,0.02); /* very subtle purple tint */
-  --border:      rgba(157,0,255,0.5); /* brighter border glow */
-  
-  --text-main:   #f0e6ff;         /* soft white-purple */
-  --text-dim:     #8050a0;         /* dimmed text */
-  --text-bright: #ffffff;         /* pure white for emphasis */
+  --neon-crimson: #e8002a;        /* ★ PRIMARY — hot crimson, energy/heat */
+  --neon-purple:  #b400ff;        /* ★ STRUCTURE — deep violet, architecture */
+  --neon-cyan:    #00e5ff;        /* SIGNAL — electric cyan, data display */
+  --neon-magenta: #ff0080;        /* HOT PINK — secondary accent */
+  --neon-green:   #00ff66;        /* SUCCESS — toxic green */
+  --neon-yellow:  #ffe600;        /* WARN — high-vis yellow */
+  --neon-red:     #ff1a3a;        /* CRITICAL — alert red */
+  --neon-orange:  #ff5500;        /* HEAT — burner orange */
+  --neon-blood:   #6b0019;        /* DEEP — dark blood, shadow crimson */
 
-  /* Glow multipliers — heavier than before */
-  --glow-cyan:    0 0 80px rgba(0,247,255,.7), 0 0 160px rgba(0,247,255,.5);
-  --glow-magenta: 0 0 80px rgba(255,42,156,.7), 0 0 160px rgba(255,42,156,.5);
-  --glow-green:   0 0 70px rgba(0,255,102,.7), 0 0 140px rgba(0,255,102,.5);
-  --glow-red:     0 0 80px rgba(255,51,102,.75), 0 0 160px rgba(255,51,102,.55);
-  --glow-purple:  0 0 90px rgba(157,0,255,.75), 0 0 180px rgba(157,0,255,.55);
-  --glow-crimson: 0 0 70px rgba(220,20,60,.7), 0 0 140px rgba(220,20,60,.5);
+  --bg-dark:     #04000a;         /* near-black, deep purple-black */
+  --bg-darker:   #020005;
+  --surface:     rgba(10,0,18,0.97);   /* deep purple-black surface */
+  --glass:       rgba(180,0,255,0.025); /* subtle purple tint */
+  --border:      rgba(180,0,255,0.45); /* purple structural border */
+
+  --text-main:   #eedeff;         /* soft white-violet */
+  --text-dim:    #6a3a8a;         /* dimmed purple-grey */
+  --text-bright: #ffffff;
+
+  /* Glows */
+  --glow-crimson: 0 0 60px rgba(232,0,42,.8),  0 0 120px rgba(232,0,42,.5);
+  --glow-purple:  0 0 70px rgba(180,0,255,.75), 0 0 140px rgba(180,0,255,.5);
+  --glow-cyan:    0 0 60px rgba(0,229,255,.7),  0 0 120px rgba(0,229,255,.45);
+  --glow-magenta: 0 0 60px rgba(255,0,128,.7),  0 0 120px rgba(255,0,128,.45);
+  --glow-green:   0 0 50px rgba(0,255,102,.7),  0 0 100px rgba(0,255,102,.45);
+  --glow-red:     0 0 60px rgba(255,26,58,.75), 0 0 120px rgba(255,26,58,.5);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow-x:hidden;background:#050505}
@@ -50,11 +51,13 @@ body{background:var(--bg-dark);color:var(--text-main);font-family:'Share Tech Mo
 /* ── ANIMATED GRID ── */
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(0,247,255,.12) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,247,255,.12) 1px,transparent 1px);
-  background-size:48px 48px;
-  animation:grid-pulse 4s ease-in-out infinite}
-@keyframes grid-pulse{0%,100%{opacity:.6}50%{opacity:1}}
+    linear-gradient(rgba(180,0,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(180,0,255,.07) 1px,transparent 1px),
+    linear-gradient(rgba(232,0,42,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(232,0,42,.04) 1px,transparent 1px);
+  background-size:48px 48px, 48px 48px, 192px 192px, 192px 192px;
+  animation:grid-pulse 5s ease-in-out infinite}
+@keyframes grid-pulse{0%,100%{opacity:.5}50%{opacity:.9}}
 
 /* ── SCANLINES ── */
 body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -62,7 +65,38 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 /* ── VIGNETTE ── */
 #vignette{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse at center,transparent 30%,rgba(10,0,15,1) 100%)}
+  background:radial-gradient(ellipse at center,transparent 20%,rgba(4,0,10,0.98) 100%)}
+
+/* ── DIM LIGHT SPOTS ── slow-drifting crimson/purple atmosphere glows */
+#spotlights{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.spot{position:absolute;border-radius:50%;filter:blur(140px);will-change:transform}
+.spot-1{width:800px;height:800px;
+  background:radial-gradient(circle,rgba(232,0,42,.13) 0%,transparent 65%);
+  animation:spot-drift-1 24s ease-in-out infinite;top:-200px;left:-100px}
+.spot-2{width:600px;height:600px;
+  background:radial-gradient(circle,rgba(180,0,255,.11) 0%,transparent 65%);
+  animation:spot-drift-2 31s ease-in-out infinite;top:30%;right:-150px}
+.spot-3{width:500px;height:500px;
+  background:radial-gradient(circle,rgba(107,0,25,.16) 0%,transparent 65%);
+  animation:spot-drift-3 19s ease-in-out infinite;bottom:-100px;left:30%}
+.spot-4{width:420px;height:420px;
+  background:radial-gradient(circle,rgba(140,0,200,.09) 0%,transparent 65%);
+  animation:spot-drift-4 41s ease-in-out infinite;top:50%;left:55%}
+@keyframes spot-drift-1{
+  0%,100%{transform:translate(0,0)}
+  30%{transform:translate(40vw,30vh)}
+  65%{transform:translate(55vw,-10vh)}}
+@keyframes spot-drift-2{
+  0%,100%{transform:translate(0,0)}
+  45%{transform:translate(-50vw,20vh)}}
+@keyframes spot-drift-3{
+  0%,100%{transform:translate(0,0)}
+  25%{transform:translate(30vw,-40vh)}
+  75%{transform:translate(-20vw,-20vh)}}
+@keyframes spot-drift-4{
+  0%,100%{transform:translate(0,0)}
+  35%{transform:translate(-35vw,25vh)}
+  70%{transform:translate(10vw,-30vh)}}
 
 /* ── LAYOUT ── */
 #app{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:14px 18px}
@@ -71,12 +105,12 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;
   background:var(--surface);border:1px solid var(--border);border-radius:6px;
   margin-bottom:14px;backdrop-filter:blur(24px);position:relative;overflow:hidden;
-  box-shadow:0 0 120px rgba(157,0,255,.4),0 0 200px rgba(0,247,255,.2),inset 0 1px 0 rgba(157,0,255,.4)}
+  box-shadow:0 0 100px rgba(232,0,42,.25),0 0 160px rgba(180,0,255,.3),inset 0 1px 0 rgba(180,0,255,.4)}
 header::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(0,229,255,.06),transparent);
   animation:header-sweep 6s linear infinite}
 header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--neon-cyan),var(--neon-magenta),var(--neon-cyan),transparent);
+  background:linear-gradient(90deg,transparent,var(--neon-crimson),var(--neon-purple),var(--neon-crimson),transparent);
   animation:bottom-glow 3s ease-in-out infinite}
 @keyframes header-sweep{0%{left:-60%}100%{left:160%}}
 @keyframes bottom-glow{0%,100%{opacity:.4}50%{opacity:1}}
@@ -183,17 +217,17 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 
 /* ── CARDS ── */
 .card{background:var(--glass);border:1px solid var(--border);border-radius:6px;
-  padding:20px;backdrop-filter:blur(12px);transition:all .3s;position:relative;overflow:hidden;
-  box-shadow:0 0 30px rgba(0,229,255,.06),inset 0 0 30px rgba(0,229,255,.02)}
-/* animated corner brackets */
-.card::before,.card::after{content:'';position:absolute;width:16px;height:16px;
-  transition:all .3s;opacity:.5}
-.card::before{top:4px;left:4px;border-top:2px solid var(--neon-cyan);border-left:2px solid var(--neon-cyan)}
-.card::after{bottom:4px;right:4px;border-bottom:2px solid var(--neon-cyan);border-right:2px solid var(--neon-cyan)}
-.card:hover{border-color:rgba(0,229,255,.45);
-  box-shadow:0 0 40px rgba(0,229,255,.18),0 0 80px rgba(0,229,255,.06),inset 0 0 30px rgba(0,229,255,.04)}
-.card:hover::before,.card:hover::after{width:24px;height:24px;opacity:1;
-  box-shadow:0 0 8px var(--neon-cyan)}
+  padding:20px;backdrop-filter:blur(14px);transition:all .3s;position:relative;overflow:hidden;
+  box-shadow:0 0 24px rgba(180,0,255,.07),inset 0 0 24px rgba(180,0,255,.02)}
+/* animated corner brackets — crimson top-left, purple bottom-right */
+.card::before,.card::after{content:'';position:absolute;width:14px;height:14px;
+  transition:all .3s;opacity:.6}
+.card::before{top:4px;left:4px;border-top:2px solid var(--neon-crimson);border-left:2px solid var(--neon-crimson)}
+.card::after{bottom:4px;right:4px;border-bottom:2px solid var(--neon-purple);border-right:2px solid var(--neon-purple)}
+.card:hover{border-color:rgba(232,0,42,.5);
+  box-shadow:0 0 40px rgba(232,0,42,.16),0 0 80px rgba(180,0,255,.10),inset 0 0 30px rgba(232,0,42,.04)}
+.card:hover::before{width:22px;height:22px;opacity:1;box-shadow:0 0 10px var(--neon-crimson)}
+.card:hover::after{width:22px;height:22px;opacity:1;box-shadow:0 0 10px var(--neon-purple)}
 /* top sweep on hover */
 .card .card-sweep{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(0,229,255,.04),transparent);pointer-events:none}
@@ -403,7 +437,8 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .section-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;
   padding-bottom:12px;border-bottom:1px solid var(--border);position:relative}
 .section-header::after{content:'';position:absolute;bottom:-1px;left:0;width:60px;height:1px;
-  background:var(--neon-cyan);box-shadow:0 0 8px var(--neon-cyan)}
+  background:linear-gradient(90deg,var(--neon-crimson),var(--neon-purple));
+  box-shadow:0 0 8px var(--neon-crimson)}
 .section-title{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;
   letter-spacing:4px;text-transform:uppercase;text-shadow:0 0 15px currentColor}
 .section-badge{padding:5px 14px;border-radius:3px;font-size:15px;
@@ -411,9 +446,9 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{background:rgba(0,0,0,.4)}
-::-webkit-scrollbar-thumb{background:rgba(0,229,255,.4);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:rgba(0,229,255,.7)}
+::-webkit-scrollbar-track{background:rgba(4,0,10,.8)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(232,0,42,.6),rgba(180,0,255,.6));border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,rgba(232,0,42,.9),rgba(180,0,255,.9))}
 
 /* ── GLITCH ── */
 @keyframes glitch{
@@ -488,32 +523,22 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
 }
 
 @keyframes pulse-active{
-  0%,100% { box-shadow: 0 0 20px var(--neon-cyan), inset 0 0 10px var(--neon-cyan); border-color: var(--neon-cyan); }
-  50% { box-shadow: 0 0 35px var(--neon-cyan), inset 0 0 15px var(--neon-cyan); border-color: var(--neon-magenta); }
+  0%,100% { box-shadow: 0 0 22px var(--neon-crimson), inset 0 0 10px rgba(232,0,42,.15); border-color: var(--neon-crimson); }
+  50% { box-shadow: 0 0 38px var(--neon-purple), inset 0 0 16px rgba(180,0,255,.15); border-color: var(--neon-purple); }
 }
-.tab-btn.active { animation: pulse-active 2.5s ease-in-out infinite; }
-.card {
-  position: relative;
-  padding: 18px;
-}
-.card::before, .card::after {
-  content: '';
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border: 1px solid var(--neon-cyan);
-  opacity: 0.6;
-  transition: all .2s;
-}
-.card::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
-.card::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
-.card:hover::before, .card:hover::after {
-  opacity: 1;
-  width: 12px;
-  height: 12px;
-  border-color: var(--neon-magenta);
-  box-shadow: 0 0 10px var(--neon-magenta);
-}
+.tab-btn.active { animation: pulse-active 3s ease-in-out infinite; }
+
+/* ── TYPOGRAPHY NORMALIZATION ── */
+.card { font-size: 15px; line-height: 1.75; }
+.card table { font-size: 14px; }
+.card code { font-family: 'Share Tech Mono', monospace; font-size: 14px; }
+.card li { font-size: 15px; line-height: 1.85; }
+.card-title { font-size: 14px; letter-spacing: 2.5px; }
+.section-title { font-size: 17px; letter-spacing: 4px; }
+.stat-num { font-size: 48px; }
+.health-label { font-size: 15px; }
+.health-val { font-size: 15px; }
+p, div { font-family: 'Share Tech Mono', monospace; }
 
 /* Corner brackets for sections */
 .tab-section { position: relative; }
@@ -521,19 +546,26 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
   content: '';
   position: absolute;
   width: 20px; height: 20px;
-  border: 2px solid var(--neon-purple);
-  opacity: 0.4;
+  opacity: 0.5;
   pointer-events: none;
 }
-.tab-section::before { top: -8px; left: -8px; border-right: none; border-bottom: none; }
-.tab-section::after { bottom: -8px; right: -8px; border-left: none; border-top: none; }
+.tab-section::before { top: -8px; left: -8px; border-top: 2px solid var(--neon-crimson); border-left: 2px solid var(--neon-crimson); }
+.tab-section::after  { bottom: -8px; right: -8px; border-bottom: 2px solid var(--neon-purple); border-right: 2px solid var(--neon-purple); }
 
-/* HUD lines around main content */
+/* HUD frame around main content */
 #app::before {
   content: '';
   position: fixed;
-  top: 20px; left: 20px; right: 20px; bottom: 20px;
-  border: 1px solid rgba(157,0,255,0.12);
+  top: 18px; left: 18px; right: 18px; bottom: 18px;
+  border: 1px solid rgba(180,0,255,0.1);
+  pointer-events: none;
+  z-index: 0;
+}
+#app::after {
+  content: '';
+  position: fixed;
+  top: 22px; left: 22px; right: 22px; bottom: 22px;
+  border: 1px solid rgba(232,0,42,0.06);
   pointer-events: none;
   z-index: 0;
 }</style>
@@ -542,6 +574,12 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
 
 <canvas id="matrix"></canvas>
 <canvas id="beams"></canvas>
+<div id="spotlights">
+  <div class="spot spot-1"></div>
+  <div class="spot spot-2"></div>
+  <div class="spot spot-3"></div>
+  <div class="spot spot-4"></div>
+</div>
 <div id="vignette"></div>
 
 <div id="app">
@@ -592,7 +630,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
   <button class="tab-btn" data-tab="commands">⌨️ ⌘ COMMANDS</button>
   <button class="tab-btn" data-tab="live">📡 ◈ LIVE STATUS</button>
   <button class="tab-btn" data-tab="watcher">👁️ ⚡ AUTO-PUSH</button>
-    <button class="tab-btn" data-tab="broker">🚚 ◉ BROKER</button>
+    <button class="tab-btn" data-tab="broker">🏛️ ◉ BROKER</button>
   <button class="tab-btn" data-tab="api-monitoring">📊 ◈ API MONITORING</button>
   <button class="tab-btn" data-tab="scripts">📜 ◈ SCRIPTS</button>
 </nav>
@@ -1406,8 +1444,9 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
         <div><code style="color:var(--neon-cyan)">/mission MIG-ID</code><br><span style="color:var(--text-dim);font-size:15px">Full mission details (PII visible only to endpoint)</span></div>
         <div><code style="color:var(--neon-cyan)">/driver-profile NAME</code><br><span style="color:var(--text-dim);font-size:15px">Driver history, ratings, past missions</span></div>
         <div><code style="color:var(--neon-cyan)">/price-benchmark PRODUCT WEIGHT</code><br><span style="color:var(--text-dim);font-size:15px">Price range from similar past missions (uses gemma-agentic)</span></div>
-        <div><code style="color:var(--neon-cyan)">/new-mission</code><br><span style="color:var(--text-dim);font-size:15px">Manual mission creation (bypasses group detection)</span></div>
-        <div><code style="color:var(--neon-cyan)">/help</code><br><span style="color:var(--text-dim);font-size:15px">Show available commands</span></div>
+        <div><code style="color:var(--neon-cyan)">/new-mission</code><br><span style="color:var(--text-dim)">Manual mission creation (bypasses group detection)</span></div>
+        <div><code style="color:var(--neon-purple)">/simulate [scenario]</code><br><span style="color:var(--text-dim)">Full dry-run: synthetic customer → broadcast → 3 driver offers → assignment + SLA report</span></div>
+        <div><code style="color:var(--neon-cyan)">/help</code><br><span style="color:var(--text-dim)">Show available commands</span></div>
       </div>
     </div>
 
@@ -1441,9 +1480,9 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
       </div>
     </div>
 
-    <!-- 4 Workflows -->
+    <!-- 5 Workflows -->
     <div class="card" style="border-color:#7c4dff;margin-bottom:16px">
-      <div class="card-title" style="color:#7c4dff"><span class="accent" style="background:#7c4dff"></span>Mission Lifecycle — 4 Workflows</div>
+      <div class="card-title" style="color:#7c4dff"><span class="accent" style="background:#7c4dff"></span>Mission Lifecycle — 5 Workflows</div>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;font-size:15px">
 
@@ -1516,6 +1555,22 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
           </div>
         </div>
 
+        <div style="background:rgba(232,0,42,.06);border:1px solid rgba(232,0,42,.3);border-radius:6px;padding:12px">
+          <div style="font-weight:700;color:var(--neon-crimson);margin-bottom:8px;font-size:16px">Workflow E — Simulation Mode 🏛️</div>
+          <div style="color:var(--text-dim);margin-bottom:10px">Trigger: <code>/simulate</code> · "simulate" · "test mission" from endpoint</div>
+          <ol style="margin-left:16px;color:var(--text-main);line-height:1.9">
+            <li>Acknowledge + show scenario plan (synthetic sand delivery, 2.5t, 18km)</li>
+            <li>Simulate customers group message → trigger detection echo</li>
+            <li>Simulate compressed intake (all 7 answers at once)</li>
+            <li>Simulate driver broadcast to drivers group</li>
+            <li>Show 3 synthetic driver offers (ranked by price/rating/speed)</li>
+            <li>Wait for SELECT N → simulate assignment → print SLA timing summary</li>
+          </ol>
+          <div style="margin-top:8px;padding:6px 10px;background:rgba(232,0,42,.06);border-left:2px solid var(--neon-crimson);font-size:14px;color:var(--text-dim)">
+            Creates real <code>MIG-SIM1.md</code> with <code>simulation:true</code> — excluded from live mission counts. No WhatsApp sends.
+          </div>
+        </div>
+
       </div>
 
       <div style="margin-top:12px;display:flex;gap:24px;flex-wrap:wrap;font-size:15px;padding-top:12px;border-top:1px solid var(--border)">
@@ -1532,7 +1587,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;font-size:15px">
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">Agent Definition</div>
-          <div style="color:var(--neon-green)">✓ Ready — broker.md (292 lines)</div>
+          <div style="color:var(--neon-green)">✓ Ready — SOUL.md (327 lines) · broker.md (5 fixes 2026-04-29)</div>
         </div>
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">Model Routing</div>
@@ -1581,7 +1636,7 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
 └── security_log.md               # Privacy violation attempts log
 
 ~/.openclaw/agents/
-├── broker.md                     # Agent definition (292 lines)
+├── broker/broker.md              # Agent definition (rebuilt 2026-04-29)
 └── agents/memory/broker/
     └── state.jsonl               # Event log (mission_created, offer, assigned…)
       </pre>
@@ -1811,7 +1866,7 @@ const COMMANDS = [
   const ctx=c.getContext('2d');
   let w,h,cols,drops,colHue;
   const chars='アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF><|{}[]#@!DEX';
-  const PALETTES=['#00e5ff','#e040fb','#69ff47','#00e5ff','#ffea00','#00e5ff'];
+  const PALETTES=['#e8002a','#b400ff','#e8002a','#ff0080','#b400ff','#6b0019','#e8002a','#b400ff'];
   function init(){
     w=c.width=window.innerWidth;h=c.height=window.innerHeight;
     cols=Math.floor(w/14);
@@ -1847,11 +1902,12 @@ const COMMANDS = [
   resize();window.addEventListener('resize',resize);
 
   const BEAMS=[
-    {x:0,y:0,angle:30, speed:0.45, hue:'rgba(0,229,255,',   len:420, width:2.5},
-    {x:0,y:0,angle:150,speed:0.30, hue:'rgba(224,64,251,',  len:360, width:2},
-    {x:0,y:0,angle:70, speed:0.55, hue:'rgba(105,255,71,',  len:300, width:1.5},
-    {x:0,y:0,angle:20, speed:0.20, hue:'rgba(255,234,0,',   len:280, width:1.5},
-    {x:0,y:0,angle:110,speed:0.38, hue:'rgba(0,229,255,',   len:500, width:3},
+    {x:0,y:0,angle:30, speed:0.40, hue:'rgba(232,0,42,',    len:480, width:2.5},
+    {x:0,y:0,angle:150,speed:0.28, hue:'rgba(180,0,255,',   len:400, width:2},
+    {x:0,y:0,angle:70, speed:0.50, hue:'rgba(232,0,42,',    len:340, width:1.5},
+    {x:0,y:0,angle:20, speed:0.18, hue:'rgba(140,0,200,',   len:300, width:1.5},
+    {x:0,y:0,angle:110,speed:0.35, hue:'rgba(180,0,255,',   len:560, width:3},
+    {x:0,y:0,angle:55, speed:0.22, hue:'rgba(255,0,128,',   len:260, width:1.2},
   ];
   // init positions spread across canvas
   BEAMS.forEach((b,i)=>{
