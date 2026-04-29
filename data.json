@@ -94,5 +94,86 @@
       }
     },
     "last_updated": "2026-04-27T07:10:33Z"
+  },
+  "broker": {
+    "status": "configured_not_running",
+    "agent_path": "~/.openclaw/agents/broker.md",
+    "workspace": "~/.openclaw/workspace/broker/",
+    "model_routing": {
+      "default": "litellm/gemma-chat (Gemma 3 27B)",
+      "heavy": "litellm/gemma-agentic (Gemma 4 31B)",
+      "routing_logic": "lightweight tasks (<6K tokens) on gemma-chat; heavy RAG/benchmark (>=6K tokens) on gemma-agentic; gemma-fallback bypassed"
+    },
+    "privacy": {
+      "firewall_enabled": true,
+      "blocked_fields": [
+        "customer_name",
+        "customer_phone",
+        "customer_whatsapp",
+        "customer_photo",
+        "exact_address",
+        "payment_details",
+        "personal_notes"
+      ],
+      "sanitizer": "sanitize_for_drivers() \u2014 rejects any message containing blocked fields"
+    },
+    "mission_id_format": "MIG-YYYYMMDD-NNN",
+    "sla_secs": {
+      "group_detection_response": 10,
+      "intake_initial_dm": 10,
+      "broadcast_after_intake": 30
+    },
+    "capacity": {
+      "llm_tokens_per_mission": {
+        "light_no_benchmark": "~3,400",
+        "mixed_70_30": "~6,800 avg",
+        "heavy_100_benchmark": "~11,400"
+      },
+      "max_per_hour_theoretical": {
+        "light": 120,
+        "mixed": 97,
+        "heavy": 50
+      },
+      "max_per_day_realistic": {
+        "light": 180,
+        "mixed": 150,
+        "heavy": 80
+      },
+      "concurrent_active_range": "65\u2013105",
+      "latency_ms": {
+        "gemma_chat": "700\u20131900",
+        "gemma_agentic": "5000\u201311000"
+      },
+      "availability_target_pct": 98
+    },
+    "database": {
+      "type": "Markdown files",
+      "locations": {
+        "missions": "workspace/broker/missions/MIG-YYYYMMDD-NNN.md",
+        "drivers": "workspace/broker/drivers/*.md",
+        "templates": "workspace/broker/templates/{customer_intake,driver_brief}.md",
+        "memory_index": "workspace/broker/MEMORY.md",
+        "security_log": "workspace/broker/security_log.md"
+      }
+    },
+    "commands": [
+      "/list-missions [status]",
+      "/mission MIG-ID",
+      "/driver-profile NAME",
+      "/price-benchmark product weight",
+      "/new-mission",
+      "/help"
+    ],
+    "live_metrics": {
+      "missions_today": 0,
+      "active_drivers": 0,
+      "avg_response_sec": 22,
+      "completed_total": 0,
+      "uptime": "not_started",
+      "last_activity": null
+    },
+    "workspace_created": "2026-04-28T22:00:00Z",
+    "agent_definition_lines": 292,
+    "notes": "Smart routing built-in. Internal agents routed to gemma-agentic. Requires WhatsApp MCP integration."
   }
 }

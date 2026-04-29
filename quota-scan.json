@@ -1,48 +1,1424 @@
 {
   "schema_version": "2.0",
-  "scanned_at": "2026-04-29T01:26:49Z",
-  "key_count": 1,
-  "model_count": 1,
+  "scanned_at": "2026-04-29T01:49:18Z",
+  "key_count": 6,
+  "model_count": 15,
   "pools": {
-    "gemma-fallback": {
-      "model": "gemma-3-4b-it",
-      "provider": "gemini",
+    "mistral-large": {
+      "model": "mistral-large-latest",
+      "provider": "mistral",
       "keys": [
         {
-          "key": "GEMINI_API_KEY_2",
+          "key": "MISTRAL_API_KEY_1",
           "status": "OK",
           "http_code": 200,
-          "latency_ms": 1707,
+          "latency_ms": 495,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 533,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 599,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 640,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 667,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 716,
           "rl_headers": {}
         }
       ],
       "summary": {
-        "total": 1,
-        "ok": 1,
+        "total": 6,
+        "ok": 6,
         "daily_quota": 0,
         "minute_quota": 0,
         "other": 0,
         "health_pct": 100
       },
       "limits": {
-        "rpm": 30,
-        "tpm": 15000,
-        "rpd": 14400,
-        "tpm_label": "15K/key"
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "mistral-medium": {
+      "model": "mistral-medium-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 652,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 655,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 655,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 1277,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 1284,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 1409,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "mistral-small": {
+      "model": "mistral-small-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 784,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 786,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 617,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 637,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 706,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 1863,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "mistral-nemo": {
+      "model": "open-mistral-nemo",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 361,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 375,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 376,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 319,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 554,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 548,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "ministral-3b": {
+      "model": "ministral-3b-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 281,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 266,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 307,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 428,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 397,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 414,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "ministral-8b": {
+      "model": "ministral-8b-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 267,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 318,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 309,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 311,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 354,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 370,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "ministral-14b": {
+      "model": "ministral-14b-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 359,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 359,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 310,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 319,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 299,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 580,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "magistral-small": {
+      "model": "magistral-small-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 313,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 311,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 293,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 341,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 319,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 2346,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "magistral-medium": {
+      "model": "magistral-medium-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 360,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 384,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 392,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 343,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 347,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 328,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "codestral": {
+      "model": "codestral-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 291,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 310,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 305,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 363,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 300,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 318,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "devstral": {
+      "model": "devstral-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 361,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 433,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 422,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 458,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 425,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 435,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "pixtral-large": {
+      "model": "pixtral-large-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 394,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 440,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 602,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 582,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 582,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 625,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "mistral-embed": {
+      "model": "mistral-embed",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 308,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 326,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 348,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 361,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 429,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 508,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "codestral-embed": {
+      "model": "codestral-embed",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 365,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 309,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 377,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 386,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 371,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 395,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
+      }
+    },
+    "mistral-moderation": {
+      "model": "mistral-moderation-latest",
+      "provider": "mistral",
+      "keys": [
+        {
+          "key": "MISTRAL_API_KEY_1",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 292,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_2",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 324,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_3",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 313,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 306,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_5",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 319,
+          "rl_headers": {}
+        },
+        {
+          "key": "MISTRAL_API_KEY_4",
+          "status": "OK",
+          "http_code": 200,
+          "latency_ms": 1184,
+          "rl_headers": {}
+        }
+      ],
+      "summary": {
+        "total": 6,
+        "ok": 6,
+        "daily_quota": 0,
+        "minute_quota": 0,
+        "other": 0,
+        "health_pct": 100
+      },
+      "limits": {
+        "rpm": 2,
+        "tpm": 500000,
+        "rpd": 2880,
+        "tpm_label": "500K/key"
       }
     }
   },
-  "tpm_stress": [
+  "burst_probes": [
     {
-      "key": "GEMINI_API_KEY_2",
-      "model": "gemma-3-4b-it",
-      "status": "TOKEN_QUOTA",
-      "latency_ms": 494,
-      "token_wall_hit": true,
-      "hit_rpm_instead": false,
-      "known_tpm": 15000,
-      "rl_headers": {},
-      "error_excerpt": "{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota ex"
+      "key": "MISTRAL_API_KEY_1",
+      "model": "mistral-large-latest",
+      "burst_n": 5,
+      "ok": 2,
+      "throttled": 3,
+      "status_breakdown": {
+        "MINUTE_QUOTA": 3,
+        "OK": 2
+      },
+      "elapsed_s": 0.55,
+      "empirical_rpm": 2,
+      "known_rpm": 2,
+      "lat_p50_ms": 442,
+      "lat_p95_ms": 547,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "mistral-large-latest",
+      "burst_n": 5,
+      "ok": 3,
+      "throttled": 2,
+      "status_breakdown": {
+        "MINUTE_QUOTA": 2,
+        "OK": 3
+      },
+      "elapsed_s": 0.53,
+      "empirical_rpm": 3,
+      "known_rpm": 2,
+      "lat_p50_ms": 466,
+      "lat_p95_ms": 526,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_5",
+      "model": "mistral-medium-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 1.25,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 518,
+      "lat_p95_ms": 1244,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_4",
+      "model": "mistral-medium-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 1.76,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 640,
+      "lat_p95_ms": 1759,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "mistral-small-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 1.73,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 1052,
+      "lat_p95_ms": 1728,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "mistral-small-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 1.32,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 686,
+      "lat_p95_ms": 1319,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "open-mistral-nemo",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.83,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 681,
+      "lat_p95_ms": 819,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_3",
+      "model": "open-mistral-nemo",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.97,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 435,
+      "lat_p95_ms": 972,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "ministral-3b-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.43,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 368,
+      "lat_p95_ms": 421,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "ministral-3b-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.38,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 373,
+      "lat_p95_ms": 377,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "ministral-8b-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.39,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 363,
+      "lat_p95_ms": 384,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "ministral-8b-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.38,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 347,
+      "lat_p95_ms": 376,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "ministral-14b-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 14.33,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 393,
+      "lat_p95_ms": 14323,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "ministral-14b-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.39,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 346,
+      "lat_p95_ms": 379,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "magistral-small-latest",
+      "burst_n": 5,
+      "ok": 1,
+      "throttled": 4,
+      "status_breakdown": {
+        "MINUTE_QUOTA": 4,
+        "OK": 1
+      },
+      "elapsed_s": 2.12,
+      "empirical_rpm": 1,
+      "known_rpm": 2,
+      "lat_p50_ms": 295,
+      "lat_p95_ms": 2114,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "magistral-small-latest",
+      "burst_n": 5,
+      "ok": 3,
+      "throttled": 2,
+      "status_breakdown": {
+        "OK": 3,
+        "MINUTE_QUOTA": 2
+      },
+      "elapsed_s": 0.39,
+      "empirical_rpm": 3,
+      "known_rpm": 2,
+      "lat_p50_ms": 338,
+      "lat_p95_ms": 383,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "magistral-medium-latest",
+      "burst_n": 5,
+      "ok": 0,
+      "throttled": 5,
+      "status_breakdown": {
+        "MINUTE_QUOTA": 5
+      },
+      "elapsed_s": 0.31,
+      "empirical_rpm": 0,
+      "known_rpm": 2,
+      "lat_p50_ms": 297,
+      "lat_p95_ms": 308,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "magistral-medium-latest",
+      "burst_n": 5,
+      "ok": 0,
+      "throttled": 5,
+      "status_breakdown": {
+        "MINUTE_QUOTA": 5
+      },
+      "elapsed_s": 0.35,
+      "empirical_rpm": 0,
+      "known_rpm": 2,
+      "lat_p50_ms": 321,
+      "lat_p95_ms": 348,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "codestral-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.38,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 371,
+      "lat_p95_ms": 378,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_3",
+      "model": "codestral-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.37,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 358,
+      "lat_p95_ms": 362,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "devstral-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.45,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 420,
+      "lat_p95_ms": 445,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_3",
+      "model": "devstral-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.47,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 442,
+      "lat_p95_ms": 464,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_4",
+      "model": "pixtral-large-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.84,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 642,
+      "lat_p95_ms": 833,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY",
+      "model": "pixtral-large-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 1.03,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 622,
+      "lat_p95_ms": 1025,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "mistral-embed",
+      "burst_n": 10,
+      "ok": 10,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 10
+      },
+      "elapsed_s": 0.57,
+      "empirical_rpm": 10,
+      "known_rpm": 2,
+      "lat_p50_ms": 510,
+      "lat_p95_ms": 554,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "mistral-embed",
+      "burst_n": 10,
+      "ok": 10,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 10
+      },
+      "elapsed_s": 0.56,
+      "empirical_rpm": 10,
+      "known_rpm": 2,
+      "lat_p50_ms": 454,
+      "lat_p95_ms": 542,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "codestral-embed",
+      "burst_n": 10,
+      "ok": 10,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 10
+      },
+      "elapsed_s": 14.41,
+      "empirical_rpm": 10,
+      "known_rpm": 2,
+      "lat_p50_ms": 480,
+      "lat_p95_ms": 14405,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "codestral-embed",
+      "burst_n": 10,
+      "ok": 10,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 10
+      },
+      "elapsed_s": 0.58,
+      "empirical_rpm": 10,
+      "known_rpm": 2,
+      "lat_p50_ms": 492,
+      "lat_p95_ms": 572,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_1",
+      "model": "mistral-moderation-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.46,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 412,
+      "lat_p95_ms": 460,
+      "rl_headers": {}
+    },
+    {
+      "key": "MISTRAL_API_KEY_2",
+      "model": "mistral-moderation-latest",
+      "burst_n": 5,
+      "ok": 5,
+      "throttled": 0,
+      "status_breakdown": {
+        "OK": 5
+      },
+      "elapsed_s": 0.53,
+      "empirical_rpm": 5,
+      "known_rpm": 2,
+      "lat_p50_ms": 403,
+      "lat_p95_ms": 525,
+      "rl_headers": {}
     }
   ]
 }

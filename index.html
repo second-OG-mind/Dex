@@ -20,10 +20,10 @@
   --neon-purple:  #9d00ff;        /* deep purple — headers/borders */
   --neon-crimson: #dc143c;        /* true crimson — priority highlights */
   
-  --bg-dark:     #050505;         /* near-black, not pure */
-  --bg-darker:   #020202;
-  --surface:     rgba(10,0,15,0.92);  /* purple-tinted surface */
-  --glass:       rgba(157,0,255,0.06); /* very subtle purple tint */
+  --bg-dark:     #000000;         /* near-black, not pure */
+  --bg-darker:   #000000;
+  --surface:     rgba(8,0,12,0.95);  /* purple-tinted surface */
+  --glass:       rgba(157,0,255,0.03); /* very subtle purple tint */
   --border:      rgba(157,0,255,0.35); /* brighter border glow */
   
   --text-main:   #f0e6ff;         /* soft white-purple */
@@ -31,11 +31,11 @@
   --text-bright: #ffffff;         /* pure white for emphasis */
 
   /* Glow multipliers — heavier than before */
-  --glow-cyan:    0 0 30px rgba(0,247,255,.45), 0 0 60px rgba(0,247,255,.25);
-  --glow-magenta: 0 0 30px rgba(255,42,156,.45), 0 0 60px rgba(255,42,156,.25);
-  --glow-green:   0 0 25px rgba(0,255,102,.45), 0 0 50px rgba(0,255,102,.2);
-  --glow-red:     0 0 30px rgba(255,51,102,.5),  0 0 60px rgba(255,51,102,.3);
-  --glow-purple:  0 0 35px rgba(157,0,255,.5),   0 0 70px rgba(157,0,255,.25);
+  --glow-cyan:    0 0 50px rgba(0,247,255,.55), 0 0 100px rgba(0,247,255,.35);
+  --glow-magenta: 0 0 50px rgba(255,42,156,.55), 0 0 100px rgba(255,42,156,.35);
+  --glow-green:   0 0 40px rgba(0,255,102,.55), 0 0 80px rgba(0,255,102,.35);
+  --glow-red:     0 0 50px rgba(255,51,102,.6),  0 0 100px rgba(255,51,102,.45);
+  --glow-purple:  0 0 55px rgba(157,0,255,.6),   0 0 110px rgba(157,0,255,.35);
   --glow-crimson: 0 0 35px rgba(220,20,60,.55),  0 0 70px rgba(220,20,60,.3);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -459,7 +459,34 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
 @keyframes pulse-dot{
   0%,100%{opacity:.9;transform:translateY(-50%) scale(1)}
   50%{opacity:1;transform:translateY(-50%) scale(1.15)}
-}</style>
+}
+/* Glitch hover effect for cards */
+.card:hover {
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes glitch-skew {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+/* Neon text glow for headings */
+.neon-text {
+  text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+}
+
+/* Breathing border for broker tab */
+#tab-broker.active .tab-btn {
+  animation: breathe 3s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100% { border-color: var(--neon-purple); box-shadow: 0 0 28px rgba(157,0,255,.3), inset 0 0 8px rgba(157,0,255,.1); }
+  50% { border-color: var(--neon-crimson); box-shadow: 0 0 40px rgba(220,20,60,.4), inset 0 0 12px rgba(220,20,60,.2); }
+}
+</style>
 </head>
 <body>
 
@@ -1237,19 +1264,35 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
       </div>
 
       <div class="card" style="border-color:var(--neon-magenta)">
-        <div class="card-title" style="color:var(--neon-magenta)"><span class="accent" style="background:var(--neon-magenta)"></span>Model Routing (Smart)</div>
+        <div class="card-title" style="color:var(--neon-magenta)"><span class="accent" style="background:var(--neon-magenta)"></span>Model Routing — SLA-Aware (updated 2026-04-29)</div>
         <div style="line-height:1.8;color:var(--text-main);font-size:16px">
-          <div style="margin-bottom:8px"><span style="color:var(--neon-green)">● Default:</span> <code>litellm/gemma-chat</code> (Gemma 3 27B, 0.7–1.9s)</div>
-          <div style="margin-bottom:8px"><span style="color:var(--neon-orange)">● Heavy ops:</span> <code>litellm/gemma-agentic</code> (Gemma 4 31B, 5–11s, unlimited TPM)</div>
-          <div><span style="color:var(--neon-red)">● Bypassed:</span> gemma-fallback (4B) not in critical path</div>
+          <div style="margin-bottom:6px"><span style="color:var(--neon-green)">● Default:</span> <code>litellm/gemma-chat</code> — Gemma 3 27B · 0.7–1.9s · 15K TPM</div>
+          <div style="margin-bottom:6px"><span style="color:var(--neon-cyan)">● SLA Fallback (tier-2):</span> <code>litellm/mistral-chat</code> — Ministral 8B · <strong style="color:var(--neon-cyan)">314ms</strong> · 500K TPM ✓</div>
+          <div style="margin-bottom:6px"><span style="color:var(--neon-orange)">● Heavy RAG (tier-3):</span> <code>litellm/gemma-agentic</code> — Gemma 4 31B · 5–11s · ∞ TPM</div>
+          <div style="margin-bottom:6px"><span style="color:var(--text-dim)">● Bypassed:</span> gemma-fallback 4B not in broker path</div>
+          <div style="margin-top:10px;padding:8px;background:rgba(0,229,255,.07);border-left:3px solid var(--neon-cyan);font-size:15px">
+            <strong style="color:var(--neon-cyan)">Auto-fallback chain (LiteLLM-managed):</strong><br>
+            gemma-chat → <strong>mistral-chat</strong> (314ms, SLA-safe) → gemma-agentic (final)<br>
+            Mistral is tier-2 so broker 10s SLA is preserved even under Gemma quota pressure.
+          </div>
           <div style="margin-top:8px;font-size:15px;color:var(--text-dim)">
-            Light tasks (<6K tokens) → gemma-chat.<br>
-            Heavy RAG/benchmark (≥6K tokens) → gemma-agentic directly.<br>
-            Avoids TPM cascade, eliminates 4B pool 429 surprises.
+            /price-benchmark, /driver-profile &gt;3 missions, RAG &gt;6K tokens → gemma-agentic directly.
           </div>
         </div>
       </div>
+    
+
+    <div class="card" style="border-color:var(--neon-cyan);margin-bottom:16px">
+      <div class="card-title" style="color:var(--neon-cyan)"><span class="accent" style="background:var(--neon-cyan)"></span>📡 Live Status (Simulated)</div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:16px">
+        <div>📦 Missions today: <span id="missions-today" style="color:var(--neon-green)">0</span></div>
+        <div>🚚 Active drivers: <span id="active-drivers" style="color:var(--neon-magenta)">0</span></div>
+        <div>⏱ Avg response: <span id="avg-response" style="color:var(--neon-yellow)">~22s</span></div>
+        <div>✅ Completed: <span id="completed" style="color:var(--neon-green)">0</span></div>
+      </div>
     </div>
+
+</div>
 
     <div class="card" style="border-color:var(--neon-yellow);margin-bottom:16px">
       <div class="card-title" style="color:var(--neon-yellow)"><span class="accent" style="background:var(--neon-yellow)"></span>Capacity & Performance (Realistic, Human-in-the-Loop)</div>
@@ -1315,6 +1358,159 @@ footer{text-align:center;padding:18px;font-size:13px;color:var(--text-dim);
         <div><code style="color:var(--neon-cyan)">/price-benchmark PRODUCT WEIGHT</code><br><span style="color:var(--text-dim);font-size:15px">Price range from similar past missions (uses gemma-agentic)</span></div>
         <div><code style="color:var(--neon-cyan)">/new-mission</code><br><span style="color:var(--text-dim);font-size:15px">Manual mission creation (bypasses group detection)</span></div>
         <div><code style="color:var(--neon-cyan)">/help</code><br><span style="color:var(--text-dim);font-size:15px">Show available commands</span></div>
+      </div>
+    </div>
+
+    <!-- SLA Requirements -->
+    <div class="card" style="border-color:var(--neon-red);margin-bottom:16px">
+      <div class="card-title" style="color:var(--neon-red)"><span class="accent" style="background:var(--neon-red)"></span>SLA Requirements</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;font-size:16px">
+        <div style="background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.3);border-radius:6px;padding:12px;text-align:center">
+          <div style="font-size:28px;font-weight:700;color:var(--neon-red);font-family:Orbitron">10s</div>
+          <div style="color:var(--text-main)">Customer detection → group reply</div>
+          <div style="color:var(--text-dim);font-size:14px">Trigger: keyword in customers group</div>
+        </div>
+        <div style="background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.3);border-radius:6px;padding:12px;text-align:center">
+          <div style="font-size:28px;font-weight:700;color:var(--neon-orange);font-family:Orbitron">10s</div>
+          <div style="color:var(--text-main)">Group reply → private DM open</div>
+          <div style="color:var(--text-dim);font-size:14px">Intake form sent to customer</div>
+        </div>
+        <div style="background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.3);border-radius:6px;padding:12px;text-align:center">
+          <div style="font-size:28px;font-weight:700;color:var(--neon-yellow);font-family:Orbitron">30s</div>
+          <div style="color:var(--text-main)">Intake complete → driver broadcast</div>
+          <div style="color:var(--text-dim);font-size:14px">Mission file created, sanitized, posted</div>
+        </div>
+        <div style="background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.3);border-radius:6px;padding:12px;text-align:center">
+          <div style="font-size:28px;font-weight:700;color:var(--neon-cyan);font-family:Orbitron">2h</div>
+          <div style="color:var(--text-main)">Offer collection window</div>
+          <div style="color:var(--text-dim);font-size:14px">15-min reminders if &lt;3 offers received</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:15px;color:var(--text-dim)">
+        <strong style="color:var(--neon-cyan)">Why mistral-chat is tier-2:</strong> gemma-agentic responds in 5–11s — too close to the 10s wall under load. Ministral 8B at 314ms gives 30× headroom for SLA-critical flows.
+      </div>
+    </div>
+
+    <!-- 4 Workflows -->
+    <div class="card" style="border-color:#7c4dff;margin-bottom:16px">
+      <div class="card-title" style="color:#7c4dff"><span class="accent" style="background:#7c4dff"></span>Mission Lifecycle — 4 Workflows</div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;font-size:15px">
+
+        <div style="background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.3);border-radius:6px;padding:12px">
+          <div style="font-weight:700;color:#7c4dff;margin-bottom:8px;font-size:16px">Workflow A — Customer → Mission</div>
+          <div style="color:var(--text-dim);margin-bottom:8px">Trigger keywords in customers group:</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">transport</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">deliver</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">truck</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">van</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">sand</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">iron</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">goods</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">cargo</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">move</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">ship</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">load/unload</span>
+            <span style="background:rgba(124,77,255,.2);color:#b388ff;padding:2px 7px;border-radius:3px;font-size:13px">hire</span>
+          </div>
+          <ol style="margin-left:16px;color:var(--text-main);line-height:1.9">
+            <li>Reply in group within 10s → "Check your DM ✋"</li>
+            <li>Open private DM → send 7-question intake form</li>
+            <li>Collect answers → validate → generate MIG-YYYYMMDD-NNN</li>
+            <li>Create mission file in workspace/broker/missions/</li>
+            <li>If dry_run: log + wait for APPROVE_MIG-XXX from endpoint</li>
+          </ol>
+        </div>
+
+        <div style="background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.3);border-radius:6px;padding:12px">
+          <div style="font-weight:700;color:#7c4dff;margin-bottom:8px;font-size:16px">Workflow B — Broadcast to Drivers</div>
+          <div style="color:var(--text-dim);margin-bottom:10px">Triggered by: broadcast_to_drivers(mission_id)</div>
+          <ol style="margin-left:16px;color:var(--text-main);line-height:1.9">
+            <li>Load mission → extract ALLOWED fields only</li>
+            <li>Run <code>sanitize_for_drivers()</code> — raises PrivacyError on violation</li>
+            <li>Format via driver_brief.md template</li>
+            <li>Post to drivers group → start 2h offer timer</li>
+            <li>Send 15-min reminders if &lt;1h remaining with no offers</li>
+          </ol>
+          <div style="margin-top:8px;font-size:14px;color:var(--text-dim)">
+            Allowed fields: mission_id, product_type, weight, size, pickup_area, delivery_area, vehicle_required, deadline, distance_estimate_km
+          </div>
+        </div>
+
+        <div style="background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.3);border-radius:6px;padding:12px">
+          <div style="font-weight:700;color:#7c4dff;margin-bottom:8px;font-size:16px">Workflow C — Driver Offer → Selection</div>
+          <div style="color:var(--text-dim);margin-bottom:10px">Trigger: DM from driver containing mission ID</div>
+          <ol style="margin-left:16px;color:var(--text-main);line-height:1.9">
+            <li>Parse offer: price + vehicle + ETA</li>
+            <li>Validate driver profile (create stub if new)</li>
+            <li>Append to mission file under Offers section</li>
+            <li>When ≥2 offers OR 15 min to deadline → rank top 3</li>
+            <li>DM endpoint: table of top 3 (price ↑, rating ↓, speed ↓)</li>
+            <li>Wait for SELECT N reply — auto-select cheapest if timeout</li>
+          </ol>
+        </div>
+
+        <div style="background:rgba(124,77,255,.07);border:1px solid rgba(124,77,255,.3);border-radius:6px;padding:12px">
+          <div style="font-weight:700;color:#7c4dff;margin-bottom:8px;font-size:16px">Workflow D — Assignment & Notification</div>
+          <div style="color:var(--text-dim);margin-bottom:10px">Trigger: SELECT N from endpoint</div>
+          <ol style="margin-left:16px;color:var(--text-main);line-height:1.9">
+            <li>Update mission file: status=assigned, driver, price, timestamp</li>
+            <li>DM winning driver: pickup area + deadline + CONFIRMED request</li>
+            <li>Notify customer: driver name, vehicle, ETA</li>
+            <li>Archive rejected offers with reason not_selected</li>
+            <li>Update MEMORY.md with outcome for future RAG</li>
+          </ol>
+          <div style="margin-top:8px;padding:6px 10px;background:rgba(105,255,71,.07);border-left:2px solid var(--neon-green);font-size:14px;color:var(--text-dim)">
+            Customer contact is NEVER shared with driver directly — all coordination through broker.
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:24px;flex-wrap:wrap;font-size:15px;padding-top:12px;border-top:1px solid var(--border)">
+        <div><strong style="color:var(--neon-green)">Mission ID:</strong> <code>MIG-YYYYMMDD-NNN</code> — resets at midnight UTC, 001–999/day</div>
+        <div><strong style="color:var(--neon-yellow)">Dry-run mode:</strong> first 5 missions require APPROVE_MIG-XXX from endpoint before broadcast</div>
+        <div><strong style="color:var(--neon-orange)">No-offers fallback:</strong> alert endpoint → suggest repost or adjust requirements</div>
+      </div>
+    </div>
+
+    <!-- Deployment Status -->
+    <div class="card" style="border-color:var(--neon-yellow);margin-bottom:16px">
+      <div class="card-title" style="color:var(--neon-yellow)"><span class="accent" style="background:var(--neon-yellow)"></span>Deployment Status</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;font-size:15px">
+        <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
+          <div style="color:var(--text-dim);margin-bottom:4px">Agent Definition</div>
+          <div style="color:var(--neon-green)">✓ Ready — broker.md (292 lines)</div>
+        </div>
+        <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
+          <div style="color:var(--text-dim);margin-bottom:4px">Model Routing</div>
+          <div style="color:var(--neon-green)">✓ gemma-chat → mistral-chat → gemma-agentic</div>
+        </div>
+        <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
+          <div style="color:var(--text-dim);margin-bottom:4px">Dry-run Mode</div>
+          <div style="color:var(--neon-yellow)">⚠ ACTIVE — first 5 missions require manual approval</div>
+        </div>
+        <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
+          <div style="color:var(--text-dim);margin-bottom:4px">customers_group_id</div>
+          <div style="color:var(--neon-red)">✗ Not set — update broker/config.md</div>
+        </div>
+        <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
+          <div style="color:var(--text-dim);margin-bottom:4px">drivers_group_id</div>
+          <div style="color:var(--neon-red)">✗ Not set — update broker/config.md</div>
+        </div>
+        <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
+          <div style="color:var(--text-dim);margin-bottom:4px">WhatsApp MCP</div>
+          <div style="color:var(--neon-red)">✗ Not installed — required for live operation</div>
+        </div>
+        <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
+          <div style="color:var(--text-dim);margin-bottom:4px">Workspace Files</div>
+          <div style="color:var(--neon-green)">✓ missions/ drivers/ templates/ config.md MEMORY.md</div>
+        </div>
+        <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
+          <div style="color:var(--text-dim);margin-bottom:4px">SLA Protection</div>
+          <div style="color:var(--neon-green)">✓ mistral-chat tier-2 fallback active (314ms)</div>
+        </div>
       </div>
     </div>
 
@@ -1438,11 +1634,11 @@ const SYSTEM = {
 };
 
 const SERVICES = [
-  { id:'openclaw-gateway', name:'🌐 OPENCLAW GATEWAY', emoji:'🌐', port:18789, proto:'WebSocket/HTTP', cpu:1.8, mem:3.2, pid:289, unit:'openclaw-gateway.service', desc:'🤖 Main AI gateway. Handles Telegram, runs agents, loads plugins.', color:'var(--neon-cyan)' },
-  { id:'cognee', name:'COGNEE', emoji:'🧠', port:8000, proto:'HTTP/uvicorn', cpu:0.2, mem:1.8, pid:286, unit:'cognee.service', desc:'🧠 Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--neon-magenta)' },
-  { id:'mem0', name:'MEM0 REST', emoji:'💾', port:8080, proto:'HTTP/FastAPI', cpu:0.5, mem:0.7, pid:5751, unit:'mem0.service', desc:'💾 Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--neon-orange)' },
-  { id:'qdrant', name:'QDRANT', emoji:'🗄️', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:2.2, pid:290, unit:'qdrant.service', desc:'🗄️ Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--neon-green)' },
-  { id:'litellm', name:'LITELLM PROXY', emoji:'🔗', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'🔗 LiteLLM proxy. 6 pools × 28 keys: gemma-chat, gemma-fallback, gemma-internal, gemma-agentic, gemini-embedding, gemini-embedding-2.', color:'var(--neon-yellow)' },
+  { id:'openclaw-gateway', name:'🌐 OPENCLAW GATEWAY', port:18789, proto:'WebSocket/HTTP', cpu:1.8, mem:3.2, pid:289, unit:'openclaw-gateway.service', desc:'Main AI gateway. Handles Telegram, runs agents, loads plugins.', color:'var(--neon-cyan)', uptime:'1h 31m' },
+  { id:'cognee', name:'🧠 COGNEE', port:8000, proto:'HTTP/uvicorn', cpu:0.2, mem:1.8, pid:286, unit:'cognee.service', desc:'Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--neon-magenta)', uptime:'3d 12h' },
+  { id:'mem0', name:'💾 MEM0 REST', port:8080, proto:'HTTP/FastAPI', cpu:0.5, mem:0.7, pid:5751, unit:'mem0.service', desc:'Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--neon-orange)', uptime:'4d 02h' },
+  { id:'qdrant', name:'🗄️ QDRANT', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:2.2, pid:290, unit:'qdrant.service', desc:'Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--neon-green)', uptime:'4d 15h' },
+  { id:'litellm', name:'🔗 LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 6 pools × 28 keys. Smart routing: gemma-chat→gemma-agentic (4B bypassed).', color:'var(--neon-yellow)', uptime:'1h 31m' },
 ];
 
 const PLUGINS = [
