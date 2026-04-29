@@ -1,18 +1,18 @@
 {
-  "last_updated": "2026-04-29T04:00:03Z",
+  "last_updated": "2026-04-29T04:14:37Z",
   "gateway": {
-    "status": "online",
+    "status": "offline",
     "port": 18789,
-    "pid": 292554,
+    "pid": 301801,
     "version": "2026.4.27"
   },
   "services": {
     "openclaw-gateway": {
-      "active": true,
-      "cpu": 2.7,
-      "mem": 2.7,
+      "active": false,
+      "cpu": 25.7,
+      "mem": 2.9,
       "port": 18789,
-      "pid": 292554
+      "pid": 301801
     },
     "cognee": {
       "active": false,
@@ -37,7 +37,7 @@
     "litellm-proxy": {
       "active": true,
       "cpu": 0.8,
-      "mem": 2.5,
+      "mem": 2.6,
       "port": 4000
     }
   },
