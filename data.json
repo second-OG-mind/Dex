@@ -1,18 +1,18 @@
 {
-  "last_updated": "2026-04-29T12:30:01Z",
+  "last_updated": "2026-04-29T12:45:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
-    "pid": 351207,
+    "pid": 353896,
     "version": "2026.4.27"
   },
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 8.8,
-      "mem": 3.0,
+      "cpu": 11.3,
+      "mem": 3.4,
       "port": 18789,
-      "pid": 351207
+      "pid": 353896
     },
     "cognee": {
       "active": false,
@@ -78,9 +78,9 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 0,
-    "unhealthy_endpoints": 0,
-    "total_endpoints": 0
+    "healthy_endpoints": 201,
+    "unhealthy_endpoints": 9,
+    "total_endpoints": 210
   },
   "key_states": {
     "schema_version": "1.1",
@@ -88,46 +88,46 @@
       "gemini-embedding": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T12:30:01Z",
+        "last_checked": "2026-04-29T12:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T12:30:01Z",
+        "last_checked": "2026-04-29T12:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T12:30:01Z",
+        "last_checked": "2026-04-29T12:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T12:30:01Z",
+        "last_checked": "2026-04-29T12:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-agentic": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T12:30:01Z",
+        "last_checked": "2026-04-29T12:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-04-29T12:30:01Z",
+        "last_checked": "2026-04-29T12:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-04-29T12:30:01Z"
+    "last_updated": "2026-04-29T12:45:01Z"
   }
 }
