@@ -190,6 +190,22 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tab-btn[data-tab="scripts"].active{border-color:#00ffcc;color:#00ffcc;box-shadow:0 0 28px rgba(0,255,204,.3);background:rgba(0,255,204,.07)}
 .tab-btn[data-tab="scripts"].active::after{background:#00ffcc;box-shadow:0 0 12px #00ffcc}
 .tab-btn[data-tab="scripts"]:hover{border-color:rgba(0,255,204,.5);color:#00ffcc}
+.tab-btn[data-tab="blueprint"].active{border-color:#ff9f43;color:#ff9f43;box-shadow:0 0 28px rgba(255,159,67,.3);background:rgba(255,159,67,.07)}
+.tab-btn[data-tab="blueprint"].active::after{background:#ff9f43;box-shadow:0 0 12px #ff9f43}
+.tab-btn[data-tab="blueprint"]:hover{border-color:rgba(255,159,67,.5);color:#ff9f43}
+.bp-table{width:100%;border-collapse:collapse;margin-bottom:4px}
+.bp-table th{background:rgba(255,159,67,.1);color:#ff9f43;font-family:'Orbitron',monospace;font-size:13px;letter-spacing:1px;padding:9px 12px;text-align:left;border-bottom:1px solid rgba(255,159,67,.35);text-transform:uppercase}
+.bp-table td{padding:8px 12px;font-size:15px;color:var(--text-main);border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
+.bp-table tr:hover td{background:rgba(255,159,67,.04)}
+.bp-table td:first-child{color:var(--text-dim);font-size:14px;font-family:'Share Tech Mono',monospace;white-space:nowrap}
+.bp-section{margin-bottom:16px}
+.bp-section-title{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:#ff9f43;letter-spacing:2px;margin-bottom:8px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.bp-section-title::before{content:'';display:inline-block;width:3px;height:16px;background:#ff9f43;box-shadow:0 0 8px #ff9f43}
+.bp-card{background:rgba(0,0,0,.4);border:1px solid rgba(255,159,67,.2);border-radius:8px;padding:16px 18px}
+.bp-card:hover{border-color:rgba(255,159,67,.4)}
+.bp-warn{display:inline-block;background:rgba(255,23,68,.12);border:1px solid rgba(255,23,68,.4);color:var(--neon-red);border-radius:3px;padding:1px 8px;font-size:13px;font-family:'Share Tech Mono',monospace}
+.bp-ok{display:inline-block;background:rgba(105,255,71,.1);border:1px solid rgba(105,255,71,.4);color:var(--neon-green);border-radius:3px;padding:1px 8px;font-size:13px;font-family:'Share Tech Mono',monospace}
+.bp-dim{color:var(--text-dim);font-size:14px}
 .script-card{background:rgba(0,0,0,.45);border:1px solid rgba(0,255,204,.18);border-radius:10px;padding:20px 22px;margin-bottom:16px}
 .script-card:hover{border-color:rgba(0,255,204,.45);background:rgba(0,255,204,.04)}
 .script-name{font-family:'Orbitron',monospace;font-size:17px;font-weight:700;color:#00ffcc;margin-bottom:4px;letter-spacing:1px}
@@ -697,6 +713,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
     <button class="tab-btn" data-tab="broker">🏛️ ◉ BROKER</button>
   <button class="tab-btn" data-tab="api-monitoring">📊 ◈ API MONITORING</button>
   <button class="tab-btn" data-tab="scripts">📜 ◈ SCRIPTS</button>
+  <button class="tab-btn" data-tab="blueprint">🗺️ ◈ BLUEPRINT</button>
 </nav>
 
 <!-- ═══════════════════════════ OVERVIEW ═══════════════════════════ -->
@@ -2859,5 +2876,209 @@ loadLiveData();
   setInterval(animate, 2000);
   animate(); // initial
 })();
-</script></body>
+</script>
+
+<!-- ═══════════════════════════ BLUEPRINT ═══════════════════════════ -->
+<section class="tab-section" id="tab-blueprint">
+  <div class="section-header">
+    <div class="section-title" style="color:#ff9f43">SYSTEM BLUEPRINT</div>
+    <span class="section-badge" style="border-color:#ff9f43;color:#ff9f43">OPENCLAW · FULL STACK REFERENCE · 2026-04-30</span>
+  </div>
+
+  <div class="grid-2" style="gap:14px;margin-bottom:14px">
+
+    <!-- SYSTEM CORE -->
+    <div class="bp-card">
+      <div class="bp-section-title">System Core</div>
+      <table class="bp-table">
+        <tr><td>Version</td><td>OpenClaw <span style="color:#ff9f43">2026.4.15</span></td></tr>
+        <tr><td>Runtime</td><td>Node.js v24.15.0 via nvm</td></tr>
+        <tr><td>Platform</td><td>WSL2 / Ubuntu 24.04</td></tr>
+        <tr><td>Gateway port</td><td style="color:var(--neon-cyan)">18789</td><td class="bp-dim">(loopback only)</td></tr>
+        <tr><td>Auth mode</td><td>token</td></tr>
+        <tr><td>Config file</td><td style="font-family:'Share Tech Mono',monospace;font-size:13px">~/.openclaw/openclaw.json</td></tr>
+        <tr><td>Service</td><td style="font-family:'Share Tech Mono',monospace;font-size:13px">openclaw-gateway.service</td></tr>
+        <tr><td>Dashboard</td><td style="font-size:13px">second-og-mind.github.io/Dex</td></tr>
+      </table>
+    </div>
+
+    <!-- AGENTS -->
+    <div class="bp-card">
+      <div class="bp-section-title">Agents</div>
+      <table class="bp-table">
+        <thead><tr><th>ID</th><th>Identity</th><th>Model</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="color:#ff9f43">main</td>
+            <td>⚡ DEX</td>
+            <td style="color:var(--neon-cyan)">gemma-chat</td>
+            <td class="bp-dim">Primary agent</td>
+          </tr>
+          <tr>
+            <td style="color:var(--neon-purple)">broker</td>
+            <td>🏛️ Broker</td>
+            <td style="color:var(--neon-cyan)">gemma-chat</td>
+            <td class="bp-dim">Logistics specialist — router excluded</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:14px">
+        <div class="bp-section-title" style="font-size:13px">Critical Ops Rules</div>
+        <div style="font-size:14px;line-height:2;color:var(--text-main)">
+          <div>⚠️ <span style="color:#ff9f43">Stop gateway before editing openclaw.json</span> — file watcher race condition</div>
+          <div><span class="bp-warn">gemini-2.0-flash</span> — BANNED, deprecated</div>
+          <div><span class="bp-warn">gemma-internal 12B</span> — never primary (beta quota ~100-500 RPD)</div>
+          <div><span class="bp-ok">gemma-agentic 31B</span> — internal agents only (∞ TPM)</div>
+          <div><span style="color:var(--neon-magenta)">mistral-large</span> — explicit-only (multimodal/PDF)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUNNING SERVICES -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">Running Services</div>
+    <table class="bp-table">
+      <thead><tr><th>Service</th><th>Port</th><th>Type</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>openclaw-gateway.service</td><td style="color:var(--neon-cyan)">18789</td><td>Node.js daemon</td><td>Main gateway — channels, agents, plugins</td></tr>
+        <tr><td>cognee.service</td><td style="color:var(--neon-magenta)">8000</td><td>Python uvicorn</td><td>Graph memory (Cognee)</td></tr>
+        <tr><td>qdrant.service</td><td style="color:var(--neon-green)">6333</td><td>Qdrant vector DB</td><td>Vector store for mem0 JS + Python</td></tr>
+        <tr><td>mem0.service</td><td style="color:var(--neon-orange)">8080</td><td>Python FastAPI</td><td>Python mem0 REST API (separate from JS plugin)</td></tr>
+        <tr><td>litellm-proxy.service</td><td style="color:var(--neon-yellow)">4000</td><td>Python uvicorn</td><td>Model routing proxy — all inference goes through here</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LITELLM POOLS -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">LiteLLM Pools — 10 active</div>
+    <table class="bp-table">
+      <thead><tr><th>Pool alias</th><th>Model</th><th>Keys</th><th>RPM/key</th><th>RPD/key</th><th>TPM</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#39ff14">gemma-chat</td><td>Gemma 3 27B</td><td>28</td><td>28</td><td>14,400</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Primary user chat</td></tr>
+        <tr><td style="color:var(--neon-magenta)">gemma-fallback</td><td>Gemma 3 4B</td><td>28</td><td>18</td><td>14,400</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Fast / short messages</td></tr>
+        <tr><td style="color:var(--text-dim)">gemma-internal</td><td>Gemma 3 12B</td><td>28</td><td>28</td><td>~100-500</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Passive fallback only (beta quota)</td></tr>
+        <tr><td style="color:var(--neon-orange)">gemma-agentic</td><td>Gemma 4 31B</td><td>28</td><td>13</td><td>1,500</td><td style="color:var(--neon-green)">∞ TPM ✅</td><td>Internal agents (cognee · mem0 · slug-gen)</td></tr>
+        <tr><td style="color:var(--neon-yellow)">gemini-embedding</td><td>Gemini Embedding</td><td>28</td><td>98</td><td>1,000</td><td>—</td><td>Primary embeddings (3072-dim)</td></tr>
+        <tr><td style="color:var(--neon-yellow)">gemini-embedding-2</td><td>Gemini Embedding 2</td><td>28</td><td>98</td><td>1,000</td><td>—</td><td>Embedding fallback (independent quota)</td></tr>
+        <tr><td style="color:var(--neon-cyan)">mistral-chat</td><td>Ministral 8B</td><td>9</td><td>4</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Chat fallback (314ms SLA)</td></tr>
+        <tr><td style="color:var(--neon-cyan)">mistral-large</td><td>Mistral Large</td><td>9</td><td>2</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Explicit-only: multimodal / PDF</td></tr>
+        <tr><td style="color:var(--neon-cyan)">codestral</td><td>Codestral</td><td>9</td><td>4</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Code routing</td></tr>
+        <tr><td style="color:var(--neon-cyan)">mistral-embed</td><td>Mistral Embed</td><td>9</td><td>8</td><td>~2,880</td><td>—</td><td>Embedding escape route</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;font-size:14px;color:var(--text-dim);line-height:1.9">
+      <span style="color:#ff9f43">Fallback chains:</span>
+      gemma-chat → mistral-chat → gemma-agentic &nbsp;|&nbsp;
+      gemma-fallback → mistral-chat → gemma-agentic &nbsp;|&nbsp;
+      gemma-internal → gemma-agentic → mistral-chat &nbsp;|&nbsp;
+      gemini-embedding → gemini-embedding-2 → mistral-embed
+    </div>
+  </div>
+
+  <!-- INPUT ROUTER -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">Input Router — Routing Logic (priority order)</div>
+    <table class="bp-table">
+      <thead><tr><th>#</th><th>Trigger</th><th>Routes to</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Agent in excludeAgents + media</td><td style="color:var(--neon-cyan)">gemini-vision</td><td class="bp-dim">Excluded agents still get vision routing</td></tr>
+        <tr><td>2</td><td>Agent in excludeAgents (text)</td><td style="color:var(--text-dim)">pass-through</td><td class="bp-dim">Broker uses own model config — never overridden</td></tr>
+        <tr><td>3</td><td>modelProviderId = mistral (internal agents)</td><td style="color:var(--neon-orange)">gemma-agentic</td><td class="bp-dim">Unlimited TPM — handles 10K–130K ctx</td></tr>
+        <tr><td>4</td><td>modelProviderId ≠ litellm and ≠ mistral</td><td style="color:var(--text-dim)">pass-through</td><td class="bp-dim">Google, Anthropic — untouched</td></tr>
+        <tr><td>5</td><td>Prompt matches [media attached…]</td><td style="color:var(--neon-cyan)">gemini-vision</td><td class="bp-dim">MEDIA_RE pattern</td></tr>
+        <tr><td>6</td><td>Code detected (CODE_RE)</td><td style="color:#00ffcc">codestral</td><td class="bp-dim">Code fences, def/import/function/SyntaxError…</td></tr>
+        <tr><td>7</td><td>Length &gt; 60 chars OR contains ? ! ؟</td><td style="color:#39ff14">gemma-chat (27B)</td><td class="bp-dim">Complex text path</td></tr>
+        <tr><td>8</td><td>Short / greeting</td><td style="color:var(--neon-magenta)">gemma-fallback (4B)</td><td class="bp-dim">Fast path</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2" style="gap:14px;margin-bottom:14px">
+
+    <!-- TELEGRAM -->
+    <div class="bp-card">
+      <div class="bp-section-title">Channel — Telegram</div>
+      <table class="bp-table">
+        <tr><td>Bot</td><td style="color:var(--neon-cyan)">@dexclawbot_bot</td></tr>
+        <tr><td>Mode</td><td>Long-polling</td></tr>
+        <tr><td>DM policy</td><td><span class="bp-ok">open</span></td></tr>
+        <tr><td>Allow from</td><td style="color:var(--neon-green)">["*"]</td></tr>
+        <tr><td>Group policy</td><td><span class="bp-ok">open</span></td></tr>
+        <tr><td>Timeout</td><td>25s</td></tr>
+      </table>
+      <div style="margin-top:10px">
+        <div style="font-size:13px;color:#ff9f43;margin-bottom:6px;font-family:'Orbitron',monospace;letter-spacing:1px">REGISTERED GROUPS</div>
+        <table class="bp-table">
+          <thead><tr><th>Group</th><th>ID</th><th>requireMention</th></tr></thead>
+          <tbody>
+            <tr><td class="bp-dim">Group 1</td><td style="font-family:'Share Tech Mono',monospace;font-size:13px">-1003878643720</td><td style="color:var(--neon-green)">true</td></tr>
+            <tr><td class="bp-dim">Chemical✨Black (migrated)</td><td style="font-family:'Share Tech Mono',monospace;font-size:13px">-1003947673952</td><td style="color:var(--neon-green)">true</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- WHATSAPP -->
+    <div class="bp-card">
+      <div class="bp-section-title">Channel — WhatsApp</div>
+      <table class="bp-table">
+        <tr><td>DM policy</td><td><span style="color:var(--neon-orange)">pairing</span></td></tr>
+        <tr><td>Group policy</td><td><span class="bp-ok">open</span></td></tr>
+        <tr><td>DM bypass (pre-auth)</td><td style="font-size:13px;font-family:'Share Tech Mono',monospace">+96176370259 · +905013478718</td></tr>
+      </table>
+      <div style="margin-top:10px">
+        <div style="font-size:13px;color:#ff9f43;margin-bottom:6px;font-family:'Orbitron',monospace;letter-spacing:1px">ACCOUNTS</div>
+        <table class="bp-table">
+          <thead><tr><th>Account</th><th>Status</th><th>DM policy</th></tr></thead>
+          <tbody>
+            <tr><td>tr (+905013478718)</td><td><span class="bp-ok">✅ active</span></td><td>pairing</td></tr>
+            <tr><td>lb</td><td><span class="bp-warn">⚠️ needs re-pairing</span></td><td>pairing</td></tr>
+            <tr><td>default</td><td><span class="bp-warn">⚠️ needs pairing</span></td><td>pairing</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:8px;font-size:13px;color:var(--text-dim)">Pair lb: <code style="color:var(--neon-cyan)">openclaw channels login --channel whatsapp --account lb</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLUGINS -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">Active Plugins (5)</div>
+    <table class="bp-table">
+      <thead><tr><th>Plugin</th><th>Kind</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--neon-yellow)">openclaw-mem0</td><td>slot / memory</td><td>Episodic memory — Qdrant :6333, collection=mem0-openclaw, 3072-dim, userId=openclaw-main</td></tr>
+        <tr><td style="color:var(--neon-magenta)">cognee-augment</td><td>hook</td><td>Graph memory — Cognee :8000, GRAPH_COMPLETION, dataset=openclaw-main</td></tr>
+        <tr><td style="color:#ff9f43">input-router</td><td>hook</td><td>Code + complexity model routing + Maps URL → Nominatim location resolver</td></tr>
+        <tr><td style="color:var(--neon-cyan)">telegram</td><td>channel</td><td>Telegram long-polling (@dexclawbot_bot)</td></tr>
+        <tr><td style="color:var(--neon-green)">whatsapp</td><td>channel</td><td>WhatsApp multi-account via baileys (tr · lb · default)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MEMORY LAYERS -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">Memory Architecture — 4 Layers</div>
+    <table class="bp-table">
+      <thead><tr><th>#</th><th>Layer</th><th>Where</th><th>Vector store</th><th>Collection</th><th>Dims</th><th>Injection</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#ff9f43">1</td><td style="color:var(--neon-cyan)">QMD</td><td>Built into gateway</td><td>—</td><td>—</td><td>—</td><td><span class="bp-ok">fires first</span></td></tr>
+        <tr><td style="color:#ff9f43">2</td><td style="color:var(--neon-yellow)">openclaw-mem0 (JS)</td><td>Inside gateway process</td><td>Qdrant :6333</td><td>mem0-openclaw</td><td>3072</td><td>prependSystemContext</td></tr>
+        <tr><td style="color:#ff9f43">3</td><td style="color:var(--neon-magenta)">cognee-augment</td><td>Hook → Cognee :8000</td><td>Graph DB</td><td>openclaw-main</td><td>—</td><td>appendSystemContext</td></tr>
+        <tr><td style="color:#ff9f43">4</td><td style="color:var(--neon-orange)">mem0.service (Python)</td><td>Separate process :8080</td><td>Qdrant :6333</td><td>mem0-rest</td><td>3072</td><td>Direct REST API</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:8px;font-size:14px;color:var(--text-dim)">
+      Injection order per conversation: <span style="color:var(--neon-cyan)">QMD</span> → <span style="color:var(--neon-yellow)">mem0 prepend</span> → <span style="color:var(--neon-magenta)">cognee append</span>
+    </div>
+  </div>
+
+  <div style="margin-top:8px;font-size:14px;color:var(--text-dim);text-align:right">
+    Reference crystallized by brain · 2026-04-30 · confidence 1.0
+  </div>
+</section>
+
+</body>
 </html>
