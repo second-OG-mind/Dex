@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-29T23:53:19Z",
+  "last_updated": "2026-04-30T00:00:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -9,7 +9,7 @@
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 15.9,
+      "cpu": 8.4,
       "mem": 3.1,
       "port": 18789,
       "pid": 413486
