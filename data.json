@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T17:30:03Z",
+  "last_updated": "2026-05-01T17:45:02Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -78,9 +78,9 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 194,
-    "unhealthy_endpoints": 28,
-    "total_endpoints": 222
+    "healthy_endpoints": 0,
+    "unhealthy_endpoints": 0,
+    "total_endpoints": 0
   },
   "key_states": {
     "schema_version": "1.1",
@@ -98,7 +98,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:30:03Z",
+        "last_checked": "2026-05-01T17:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -115,7 +115,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:30:03Z",
+        "last_checked": "2026-05-01T17:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -132,7 +132,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:30:03Z",
+        "last_checked": "2026-05-01T17:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -149,7 +149,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:30:03Z",
+        "last_checked": "2026-05-01T17:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -319,7 +319,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:30:03Z",
+        "last_checked": "2026-05-01T17:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -336,12 +336,12 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:30:03Z",
+        "last_checked": "2026-05-01T17:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-05-01T17:30:03Z"
+    "last_updated": "2026-05-01T17:45:02Z"
   },
   "config": {
     "key_counts": {
