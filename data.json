@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T17:15:03Z",
+  "last_updated": "2026-05-01T17:30:03Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -78,8 +78,8 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 172,
-    "unhealthy_endpoints": 50,
+    "healthy_endpoints": 194,
+    "unhealthy_endpoints": 28,
     "total_endpoints": 222
   },
   "key_states": {
@@ -98,9 +98,9 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:15:03Z",
-        "healthy_keys": 8,
-        "unhealthy_keys": 20
+        "last_checked": "2026-05-01T17:30:03Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
@@ -115,9 +115,9 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:15:03Z",
-        "healthy_keys": 10,
-        "unhealthy_keys": 18
+        "last_checked": "2026-05-01T17:30:03Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
@@ -132,9 +132,9 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:15:03Z",
-        "healthy_keys": 7,
-        "unhealthy_keys": 21
+        "last_checked": "2026-05-01T17:30:03Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
@@ -149,9 +149,9 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:15:03Z",
-        "healthy_keys": 6,
-        "unhealthy_keys": 22
+        "last_checked": "2026-05-01T17:30:03Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemma-agentic": {
         "total": 28,
@@ -319,9 +319,9 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:15:03Z",
-        "healthy_keys": 8,
-        "unhealthy_keys": 20
+        "last_checked": "2026-05-01T17:30:03Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
@@ -336,12 +336,12 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T17:15:03Z",
-        "healthy_keys": 7,
-        "unhealthy_keys": 21
+        "last_checked": "2026-05-01T17:30:03Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-05-01T17:15:03Z"
+    "last_updated": "2026-05-01T17:30:03Z"
   },
   "config": {
     "key_counts": {
