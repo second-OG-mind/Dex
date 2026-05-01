@@ -235,6 +235,83 @@ data = {
     'key_states': ks,
 }
 
+# ── Structural config export ─────────────────────────────────────────────────
+# Parses openclaw.json, .env, and config.yaml so the dashboard can
+# auto-update key counts, pool count, and channel config without a manual edit.
+import re, sys
+config = {}
+
+# Key counts from .env
+try:
+    kc = {'google': 0, 'mistral': 0, 'browserless': 0}
+    with open('/home/monster-ubunto/.openclaw/.env') as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith('#') or '=' not in line:
+                continue
+            k = line.split('=', 1)[0]
+            if k.startswith('GEMINI_API_KEY_') or k.startswith('GEMINI_MEM_KEY_') or k == 'GOOGLE_API_KEY':
+                kc['google'] += 1
+            elif k == 'MISTRAL_API_KEY' or (k.startswith('MISTRAL_API_KEY_') and not k.startswith('MISTRAL_API_KEY_0')):
+                kc['mistral'] += 1
+            elif k.startswith('BROWSERLESS_API_KEY_'):
+                kc['browserless'] += 1
+    kc['total'] = sum(kc.values())
+    config['key_counts'] = kc
+except Exception as ex:
+    config['key_counts'] = {'error': str(ex), 'google': 29, 'mistral': 10, 'browserless': 6, 'total': 45}
+
+# Pool definitions from ~/.litellm/config.yaml
+try:
+    pools_order = []
+    pools_data = {}
+    cur = None
+    with open('/home/monster-ubunto/.litellm/config.yaml') as f:
+        for line in f:
+            m = re.match(r'\s*- model_name:\s*(.+)', line)
+            if m:
+                cur = m.group(1).strip()
+                if cur not in pools_data:
+                    pools_data[cur] = {'name': cur, 'keys': 0, 'rpm': None, 'model': None}
+                    pools_order.append(cur)
+                pools_data[cur]['keys'] += 1
+            elif cur:
+                m2 = re.match(r'\s*rpm:\s*(\d+)', line)
+                if m2 and pools_data[cur]['rpm'] is None:
+                    pools_data[cur]['rpm'] = int(m2.group(1))
+                m3 = re.match(r'\s*model:\s*(.+)', line)
+                if m3 and pools_data[cur]['model'] is None:
+                    pools_data[cur]['model'] = m3.group(1).strip()
+    real_pools = [p for p in pools_order if not p.startswith('openai/')]
+    config['pools'] = [pools_data[p] for p in pools_order]
+    config['pool_count'] = len(real_pools)
+except Exception as ex:
+    config['pools'] = []
+    config['pool_count'] = 11
+    config['pool_parse_error'] = str(ex)
+
+# Channel config from openclaw.json
+try:
+    oc = json.load(open('/home/monster-ubunto/.openclaw/openclaw.json'))
+    tg = oc.get('channels', {}).get('telegram', {})
+    wa = oc.get('channels', {}).get('whatsapp', {})
+    config['channels'] = {
+        'telegram': {
+            'dm_policy': tg.get('dmPolicy', 'unknown'),
+            'group_policy': tg.get('groupPolicy', 'unknown'),
+            'groups': [{'id': gid, 'requireMention': gcfg.get('requireMention', False)}
+                       for gid, gcfg in tg.get('groups', {}).items()],
+        },
+        'whatsapp': {
+            'accounts': {k: {'enabled': v.get('enabled', False), 'dm_policy': v.get('dmPolicy', 'unknown')}
+                         for k, v in wa.get('accounts', {}).items()}
+        }
+    }
+except Exception as ex:
+    config['channels'] = {'error': str(ex)}
+
+data['config'] = config
+
 with open(e('DJ_FILE'), 'w') as fh:
     json.dump(data, fh, indent=2)
 print('data.json written OK')

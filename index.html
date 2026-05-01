@@ -725,14 +725,14 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       <div class="stat-sub">All systemd healthy</div>
     </div>
     <div class="card" style="border-color:rgba(105,255,71,.3)">
-      <div class="stat-num counter" data-target="43" style="color:var(--neon-green)">0</div>
+      <div class="stat-num counter" id="stat-key-total" data-target="45" style="color:var(--neon-green)">0</div>
       <div class="stat-label">API Keys Total</div>
-      <div class="stat-sub">28 Google · 9 Mistral · 6 Browserless</div>
+      <div class="stat-sub" id="stat-key-sub">29 Google · 10 Mistral · 6 Browserless</div>
     </div>
     <div class="card" style="border-color:rgba(224,64,251,.3)">
-      <div class="stat-num counter" data-target="10" style="color:var(--neon-magenta)">0</div>
+      <div class="stat-num counter" id="stat-pool-count" data-target="11" style="color:var(--neon-magenta)">0</div>
       <div class="stat-label">LiteLLM Pools</div>
-      <div class="stat-sub">4 Gemma · 2 Embed · 4 Mistral</div>
+      <div class="stat-sub" id="stat-pool-sub">4 Gemma · 1 Vision · 2 Embed · 4 Mistral</div>
     </div>
     <div class="card" style="border-color:rgba(255,234,0,.3)">
       <div class="stat-num counter" data-target="5" style="color:var(--neon-yellow)">0</div>
@@ -753,7 +753,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div style="padding-left:60px;color:var(--text-main)">Code → <span style="color:#00ffcc">litellm/codestral</span></div>
         <div style="padding-left:60px;color:var(--text-main)">Complex text → <span style="color:var(--neon-cyan)">litellm/gemma-chat</span> (27B)</div>
         <div style="padding-left:60px;color:var(--text-main)">Short text → <span style="color:var(--neon-magenta)">litellm/gemma-fallback</span> (4B)</div>
-        <div style="padding-left:60px;color:var(--text-main)">Media/PDF → <span style="color:var(--neon-orange)">mistral/mistral-large-latest</span></div>
+        <div style="padding-left:60px;color:var(--text-main)">Media/images → <span style="color:var(--neon-orange)">litellm/gemini-vision</span> (12 keys · 2.0-flash)</div>
         <div style="padding-left:60px;color:var(--text-main)">Internal agents → <span style="color:var(--neon-orange)">litellm/gemma-agentic</span> (31B · ∞ TPM)</div>
         <div style="padding-left:40px;color:var(--text-dim)">→ openclaw-mem0 (prependSystemContext)</div>
         <div style="padding-left:60px;color:var(--neon-yellow)">Qdrant :6333 → mem0-openclaw</div>
@@ -806,14 +806,14 @@ p, div { font-family: 'Share Tech Mono', monospace; }
     <div class="grid-4">
       <div>
         <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">GOOGLE / GEMINI</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-cyan)">28</div>
-        <div style="font-size:16px;color:var(--text-dim)">All 6 Gemma/Gemini pools</div>
-        <div style="font-size:16px;color:var(--text-dim)">Chat · agentic · embed</div>
+        <div id="inv-google-count" style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-cyan)">29</div>
+        <div style="font-size:16px;color:var(--text-dim)">6 pools (GEMINI_API_KEY_1-16 · GEMINI_MEM_KEY_1-12)</div>
+        <div style="font-size:16px;color:var(--text-dim)">+ 1 spare (GOOGLE_API_KEY)</div>
       </div>
       <div>
         <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">MISTRAL</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-magenta)">9</div>
-        <div style="font-size:16px;color:var(--text-dim)">MISTRAL_API_KEY_1-9</div>
+        <div id="inv-mistral-count" style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-magenta)">10</div>
+        <div style="font-size:16px;color:var(--text-dim)">MISTRAL_API_KEY (plain) + _1-9</div>
         <div style="font-size:16px;color:var(--text-dim)">chat · large · code · embed</div>
       </div>
       <div>
@@ -897,7 +897,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div>Used by: all text conversations via input-router</div>
         <br>
         <div style="color:var(--neon-magenta);font-size:15px;font-weight:700">POOL 2 — gemma-fallback (HYBRID)</div>
-        <div>Keys: all 28 · Model: gemma-3-4b-it · rpm:28</div>
+        <div>Keys: all 28 · Model: gemma-3-4b-it · rpm:18</div>
         <div>Auto-triggered when gemma-chat fully exhausts RPD</div>
         <br>
         <div style="color:var(--text-dim);font-size:15px;font-weight:700">POOL 3 — gemma-internal (PASSIVE FALLBACK)</div>
@@ -916,14 +916,18 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div>Keys: all 28 · Model: gemini-embedding-2 (3072d) · rpm:98</div>
         <div>Independent quota from Pool 5 · fallback target · 56K RPD total</div>
         <br>
-        <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOLS 7-10 — MISTRAL (chat · large · code · embed)</div>
+        <div style="color:var(--neon-orange);font-size:15px;font-weight:700">POOL 9 — gemini-vision (MEDIA / MULTIMODAL)</div>
+        <div>Keys: 12 · Model: gemini-2.0-flash · rpm:15 · 180 RPM total</div>
+        <div style="color:var(--neon-green)">Input-router multimodalModel — images, media → fast vision routing</div>
+        <br>
+        <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOLS 7-8 · 10-11 — MISTRAL (chat · large · code · embed)</div>
         <div>Keys: 9 each · 500K TPM · no rate wall · see Mistral card →</div>
         <div>Fallback: gemma-chat → mistral-chat → gemma-agentic</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--neon-cyan)"></span>MISTRAL LITELLM POOLS — 4 POOLS · 9 KEYS</div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-cyan)"></span>MISTRAL + VISION POOLS — 5 POOLS</div>
       <div style="font-size:16px;color:var(--text-dim);line-height:1.9">
         <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOL 7 — mistral-chat (SLA FALLBACK)</div>
         <div>Keys: 9 · Model: ministral-8b · rpm:4 · p50: 314ms</div>
@@ -931,17 +935,21 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <br>
         <div style="color:var(--neon-magenta);font-size:15px;font-weight:700">POOL 8 — mistral-large (EXPLICIT ONLY)</div>
         <div>Keys: 9 · Model: mistral-large-latest · rpm:2</div>
-        <div>Used by: image/PDF via Mistral plugin · never in fallback chain</div>
+        <div>Used by: gemini-vision fallback · explicit PDF calls · never auto-routed</div>
         <br>
-        <div style="color:#00ffcc;font-size:15px;font-weight:700">POOL 9 — codestral (CODE ROUTING)</div>
+        <div style="color:var(--neon-orange);font-size:15px;font-weight:700">POOL 9 — gemini-vision (MEDIA ROUTING)</div>
+        <div>Keys: 12 · Model: gemini-2.0-flash · rpm:15 · 180 RPM total</div>
+        <div style="color:var(--neon-green)">Input-router media/multimodal path · fallback: mistral-large</div>
+        <br>
+        <div style="color:#00ffcc;font-size:15px;font-weight:700">POOL 10 — codestral (CODE ROUTING)</div>
         <div>Keys: 9 · Model: codestral · rpm:4 · p50: 307ms</div>
         <div>Used by: input-router when CODE_RE matches</div>
         <br>
-        <div style="color:var(--neon-yellow);font-size:15px;font-weight:700">POOL 10 — mistral-embed (EMBEDDING ESCAPE)</div>
+        <div style="color:var(--neon-yellow);font-size:15px;font-weight:700">POOL 11 — mistral-embed (EMBEDDING ESCAPE)</div>
         <div>Keys: 9 · Model: mistral-embed · rpm:8</div>
         <div>Used by: gemini-embedding fallback chain (last resort)</div>
         <br>
-        <div style="font-size:15px;color:var(--text-dim)">All Mistral pools: 500K TPM ✅ · ~2,880 RPD/key · no TPM wall</div>
+        <div style="font-size:15px;color:var(--text-dim)">Mistral pools: 500K TPM ✅ · ~2,880 RPD/key · gemini-vision: free quota</div>
       </div>
     </div>
   </div>
@@ -964,7 +972,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <span class="key-pool-name">GEMMA FALLBACK — Gemma 3 4B (all 28 keys)</span>
         <span class="key-pool-count" style="color:var(--neon-magenta)" id="gemma-fallback-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-fallback · gemini/gemma-3-4b-it · rpm:28 · HYBRID auto-fallback</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-fallback · gemini/gemma-3-4b-it · rpm:18 · HYBRID auto-fallback</div>
       <div class="key-dots" id="gemma-fallback-dots"></div>
     </div>
 
@@ -1070,6 +1078,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
             service: mem0.service :8080 · Python uvicorn · FastAPI<br>
             vector store: Qdrant :6333 · collection: mem0-rest · 9 points<br>
             embedder: gemini-embedding via LiteLLM · dims: 3072<br>
+            llm: gemma-internal (12B) via LiteLLM<br>
             endpoints: POST /memories · POST /search · GET /memories/{user_id}
           </div>
           <div class="mem-badge" style="border-color:var(--neon-orange);color:var(--neon-orange);background:rgba(255,109,0,.06)">✓ mem0.service :8080 (Python REST)</div>
@@ -1813,13 +1822,14 @@ p, div { font-family: 'Share Tech Mono', monospace; }
     <div class="card" style="border-color:rgba(57,255,20,.2)">
       <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>ROUTING RULES</div>
       <div style="font-size:16px;line-height:2;color:var(--text-main)">
+        <div><span style="color:#39ff14">Media / images</span> → input-router MEDIA_RE → LiteLLM → <span style="color:var(--neon-orange)">gemini-vision (12 keys · 2.0-flash)</span></div>
         <div><span style="color:#39ff14">Code</span> → input-router CODE_RE → LiteLLM → <span style="color:#00ffcc">codestral (9 keys · Codestral)</span></div>
         <div><span style="color:#39ff14">Complex text</span> → input-router → litellm plugin → LiteLLM → <span style="color:var(--neon-cyan)">gemma-chat (28 keys · 27B)</span></div>
         <div><span style="color:#39ff14">Short text</span> → input-router → LiteLLM → <span style="color:var(--neon-magenta)">gemma-fallback (28 keys · 4B)</span></div>
         <div><span style="color:#39ff14">Internal agents</span> → input-router (mistral provider) → LiteLLM → <span style="color:var(--neon-orange)">gemma-agentic (28 keys · 31B · ∞ TPM)</span></div>
         <div><span style="color:#39ff14">Memory embeddings</span> → LiteLLM → <span style="color:var(--neon-yellow)">gemini-embedding + gemini-embedding-2 (28 keys each)</span></div>
         <div><span style="color:#39ff14">SLA fallback chain</span> → gemma-chat → <span style="color:var(--neon-cyan)">mistral-chat (9 keys · 314ms)</span> → gemma-agentic</div>
-        <div style="margin-top:8px;color:var(--text-dim)">Mistral Large: image/PDF only (explicit). gemma-internal: passive fallback chain only (beta quota ~100-500 RPD).</div>
+        <div style="margin-top:8px;color:var(--text-dim)">gemini-vision fallback → mistral-large. Mistral Large: explicit PDF only. gemma-internal: passive fallback only (beta quota ~100-500 RPD).</div>
       </div>
     </div>
   </div>
@@ -1858,16 +1868,16 @@ const SERVICES = [
   { id:'cognee', name:'🧠 COGNEE', port:8000, proto:'HTTP/uvicorn', cpu:0.2, mem:1.8, pid:286, unit:'cognee.service', desc:'Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--neon-magenta)', uptime:'3d 12h' },
   { id:'mem0', name:'💾 MEM0 REST', port:8080, proto:'HTTP/FastAPI', cpu:0.5, mem:0.7, pid:5751, unit:'mem0.service', desc:'Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--neon-orange)', uptime:'4d 02h' },
   { id:'qdrant', name:'🗄️ QDRANT', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:2.2, pid:290, unit:'qdrant.service', desc:'Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--neon-green)', uptime:'4d 15h' },
-  { id:'litellm', name:'🔗 LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 10 pools (4 Gemma · 2 Embed · 4 Mistral). Fallback: gemma-chat→mistral-chat→gemma-agentic.', color:'var(--neon-yellow)', uptime:'1h 31m' },
+  { id:'litellm', name:'🔗 LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 11 pools (4 Gemma · 1 Vision · 2 Embed · 4 Mistral). Fallback: gemma-chat→mistral-chat→gemma-agentic.', color:'var(--neon-yellow)', uptime:'1h 31m' },
 ];
 
 const PLUGINS = [
   { name:'openclaw-mem0', kind:'memory slot', version:'1.0.5', enabled:true, desc:'Episodic memory. JS plugin embedded in gateway. Qdrant :6333 (mem0-openclaw, 3072d). topK=10. prependSystemContext before every prompt.' },
   { name:'cognee-augment', kind:'hook', version:'1.0.0', enabled:true, desc:'Graph memory hooks. api.on() for before_prompt_build (recall→appendSystemContext) + agent_end (cognify). Cognee :8000 · dataset: openclaw-main.' },
-  { name:'input-router', kind:'hook', version:'2.5.0', enabled:true, desc:'Code + complexity routing. CODE_RE → codestral. Long/complex → gemma-chat (27B). Short → gemma-fallback (4B). Internal (mistral provider) → gemma-agentic (∞ TPM). Maps URL → Nominatim location resolver.' },
+  { name:'input-router', kind:'hook', version:'2.5.0', enabled:true, desc:'Code + complexity routing. Media/images → gemini-vision (2.0-flash). CODE_RE → codestral. Long/complex → gemma-chat (27B). Short → gemma-fallback (4B). Internal (mistral provider) → gemma-agentic (∞ TPM). Maps URL → Nominatim location resolver.' },
   { name:'telegram', kind:'channel', version:'built-in', enabled:true, desc:'Telegram bot. @dexclawbot_bot. dmPolicy=open, allowFrom=*, groupPolicy=open. 2 registered groups (requireMention=true).' },
   { name:'whatsapp', kind:'channel', version:'built-in', enabled:true, desc:'WhatsApp multi-account via Baileys. dmPolicy=pairing. Accounts: tr (active), lb (needs pair), default. groupPolicy=open. Allowed bypass: +96176370259, +905013478718.' },
-  { name:'litellm', kind:'provider', version:'built-in', enabled:true, desc:'LiteLLM-compatible provider. Routes to LiteLLM proxy :4000. All 10 pools via this plugin.' },
+  { name:'litellm', kind:'provider', version:'built-in', enabled:true, desc:'LiteLLM-compatible provider. Routes to LiteLLM proxy :4000. All 11 pools via this plugin.' },
   { name:'mistral', kind:'provider', version:'built-in', enabled:true, desc:'Mistral AI provider. Serves mistral-large-latest for PDF/image tasks (explicit routing only).' },
   { name:'google', kind:'provider', version:'built-in', enabled:true, desc:'Google AI provider. Present in config but inference goes through litellm plugin → LiteLLM proxy.' },
   { name:'openai', kind:'provider', version:'built-in', enabled:true, desc:'OpenAI-compatible provider. Present in config alongside litellm for compatibility.' },
@@ -2094,6 +2104,47 @@ setInterval(updateClock,1000);updateClock();
 // ═══════════════════════════════════════════════════════════════
 // GATEWAY STATUS
 // ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// STRUCTURAL CONFIG AUTO-UPDATE
+// Reads data.config from data.json (exported by update-status.sh)
+// and updates key counts, pool counts, and channel info live.
+// ═══════════════════════════════════════════════════════════════
+function applyConfigUpdate(cfg){
+  if(!cfg) return;
+
+  // Key counts
+  const kc = cfg.key_counts;
+  if(kc && !kc.error){
+    const total = kc.total || (kc.google||0)+(kc.mistral||0)+(kc.browserless||0);
+    const el = document.getElementById('stat-key-total');
+    if(el){ el.dataset.target = total; el.textContent = total; }
+    const sub = document.getElementById('stat-key-sub');
+    if(sub) sub.textContent = `${kc.google||0} Google · ${kc.mistral||0} Mistral · ${kc.browserless||0} Browserless`;
+    const g = document.getElementById('inv-google-count');
+    if(g) g.textContent = kc.google||0;
+    const m = document.getElementById('inv-mistral-count');
+    if(m) m.textContent = kc.mistral||0;
+  }
+
+  // Pool count
+  if(cfg.pool_count){
+    const el = document.getElementById('stat-pool-count');
+    if(el){ el.dataset.target = cfg.pool_count; el.textContent = cfg.pool_count; }
+  }
+
+  // Telegram groups — update BLUEPRINT tab registered groups table
+  const tg = cfg.channels?.telegram;
+  if(tg && tg.groups && tg.groups.length){
+    const tbody = document.querySelector('#tg-groups-tbody');
+    if(tbody){
+      tbody.innerHTML = tg.groups.map(g=>`
+        <tr><td class="bp-dim">Group</td>
+        <td style="font-family:'Share Tech Mono',monospace;font-size:13px">${g.id}</td>
+        <td style="color:${g.requireMention?'var(--neon-green)':'var(--text-dim)'}">${g.requireMention?'true':'false'}</td></tr>`).join('');
+    }
+  }
+}
+
 function checkGatewayStatus(){
   const dot=document.getElementById('gw-dot');
   const label=document.getElementById('gw-label');
@@ -2108,9 +2159,9 @@ function checkGatewayStatus(){
         const lu=new Date(d.last_updated);
         document.getElementById('last-updated').textContent='Last push: '+lu.toUTCString().replace(' GMT','');
       }
+      applyConfigUpdate(d.config);
     })
     .catch(()=>{
-      // static page — show as online (confirmed before push)
       dot.className='status-dot online';
       label.textContent='DEX — ONLINE (static)';
       label.style.color='var(--neon-green)';
@@ -2556,7 +2607,7 @@ function renderApiMonitoring(d){
   }
 
   renderPool('apim-gemma-content',    'gemma-chat',         'Gemma 3 27B',       'gemma-chat · 28 keys · rpm:28 · PRIMARY');
-  renderPool('apim-fallback-content', 'gemma-fallback',     'Gemma 3 4B',        'gemma-fallback · 28 keys · rpm:28 · HYBRID');
+  renderPool('apim-fallback-content', 'gemma-fallback',     'Gemma 3 4B',        'gemma-fallback · 28 keys · rpm:18 · HYBRID');
   renderPool('apim-internal-content', 'gemma-internal',     'Gemma 3 12B',       'gemma-internal · 28 keys · rpm:28 · Cognee + mem0');
   renderPool('apim-agentic-content',  'gemma-agentic',      'Gemma 4 31B',       'gemma-agentic · 28 keys · rpm:13 · future subagents');
   renderPool('apim-embed-content',    'gemini-embedding',   'Gemini Embedding 1','gemini-embedding · 28 keys · 3072d · rpm:98');
@@ -2848,13 +2899,13 @@ loadLiveData();
           <td style="padding:6px 10px;color:var(--neon-green)">98 ✓</td>
         </tr>
         <tr>
-          <td style="padding:6px 10px;color:var(--neon-magenta)">mistral-multimodal</td>
-          <td style="padding:6px 10px">mistral-large</td>
-          <td style="padding:6px 10px;text-align:right;color:var(--text-dim)">TBD</td>
-          <td style="padding:6px 10px;text-align:right;color:var(--text-dim)">?</td>
-          <td style="padding:6px 10px;text-align:right;color:var(--text-dim)">?</td>
-          <td style="padding:6px 10px;text-align:right;color:var(--text-dim)">?</td>
-          <td style="padding:6px 10px;color:var(--neon-yellow)">run --burst</td>
+          <td style="padding:6px 10px;color:var(--neon-orange)">gemini-vision</td>
+          <td style="padding:6px 10px">gemini-2.0-flash</td>
+          <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">15</td>
+          <td style="padding:6px 10px;text-align:right">15</td>
+          <td style="padding:6px 10px;text-align:right">—</td>
+          <td style="padding:6px 10px;text-align:right">1,500</td>
+          <td style="padding:6px 10px;color:var(--neon-green)">15 ✓</td>
         </tr>
       </tbody>
     </table>
@@ -2993,7 +3044,7 @@ loadLiveData();
 
   <!-- LITELLM POOLS -->
   <div class="bp-card bp-section">
-    <div class="bp-section-title">LiteLLM Pools — 10 active</div>
+    <div class="bp-section-title">LiteLLM Pools — 11 active</div>
     <table class="bp-table">
       <thead><tr><th>Pool alias</th><th>Model</th><th>Keys</th><th>RPM/key</th><th>RPD/key</th><th>TPM</th><th>Role</th></tr></thead>
       <tbody>
@@ -3004,7 +3055,8 @@ loadLiveData();
         <tr><td style="color:var(--neon-yellow)">gemini-embedding</td><td>Gemini Embedding</td><td>28</td><td>98</td><td>1,000</td><td>—</td><td>Primary embeddings (3072-dim)</td></tr>
         <tr><td style="color:var(--neon-yellow)">gemini-embedding-2</td><td>Gemini Embedding 2</td><td>28</td><td>98</td><td>1,000</td><td>—</td><td>Embedding fallback (independent quota)</td></tr>
         <tr><td style="color:var(--neon-cyan)">mistral-chat</td><td>Ministral 8B</td><td>9</td><td>4</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Chat fallback (314ms SLA)</td></tr>
-        <tr><td style="color:var(--neon-cyan)">mistral-large</td><td>Mistral Large</td><td>9</td><td>2</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Explicit-only: multimodal / PDF</td></tr>
+        <tr><td style="color:var(--neon-cyan)">mistral-large</td><td>Mistral Large</td><td>9</td><td>2</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Explicit-only: gemini-vision fallback + PDF</td></tr>
+        <tr><td style="color:var(--neon-orange)">gemini-vision</td><td>Gemini 2.0 Flash</td><td>12</td><td>15</td><td>1,500</td><td>—</td><td>Media / images (input-router multimodalModel)</td></tr>
         <tr><td style="color:var(--neon-cyan)">codestral</td><td>Codestral</td><td>9</td><td>4</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Code routing</td></tr>
         <tr><td style="color:var(--neon-cyan)">mistral-embed</td><td>Mistral Embed</td><td>9</td><td>8</td><td>~2,880</td><td>—</td><td>Embedding escape route</td></tr>
       </tbody>
@@ -3014,6 +3066,7 @@ loadLiveData();
       gemma-chat → mistral-chat → gemma-agentic &nbsp;|&nbsp;
       gemma-fallback → mistral-chat → gemma-agentic &nbsp;|&nbsp;
       gemma-internal → gemma-agentic → mistral-chat &nbsp;|&nbsp;
+      gemini-vision → mistral-large &nbsp;|&nbsp;
       gemini-embedding → gemini-embedding-2 → mistral-embed
     </div>
   </div>
@@ -3053,9 +3106,9 @@ loadLiveData();
         <div style="font-size:13px;color:#ff9f43;margin-bottom:6px;font-family:'Orbitron',monospace;letter-spacing:1px">REGISTERED GROUPS</div>
         <table class="bp-table">
           <thead><tr><th>Group</th><th>ID</th><th>requireMention</th></tr></thead>
-          <tbody>
+          <tbody id="tg-groups-tbody">
             <tr><td class="bp-dim">Group 1</td><td style="font-family:'Share Tech Mono',monospace;font-size:13px">-1003878643720</td><td style="color:var(--neon-green)">true</td></tr>
-            <tr><td class="bp-dim">Chemical✨Black (migrated)</td><td style="font-family:'Share Tech Mono',monospace;font-size:13px">-1003947673952</td><td style="color:var(--neon-green)">true</td></tr>
+            <tr><td class="bp-dim">Group 2</td><td style="font-family:'Share Tech Mono',monospace;font-size:13px">-5153817877</td><td style="color:var(--neon-green)">true</td></tr>
           </tbody>
         </table>
       </div>
