@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T09:30:01Z",
+  "last_updated": "2026-05-01T09:34:22Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -78,8 +78,8 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 184,
-    "unhealthy_endpoints": 38,
+    "healthy_endpoints": 194,
+    "unhealthy_endpoints": 28,
     "total_endpoints": 222
   },
   "key_states": {
@@ -129,5 +129,126 @@
       }
     },
     "last_updated": "2026-05-01T09:30:01Z"
+  },
+  "config": {
+    "key_counts": {
+      "google": 29,
+      "mistral": 10,
+      "browserless": 6,
+      "total": 45
+    },
+    "pools": [
+      {
+        "name": "gemma-chat",
+        "keys": 28,
+        "rpm": 28,
+        "model": "gemini/gemma-3-27b-it"
+      },
+      {
+        "name": "gemma-fallback",
+        "keys": 28,
+        "rpm": 18,
+        "model": "gemini/gemma-3-4b-it"
+      },
+      {
+        "name": "gemma-internal",
+        "keys": 28,
+        "rpm": 28,
+        "model": "gemini/gemma-3-12b-it"
+      },
+      {
+        "name": "gemma-agentic",
+        "keys": 28,
+        "rpm": 13,
+        "model": "gemini/gemma-4-31b-it"
+      },
+      {
+        "name": "gemini-embedding",
+        "keys": 28,
+        "rpm": 98,
+        "model": "gemini/gemini-embedding-001"
+      },
+      {
+        "name": "gemini-embedding-2",
+        "keys": 28,
+        "rpm": 98,
+        "model": "gemini/gemini-embedding-2"
+      },
+      {
+        "name": "openai/gemma-internal",
+        "keys": 3,
+        "rpm": 18,
+        "model": "gemini/gemma-3-4b-it"
+      },
+      {
+        "name": "openai/gemini-embedding",
+        "keys": 3,
+        "rpm": 98,
+        "model": "gemini/gemini-embedding-001"
+      },
+      {
+        "name": "mistral-chat",
+        "keys": 9,
+        "rpm": 4,
+        "model": "mistral/ministral-8b-latest"
+      },
+      {
+        "name": "mistral-large",
+        "keys": 9,
+        "rpm": 2,
+        "model": "mistral/mistral-large-latest"
+      },
+      {
+        "name": "gemini-vision",
+        "keys": 12,
+        "rpm": 15,
+        "model": "gemini/gemini-2.0-flash"
+      },
+      {
+        "name": "codestral",
+        "keys": 9,
+        "rpm": 4,
+        "model": "mistral/codestral-latest"
+      },
+      {
+        "name": "mistral-embed",
+        "keys": 9,
+        "rpm": 8,
+        "model": "mistral/mistral-embed"
+      }
+    ],
+    "pool_count": 11,
+    "channels": {
+      "telegram": {
+        "dm_policy": "open",
+        "group_policy": "open",
+        "groups": [
+          {
+            "id": "-1003878643720",
+            "requireMention": true
+          },
+          {
+            "id": "-5153817877",
+            "requireMention": true
+          }
+        ]
+      },
+      "whatsapp": {
+        "accounts": {
+          "lb": {
+            "enabled": true,
+            "dm_policy": "pairing"
+          },
+          "tr": {
+            "enabled": true,
+            "dm_policy": "pairing"
+          },
+          "default": {
+            "enabled": false,
+            "dm_policy": "pairing"
+          }
+        }
+      }
+    }
   }
 }
