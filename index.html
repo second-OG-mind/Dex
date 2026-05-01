@@ -193,6 +193,15 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tab-btn[data-tab="blueprint"].active{border-color:#ff9f43;color:#ff9f43;box-shadow:0 0 28px rgba(255,159,67,.3);background:rgba(255,159,67,.07)}
 .tab-btn[data-tab="blueprint"].active::after{background:#ff9f43;box-shadow:0 0 12px #ff9f43}
 .tab-btn[data-tab="blueprint"]:hover{border-color:rgba(255,159,67,.5);color:#ff9f43}
+.tab-btn[data-tab="social"].active{border-color:#ff2d55;color:#ff2d55;box-shadow:0 0 28px rgba(255,45,85,.3);background:rgba(255,45,85,.07)}
+.tab-btn[data-tab="social"].active::after{background:#ff2d55;box-shadow:0 0 12px #ff2d55}
+.tab-btn[data-tab="social"]:hover{border-color:rgba(255,45,85,.5);color:#ff2d55}
+.tab-btn[data-tab="laws"].active{border-color:#ffaa00;color:#ffaa00;box-shadow:0 0 28px rgba(255,170,0,.3);background:rgba(255,170,0,.07)}
+.tab-btn[data-tab="laws"].active::after{background:#ffaa00;box-shadow:0 0 12px #ffaa00}
+.tab-btn[data-tab="laws"]:hover{border-color:rgba(255,170,0,.5);color:#ffaa00}
+.tab-btn[data-tab="channels"].active{border-color:#00b4ff;color:#00b4ff;box-shadow:0 0 28px rgba(0,180,255,.3);background:rgba(0,180,255,.07)}
+.tab-btn[data-tab="channels"].active::after{background:#00b4ff;box-shadow:0 0 12px #00b4ff}
+.tab-btn[data-tab="channels"]:hover{border-color:rgba(0,180,255,.5);color:#00b4ff}
 .bp-table{width:100%;border-collapse:collapse;margin-bottom:4px}
 .bp-table th{background:rgba(255,159,67,.1);color:#ff9f43;font-family:'Orbitron',monospace;font-size:13px;letter-spacing:1px;padding:9px 12px;text-align:left;border-bottom:1px solid rgba(255,159,67,.35);text-transform:uppercase}
 .bp-table td{padding:8px 12px;font-size:15px;color:var(--text-main);border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
@@ -701,17 +710,27 @@ p, div { font-family: 'Share Tech Mono', monospace; }
 
 <!-- ═══════════════════════════ TABS ═══════════════════════════ -->
 <nav class="tab-nav">
+  <!-- SYSTEM OVERVIEW -->
   <button class="tab-btn active" data-tab="overview">⬡ OVERVIEW</button>
-  <button class="tab-btn" data-tab="services">⚡ ◈ SERVICES</button>
+  <!-- AGENTS -->
+  <button class="tab-btn" data-tab="broker">🏛️ ◉ BROKER</button>
+  <button class="tab-btn" data-tab="social">📱 ◉ SOCIAL</button>
+  <button class="tab-btn" data-tab="laws">⚖️ ◈ LAWS</button>
+  <!-- CHANNELS & CONNECTIVITY -->
+  <button class="tab-btn" data-tab="channels">📡 ◈ CHANNELS</button>
+  <!-- INTELLIGENCE LAYER -->
   <button class="tab-btn" data-tab="models">🧠 ◉ MODELS</button>
   <button class="tab-btn" data-tab="memory">💾 ◎ MEMORY</button>
   <button class="tab-btn" data-tab="plugins">🔌 ◆ PLUGINS</button>
+  <!-- INFRASTRUCTURE -->
+  <button class="tab-btn" data-tab="services">⚡ ◈ SERVICES</button>
   <button class="tab-btn" data-tab="structure">🏗️ ◧ STRUCTURE</button>
-  <button class="tab-btn" data-tab="commands">⌨️ ⌘ COMMANDS</button>
-  <button class="tab-btn" data-tab="live">📡 ◈ LIVE STATUS</button>
+  <!-- OPERATIONS -->
+  <button class="tab-btn" data-tab="live">📡 ◈ LIVE</button>
   <button class="tab-btn" data-tab="watcher">👁️ ⚡ AUTO-PUSH</button>
-    <button class="tab-btn" data-tab="broker">🏛️ ◉ BROKER</button>
-  <button class="tab-btn" data-tab="api-monitoring">📊 ◈ API MONITORING</button>
+  <button class="tab-btn" data-tab="api-monitoring">📊 ◈ API MONITOR</button>
+  <!-- REFERENCE -->
+  <button class="tab-btn" data-tab="commands">⌨️ ⌘ COMMANDS</button>
   <button class="tab-btn" data-tab="scripts">📜 ◈ SCRIPTS</button>
   <button class="tab-btn" data-tab="blueprint">🗺️ ◈ BLUEPRINT</button>
 </nav>
@@ -735,9 +754,9 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       <div class="stat-sub" id="stat-pool-sub">4 Gemma · 1 Vision · 2 Embed · 4 Mistral</div>
     </div>
     <div class="card" style="border-color:rgba(255,234,0,.3)">
-      <div class="stat-num counter" data-target="5" style="color:var(--neon-yellow)">0</div>
-      <div class="stat-label">Active Plugins</div>
-      <div class="stat-sub">openclaw-mem0 · cognee · router · tg · wa</div>
+      <div class="stat-num counter" data-target="3" style="color:var(--neon-yellow)">0</div>
+      <div class="stat-label">Active Agents</div>
+      <div class="stat-sub">DEX (main) · Broker · Social-Free</div>
     </div>
   </div>
 
@@ -760,6 +779,9 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div style="padding-left:40px;color:var(--text-dim)">→ cognee-augment (appendSystemContext)</div>
         <div style="padding-left:60px;color:var(--neon-yellow)">Cognee :8000 → knowledge graph</div>
         <div style="padding-left:40px;color:var(--text-dim)">→ QMD (context memory) → Agent inference → Reply</div>
+        <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,.07);padding-top:10px;color:var(--text-dim)">↳ Telegram binding → <span style="color:var(--neon-purple)">broker agent</span> (WhatsApp logistics)</div>
+        <div style="padding-left:20px;color:var(--text-dim)">↳ direct invoke → <span style="color:#ff2d55">social-free agent</span> (FB/IG manager · Pollinations · FB Graph API)</div>
+        <div style="padding-left:20px;color:var(--text-dim)">↳ law-tracker.timer → <span style="color:#ffaa00">KGM scraper</span> (Mon 06:00 · broker regulatory KB)</div>
       </div>
     </div>
 
@@ -1564,7 +1586,53 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div><code style="color:var(--neon-cyan)">/price-benchmark PRODUCT WEIGHT</code><br><span style="color:var(--text-dim);font-size:15px">Price range from similar past missions (uses gemma-agentic)</span></div>
         <div><code style="color:var(--neon-cyan)">/new-mission</code><br><span style="color:var(--text-dim)">Manual mission creation (bypasses group detection)</span></div>
         <div><code style="color:var(--neon-purple)">/simulate [scenario]</code><br><span style="color:var(--text-dim)">Full dry-run: synthetic customer → broadcast → 3 driver offers → assignment + SLA report</span></div>
+        <div><code style="color:#ffaa00">/law-check</code><br><span style="color:var(--text-dim)">Show current Turkish bridge fees, last tracker run, pending law changes</span></div>
         <div><code style="color:var(--neon-cyan)">/help</code><br><span style="color:var(--text-dim)">Show available commands</span></div>
+      </div>
+    </div>
+
+    <!-- Law Tracker -->
+    <div class="card" style="border-color:rgba(255,170,0,.35);margin-bottom:16px">
+      <div class="card-title" style="color:#ffaa00"><span class="accent" style="background:#ffaa00"></span>⚖️ Regulatory Knowledge — Turkish Bridge Fees (KGM)</div>
+      <div style="font-size:15px;color:var(--text-dim);margin-bottom:12px">Loaded at startup via <code>~/.openclaw/workspace/broker/laws/TR_BRIDGE_FEES.md</code> (Step 7 of startup sequence). Auto-updated weekly by <code>law-tracker.timer</code>.</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:15px">
+          <tr style="border-bottom:1px solid rgba(255,170,0,.25)">
+            <th style="padding:7px 10px;text-align:left;color:#ffaa00;font-family:Orbitron;font-size:12px">Bridge</th>
+            <th style="padding:7px 10px;text-align:right;color:#ffaa00;font-family:Orbitron;font-size:12px">Class 4 (Kamyon)</th>
+            <th style="padding:7px 10px;text-align:right;color:#ffaa00;font-family:Orbitron;font-size:12px">Class 5 (TIR)</th>
+            <th style="padding:7px 10px;text-align:left;color:#ffaa00;font-family:Orbitron;font-size:12px">Trucks?</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+            <td style="padding:7px 10px;color:var(--neon-green)">Yavuz Sultan Selim (3rd Bosphorus)</td>
+            <td style="padding:7px 10px;text-align:right;color:var(--text-main)">595 TL</td>
+            <td style="padding:7px 10px;text-align:right;font-weight:700;color:#ffaa00">740 TL</td>
+            <td style="padding:7px 10px;color:var(--neon-green)">✅ MANDATORY</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+            <td style="padding:7px 10px;color:var(--text-main)">Osmangazi (Gebze–Bursa)</td>
+            <td style="padding:7px 10px;text-align:right;color:var(--text-main)">2,505 TL</td>
+            <td style="padding:7px 10px;text-align:right;color:var(--text-main)">3,165 TL</td>
+            <td style="padding:7px 10px;color:var(--neon-green)">✅</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+            <td style="padding:7px 10px;color:var(--text-main)">1915 Çanakkale (Dardanelles)</td>
+            <td style="padding:7px 10px;text-align:right;color:var(--text-main)">2,490 TL</td>
+            <td style="padding:7px 10px;text-align:right;color:var(--text-main)">3,755 TL</td>
+            <td style="padding:7px 10px;color:var(--neon-green)">✅</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 10px;color:var(--text-dim)">FSM + 15 Temmuz (1st/2nd Bosphorus)</td>
+            <td style="padding:7px 10px;text-align:right;color:var(--neon-red)">❌</td>
+            <td style="padding:7px 10px;text-align:right;color:var(--neon-red)">❌</td>
+            <td style="padding:7px 10px;color:var(--neon-red)">Prohibited Class 3+</td>
+          </tr>
+        </table>
+      </div>
+      <div style="margin-top:12px;padding:10px 14px;background:rgba(255,170,0,.06);border-left:3px solid #ffaa00;font-size:15px;color:var(--text-main)">
+        <strong style="color:#ffaa00">Hard rule:</strong> Istanbul Bosphorus crossings → Yavuz Sultan Selim only for Class 4/5.<br>
+        <strong style="color:#ffaa00">Pricing:</strong> Bridge toll is separate from transport fee. Add <strong>+740 TL</strong> (TIR) or <strong>+595 TL</strong> (Kamyon) per crossing to estimate.<br>
+        <strong style="color:#ffaa00">Tracker:</strong> law-tracker.timer runs Mon 06:00. Fee-fingerprint based (no false positives). Check: <code>cat ~/.openclaw/workspace/broker/laws/tracker_log.jsonl | tail -5</code>
       </div>
     </div>
 
@@ -1755,17 +1823,390 @@ p, div { font-family: 'Share Tech Mono', monospace; }
 
 ~/.openclaw/agents/
 ├── broker/broker.md              # Agent definition (rebuilt 2026-04-29)
+│   └── broker/agent/
+│       ├── auth-profiles.json    # litellm API key profile
+│       ├── auth-state.json       # last-good model + usage stats
+│       └── models.json           # gemma-chat + gemma-agentic model defs
+├── social-free/social-free.md    # Social media agent (created 2026-05-01)
+│   └── social-free/agent/        # Same auth/model structure as broker
 └── agents/memory/broker/
     └── state.jsonl               # Event log (mission_created, offer, assigned…)
+
+~/.openclaw/workspace/broker/laws/
+├── tariffs.json                  # 2026 KGM fee database (structured)
+├── TR_BRIDGE_FEES.md             # Knowledge article (auto-regenerated by tracker)
+├── law_tracker.py                # KGM scraper — fee-fingerprint based
+└── tracker_log.jsonl             # Append-only check/change log
+
+~/.config/systemd/user/
+├── law-tracker.service           # Oneshot: runs law_tracker.py
+└── law-tracker.timer             # Weekly Mon 06:00 · Persistent=true
       </pre>
     </div>
 
     <div style="font-size:15px;color:var(--text-dim);padding:8px 0;border-top:1px solid var(--border);margin-top:12px">
-      <strong>Note:</strong> Broker agent requires WhatsApp MCP integration (not yet installed). Connect via WhatsApp Business Cloud API or WhatsApp MCP server. Current status: <span style="color:var(--neon-yellow)">ready for deployment</span>.
+      <strong>Note:</strong> Broker uses WhatsApp via Baileys (built-in openclaw whatsapp plugin). Accounts: tr (active) · lb (needs pair). Current status: <span style="color:var(--neon-green)">deployed · Telegram binding active</span>.
     </div>
   </div>
 </section>
 
+<!-- ═══════════════════════════ SOCIAL ═══════════════════════════ -->
+<section class="tab-section" id="tab-social">
+  <div class="section-header">
+    <div class="section-title" style="color:#ff2d55">SOCIAL-FREE AGENT</div>
+    <span class="section-badge" style="border-color:#ff2d55;color:#ff2d55">Facebook · Instagram · Free Tier Only</span>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:14px">
+    <div class="card" style="border-color:rgba(255,45,85,.35)">
+      <div class="card-title" style="color:#ff2d55"><span class="accent" style="background:#ff2d55"></span>Agent Identity</div>
+      <div style="font-size:16px;line-height:2;color:var(--text-main)">
+        <div><span style="color:var(--text-dim)">ID:</span> <code>social-free</code></div>
+        <div><span style="color:var(--text-dim)">Model:</span> <code>litellm/gemma-chat</code> (default) · <code>litellm/gemma-agentic</code> (creative)</div>
+        <div><span style="color:var(--text-dim)">Vision:</span> <code>litellm/gemini-vision</code> (image analysis)</div>
+        <div><span style="color:var(--text-dim)">Agent dir:</span> <code>~/.openclaw/agents/social-free/</code></div>
+        <div><span style="color:var(--text-dim)">Workspace:</span> <code>~/.openclaw/workspace/social/</code></div>
+        <div><span style="color:var(--text-dim)">Config:</span> <code>workspace/social/config.json</code></div>
+        <div><span style="color:var(--text-dim)">Queue:</span> <code>workspace/social/queue.json</code></div>
+        <div style="margin-top:10px;padding:8px 12px;background:rgba(255,45,85,.07);border-left:3px solid #ff2d55">
+          <span style="color:#ff2d55">System deps:</span> ffmpeg 6.1.1 · ImageMagick 6.9.12 · jq 1.7<br>
+          <span style="color:#ff2d55">Python deps:</span> openai 2.33 · google-genai · requests
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:rgba(255,45,85,.25)">
+      <div class="card-title" style="color:#ff2d55"><span class="accent" style="background:#ff2d55"></span>Image Generation Waterfall (4 Tiers · Auto)</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:15px">
+        <div style="padding:10px 12px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);border-radius:5px">
+          <div style="color:var(--neon-cyan);font-weight:700;margin-bottom:3px">TIER 1 — Gemini Image (google-genai SDK)</div>
+          <div style="color:var(--text-dim)">Models: gemini-2.5-flash-image → gemini-flash-latest</div>
+          <div style="color:var(--text-dim)">Keys: 5 GEMINI_KEYS from config.json (rotated on 429)</div>
+          <div style="color:var(--text-dim)">SDK: <code>from google import genai</code> · response_modalities=["IMAGE","TEXT"]</div>
+        </div>
+        <div style="padding:10px 12px;background:rgba(105,255,71,.06);border:1px solid rgba(105,255,71,.2);border-radius:5px">
+          <div style="color:var(--neon-green);font-weight:700;margin-bottom:3px">TIER 2 — Pollinations.AI (no key · FLUX · unlimited)</div>
+          <div style="color:var(--text-dim)">URL: <code>image.pollinations.ai/prompt/{encoded}?width={w}&height={h}&model=flux&nologo=true&enhance=true</code></div>
+        </div>
+        <div style="padding:10px 12px;background:rgba(255,109,0,.06);border:1px solid rgba(255,109,0,.2);border-radius:5px">
+          <div style="color:var(--neon-orange);font-weight:700;margin-bottom:3px">TIER 3 — Leonardo.AI (150/day free)</div>
+          <div style="color:var(--text-dim)">Requires: LEONARDO_API_KEY in config.json</div>
+          <div style="color:var(--text-dim)">Model: Leonardo Diffusion XL (b24e16ff…)</div>
+        </div>
+        <div style="padding:10px 12px;background:rgba(224,64,251,.06);border:1px solid rgba(224,64,251,.2);border-radius:5px">
+          <div style="color:var(--neon-magenta);font-weight:700;margin-bottom:3px">TIER 4 — HuggingFace (FLUX.1-schnell · free tier)</div>
+          <div style="color:var(--text-dim)">Requires: HF_TOKEN in config.json</div>
+          <div style="color:var(--text-dim)">Model: <code>black-forest-labs/FLUX.1-schnell</code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:14px">
+    <div class="card" style="border-color:rgba(255,45,85,.25)">
+      <div class="card-title" style="color:#ff2d55"><span class="accent" style="background:#ff2d55"></span>Commands</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:15px">
+        <div><code style="color:#ff2d55">/post-now &lt;topic&gt; [--platform fb|ig|both] [--media image|video|text] [--dry-run]</code><br><span style="color:var(--text-dim)">Generate + publish immediately. Uses gemma-agentic for creative content.</span></div>
+        <div><code style="color:#ff2d55">/queue-add &lt;topic&gt; --at 'YYYY-MM-DD HH:MM' [--platform]</code><br><span style="color:var(--text-dim)">Schedule a future post. Appends to queue.json.</span></div>
+        <div><code style="color:var(--neon-cyan)">/queue-list</code><br><span style="color:var(--text-dim)">Show all scheduled posts sorted by time + status (pending/done/failed).</span></div>
+        <div><code style="color:var(--neon-cyan)">/queue-run</code><br><span style="color:var(--text-dim)">Publish any queued posts whose scheduled_at ≤ now.</span></div>
+        <div><code style="color:var(--neon-cyan)">/comments-check [--auto-reply]</code><br><span style="color:var(--text-dim)">Fetch new Facebook comments. --auto-reply generates + posts AI replies via gemma-chat.</span></div>
+        <div><code style="color:var(--neon-cyan)">/analytics [--days 7|30] [--platform fb|ig|both]</code><br><span style="color:var(--text-dim)">Pull FB/IG Graph API insights: impressions, reach, engaged users, fan adds, top posts.</span></div>
+        <div><code style="color:var(--neon-cyan)">/generate-image &lt;prompt&gt; [--aspect 1:1|9:16|16:9] [--dry-run]</code><br><span style="color:var(--text-dim)">Standalone image gen test. Reports which tier succeeded and file path.</span></div>
+        <div><code style="color:var(--neon-cyan)">/help</code><br><span style="color:var(--text-dim)">Show all commands, config requirements, current API key status.</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:rgba(255,45,85,.25)">
+      <div class="card-title" style="color:#ff2d55"><span class="accent" style="background:#ff2d55"></span>Scripts &amp; Config</div>
+      <div style="font-size:15px;line-height:1.8">
+        <div style="color:var(--text-dim);letter-spacing:1px;margin-bottom:8px">workspace/social/scripts/</div>
+        <div><code style="color:#ff2d55">generate_image.py</code> <span style="color:var(--text-dim)">— 4-tier waterfall · --aspect · --dry-run</span></div>
+        <div><code style="color:#ff2d55">post_facebook.sh</code> <span style="color:var(--text-dim)">— Graph API v21.0 · image/video/text · --dry-run · logs to posts.jsonl</span></div>
+        <div><code style="color:var(--neon-cyan)">fetch_stock.sh</code> <span style="color:var(--text-dim)">— Pexels + Pixabay video/image API</span></div>
+        <div><code style="color:var(--neon-cyan)">assemble_video.sh</code> <span style="color:var(--text-dim)">— FFmpeg trim→28s · ImageMagick caption · music vol=0.15</span></div>
+        <div><code style="color:var(--neon-cyan)">comments.py</code> <span style="color:var(--text-dim)">— fetch FB comments · AI replies via LiteLLM :4000 · seen.json dedup</span></div>
+        <div><code style="color:var(--neon-cyan)">analytics.sh</code> <span style="color:var(--text-dim)">— Graph API insights · impressions/reach/fans · top posts</span></div>
+        <div style="margin-top:12px;color:var(--text-dim);letter-spacing:1px;margin-bottom:8px">config.json keys required:</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:14px">
+          <div><code style="color:var(--neon-green)">GEMINI_KEYS[]</code> <span style="color:var(--text-dim)">✅ filled (5 keys)</span></div>
+          <div><code style="color:var(--neon-yellow)">FB_PAGE_ACCESS_TOKEN</code> <span style="color:var(--neon-red)">⚠️ empty</span></div>
+          <div><code style="color:var(--neon-yellow)">FB_PAGE_ID</code> <span style="color:var(--neon-red)">⚠️ empty</span></div>
+          <div><code style="color:var(--neon-yellow)">IG_BUSINESS_ACCOUNT_ID</code> <span style="color:var(--neon-red)">⚠️ empty</span></div>
+          <div><code>IMGBB_API_KEY</code> <span style="color:var(--text-dim)">optional (IG photos)</span></div>
+          <div><code>PEXELS_API_KEY</code> <span style="color:var(--text-dim)">optional (stock video)</span></div>
+        </div>
+        <div style="margin-top:12px;color:var(--text-dim);letter-spacing:1px;margin-bottom:6px">Aspect ratios supported:</div>
+        <div style="font-size:14px;color:var(--text-dim)">1:1 → 1080×1080 · 9:16 → 1080×1920 · 16:9 → 1920×1080 · 4:5 → 1080×1350</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(255,45,85,.2)">
+    <div class="card-title" style="color:#ff2d55"><span class="accent" style="background:#ff2d55"></span>Brand Configuration (BRAND object in config.json)</div>
+    <div style="font-size:15px;line-height:1.9">
+      <div class="grid-2">
+        <div>
+          <div><span style="color:var(--text-dim)">name:</span> <code>YOUR_BRAND_NAME</code> <span style="color:var(--neon-red)">← fill this</span></div>
+          <div><span style="color:var(--text-dim)">voice:</span> professional, warm, helpful — Arabic + English</div>
+          <div><span style="color:var(--text-dim)">primary_color:</span> <span style="color:#C4152D;font-weight:700">#C4152D</span></div>
+          <div><span style="color:var(--text-dim)">secondary_color:</span> <span style="color:#7A00E6;font-weight:700">#7A00E6</span></div>
+          <div><span style="color:var(--text-dim)">timezone:</span> Asia/Beirut</div>
+        </div>
+        <div>
+          <div><span style="color:var(--text-dim)">posting_times:</span> 09:00 · 18:00</div>
+          <div><span style="color:var(--text-dim)">platforms:</span> fb · ig</div>
+          <div><span style="color:var(--text-dim)">default_aspect:</span> 1:1</div>
+          <div><span style="color:var(--text-dim)">hashtags_always:</span> ["#YourBrand"]</div>
+          <div><span style="color:var(--text-dim)">Image prompt enrichment:</span> brand colors prepended automatically</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding:10px 14px;background:rgba(255,45,85,.06);border-left:3px solid #ff2d55;font-size:14px;color:var(--text-dim)">
+        <strong style="color:#ff2d55">Rule:</strong> Always --dry-run first on any new topic until user confirms. Caption language matches brand voice (default: Arabic/English bilingual). Hashtag limits: FB ≤10 · IG use 10–15. Video only assembled if stock footage fetched.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ LAWS ═══════════════════════════ -->
+<section class="tab-section" id="tab-laws">
+  <div class="section-header">
+    <div class="section-title" style="color:#ffaa00">TURKISH LAW TRACKER</div>
+    <span class="section-badge" style="border-color:#ffaa00;color:#ffaa00">KGM · BRIDGE FEES · AUTO-UPDATED WEEKLY</span>
+  </div>
+
+  <div class="grid-3" style="margin-bottom:14px">
+    <div class="card" style="border-color:rgba(255,170,0,.4);text-align:center">
+      <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:#ffaa00;text-shadow:0 0 20px #ffaa00;line-height:1">740</div>
+      <div style="font-size:13px;letter-spacing:3px;color:var(--text-dim);margin-top:6px">TL — TIR / BOSPHORUS</div>
+      <div style="font-size:14px;color:var(--text-dim);margin-top:8px">Yavuz Sultan Selim · Class 5</div>
+    </div>
+    <div class="card" style="border-color:rgba(255,170,0,.3);text-align:center">
+      <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:var(--neon-green);text-shadow:0 0 20px var(--neon-green);line-height:1">Jan</div>
+      <div style="font-size:13px;letter-spacing:3px;color:var(--text-dim);margin-top:6px">ANNUAL UPDATE CYCLE</div>
+      <div style="font-size:14px;color:var(--text-dim);margin-top:8px">2026: +25.49% · next: 2027-01-01</div>
+    </div>
+    <div class="card" style="border-color:rgba(255,170,0,.3);text-align:center">
+      <div style="font-family:'Orbitron',monospace;font-size:48px;font-weight:900;color:var(--neon-cyan);text-shadow:0 0 20px var(--neon-cyan);line-height:1">Mon</div>
+      <div style="font-size:13px;letter-spacing:3px;color:var(--text-dim);margin-top:6px">TRACKER SCHEDULE</div>
+      <div style="font-size:14px;color:var(--text-dim);margin-top:8px">law-tracker.timer · 06:00 weekly</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(255,170,0,.35);margin-bottom:14px">
+    <div class="card-title" style="color:#ffaa00"><span class="accent" style="background:#ffaa00"></span>2026 Bridge Crossing Fees (Single Direction, TRY) — Effective 2026-01-01</div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr style="border-bottom:2px solid rgba(255,170,0,.3)">
+            <th style="padding:10px 12px;text-align:left;color:#ffaa00;font-family:Orbitron;font-size:12px;letter-spacing:1px">Bridge</th>
+            <th style="padding:10px 12px;text-align:left;color:#ffaa00;font-family:Orbitron;font-size:12px">Location</th>
+            <th style="padding:10px 12px;text-align:right;color:#ffaa00;font-family:Orbitron;font-size:12px">Class 1 (Car)</th>
+            <th style="padding:10px 12px;text-align:right;color:#ffaa00;font-family:Orbitron;font-size:12px">Class 4 (Kamyon 4–5ax)</th>
+            <th style="padding:10px 12px;text-align:right;color:#ffaa00;font-family:Orbitron;font-size:12px">Class 5 (TIR 6+ax)</th>
+            <th style="padding:10px 12px;text-align:left;color:#ffaa00;font-family:Orbitron;font-size:12px">Truck Access</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.06);background:rgba(105,255,71,.04)">
+            <td style="padding:10px 12px;color:var(--neon-green);font-weight:700">Yavuz Sultan Selim<br><span style="font-size:12px;color:var(--text-dim)">3rd Bosphorus Bridge, Istanbul</span></td>
+            <td style="padding:10px 12px;color:var(--text-dim);font-size:14px">Istanbul (northern)</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--text-main)">105</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--text-main)">595</td>
+            <td style="padding:10px 12px;text-align:right;font-weight:700;color:#ffaa00;font-size:18px">740</td>
+            <td style="padding:10px 12px;color:var(--neon-green);font-weight:700">✅ MANDATORY for Class 3+</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.06)">
+            <td style="padding:10px 12px;color:var(--text-main)">Osmangazi Köprüsü<br><span style="font-size:12px;color:var(--text-dim)">Gebze–Bursa, İzmit Bay</span></td>
+            <td style="padding:10px 12px;color:var(--text-dim);font-size:14px">Kocaeli</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--text-main)">995</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--text-main)">2,505</td>
+            <td style="padding:10px 12px;text-align:right;font-weight:700;color:var(--text-main)">3,165</td>
+            <td style="padding:10px 12px;color:var(--neon-green)">✅ All classes</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.06)">
+            <td style="padding:10px 12px;color:var(--text-main)">1915 Çanakkale Köprüsü<br><span style="font-size:12px;color:var(--text-dim)">Dardanelles Strait</span></td>
+            <td style="padding:10px 12px;color:var(--text-dim);font-size:14px">Çanakkale</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--text-main)">995</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--text-main)">2,490</td>
+            <td style="padding:10px 12px;text-align:right;font-weight:700;color:var(--text-main)">3,755</td>
+            <td style="padding:10px 12px;color:var(--neon-green)">✅ All classes</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.06)">
+            <td style="padding:10px 12px;color:var(--text-dim)">15 Temmuz Şehitler (1st Bosphorus)<br><span style="font-size:12px">FSM — Fatih Sultan Mehmet (2nd Bosphorus)</span></td>
+            <td style="padding:10px 12px;color:var(--text-dim);font-size:14px">Istanbul</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--text-dim)">see KGM</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--neon-red)">❌</td>
+            <td style="padding:10px 12px;text-align:right;color:var(--neon-red)">❌</td>
+            <td style="padding:10px 12px;color:var(--neon-red)">Prohibited — Class 1 only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:14px">
+    <div class="card" style="border-color:rgba(255,170,0,.25)">
+      <div class="card-title" style="color:#ffaa00"><span class="accent" style="background:#ffaa00"></span>Vehicle Classification (Axle-Based)</div>
+      <div style="font-size:15px;line-height:2">
+        <div><span style="color:#ffaa00;font-weight:700">Class 4 (Kamyon):</span> 4–5 axles — standard trucks</div>
+        <div><span style="color:#ffaa00;font-weight:700">Class 5 (TIR/Treyler):</span> 6+ axles — semi-trailers, long-haul</div>
+        <div style="margin-top:8px;padding:8px 12px;background:rgba(255,170,0,.06);border-left:3px solid #ffaa00;font-size:14px;color:var(--text-dim)">
+          KGM uses <strong style="color:#ffaa00">aks sayısı</strong> (axle count), not GVW/weight, for classification.<br>
+          Turkish: "Aks adedi 4 ve 5 olan her türlü araç 4. sınıf araçtır"
+        </div>
+        <div style="margin-top:10px"><span style="color:var(--neon-red);font-weight:700">HARD RULE:</span> Class 3–5 vehicles crossing Istanbul Bosphorus <strong>MUST</strong> use Yavuz Sultan Selim. FSM and 15 Temmuz bridges are legally prohibited for trucks.</div>
+        <div style="margin-top:8px"><span style="color:var(--text-dim)">Legal basis:</span> KGM Yönetmelik — "Karayollarında Geçiş Ücretlerinin Belirlenmesi ve Uygulanmasına Dair Yönetmelik"</div>
+        <div><span style="color:var(--text-dim)">Authority:</span> KGM (Karayolları Genel Müdürlüğü) under Ministry of Transportation</div>
+        <div><span style="color:var(--text-dim)">Official source:</span> <code>kgm.gov.tr/Sayfalar/KGM/SiteTr/Otoyollar/UcretlerYeni.aspx</code></div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:rgba(255,170,0,.25)">
+      <div class="card-title" style="color:#ffaa00"><span class="accent" style="background:#ffaa00"></span>Law Tracker Architecture</div>
+      <div style="font-size:15px;line-height:1.9">
+        <div><span style="color:var(--text-dim)">Tracker script:</span> <code>~/.openclaw/workspace/broker/laws/law_tracker.py</code></div>
+        <div><span style="color:var(--text-dim)">Tariff database:</span> <code>laws/tariffs.json</code> (structured 2026 data)</div>
+        <div><span style="color:var(--text-dim)">KB article:</span> <code>laws/TR_BRIDGE_FEES.md</code> (broker reads at startup)</div>
+        <div><span style="color:var(--text-dim)">Audit log:</span> <code>laws/tracker_log.jsonl</code> (append-only)</div>
+        <div style="margin-top:10px;padding:10px 12px;background:rgba(255,170,0,.06);border:1px solid rgba(255,170,0,.2);border-radius:5px;font-size:14px">
+          <div style="color:#ffaa00;font-weight:700;margin-bottom:6px">Detection logic:</div>
+          <div style="color:var(--text-dim)">1. Fetch <code>kgm.gov.tr</code> weekly</div>
+          <div style="color:var(--text-dim)">2. Extract fee numbers via regex (Yavuz/Osmangazi/Çanakkale)</div>
+          <div style="color:var(--text-dim)">3. Fingerprint on fee values only — not full HTML (avoids false positives from dynamic page content)</div>
+          <div style="color:var(--text-dim)">4. Year-flip check: if current year > effective_date year → flag for review</div>
+          <div style="color:var(--text-dim)">5. On change: regenerate TR_BRIDGE_FEES.md + log + save new tariffs.json</div>
+        </div>
+        <div style="margin-top:10px;font-size:14px">
+          <div><code style="color:var(--neon-cyan)">systemctl --user status law-tracker.timer</code></div>
+          <div><code style="color:var(--neon-cyan)">python3 law_tracker.py --force</code> — force re-check now</div>
+          <div><code style="color:var(--neon-cyan)">python3 law_tracker.py --status</code> — print current rates</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(255,170,0,.2)">
+    <div class="card-title" style="color:#ffaa00"><span class="accent" style="background:#ffaa00"></span>Annual Update Cycle &amp; Historical Changes</div>
+    <div style="font-size:15px;line-height:1.9">
+      <div class="grid-3">
+        <div style="padding:12px;background:rgba(255,170,0,.06);border:1px solid rgba(255,170,0,.2);border-radius:5px;text-align:center">
+          <div style="font-family:Orbitron;font-size:22px;color:#ffaa00;font-weight:700">+25.49%</div>
+          <div style="color:var(--text-dim);font-size:13px">2025 → 2026 (effective 2026-01-01)</div>
+        </div>
+        <div style="padding:12px;background:rgba(105,255,71,.06);border:1px solid rgba(105,255,71,.2);border-radius:5px;text-align:center">
+          <div style="font-family:Orbitron;font-size:22px;color:var(--neon-green);font-weight:700">+18%</div>
+          <div style="color:var(--text-dim);font-size:13px">2024 → 2025 (effective 2025-01-01)</div>
+        </div>
+        <div style="padding:12px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);border-radius:5px;text-align:center">
+          <div style="font-family:Orbitron;font-size:22px;color:var(--neon-cyan);font-weight:700">2027-01-01</div>
+          <div style="color:var(--text-dim);font-size:13px">Next expected update</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:14px;color:var(--text-dim)">
+        Update method: Turkish government publishes official <strong style="color:#ffaa00">yeniden değerleme oranı</strong> (revaluation coefficient) each December → KGM applies it to all bridge/highway fees on January 1st.
+        Mid-year updates are rare (2024 had one on May 15).
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CHANNELS ═══════════════════════════ -->
+<section class="tab-section" id="tab-channels">
+  <div class="section-header">
+    <div class="section-title" style="color:#00b4ff">CHANNELS</div>
+    <span class="section-badge" style="border-color:#00b4ff;color:#00b4ff">Telegram · WhatsApp · Live</span>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:14px">
+    <div class="card" style="border-color:rgba(0,180,255,.4)">
+      <div class="card-title" style="color:#00b4ff"><span class="accent" style="background:#00b4ff"></span>📱 Telegram</div>
+      <div style="font-size:15px;line-height:2">
+        <div><span style="color:var(--text-dim)">Bot:</span> <code>@dexclawbot_bot</code></div>
+        <div><span style="color:var(--text-dim)">dmPolicy:</span> open (all DMs accepted)</div>
+        <div><span style="color:var(--text-dim)">allowFrom:</span> * (no restriction)</div>
+        <div><span style="color:var(--text-dim)">groupPolicy:</span> open</div>
+        <div><span style="color:var(--text-dim)">timeoutSeconds:</span> 25</div>
+        <div><span style="color:var(--text-dim)">DNS:</span> ipv4first · autoSelectFamily: false</div>
+        <div><span style="color:var(--text-dim)">Agent binding:</span> Telegram → <code style="color:var(--neon-purple)">broker</code> (all messages)</div>
+        <div style="margin-top:10px;color:var(--text-dim);letter-spacing:1px;font-size:13px">REGISTERED GROUPS</div>
+        <table id="tg-groups-tbody-channels" style="width:100%;border-collapse:collapse;font-size:14px;margin-top:4px">
+          <tr style="border-bottom:1px solid rgba(0,180,255,.15)">
+            <td style="padding:5px 8px;color:var(--text-dim)">Group</td>
+            <td style="font-family:'Share Tech Mono',monospace;padding:5px 8px">-1003878643720</td>
+            <td style="color:var(--neon-green);padding:5px 8px">requireMention: true</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 8px;color:var(--text-dim)">Group</td>
+            <td style="font-family:'Share Tech Mono',monospace;padding:5px 8px">-5153817877</td>
+            <td style="color:var(--neon-green);padding:5px 8px">requireMention: true</td>
+          </tr>
+        </table>
+        <div style="margin-top:12px;padding:8px 12px;background:rgba(0,180,255,.06);border-left:3px solid #00b4ff;font-size:13px;color:var(--text-dim)">
+          <strong style="color:#00b4ff">Polling issue:</strong> ETIMEDOUT stalls every ~11 min detected in gateway logs. Self-heals via polling restart. Unrelated to model routing.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:rgba(105,255,71,.35)">
+      <div class="card-title" style="color:var(--neon-green)"><span class="accent" style="background:var(--neon-green)"></span>💬 WhatsApp (Baileys multi-account)</div>
+      <div style="font-size:15px;line-height:2">
+        <div><span style="color:var(--text-dim)">Plugin:</span> built-in whatsapp (Baileys)</div>
+        <div><span style="color:var(--text-dim)">Enabled accounts:</span> tr · lb · default</div>
+        <div><span style="color:var(--text-dim)">dmPolicy:</span> pairing (require QR pair first)</div>
+        <div><span style="color:var(--text-dim)">groupPolicy:</span> open</div>
+        <div><span style="color:var(--text-dim)">allowFrom (both):</span> <code>+96176370259</code> · <code>+905013478718</code></div>
+        <div style="margin-top:10px;color:var(--text-dim);letter-spacing:1px;font-size:13px">ACCOUNT STATUS</div>
+        <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:4px">
+          <tr style="border-bottom:1px solid rgba(105,255,71,.15)">
+            <td style="padding:5px 8px;color:var(--neon-green);font-weight:700">tr</td>
+            <td style="padding:5px 8px;color:var(--neon-green)">enabled: true</td>
+            <td style="padding:5px 8px;color:var(--text-dim)">dmPolicy: pairing</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(105,255,71,.15)">
+            <td style="padding:5px 8px;color:var(--neon-yellow)">lb</td>
+            <td style="padding:5px 8px;color:var(--neon-yellow)">enabled: true</td>
+            <td style="padding:5px 8px;color:var(--text-dim)">needs pair</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 8px;color:var(--text-dim)">default</td>
+            <td style="padding:5px 8px;color:var(--text-dim)">fallback config</td>
+            <td style="padding:5px 8px;color:var(--text-dim)">pairing</td>
+          </tr>
+        </table>
+        <div style="margin-top:10px;font-size:14px">
+          <div><code style="color:var(--neon-cyan)">openclaw channels login --channel whatsapp --account tr</code></div>
+          <div><code style="color:var(--neon-cyan)">openclaw channels login --channel whatsapp --account lb</code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(0,180,255,.2)">
+    <div class="card-title" style="color:#00b4ff"><span class="accent" style="background:#00b4ff"></span>Channel → Agent Routing</div>
+    <div style="font-size:15px;line-height:2">
+      <div class="grid-3">
+        <div style="padding:12px;background:rgba(180,0,255,.06);border:1px solid rgba(180,0,255,.2);border-radius:5px">
+          <div style="color:var(--neon-purple);font-weight:700;margin-bottom:4px">Telegram → broker</div>
+          <div style="font-size:13px;color:var(--text-dim)">type: route · match: channel=telegram · ALL Telegram messages handled by broker agent</div>
+        </div>
+        <div style="padding:12px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);border-radius:5px">
+          <div style="color:var(--neon-cyan);font-weight:700;margin-bottom:4px">WhatsApp → main (DEX)</div>
+          <div style="font-size:13px;color:var(--text-dim)">WhatsApp tr/lb → main agent (DEX). No explicit binding. Input-router routes within DEX.</div>
+        </div>
+        <div style="padding:12px;background:rgba(255,45,85,.06);border:1px solid rgba(255,45,85,.2);border-radius:5px">
+          <div style="color:#ff2d55;font-weight:700;margin-bottom:4px">social-free → direct invoke</div>
+          <div style="font-size:13px;color:var(--text-dim)">No channel binding (Telegram already taken by broker). Invoke via: <code>openclaw chat social-free /command</code></div>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding:10px 14px;background:rgba(0,180,255,.05);border-left:3px solid #00b4ff;font-size:13px;color:var(--text-dim)">
+        <strong style="color:#00b4ff">Binding in openclaw.json:</strong><br>
+        <code>{"type":"route","agentId":"broker","match":{"channel":"telegram"}}</code><br>
+        Only one agent can bind per channel. To change: stop gateway → edit openclaw.json bindings array → restart gateway.
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ═══════════════════════════ API MONITORING ═══════════════════════════ -->
 <section class="tab-section" id="tab-api-monitoring">
@@ -2974,7 +3415,7 @@ loadLiveData();
 <section class="tab-section" id="tab-blueprint">
   <div class="section-header">
     <div class="section-title" style="color:#ff9f43">SYSTEM BLUEPRINT</div>
-    <span class="section-badge" style="border-color:#ff9f43;color:#ff9f43">OPENCLAW · FULL STACK REFERENCE · 2026-04-30</span>
+    <span class="section-badge" style="border-color:#ff9f43;color:#ff9f43">OPENCLAW · FULL STACK REFERENCE · 2026-05-01</span>
   </div>
 
   <div class="grid-2" style="gap:14px;margin-bottom:14px">
@@ -3010,7 +3451,13 @@ loadLiveData();
             <td style="color:var(--neon-purple)">broker</td>
             <td>🏛️ Broker</td>
             <td style="color:var(--neon-cyan)">gemma-chat</td>
-            <td class="bp-dim">Logistics specialist — router excluded</td>
+            <td class="bp-dim">Logistics specialist — router excluded · law-check /laws/TR_BRIDGE_FEES.md</td>
+          </tr>
+          <tr>
+            <td style="color:#ff2d55">social-free</td>
+            <td>📱 Social-Free</td>
+            <td style="color:var(--neon-cyan)">gemma-chat</td>
+            <td class="bp-dim">FB/IG free-tier poster · image waterfall: Gemini→Pollinations→Leonardo→HF</td>
           </tr>
         </tbody>
       </table>
@@ -3019,9 +3466,11 @@ loadLiveData();
         <div style="font-size:14px;line-height:2;color:var(--text-main)">
           <div>⚠️ <span style="color:#ff9f43">Stop gateway before editing openclaw.json</span> — file watcher race condition</div>
           <div><span class="bp-warn">gemini-2.0-flash</span> — BANNED, deprecated</div>
+          <div><span class="bp-warn">gemini-2.0-flash-preview-image-generation</span> — REMOVED by Google, use gemini-2.5-flash-image</div>
           <div><span class="bp-warn">gemma-internal 12B</span> — never primary (beta quota ~100-500 RPD)</div>
           <div><span class="bp-ok">gemma-agentic 31B</span> — internal agents only (∞ TPM)</div>
           <div><span style="color:var(--neon-magenta)">mistral-large</span> — explicit-only (multimodal/PDF)</div>
+          <div><span style="color:#ff2d55">social-free</span> — Gemini keys from config.json · FB/IG tokens required for live posting</div>
         </div>
       </div>
     </div>
@@ -3038,8 +3487,61 @@ loadLiveData();
         <tr><td>qdrant.service</td><td style="color:var(--neon-green)">6333</td><td>Qdrant vector DB</td><td>Vector store for mem0 JS + Python</td></tr>
         <tr><td>mem0.service</td><td style="color:var(--neon-orange)">8080</td><td>Python FastAPI</td><td>Python mem0 REST API (separate from JS plugin)</td></tr>
         <tr><td>litellm-proxy.service</td><td style="color:var(--neon-yellow)">4000</td><td>Python uvicorn</td><td>Model routing proxy — all inference goes through here</td></tr>
+        <tr><td style="color:#ffaa00">law-tracker.timer</td><td style="color:var(--text-dim)">—</td><td>systemd user timer</td><td>Runs law_tracker.py weekly Mon 06:00 — KGM bridge fee change detection</td></tr>
+        <tr><td style="color:#ffaa00">law-tracker.service</td><td style="color:var(--text-dim)">—</td><td>Python one-shot</td><td>Fingerprints KGM fee page · updates TR_BRIDGE_FEES.md · logs to tracker_log.jsonl</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- AGENT FILE PATHS -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">Agent File Paths &amp; Key Configs</div>
+    <table class="bp-table">
+      <thead><tr><th>Agent</th><th>Definition</th><th>Workspace</th><th>Key Files</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:#ff9f43">DEX (main)</td>
+          <td style="font-family:'Share Tech Mono',monospace;font-size:12px">~/.openclaw/agents/main/agent.md</td>
+          <td class="bp-dim">—</td>
+          <td class="bp-dim">agent.md · auth-profiles.json · auth-state.json · models.json</td>
+        </tr>
+        <tr>
+          <td style="color:var(--neon-purple)">broker</td>
+          <td style="font-family:'Share Tech Mono',monospace;font-size:12px">~/.openclaw/agents/broker/broker.md</td>
+          <td style="font-family:'Share Tech Mono',monospace;font-size:12px">~/.openclaw/workspace/broker/</td>
+          <td class="bp-dim">broker.md · laws/tariffs.json · laws/TR_BRIDGE_FEES.md · laws/law_tracker.py</td>
+        </tr>
+        <tr>
+          <td style="color:#ff2d55">social-free</td>
+          <td style="font-family:'Share Tech Mono',monospace;font-size:12px">~/.openclaw/agents/social-free/agent.md</td>
+          <td style="font-family:'Share Tech Mono',monospace;font-size:12px">~/.openclaw/workspace/social/</td>
+          <td class="bp-dim">config.json · scripts/post_facebook.py · scripts/post_instagram.py · scripts/generate_image.py · scripts/dry_run.py · scripts/schedule.json</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px">
+      <div style="font-size:13px;color:#ff9f43;margin-bottom:6px;font-family:'Orbitron',monospace;letter-spacing:1px">SOCIAL-FREE — REQUIRED CREDENTIALS (config.json)</div>
+      <table class="bp-table">
+        <thead><tr><th>Key</th><th>Source</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>GEMINI_KEYS[]</td><td>Google AI Studio — 5 keys loaded</td><td><span class="bp-ok">✅ wired</span></td></tr>
+          <tr><td>FB_PAGE_ACCESS_TOKEN</td><td>Meta developer portal → Page token (never expires with long-lived)</td><td><span class="bp-warn">⚠️ empty — needed for live FB posting</span></td></tr>
+          <tr><td>FB_PAGE_ID</td><td>Facebook page numeric ID</td><td><span class="bp-warn">⚠️ empty</span></td></tr>
+          <tr><td>IG_BUSINESS_ACCOUNT_ID</td><td>Meta → Instagram → Business account ID</td><td><span class="bp-warn">⚠️ empty</span></td></tr>
+          <tr><td>IMGBB_API_KEY</td><td>imgbb.com free account — needed for IG photo URL hosting</td><td><span class="bp-warn">⚠️ empty</span></td></tr>
+          <tr><td>PEXELS_API_KEY / PIXABAY_API_KEY</td><td>Stock photo APIs (optional)</td><td><span class="bp-warn">⚠️ empty</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px">
+      <div style="font-size:13px;color:#ff9f43;margin-bottom:6px;font-family:'Orbitron',monospace;letter-spacing:1px">SOCIAL-FREE — IMAGE GENERATION WATERFALL</div>
+      <div style="font-size:14px;line-height:2;color:var(--text-main)">
+        <div><span style="color:var(--neon-yellow)">Tier 1</span> — Gemini 2.5-flash-image / gemini-flash-latest · 5 keys rotated · native image generation</div>
+        <div><span style="color:var(--neon-cyan)">Tier 2</span> — Pollinations.AI (FLUX) · <code>image.pollinations.ai/prompt/{encoded}</code> · unlimited · no key needed</div>
+        <div><span style="color:var(--neon-magenta)">Tier 3</span> — Leonardo.AI · free 150 credits/day · API key optional</div>
+        <div><span style="color:var(--text-dim)">Tier 4</span> — HuggingFace FLUX.1-schnell · free inference API · fallback of last resort</div>
+      </div>
+    </div>
   </div>
 
   <!-- LITELLM POOLS -->
@@ -3153,6 +3655,45 @@ loadLiveData();
     </table>
   </div>
 
+  <!-- LAW TRACKER -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">Law Tracker — KGM Bridge Fee Monitor</div>
+    <table class="bp-table">
+      <thead><tr><th>Component</th><th>Path</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#ffaa00">law_tracker.py</td><td style="font-family:'Share Tech Mono',monospace;font-size:12px">workspace/broker/laws/law_tracker.py</td><td class="bp-dim">Main script — fetch · fingerprint · diff · regenerate KB</td></tr>
+        <tr><td style="color:#ffaa00">tariffs.json</td><td style="font-family:'Share Tech Mono',monospace;font-size:12px">workspace/broker/laws/tariffs.json</td><td class="bp-dim">2026 fee DB — bridges, classes, routing rules, known fingerprints</td></tr>
+        <tr><td style="color:#ffaa00">TR_BRIDGE_FEES.md</td><td style="font-family:'Share Tech Mono',monospace;font-size:12px">workspace/broker/laws/TR_BRIDGE_FEES.md</td><td class="bp-dim">Auto-regenerated knowledge article — broker reads at startup (step 7)</td></tr>
+        <tr><td style="color:#ffaa00">tracker_log.jsonl</td><td style="font-family:'Share Tech Mono',monospace;font-size:12px">workspace/broker/laws/tracker_log.jsonl</td><td class="bp-dim">Append-only event log — page_fetched · no_change · page_changed · fee_value_changed</td></tr>
+        <tr><td style="color:#ffaa00">law-tracker.timer</td><td style="font-family:'Share Tech Mono',monospace;font-size:12px">~/.config/systemd/user/law-tracker.timer</td><td class="bp-dim">Weekly Mon 06:00 · Persistent=true · RandomizedDelaySec=600</td></tr>
+        <tr><td style="color:#ffaa00">law-tracker.service</td><td style="font-family:'Share Tech Mono',monospace;font-size:12px">~/.config/systemd/user/law-tracker.service</td><td class="bp-dim">ExecStart=python3 law_tracker.py — runs once, exits</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px">
+      <div style="font-size:13px;color:#ff9f43;margin-bottom:6px;font-family:'Orbitron',monospace;letter-spacing:1px">CHANGE DETECTION LOGIC</div>
+      <div style="font-size:14px;line-height:2;color:var(--text-main)">
+        <div><span style="color:#ffaa00">Step 1</span> — Year-flip check: if <code>effective_date</code> year &lt; current year → flag for manual review</div>
+        <div><span style="color:#ffaa00">Step 2</span> — Fetch KGM page · extract fee numbers near Yavuz / Osmangazi / Çanakkale keywords</div>
+        <div><span style="color:#ffaa00">Step 3</span> — Fingerprint extracted fee values only (not full HTML — avoids false positives from sessions/ads)</div>
+        <div><span style="color:#ffaa00">Step 4</span> — Compare against <code>known_fingerprints</code> in tariffs.json · log any drift · regenerate TR_BRIDGE_FEES.md</div>
+        <div><span style="color:var(--text-dim)">Run modes:</span> <code>python3 law_tracker.py</code> (normal) · <code>--force</code> (force check) · <code>--status</code> (print state)</div>
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <div style="font-size:13px;color:#ff9f43;margin-bottom:6px;font-family:'Orbitron',monospace;letter-spacing:1px">2026 CLASS 5 (TIR) FEES — HARD-CODED REFERENCE</div>
+      <table class="bp-table">
+        <thead><tr><th>Bridge</th><th>Class 4 (Kamyon)</th><th>Class 5 (TIR)</th><th>Trucks?</th></tr></thead>
+        <tbody>
+          <tr><td style="color:#ffaa00">Yavuz Sultan Selim</td><td>595 TL</td><td style="color:var(--neon-green)">740 TL</td><td><span class="bp-ok">✅ MANDATORY for Istanbul crossing</span></td></tr>
+          <tr><td style="color:#ffaa00">Osmangazi (Gebze–Bursa)</td><td>2,505 TL</td><td style="color:var(--neon-green)">3,165 TL</td><td><span class="bp-ok">✅</span></td></tr>
+          <tr><td style="color:#ffaa00">1915 Çanakkale (Dardanelles)</td><td>2,490 TL</td><td style="color:var(--neon-green)">3,755 TL</td><td><span class="bp-ok">✅</span></td></tr>
+          <tr><td class="bp-dim">FSM · 15 Temmuz (1st/2nd Bosphorus)</td><td colspan="2" style="color:var(--neon-red)">❌ PROHIBITED Class 4/5</td><td><span class="bp-warn">Class 1 only</span></td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:6px;font-size:13px;color:var(--text-dim)">Source: KGM — fees revised 1 Jan annually via revaluation rate · 2026 increase: +25.49%</div>
+    </div>
+  </div>
+
   <!-- MEMORY LAYERS -->
   <div class="bp-card bp-section">
     <div class="bp-section-title">Memory Architecture — 4 Layers</div>
@@ -3170,8 +3711,50 @@ loadLiveData();
     </div>
   </div>
 
+  <!-- CHANNEL → AGENT ROUTING -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">Channel → Agent Routing Matrix</div>
+    <table class="bp-table">
+      <thead><tr><th>Channel</th><th>Account / Bot</th><th>Agent(s)</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--neon-cyan)">Telegram</td><td>@dexclawbot_bot</td><td style="color:#ff9f43">DEX (main)</td><td class="bp-dim">DM open · groups require mention · broker can be invoked via command</td></tr>
+        <tr><td style="color:var(--neon-green)">WhatsApp</td><td>tr (+905013478718)</td><td style="color:#ff9f43">DEX (main)</td><td class="bp-dim">DM pairing · pre-auth numbers bypass pairing</td></tr>
+        <tr><td style="color:var(--neon-green)">WhatsApp</td><td>lb (needs re-pairing)</td><td style="color:#ff9f43">DEX (main)</td><td class="bp-dim">Run: openclaw channels login --channel whatsapp --account lb</td></tr>
+        <tr><td style="color:#ff2d55">Facebook</td><td>Page (FB_PAGE_ID)</td><td style="color:#ff2d55">social-free</td><td class="bp-dim">Posts via Graph API v21.0 · token from FB developer portal</td></tr>
+        <tr><td style="color:#ff2d55">Instagram</td><td>IG Business (IG_BUSINESS_ACCOUNT_ID)</td><td style="color:#ff2d55">social-free</td><td class="bp-dim">Posts via IG Graph API · photo URL must be publicly accessible (imgbb.com)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- REBUILD CHECKLIST (AI AGENT REFERENCE) -->
+  <div class="bp-card bp-section">
+    <div class="bp-section-title">AI Agent Rebuild Checklist — Reproduce This Stack</div>
+    <div style="font-size:14px;line-height:2;color:var(--text-main)">
+      <div style="color:#ff9f43;font-family:'Orbitron',monospace;font-size:13px;margin-bottom:8px;letter-spacing:1px">PHASE 1 — INFRASTRUCTURE</div>
+      <div>① Install Node.js v24+ via nvm · Python 3.11+ · ffmpeg · imagemagick · jq · pip3 install openai google-genai</div>
+      <div>② Clone / install OpenClaw gateway · set port 18789 · configure <code>~/.openclaw/openclaw.json</code></div>
+      <div>③ Install &amp; start: qdrant.service (6333) · mem0.service (8080) · cognee.service (8000) · litellm-proxy.service (4000)</div>
+      <div>④ Build LiteLLM pools: gemma-chat (27B · 28 keys) · gemma-fallback (4B) · gemma-agentic (31B) · gemini-embedding · mistral-chat · codestral (see Pools table above)</div>
+      <div style="color:#ff9f43;font-family:'Orbitron',monospace;font-size:13px;margin:10px 0 8px;letter-spacing:1px">PHASE 2 — AGENTS</div>
+      <div>⑤ Register broker agent: agent.md in <code>~/.openclaw/agents/broker/</code> · add auth-profiles.json / auth-state.json / models.json</div>
+      <div>⑥ Register social-free agent: agent.md in <code>~/.openclaw/agents/social-free/</code> · same 3 auth files · workspace scripts in <code>~/.openclaw/workspace/social/</code></div>
+      <div>⑦ Wire input-router plugin: excludeAgents=[broker, social-free] · CODE_RE→codestral · MEDIA_RE→gemini-vision · length router</div>
+      <div>⑧ Enable plugins: openclaw-mem0 · cognee-augment · input-router · telegram · whatsapp</div>
+      <div style="color:#ff9f43;font-family:'Orbitron',monospace;font-size:13px;margin:10px 0 8px;letter-spacing:1px">PHASE 3 — KNOWLEDGE &amp; AUTOMATION</div>
+      <div>⑨ Build laws/ directory: tariffs.json · law_tracker.py · TR_BRIDGE_FEES.md · add startup step to broker.md to load TR_BRIDGE_FEES.md</div>
+      <div>⑩ Install systemd user timer: law-tracker.timer (Mon 06:00 · Persistent=true) · law-tracker.service (ExecStart=python3 law_tracker.py)</div>
+      <div>⑪ Wire social-free config.json: GEMINI_KEYS[] · FB_PAGE_ACCESS_TOKEN · FB_PAGE_ID · IG_BUSINESS_ACCOUNT_ID · IMGBB_API_KEY</div>
+      <div>⑫ Deploy Telegram API monitoring: Watcher script · Telegram bot alerts → api-monitoring dashboard (see API MONITOR tab)</div>
+      <div style="color:#ff9f43;font-family:'Orbitron',monospace;font-size:13px;margin:10px 0 8px;letter-spacing:1px">PHASE 4 — OPS CHECKS</div>
+      <div>⑬ Verify: <code>openclaw agents list</code> shows DEX · broker · social-free · <code>openclaw channels status</code> shows telegram · whatsapp</div>
+      <div>⑭ Test broker law: <code>openclaw ask broker /law-check</code> → should return Yavuz Sultan Selim fee + routing rule</div>
+      <div>⑮ Test image gen: <code>python3 generate_image.py "test" /tmp/test.png</code> → tier waterfall should reach Pollinations on free tier</div>
+      <div>⑯ Test law tracker: <code>python3 law_tracker.py --status</code> → should show 2026 fees · <code>systemctl --user status law-tracker.timer</code></div>
+    </div>
+  </div>
+
   <div style="margin-top:8px;font-size:14px;color:var(--text-dim);text-align:right">
-    Reference crystallized by brain · 2026-04-30 · confidence 1.0
+    Reference crystallized by brain · 2026-05-01 · agents: DEX · broker · social-free · confidence 1.0
   </div>
 </section>
 
