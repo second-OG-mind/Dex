@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T19:00:02Z",
+  "last_updated": "2026-05-01T19:15:02Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -59,8 +59,8 @@
     },
     "gemma_agentic": {
       "total": 28,
-      "healthy": 10,
-      "resting": 18
+      "healthy": 4,
+      "resting": 24
     },
     "gemini_embedding": {
       "total": 28,
@@ -78,8 +78,8 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 194,
-    "unhealthy_endpoints": 28,
+    "healthy_endpoints": 180,
+    "unhealthy_endpoints": 42,
     "total_endpoints": 222
   },
   "key_states": {
@@ -98,7 +98,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T18:45:03Z",
+        "last_checked": "2026-05-01T19:15:02Z",
         "healthy_keys": 27,
         "unhealthy_keys": 1
       },
@@ -115,7 +115,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T18:45:03Z",
+        "last_checked": "2026-05-01T19:15:02Z",
         "healthy_keys": 27,
         "unhealthy_keys": 1
       },
@@ -132,7 +132,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T18:45:03Z",
+        "last_checked": "2026-05-01T19:15:02Z",
         "healthy_keys": 27,
         "unhealthy_keys": 1
       },
@@ -149,7 +149,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T18:45:03Z",
+        "last_checked": "2026-05-01T19:15:02Z",
         "healthy_keys": 27,
         "unhealthy_keys": 1
       },
@@ -317,11 +317,65 @@
             "recover_at": "2026-05-02T07:00:00Z",
             "recover_epoch": 1777705200,
             "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_API_KEY_8",
+            "key_display": "AIzaSy...****mY0E",
+            "reason": "daily_quota",
+            "resting_since": "2026-05-01T19:15:02Z",
+            "recover_at": "2026-05-02T07:00:00Z",
+            "recover_epoch": 1777705200,
+            "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_MEM_KEY_1",
+            "key_display": "AIzaSy...****94iQ",
+            "reason": "daily_quota",
+            "resting_since": "2026-05-01T19:15:02Z",
+            "recover_at": "2026-05-02T07:00:00Z",
+            "recover_epoch": 1777705200,
+            "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_MEM_KEY_5",
+            "key_display": "AIzaSy...****av-8",
+            "reason": "daily_quota",
+            "resting_since": "2026-05-01T19:15:02Z",
+            "recover_at": "2026-05-02T07:00:00Z",
+            "recover_epoch": 1777705200,
+            "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_MEM_KEY_11",
+            "key_display": "AIzaSy...****Ju9Y",
+            "reason": "daily_quota",
+            "resting_since": "2026-05-01T19:15:02Z",
+            "recover_at": "2026-05-02T07:00:00Z",
+            "recover_epoch": 1777705200,
+            "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_MEM_KEY_12",
+            "key_display": "AIzaSy...****hnMQ",
+            "reason": "daily_quota",
+            "resting_since": "2026-05-01T19:15:02Z",
+            "recover_at": "2026-05-02T07:00:00Z",
+            "recover_epoch": 1777705200,
+            "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_API_KEY_16",
+            "key_display": "AIzaSy...****igAU",
+            "reason": "daily_quota",
+            "resting_since": "2026-05-01T19:15:02Z",
+            "recover_at": "2026-05-02T07:00:00Z",
+            "recover_epoch": 1777705200,
+            "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T18:45:03Z",
-        "healthy_keys": 27,
-        "unhealthy_keys": 1
+        "last_checked": "2026-05-01T19:15:02Z",
+        "healthy_keys": 11,
+        "unhealthy_keys": 17
       },
       "gemini-embedding-2": {
         "total": 28,
@@ -336,12 +390,12 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-01T18:45:03Z",
+        "last_checked": "2026-05-01T19:15:02Z",
         "healthy_keys": 27,
         "unhealthy_keys": 1
       }
     },
-    "last_updated": "2026-05-01T18:45:03Z"
+    "last_updated": "2026-05-01T19:15:02Z"
   },
   "config": {
     "key_counts": {
