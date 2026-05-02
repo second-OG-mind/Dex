@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-02T00:30:01Z",
+  "last_updated": "2026-05-02T00:45:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -98,7 +98,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-02T00:30:01Z",
+        "last_checked": "2026-05-02T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -115,7 +115,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-02T00:30:01Z",
+        "last_checked": "2026-05-02T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -132,7 +132,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-02T00:30:01Z",
+        "last_checked": "2026-05-02T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -149,7 +149,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-02T00:30:01Z",
+        "last_checked": "2026-05-02T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -373,7 +373,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-02T00:30:01Z",
+        "last_checked": "2026-05-02T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -390,12 +390,12 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-02T00:30:01Z",
+        "last_checked": "2026-05-02T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-05-02T00:30:01Z"
+    "last_updated": "2026-05-02T00:45:01Z"
   },
   "config": {
     "key_counts": {
