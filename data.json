@@ -1,43 +1,43 @@
 {
-  "last_updated": "2026-05-05T19:00:00Z",
+  "last_updated": "2026-05-05T19:15:00Z",
   "gateway": {
-    "status": "offline",
+    "status": "online",
     "port": 18789,
-    "pid": 0,
+    "pid": 272,
     "version": "2026.4.27"
   },
   "services": {
     "openclaw-gateway": {
-      "active": false,
-      "cpu": 0.0,
-      "mem": 0.0,
+      "active": true,
+      "cpu": 135.0,
+      "mem": 8.0,
       "port": 18789,
-      "pid": 0
+      "pid": 272
     },
     "cognee": {
       "active": true,
-      "cpu": 0.3,
-      "mem": 1.8,
+      "cpu": 14.2,
+      "mem": 1.7,
       "port": 8000,
       "status": "online"
     },
     "mem0": {
       "active": true,
-      "cpu": 0.1,
-      "mem": 0.4,
+      "cpu": 7.0,
+      "mem": 0.6,
       "port": 8080,
       "status": "online"
     },
     "qdrant": {
       "active": true,
-      "cpu": 0.2,
-      "mem": 0.4,
+      "cpu": 3.8,
+      "mem": 3.0,
       "port": 6333
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 0.8,
-      "mem": 1.9,
+      "cpu": 14.2,
+      "mem": 1.6,
       "port": 4000
     }
   },
@@ -78,9 +78,9 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 0,
-    "unhealthy_endpoints": 0,
-    "total_endpoints": 0
+    "healthy_endpoints": 194,
+    "unhealthy_endpoints": 28,
+    "total_endpoints": 222
   },
   "key_states": {
     "schema_version": "1.1",
@@ -88,47 +88,47 @@
       "gemini-embedding": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-05T19:00:00Z",
-        "healthy_keys": 28,
-        "unhealthy_keys": 0
+        "last_checked": "2026-05-05T19:15:00Z",
+        "healthy_keys": 27,
+        "unhealthy_keys": 1
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-05T19:00:00Z",
-        "healthy_keys": 28,
-        "unhealthy_keys": 0
+        "last_checked": "2026-05-05T19:15:00Z",
+        "healthy_keys": 27,
+        "unhealthy_keys": 1
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-05T19:00:00Z",
-        "healthy_keys": 28,
-        "unhealthy_keys": 0
+        "last_checked": "2026-05-05T19:15:00Z",
+        "healthy_keys": 27,
+        "unhealthy_keys": 1
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-05T19:00:00Z",
-        "healthy_keys": 28,
-        "unhealthy_keys": 0
+        "last_checked": "2026-05-05T19:15:00Z",
+        "healthy_keys": 27,
+        "unhealthy_keys": 1
       },
       "gemma-agentic": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-05T19:00:00Z",
-        "healthy_keys": 28,
-        "unhealthy_keys": 0
+        "last_checked": "2026-05-05T19:15:00Z",
+        "healthy_keys": 27,
+        "unhealthy_keys": 1
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-05T19:00:00Z",
-        "healthy_keys": 28,
-        "unhealthy_keys": 0
+        "last_checked": "2026-05-05T19:15:00Z",
+        "healthy_keys": 27,
+        "unhealthy_keys": 1
       }
     },
-    "last_updated": "2026-05-05T19:00:00Z"
+    "last_updated": "2026-05-05T19:15:00Z"
   },
   "config": {
     "key_counts": {
