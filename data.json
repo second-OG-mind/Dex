@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-06T20:15:03Z",
+  "last_updated": "2026-05-06T20:30:03Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -16,7 +16,7 @@
     },
     "cognee": {
       "active": true,
-      "cpu": 0.5,
+      "cpu": 0.4,
       "mem": 2.2,
       "port": 8000,
       "status": "online"
@@ -36,7 +36,7 @@
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 1.2,
+      "cpu": 1.1,
       "mem": 2.4,
       "port": 4000
     }
@@ -98,28 +98,28 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T20:15:03Z",
+        "last_checked": "2026-05-06T20:30:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T20:15:03Z",
+        "last_checked": "2026-05-06T20:30:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T20:15:03Z",
+        "last_checked": "2026-05-06T20:30:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T20:15:03Z",
+        "last_checked": "2026-05-06T20:30:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -136,7 +136,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T20:15:03Z",
+        "last_checked": "2026-05-06T20:30:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -153,12 +153,12 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T20:15:03Z",
+        "last_checked": "2026-05-06T20:30:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-05-06T20:15:03Z"
+    "last_updated": "2026-05-06T20:30:03Z"
   },
   "config": {
     "key_counts": {
