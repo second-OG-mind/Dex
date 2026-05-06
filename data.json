@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-06T16:25:44Z",
+  "last_updated": "2026-05-06T16:30:01Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -36,8 +36,8 @@
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 0.8,
-      "mem": 3.1,
+      "cpu": 0.9,
+      "mem": 3.0,
       "port": 4000
     }
   },
@@ -98,28 +98,28 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T16:15:01Z",
-        "healthy_keys": 27,
-        "unhealthy_keys": 1
+        "last_checked": "2026-05-06T16:30:01Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T16:15:01Z",
+        "last_checked": "2026-05-06T16:30:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T16:15:01Z",
+        "last_checked": "2026-05-06T16:30:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T16:15:01Z",
+        "last_checked": "2026-05-06T16:30:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -136,9 +136,9 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T16:15:01Z",
-        "healthy_keys": 7,
-        "unhealthy_keys": 21
+        "last_checked": "2026-05-06T16:30:01Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
@@ -153,12 +153,12 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T16:15:01Z",
-        "healthy_keys": 26,
-        "unhealthy_keys": 2
+        "last_checked": "2026-05-06T16:30:01Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-05-06T16:15:01Z"
+    "last_updated": "2026-05-06T16:30:01Z"
   },
   "config": {
     "key_counts": {
