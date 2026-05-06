@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-06T17:30:02Z",
+  "last_updated": "2026-05-06T17:45:03Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -98,28 +98,28 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T17:15:02Z",
+        "last_checked": "2026-05-06T17:45:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T17:15:02Z",
+        "last_checked": "2026-05-06T17:45:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T17:15:02Z",
+        "last_checked": "2026-05-06T17:45:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-06T17:15:02Z",
+        "last_checked": "2026-05-06T17:45:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -136,7 +136,7 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T17:15:02Z",
+        "last_checked": "2026-05-06T17:45:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -153,12 +153,12 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-05-06T17:15:02Z",
+        "last_checked": "2026-05-06T17:45:03Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-05-06T17:15:02Z"
+    "last_updated": "2026-05-06T17:45:03Z"
   },
   "config": {
     "key_counts": {
