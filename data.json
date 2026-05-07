@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-07T16:00:02Z",
+  "last_updated": "2026-05-07T16:15:02Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -10,13 +10,13 @@
     "openclaw-gateway": {
       "active": true,
       "cpu": 1.1,
-      "mem": 4.2,
+      "mem": 4.3,
       "port": 18789,
       "pid": 107740
     },
     "cognee": {
       "active": true,
-      "cpu": 0.3,
+      "cpu": 0.2,
       "mem": 2.2,
       "port": 8000,
       "status": "online"
@@ -98,47 +98,47 @@
       "gemini-embedding": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T16:00:02Z",
+        "last_checked": "2026-05-07T16:15:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T16:00:02Z",
+        "last_checked": "2026-05-07T16:15:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T16:00:02Z",
+        "last_checked": "2026-05-07T16:15:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T16:00:02Z",
+        "last_checked": "2026-05-07T16:15:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-agentic": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T16:00:02Z",
+        "last_checked": "2026-05-07T16:15:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T16:00:02Z",
+        "last_checked": "2026-05-07T16:15:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-05-07T16:00:02Z"
+    "last_updated": "2026-05-07T16:15:02Z"
   },
   "config": {
     "key_counts": {
