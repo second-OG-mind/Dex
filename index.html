@@ -735,7 +735,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
 <section class="tab-section active" id="tab-overview">
   <div class="grid-4" style="margin-bottom:12px">
     <div class="card" style="border-color:rgba(0,229,255,.3)">
-      <div class="stat-num counter" data-target="5" style="color:var(--neon-cyan)">0</div>
+      <div class="stat-num counter" data-target="7" style="color:var(--neon-cyan)">0</div>
       <div class="stat-label">Active Services</div>
       <div class="stat-sub">All systemd healthy</div>
     </div>
@@ -745,9 +745,9 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       <div class="stat-sub" id="stat-key-sub">29 Google · 10 Mistral · 6 Browserless</div>
     </div>
     <div class="card" style="border-color:rgba(224,64,251,.3)">
-      <div class="stat-num counter" id="stat-pool-count" data-target="11" style="color:var(--neon-magenta)">0</div>
+      <div class="stat-num counter" id="stat-pool-count" data-target="13" style="color:var(--neon-magenta)">0</div>
       <div class="stat-label">LiteLLM Pools</div>
-      <div class="stat-sub" id="stat-pool-sub">4 Gemma · 1 Vision · 2 Embed · 4 Mistral</div>
+      <div class="stat-sub" id="stat-pool-sub">4 Gemma · 2 OAI aliases · 1 Vision · 2 Embed · 4 Mistral</div>
     </div>
     <div class="card" style="border-color:rgba(255,234,0,.3)">
       <div class="stat-num counter" data-target="3" style="color:var(--neon-yellow)">0</div>
@@ -766,8 +766,8 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div style="padding-left:20px;color:var(--neon-cyan)">▶ OpenClaw Gateway :18789</div>
         <div style="padding-left:40px;color:var(--text-dim)">→ input-router plugin (priority routing)</div>
         <div style="padding-left:60px;color:var(--text-main)">Code → <span style="color:#00ffcc">litellm/codestral</span></div>
-        <div style="padding-left:60px;color:var(--text-main)">Complex text → <span style="color:var(--neon-cyan)">litellm/gemma-chat</span> (27B)</div>
-        <div style="padding-left:60px;color:var(--text-main)">Short text → <span style="color:var(--neon-magenta)">litellm/gemma-fallback</span> (4B)</div>
+        <div style="padding-left:60px;color:var(--text-main)">Complex text → <span style="color:var(--neon-cyan)">litellm/gemma-chat</span> (31B)</div>
+        <div style="padding-left:60px;color:var(--text-main)">Short text → <span style="color:var(--neon-magenta)">litellm/gemma-fallback</span> (26B A4B)</div>
         <div style="padding-left:60px;color:var(--text-main)">Media/images → <span style="color:var(--neon-orange)">litellm/gemini-vision</span> (12 keys · 2.0-flash)</div>
         <div style="padding-left:60px;color:var(--text-main)">Internal agents → <span style="color:var(--neon-orange)">litellm/gemma-agentic</span> (31B · ∞ TPM)</div>
         <div style="padding-left:40px;color:var(--text-dim)">→ openclaw-mem0 (prependSystemContext)</div>
@@ -775,7 +775,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div style="padding-left:40px;color:var(--text-dim)">→ cognee-augment (appendSystemContext)</div>
         <div style="padding-left:60px;color:var(--neon-yellow)">Cognee :8000 → knowledge graph</div>
         <div style="padding-left:40px;color:var(--text-dim)">→ QMD (context memory) → Agent inference → Reply</div>
-        <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,.07);padding-top:10px;color:var(--text-dim)">↳ Telegram binding → <span style="color:var(--neon-purple)">broker agent</span> (WhatsApp logistics)</div>
+        <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,.07);padding-top:10px;color:var(--text-dim)">↳ Telegram (all DMs + groups) → <span style="color:var(--neon-purple)">broker agent</span> · WhatsApp groups → broker · WhatsApp DMs → DEX (main)</div>
         <div style="padding-left:20px;color:var(--text-dim)">↳ direct invoke → <span style="color:#ff2d55">social-free agent</span> (FB/IG manager · Pollinations · FB Graph API)</div>
         <div style="padding-left:20px;color:var(--text-dim)">↳ law-tracker.timer → <span style="color:#ffaa00">KGM scraper</span> (Mon 06:00 · broker regulatory KB)</div>
       </div>
@@ -791,12 +791,12 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       </div>
       <div style="margin-bottom:12px">
         <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">COMPLEX TEXT</div>
-        <div class="model-chip primary">🔷 litellm/gemma-chat → Gemma 3 27B (28 keys)</div>
+        <div class="model-chip primary">🔷 litellm/gemma-chat → Gemma 4 31B (28 keys)</div>
         <div style="font-size:16px;color:var(--text-dim);margin-top:2px">Via litellm plugin → LiteLLM :4000 · rpm:28 buffer</div>
       </div>
       <div style="margin-bottom:12px">
         <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">SHORT / GREETING</div>
-        <div class="model-chip fallback">🔶 litellm/gemma-fallback → Gemma 3 4B (28 keys)</div>
+        <div class="model-chip fallback">🔶 litellm/gemma-fallback → Gemma 4 26B A4B (28 keys)</div>
         <div style="font-size:16px;color:var(--text-dim);margin-top:2px">Fast path · also auto-fallback when gemma-chat RPD exhausted</div>
       </div>
       <div style="margin-bottom:12px">
@@ -825,7 +825,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       <div>
         <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">GOOGLE / GEMINI</div>
         <div id="inv-google-count" style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-cyan)">29</div>
-        <div style="font-size:16px;color:var(--text-dim)">6 pools (GEMINI_API_KEY_1-16 · GEMINI_MEM_KEY_1-12)</div>
+        <div style="font-size:16px;color:var(--text-dim)">9 pools (GEMINI_API_KEY_1-16 · GEMINI_MEM_KEY_1-12)</div>
         <div style="font-size:16px;color:var(--text-dim)">+ 1 spare (GOOGLE_API_KEY)</div>
       </div>
       <div>
@@ -842,8 +842,8 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       </div>
       <div>
         <div style="font-size:16px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">TOTAL CAPACITY</div>
-        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-yellow)">691K</div>
-        <div style="font-size:16px;color:var(--text-dim)">RPD (chat pools only)</div>
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--neon-yellow)">806K</div>
+        <div style="font-size:16px;color:var(--text-dim)">RPD (31B + 26B A4B · 28 keys × 14,400 × 2 models)</div>
         <div style="font-size:16px;color:var(--text-dim)">∞ TPM on agentic pool</div>
       </div>
     </div>
@@ -854,7 +854,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
 <section class="tab-section" id="tab-services">
   <div class="section-header">
     <div class="section-title" style="color:var(--neon-green)">ACTIVE SERVICES</div>
-    <span class="section-badge" style="border-color:var(--neon-green);color:var(--neon-green)">5 / 5 RUNNING</span>
+    <span class="section-badge" style="border-color:var(--neon-green);color:var(--neon-green)">7 / 7 RUNNING</span>
   </div>
 
   <div class="grid-3" id="services-grid">
@@ -873,17 +873,18 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       <div class="card-title"><span class="accent" style="background:var(--neon-magenta)"></span>GOOGLE / GEMINI</div>
       <div style="font-size:16px;line-height:2;color:var(--text-dim)">
         <div style="color:var(--neon-cyan);font-weight:700">▶ PRIMARY CHAT</div>
-        <div style="padding-left:12px;color:var(--text-main)">gemma-chat → Gemma 3 27B (gemma-3-27b-it)</div>
+        <div style="padding-left:12px;color:var(--text-main)">gemma-chat → Gemma 4 31B (gemma-4-31b-it)</div>
         <div style="padding-left:12px;font-size:16px">28 keys · rpm:28 buffer · 403,200 RPD total</div>
-        <div style="padding-left:12px;font-size:16px">Via: openai plugin → LiteLLM :4000</div>
+        <div style="padding-left:12px;font-size:16px">Via: litellm plugin → LiteLLM :4000</div>
         <br>
         <div style="color:var(--neon-magenta);font-weight:700">▶ HYBRID FALLBACK</div>
-        <div style="padding-left:12px;color:var(--text-main)">gemma-fallback → Gemma 3 4B (gemma-3-4b-it)</div>
+        <div style="padding-left:12px;color:var(--text-main)">gemma-fallback → Gemma 4 26B A4B (gemma-4-26b-a4b-it)</div>
         <div style="padding-left:12px;font-size:16px">28 keys · Auto-route when primary RPD exhausted</div>
         <br>
-        <div style="color:var(--text-dim);font-weight:700">▶ PASSIVE FALLBACK (beta quota — never primary)</div>
-        <div style="padding-left:12px;color:var(--text-dim)">gemma-internal → Gemma 3 12B (gemma-3-12b-it)</div>
-        <div style="padding-left:12px;font-size:16px">28 keys · ~100-500 RPD actual · 15K TPM ⚠️</div>
+        <div style="color:var(--neon-orange);font-weight:700">▶ COGNEE LLM + MEM0 LLM (26B A4B)</div>
+        <div style="padding-left:12px;color:var(--text-main)">gemma-internal → Gemma 4 26B A4B (gemma-4-26b-a4b-it)</div>
+        <div style="padding-left:12px;font-size:16px">28 keys · Cognee cognify + recall · mem0 REST LLM · 26B A4B</div>
+        <div style="padding-left:12px;font-size:16px;color:var(--text-dim)">Alias pool: <span style="color:var(--neon-cyan)">openai/gemma-internal</span> → same 28 keys · Cognee sends this prefix</div>
         <br>
         <div style="color:var(--neon-orange);font-weight:700">▶ INTERNAL AGENTS (Cognee · mem0 · session-memory)</div>
         <div style="padding-left:12px;color:var(--text-main)">gemma-agentic → Gemma 4 31B (gemma-4-31b-it)</div>
@@ -911,16 +912,16 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div>Auth key: <span style="color:var(--text-main)">sk-openclaw-litellm-local</span></div>
         <br>
         <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOL 1 — gemma-chat (PRIMARY)</div>
-        <div>Keys: all 28 · Model: gemma-3-27b-it · rpm:28</div>
+        <div>Keys: all 28 · Model: gemma-4-31b-it · rpm:28</div>
         <div>Used by: all text conversations via input-router</div>
         <br>
         <div style="color:var(--neon-magenta);font-size:15px;font-weight:700">POOL 2 — gemma-fallback (HYBRID)</div>
-        <div>Keys: all 28 · Model: gemma-3-4b-it · rpm:18</div>
+        <div>Keys: all 28 · Model: gemma-4-26b-a4b-it · rpm:18</div>
         <div>Auto-triggered when gemma-chat fully exhausts RPD</div>
         <br>
-        <div style="color:var(--text-dim);font-size:15px;font-weight:700">POOL 3 — gemma-internal (PASSIVE FALLBACK)</div>
-        <div>Keys: all 28 · Model: gemma-3-12b-it · rpm:28</div>
-        <div style="color:var(--neon-red)">Beta quota ~100-500 RPD/key · 15K TPM ⚠️ · never route directly</div>
+        <div style="color:var(--neon-orange);font-size:15px;font-weight:700">POOL 3 — gemma-internal (COGNEE LLM · MEM0 LLM)</div>
+        <div>Keys: all 28 · Model: gemma-4-26b-a4b-it · rpm:28</div>
+        <div style="color:var(--neon-green)">Cognee cognify pipeline · mem0 REST LLM · entity extraction · 26B A4B</div>
         <br>
         <div style="color:var(--neon-orange);font-size:15px;font-weight:700">POOL 4 — gemma-agentic (INTERNAL AGENTS)</div>
         <div>Keys: all 28 · Model: gemma-4-31b-it · rpm:13 · 42,000 RPD</div>
@@ -934,40 +935,44 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div>Keys: all 28 · Model: gemini-embedding-2 (3072d) · rpm:98</div>
         <div>Independent quota from Pool 5 · fallback target · 56K RPD total</div>
         <br>
-        <div style="color:var(--neon-orange);font-size:15px;font-weight:700">POOL 9 — gemini-vision (MEDIA / MULTIMODAL)</div>
-        <div>Keys: 12 · Model: gemini-2.0-flash · rpm:15 · 180 RPM total</div>
-        <div style="color:var(--neon-green)">Input-router multimodalModel — images, media → fast vision routing</div>
+        <div style="color:var(--neon-yellow);font-size:15px;font-weight:700">POOL 7 — openai/gemma-internal (COGNEE LLM ALIAS)</div>
+        <div>Keys: all 28 · Model: gemma-4-26b-a4b-it · rpm:28</div>
+        <div style="color:var(--text-dim)">Cognee sends openai/ prefix · same quota as gemma-internal · expanded 3→28 keys</div>
         <br>
-        <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOLS 7-8 · 10-11 — MISTRAL (chat · large · code · embed)</div>
-        <div>Keys: 9 each · 500K TPM · no rate wall · see Mistral card →</div>
-        <div>Fallback: gemma-chat → mistral-chat → gemma-agentic</div>
+        <div style="color:var(--neon-yellow);font-size:15px;font-weight:700">POOL 8 — openai/gemini-embedding (COGNEE EMBED ALIAS)</div>
+        <div>Keys: all 28 · Model: gemini-embedding-001 (3072d) · rpm:98</div>
+        <div style="color:var(--text-dim)">Cognee sends openai/ prefix · same quota as gemini-embedding · expanded 3→28 keys</div>
+        <br>
+        <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOLS 9-13 — MISTRAL + VISION (chat · large · vision · code · embed)</div>
+        <div>Mistral keys: 9 each · 500K TPM · Vision: 12 keys · gemini-2.0-flash · see Mistral+Vision card →</div>
+        <div>Fallback chain: gemma-chat → mistral-chat → gemma-agentic</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="accent" style="background:var(--neon-cyan)"></span>MISTRAL + VISION POOLS — 5 POOLS</div>
+      <div class="card-title"><span class="accent" style="background:var(--neon-cyan)"></span>MISTRAL + VISION POOLS — 6 POOLS</div>
       <div style="font-size:16px;color:var(--text-dim);line-height:1.9">
-        <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOL 7 — mistral-chat (SLA FALLBACK)</div>
-        <div>Keys: 9 · Model: ministral-8b · rpm:4 · p50: 314ms</div>
+        <div style="color:var(--neon-cyan);font-size:15px;font-weight:700">POOL 9 — mistral-chat (SLA FALLBACK)</div>
+        <div>Keys: 9 · Model: ministral-8b-latest · rpm:4 · p50: 314ms</div>
         <div>Used by: gemma-chat fallback chain (SLA-safe escape)</div>
         <br>
-        <div style="color:var(--neon-magenta);font-size:15px;font-weight:700">POOL 8 — mistral-large (EXPLICIT ONLY)</div>
+        <div style="color:var(--neon-magenta);font-size:15px;font-weight:700">POOL 10 — mistral-large (EXPLICIT ONLY)</div>
         <div>Keys: 9 · Model: mistral-large-latest · rpm:2</div>
         <div>Used by: gemini-vision fallback · explicit PDF calls · never auto-routed</div>
         <br>
-        <div style="color:var(--neon-orange);font-size:15px;font-weight:700">POOL 9 — gemini-vision (MEDIA ROUTING)</div>
+        <div style="color:var(--neon-orange);font-size:15px;font-weight:700">POOL 11 — gemini-vision (MEDIA ROUTING)</div>
         <div>Keys: 12 · Model: gemini-2.0-flash · rpm:15 · 180 RPM total</div>
         <div style="color:var(--neon-green)">Input-router media/multimodal path · fallback: mistral-large</div>
         <br>
-        <div style="color:#00ffcc;font-size:15px;font-weight:700">POOL 10 — codestral (CODE ROUTING)</div>
-        <div>Keys: 9 · Model: codestral · rpm:4 · p50: 307ms</div>
+        <div style="color:#00ffcc;font-size:15px;font-weight:700">POOL 12 — codestral (CODE ROUTING)</div>
+        <div>Keys: 9 · Model: codestral-latest · rpm:4 · p50: 307ms</div>
         <div>Used by: input-router when CODE_RE matches</div>
         <br>
-        <div style="color:var(--neon-yellow);font-size:15px;font-weight:700">POOL 11 — mistral-embed (EMBEDDING ESCAPE)</div>
+        <div style="color:var(--neon-yellow);font-size:15px;font-weight:700">POOL 13 — mistral-embed (EMBEDDING ESCAPE)</div>
         <div>Keys: 9 · Model: mistral-embed · rpm:8</div>
         <div>Used by: gemini-embedding fallback chain (last resort)</div>
         <br>
-        <div style="font-size:15px;color:var(--text-dim)">Mistral pools: 500K TPM ✅ · ~2,880 RPD/key · gemini-vision: free quota</div>
+        <div style="font-size:15px;color:var(--text-dim)">Mistral pools: 500K TPM ✅ · ~2,880 RPD/key · gemini-vision: free quota · See pools 7-8 in Google/Gemini card for openai/ alias pools</div>
       </div>
     </div>
   </div>
@@ -978,29 +983,38 @@ p, div { font-family: 'Share Tech Mono', monospace; }
 
     <div class="key-pool">
       <div class="key-pool-header">
-        <span class="key-pool-name">GEMMA CHAT — Gemma 3 27B (all 28 keys)</span>
+        <span class="key-pool-name">GEMMA CHAT — Gemma 4 31B (all 28 keys)</span>
         <span class="key-pool-count" style="color:var(--neon-cyan)" id="gemma-chat-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-chat · gemini/gemma-3-27b-it · rpm:28 · PRIMARY</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-chat · gemini/gemma-4-31b-it · rpm:28 · PRIMARY</div>
       <div class="key-dots" id="gemma-chat-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
-        <span class="key-pool-name">GEMMA FALLBACK — Gemma 3 4B (all 28 keys)</span>
+        <span class="key-pool-name">GEMMA FALLBACK — Gemma 4 26B A4B (all 28 keys)</span>
         <span class="key-pool-count" style="color:var(--neon-magenta)" id="gemma-fallback-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-fallback · gemini/gemma-3-4b-it · rpm:18 · HYBRID auto-fallback</div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-fallback · gemini/gemma-4-26b-a4b-it · rpm:18 · HYBRID auto-fallback</div>
       <div class="key-dots" id="gemma-fallback-dots"></div>
     </div>
 
     <div class="key-pool">
       <div class="key-pool-header">
-        <span class="key-pool-name">GEMMA INTERNAL — Gemma 3 12B (all 28 keys)</span>
+        <span class="key-pool-name">GEMMA INTERNAL — Gemma 4 26B A4B (all 28 keys)</span>
         <span class="key-pool-count" style="color:var(--neon-green)" id="gemma-internal-count">? / 28</span>
       </div>
-      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-internal · gemini/gemma-3-12b-it · rpm:28 · <span style="color:var(--neon-red)">PASSIVE FALLBACK ONLY — beta quota</span></div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemma-internal · gemini/gemma-4-26b-a4b-it · rpm:28 · <span style="color:var(--neon-orange)">Cognee LLM + mem0 LLM · 26B A4B</span></div>
       <div class="key-dots" id="gemma-internal-dots"></div>
+    </div>
+
+    <div class="key-pool">
+      <div class="key-pool-header">
+        <span class="key-pool-name">OPENAI/GEMMA-INTERNAL — Cognee Alias (all 28 keys)</span>
+        <span class="key-pool-count" style="color:var(--neon-cyan)" id="openai-gemma-internal-count">? / 28</span>
+      </div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">openai/gemma-internal · gemini/gemma-4-26b-a4b-it · rpm:28 · <span style="color:var(--neon-cyan)">Cognee sends openai/ prefix · expanded 3→28 keys</span></div>
+      <div class="key-dots" id="openai-gemma-internal-dots"></div>
     </div>
 
     <div class="key-pool">
@@ -1028,6 +1042,15 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       </div>
       <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">gemini-embedding-2 · gemini-embedding-2 · 3072d · rpm:98 · independent quota</div>
       <div class="key-dots" id="gemini-emb2-dots"></div>
+    </div>
+
+    <div class="key-pool">
+      <div class="key-pool-header">
+        <span class="key-pool-name">OPENAI/GEMINI-EMBEDDING — Cognee Embed Alias (all 28 keys)</span>
+        <span class="key-pool-count" style="color:var(--neon-yellow)" id="openai-gemini-emb-count">? / 28</span>
+      </div>
+      <div style="font-size:16px;color:var(--text-dim);margin-bottom:4px">openai/gemini-embedding · gemini-embedding-001 · 3072d · rpm:98 · <span style="color:var(--neon-cyan)">Cognee sends openai/ prefix · expanded 3→28 keys</span></div>
+      <div class="key-dots" id="openai-gemini-emb-dots"></div>
     </div>
   </div>
 </section>
@@ -1062,7 +1085,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
           <div class="mem-name" style="color:var(--neon-green)">MEM0 JS — EPISODIC RECALL</div>
           <div class="mem-desc">openclaw-mem0 plugin (v1.0.5) embedded inside gateway. Intercepts conversations via api.on() hooks. Recalls top-10 episodic memories before each prompt.</div>
           <div style="margin-top:8px;font-size:16px;color:var(--text-dim);line-height:1.8">
-            vector store: Qdrant :6333 · collection: mem0-openclaw · 19 points<br>
+            vector store: Qdrant :6333 · collection: mem0-openclaw · 61 points<br>
             embedder: gemini-embedding-001 via LiteLLM · dims: 3072 · Cosine<br>
             userId: openclaw-main · topK: 10 · autoCapture: true · autoRecall: true<br>
             inject: prependSystemContext (fires before prompt build)
@@ -1080,7 +1103,10 @@ p, div { font-family: 'Share Tech Mono', monospace; }
             api: Cognee :8000 · version: 1.0.1<br>
             hooks: before_prompt_build (recall) · agent_end (cognify)<br>
             inject: appendSystemContext (fires after mem0)<br>
-            dataset: openclaw-main · searchType: insights<br>
+            dataset: openclaw-main · searchType: <span style="color:var(--neon-cyan)">GRAPH_COMPLETION</span><br>
+            baseUrl: :8000 (cognify write) · recallBaseUrl: :8000 (recall read)<br>
+            recall cache: 60s TTL safety net — serves stale if Cognee momentarily busy<br>
+            llm: openai/gemma-internal (26B A4B) → LiteLLM → gemini/gemma-4-26b-a4b-it<br>
             knowledge docs: system-architecture.md · setup-history.md · agent-system.md
           </div>
           <div class="mem-badge" style="border-color:var(--neon-magenta);color:var(--neon-magenta);background:rgba(224,64,251,.06)">✓ cognee.service :8000 (Python uvicorn)</div>
@@ -1096,7 +1122,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
             service: mem0.service :8080 · Python uvicorn · FastAPI<br>
             vector store: Qdrant :6333 · collection: mem0-rest · 9 points<br>
             embedder: gemini-embedding via LiteLLM · dims: 3072<br>
-            llm: gemma-internal (12B) via LiteLLM<br>
+            llm: gemma-internal (26B A4B) via LiteLLM<br>
             endpoints: POST /memories · POST /search · GET /memories/{user_id}
           </div>
           <div class="mem-badge" style="border-color:var(--neon-orange);color:var(--neon-orange);background:rgba(255,109,0,.06)">✓ mem0.service :8080 (Python REST)</div>
@@ -1110,7 +1136,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         <div class="card-title"><span class="accent" style="background:var(--neon-magenta)"></span>QDRANT v1.14.1 — PORT 6333</div>
         <div style="font-size:16px;color:var(--text-dim);margin-bottom:10px">Storage: ~/.qdrant/storage · All vectors: 3072-dim Cosine</div>
         <div id="qdrant-collections">
-          <div class="qdrant-col"><span class="col-name">mem0-openclaw</span><span class="col-stats" style="color:var(--neon-green)">19 pts · 3072d · Cosine<br><span style="color:var(--text-dim)">JS plugin (openclaw-mem0)</span></span></div>
+          <div class="qdrant-col"><span class="col-name">mem0-openclaw</span><span class="col-stats" style="color:var(--neon-green)">61 pts · 3072d · Cosine<br><span style="color:var(--text-dim)">JS plugin (openclaw-mem0)</span></span></div>
           <div class="qdrant-col"><span class="col-name">mem0-rest</span><span class="col-stats" style="color:var(--neon-orange)">9 pts · 3072d<br><span style="color:var(--text-dim)">Python REST API</span></span></div>
           <div class="qdrant-col" style="border-left-color:var(--text-dim)"><span class="col-name" style="color:var(--text-dim)">memory_migrations</span><span class="col-stats">1 pt<br><span style="color:var(--text-dim)">legacy</span></span></div>
           <div class="qdrant-col" style="border-left-color:var(--text-dim)"><span class="col-name" style="color:var(--text-dim)">mem0migrations</span><span class="col-stats">legacy<br><span style="color:var(--text-dim)">unused</span></span></div>
@@ -1145,7 +1171,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
 <section class="tab-section" id="tab-plugins">
   <div class="section-header">
     <div class="section-title">PLUGIN REGISTRY</div>
-    <span class="section-badge" style="border-color:var(--neon-cyan);color:var(--neon-cyan)">5 ACTIVE · 2 DISABLED</span>
+    <span class="section-badge" style="border-color:var(--neon-cyan);color:var(--neon-cyan)">9 ACTIVE · 2 DISABLED</span>
   </div>
   <div id="plugins-grid" style="display:flex;flex-direction:column;gap:8px"></div>
 </section>
@@ -1490,10 +1516,10 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       <div class="card" style="border-color:var(--neon-magenta)">
         <div class="card-title" style="color:var(--neon-magenta)"><span class="accent" style="background:var(--neon-magenta)"></span>Model Routing — SLA-Aware (updated 2026-04-29)</div>
         <div style="line-height:1.8;color:var(--text-main);font-size:16px">
-          <div style="margin-bottom:6px"><span style="color:var(--neon-green)">● Default:</span> <code>litellm/gemma-chat</code> — Gemma 3 27B · 0.7–1.9s · 15K TPM</div>
+          <div style="margin-bottom:6px"><span style="color:var(--neon-green)">● Default:</span> <code>litellm/gemma-chat</code> — Gemma 4 31B · 0.7–1.9s · 15K TPM</div>
           <div style="margin-bottom:6px"><span style="color:var(--neon-cyan)">● SLA Fallback (tier-2):</span> <code>litellm/mistral-chat</code> — Ministral 8B · <strong style="color:var(--neon-cyan)">314ms</strong> · 500K TPM ✓</div>
           <div style="margin-bottom:6px"><span style="color:var(--neon-orange)">● Heavy RAG (tier-3):</span> <code>litellm/gemma-agentic</code> — Gemma 4 31B · 5–11s · ∞ TPM</div>
-          <div style="margin-bottom:6px"><span style="color:var(--text-dim)">● Bypassed:</span> gemma-fallback 4B not in broker path</div>
+          <div style="margin-bottom:6px"><span style="color:var(--text-dim)">● Bypassed:</span> gemma-fallback (26B A4B) not in broker path</div>
           <div style="margin-top:10px;padding:8px;background:rgba(0,229,255,.07);border-left:3px solid var(--neon-cyan);font-size:15px">
             <strong style="color:var(--neon-cyan)">Auto-fallback chain (LiteLLM-managed):</strong><br>
             gemma-chat → <strong>mistral-chat</strong> (314ms, SLA-safe) → gemma-agentic (final)<br>
@@ -1658,7 +1684,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         </div>
       </div>
       <div style="margin-top:10px;font-size:15px;color:var(--text-dim)">
-        <strong style="color:var(--neon-cyan)">Model routing:</strong> Smart selection — lightweight tasks use gemma-chat (fast, 0.7–1.9s); heavy RAG/benchmark ops route directly to gemma-agentic (unlimited TPM, 5–11s) to avoid TPM cascade and eliminate 4B fallback from critical path. This keeps 10s SLA achievable even under load.
+        <strong style="color:var(--neon-cyan)">Model routing:</strong> Smart selection — lightweight tasks use gemma-chat (31B, fast, 0.7–1.9s); heavy RAG/benchmark ops route directly to gemma-agentic (unlimited TPM, 5–11s) to avoid TPM cascade and eliminate 26B A4B fallback from critical path. This keeps 10s SLA achievable even under load.
       </div>
     </div>
 
@@ -1773,19 +1799,19 @@ p, div { font-family: 'Share Tech Mono', monospace; }
         </div>
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">Model Routing</div>
-          <div style="color:var(--neon-green)">✓ Smart routing: gemma-chat (light) → gemma-agentic (heavy, bypasses 4B)</div>
+          <div style="color:var(--neon-green)">✓ Smart routing: gemma-chat 31B (light) → gemma-agentic 31B (heavy, bypasses 26B A4B fallback)</div>
         </div>
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">Dry-run Mode</div>
-          <div style="color:var(--neon-yellow)">⚠ ACTIVE — first 5 missions require manual approval</div>
+          <div style="color:var(--neon-green)">✓ false — live operation active</div>
         </div>
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">customers_group_id</div>
-          <div style="color:var(--neon-red)">✗ Not set — update broker/config.md</div>
+          <div style="color:var(--neon-green)">✓ 120363423843296300@g.us</div>
         </div>
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">drivers_group_id</div>
-          <div style="color:var(--neon-red)">✗ Not set — update broker/config.md</div>
+          <div style="color:var(--neon-green)">✓ 120363407993783342@g.us</div>
         </div>
         <div style="padding:10px;background:rgba(0,0,0,.3);border-radius:6px">
           <div style="color:var(--text-dim);margin-bottom:4px">WhatsApp MCP</div>
@@ -2045,8 +2071,12 @@ p, div { font-family: 'Share Tech Mono', monospace; }
           <div style="font-size:13px;color:var(--text-dim)">type: route · match: channel=telegram · ALL Telegram messages handled by broker agent</div>
         </div>
         <div style="padding:12px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);border-radius:5px">
-          <div style="color:var(--neon-cyan);font-weight:700;margin-bottom:4px">WhatsApp → main (DEX)</div>
-          <div style="font-size:13px;color:var(--text-dim)">WhatsApp tr/lb → main agent (DEX). No explicit binding. Input-router routes within DEX.</div>
+          <div style="color:var(--neon-cyan);font-weight:700;margin-bottom:4px">WhatsApp DMs → main (DEX)</div>
+          <div style="font-size:13px;color:var(--text-dim)">WhatsApp tr/lb DMs → main agent (DEX). No explicit binding — falls through to default agent.</div>
+        </div>
+        <div style="padding:12px;background:rgba(180,0,255,.06);border:1px solid rgba(180,0,255,.2);border-radius:5px">
+          <div style="color:var(--neon-purple);font-weight:700;margin-bottom:4px">WhatsApp groups → broker</div>
+          <div style="font-size:13px;color:var(--text-dim)">Both known groups (120363407993783342 · 120363423843296300) explicitly bound to broker in openclaw.json bindings[].</div>
         </div>
         <div style="padding:12px;background:rgba(255,45,85,.06);border:1px solid rgba(255,45,85,.2);border-radius:5px">
           <div style="color:#ff2d55;font-weight:700;margin-bottom:4px">social-free → direct invoke</div>
@@ -2072,15 +2102,15 @@ p, div { font-family: 'Share Tech Mono', monospace; }
   <div class="grid-3" style="margin-bottom:14px">
     <!-- Pool overview cards rendered by JS -->
     <div class="card" id="apim-pool-gemma-chat" style="border-color:rgba(57,255,20,.4)">
-      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMMA CHAT POOL <span style="font-size:13px;color:var(--neon-cyan);font-weight:400">PRIMARY · 27B</span></div>
+      <div class="card-title" style="color:#39ff14"><span class="accent" style="background:#39ff14"></span>GEMMA CHAT POOL <span style="font-size:13px;color:var(--neon-cyan);font-weight:400">PRIMARY · 31B</span></div>
       <div id="apim-gemma-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemma-fallback" style="border-color:rgba(224,64,251,.3)">
-      <div class="card-title" style="color:var(--neon-magenta)"><span class="accent" style="background:var(--neon-magenta)"></span>GEMMA FALLBACK POOL <span style="font-size:13px;color:var(--text-dim);font-weight:400">HYBRID · 4B</span></div>
+      <div class="card-title" style="color:var(--neon-magenta)"><span class="accent" style="background:var(--neon-magenta)"></span>GEMMA FALLBACK POOL <span style="font-size:13px;color:var(--text-dim);font-weight:400">HYBRID · 26B A4B</span></div>
       <div id="apim-fallback-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemma-internal" style="border-color:rgba(105,255,71,.3)">
-      <div class="card-title" style="color:var(--neon-green)"><span class="accent" style="background:var(--neon-green)"></span>GEMMA INTERNAL POOL <span style="font-size:13px;color:var(--text-dim);font-weight:400">Cognee · mem0 · 12B</span></div>
+      <div class="card-title" style="color:var(--neon-green)"><span class="accent" style="background:var(--neon-green)"></span>GEMMA INTERNAL POOL <span style="font-size:13px;color:var(--neon-orange);font-weight:400">Cognee · mem0 · 26B A4B</span></div>
       <div id="apim-internal-content" style="color:var(--text-dim);font-size:16px">Loading…</div>
     </div>
     <div class="card" id="apim-pool-gemma-agentic" style="border-color:rgba(255,109,0,.3)">
@@ -2119,12 +2149,12 @@ p, div { font-family: 'Share Tech Mono', monospace; }
       <div style="font-size:16px;line-height:2;color:var(--text-main)">
         <div><span style="color:#39ff14">Media / images</span> → input-router MEDIA_RE → LiteLLM → <span style="color:var(--neon-orange)">gemini-vision (12 keys · 2.0-flash)</span></div>
         <div><span style="color:#39ff14">Code</span> → input-router CODE_RE → LiteLLM → <span style="color:#00ffcc">codestral (9 keys · Codestral)</span></div>
-        <div><span style="color:#39ff14">Complex text</span> → input-router → litellm plugin → LiteLLM → <span style="color:var(--neon-cyan)">gemma-chat (28 keys · 27B)</span></div>
-        <div><span style="color:#39ff14">Short text</span> → input-router → LiteLLM → <span style="color:var(--neon-magenta)">gemma-fallback (28 keys · 4B)</span></div>
+        <div><span style="color:#39ff14">Complex text</span> → input-router → litellm plugin → LiteLLM → <span style="color:var(--neon-cyan)">gemma-chat (28 keys · 31B)</span></div>
+        <div><span style="color:#39ff14">Short text</span> → input-router → LiteLLM → <span style="color:var(--neon-magenta)">gemma-fallback (28 keys · 26B A4B)</span></div>
         <div><span style="color:#39ff14">Internal agents</span> → input-router (mistral provider) → LiteLLM → <span style="color:var(--neon-orange)">gemma-agentic (28 keys · 31B · ∞ TPM)</span></div>
         <div><span style="color:#39ff14">Memory embeddings</span> → LiteLLM → <span style="color:var(--neon-yellow)">gemini-embedding + gemini-embedding-2 (28 keys each)</span></div>
         <div><span style="color:#39ff14">SLA fallback chain</span> → gemma-chat → <span style="color:var(--neon-cyan)">mistral-chat (9 keys · 314ms)</span> → gemma-agentic</div>
-        <div style="margin-top:8px;color:var(--text-dim)">gemini-vision fallback → mistral-large. Mistral Large: explicit PDF only. gemma-internal: passive fallback only (beta quota ~100-500 RPD).</div>
+        <div style="margin-top:8px;color:var(--text-dim)">gemini-vision fallback → mistral-large. Mistral Large: explicit PDF only. gemma-internal + openai/gemma-internal: Cognee LLM + mem0 REST LLM only.</div>
       </div>
     </div>
   </div>
@@ -2150,7 +2180,7 @@ p, div { font-family: 'Share Tech Mono', monospace; }
 // DATA
 // ═══════════════════════════════════════════════════════════════
 const SYSTEM = {
-  gateway: { version:'2026.4.15', commit:'041266a', port:18789, pid:289, bind:'loopback', node:'v24.15.0', wsUrl:'ws://127.0.0.1:18789', dashboard:'http://127.0.0.1:18789/' },
+  gateway: { version:'2026.4.15', commit:'041266a', port:18789, pid:107740, bind:'loopback', node:'v24.15.0', wsUrl:'ws://127.0.0.1:18789', dashboard:'http://127.0.0.1:18789/' },
   channels: [
     { type:'Telegram', bot:'@dexclawbot_bot', dmPolicy:'open', allowFrom:'*', groupPolicy:'open', groups:2 },
     { type:'WhatsApp', accounts:'tr (active) · lb (needs pair) · default', dmPolicy:'pairing', allowFrom:'+96176370259 · +905013478718', groupPolicy:'open' },
@@ -2159,20 +2189,22 @@ const SYSTEM = {
 };
 
 const SERVICES = [
-  { id:'openclaw-gateway', name:'🌐 OPENCLAW GATEWAY', port:18789, proto:'WebSocket/HTTP', cpu:1.8, mem:3.2, pid:289, unit:'openclaw-gateway.service', desc:'Main AI gateway. Handles Telegram, runs agents, loads plugins.', color:'var(--neon-cyan)', uptime:'1h 31m' },
-  { id:'cognee', name:'🧠 COGNEE', port:8000, proto:'HTTP/uvicorn', cpu:0.2, mem:1.8, pid:286, unit:'cognee.service', desc:'Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--neon-magenta)', uptime:'3d 12h' },
-  { id:'mem0', name:'💾 MEM0 REST', port:8080, proto:'HTTP/FastAPI', cpu:0.5, mem:0.7, pid:5751, unit:'mem0.service', desc:'Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--neon-orange)', uptime:'4d 02h' },
-  { id:'qdrant', name:'🗄️ QDRANT', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:2.2, pid:290, unit:'qdrant.service', desc:'Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--neon-green)', uptime:'4d 15h' },
-  { id:'litellm', name:'🔗 LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:0.2, mem:1.6, pid:284, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 11 pools (4 Gemma · 1 Vision · 2 Embed · 4 Mistral). Fallback: gemma-chat→mistral-chat→gemma-agentic.', color:'var(--neon-yellow)', uptime:'1h 31m' },
+  { id:'openclaw-gateway', name:'🌐 OPENCLAW GATEWAY', port:18789, proto:'WebSocket/HTTP', cpu:1.1, mem:3.9, pid:107740, unit:'openclaw-gateway.service', desc:'Main AI gateway. Handles Telegram, runs agents, loads plugins.', color:'var(--neon-cyan)', uptime:'running' },
+  { id:'cognee', name:'🧠 COGNEE', port:8000, proto:'HTTP/uvicorn', cpu:0.3, mem:2.2, pid:109940, unit:'cognee.service', desc:'Graph memory service. Python cognee v1.0.1. POST /api/v1/search for recall.', color:'var(--neon-magenta)', uptime:'running' },
+  { id:'mem0', name:'💾 MEM0 REST', port:8080, proto:'HTTP/FastAPI', cpu:0.2, mem:0.6, pid:109941, unit:'mem0.service', desc:'Python mem0 REST API. Endpoints: /memories, /search. Qdrant backend (mem0-rest).', color:'var(--neon-orange)', uptime:'running' },
+  { id:'qdrant', name:'🗄️ QDRANT', port:6333, proto:'HTTP/gRPC', cpu:0.2, mem:3.1, pid:280, unit:'qdrant.service', desc:'Vector database v1.14.1. 4 collections. Stores mem0 & cognee embeddings.', color:'var(--neon-green)', uptime:'running' },
+  { id:'litellm', name:'🔗 LITELLM PROXY', port:4000, proto:'HTTP/OpenAI-compat', cpu:1.2, mem:2.7, pid:109938, unit:'litellm-proxy.service', desc:'LiteLLM proxy. 13 pools (4 Gemma + openai/gemma-internal + openai/gemini-embedding · 1 Vision · 2 Embed · 4 Mistral). Fallback: gemma-chat→mistral-chat→gemma-agentic.', color:'var(--neon-yellow)', uptime:'running' },
+  { id:'broker-log-extractor', name:'📋 BROKER LOG EXTRACTOR', port:null, proto:'systemd daemon', cpu:0.0, mem:0.0, pid:87023, unit:'broker-log-extractor.service', desc:'Python daemon. Tails OpenClaw gateway log. Detects "Proceeding to Broadcast" → fires create-mission.sh. Auto-restarts on failure. Runs alongside gateway.', color:'var(--neon-purple)', uptime:'running' },
+  { id:'broker-broadcast-watcher', name:'📡 BROKER BROADCAST WATCHER', port:null, proto:'systemd daemon', cpu:0.0, mem:0.0, pid:55734, unit:'broker-broadcast-watcher.service', desc:'Bash daemon. Auto-sends new missions to WhatsApp drivers group when broker creates them. After=openclaw-gateway. Auto-restarts on failure.', color:'var(--neon-orange)', uptime:'running' },
 ];
 
 const PLUGINS = [
   { name:'openclaw-mem0', kind:'memory slot', version:'1.0.5', enabled:true, desc:'Episodic memory. JS plugin embedded in gateway. Qdrant :6333 (mem0-openclaw, 3072d). topK=10. prependSystemContext before every prompt.' },
-  { name:'cognee-augment', kind:'hook', version:'1.0.0', enabled:true, desc:'Graph memory hooks. api.on() for before_prompt_build (recall→appendSystemContext) + agent_end (cognify). Cognee :8000 · dataset: openclaw-main.' },
-  { name:'input-router', kind:'hook', version:'2.5.0', enabled:true, desc:'Code + complexity routing. Media/images → gemini-vision (2.0-flash). CODE_RE → codestral. Long/complex → gemma-chat (27B). Short → gemma-fallback (4B). Internal (mistral provider) → gemma-agentic (∞ TPM). Maps URL → Nominatim location resolver.' },
+  { name:'cognee-augment', kind:'hook', version:'1.0.0', enabled:true, desc:'Graph memory hooks. before_prompt_build: GRAPH_COMPLETION recall→appendSystemContext (60s cache safety net). agent_end: cognify. Dual-port ready: baseUrl :8000 (write) + recallBaseUrl :8000 (read). Dataset: openclaw-main. LLM: openai/gemma-internal (26B A4B).' },
+  { name:'input-router', kind:'hook', version:'1.0.0', enabled:true, desc:'Code + complexity routing. Media/images → gemini-vision (2.0-flash). CODE_RE → codestral. Long/complex → gemma-chat (31B). Short → gemma-fallback (26B A4B). Internal (mistral provider) → gemma-agentic (31B · ∞ TPM). Maps URL → Nominatim location resolver.' },
   { name:'telegram', kind:'channel', version:'built-in', enabled:true, desc:'Telegram bot. @dexclawbot_bot. dmPolicy=open, allowFrom=*, groupPolicy=open. 2 registered groups (requireMention=true).' },
   { name:'whatsapp', kind:'channel', version:'built-in', enabled:true, desc:'WhatsApp multi-account via Baileys. dmPolicy=pairing. Accounts: tr (active), lb (needs pair), default. groupPolicy=open. Allowed bypass: +96176370259, +905013478718.' },
-  { name:'litellm', kind:'provider', version:'built-in', enabled:true, desc:'LiteLLM-compatible provider. Routes to LiteLLM proxy :4000. All 11 pools via this plugin.' },
+  { name:'litellm', kind:'provider', version:'built-in', enabled:true, desc:'LiteLLM-compatible provider. Routes to LiteLLM proxy :4000. All 13 pools via this plugin.' },
   { name:'mistral', kind:'provider', version:'built-in', enabled:true, desc:'Mistral AI provider. Serves mistral-large-latest for PDF/image tasks (explicit routing only).' },
   { name:'google', kind:'provider', version:'built-in', enabled:true, desc:'Google AI provider. Present in config but inference goes through litellm plugin → LiteLLM proxy.' },
   { name:'openai', kind:'provider', version:'built-in', enabled:true, desc:'OpenAI-compatible provider. Present in config alongside litellm for compatibility.' },
@@ -2190,22 +2222,18 @@ const MISTRAL_MODELS = [
   { id:'pixtral-large-latest', ctx:'128k', input:['text','image'], role:'Vision / PDF' },
 ];
 
-const CODEX_MODELS = [
-  { id:'gpt-5.4', ctx:'272k', maxOut:'128k', reasoning:true },
-  { id:'gpt-5.4-mini', ctx:'272k', maxOut:'128k', reasoning:true },
-  { id:'gpt-5.2', ctx:'272k', maxOut:'128k', reasoning:true },
-];
 
 const COMMANDS = [
   { group:'🛠️ SERVICE MANAGEMENT', private:false, items:[
-    { desc:'Start all services', cmd:'systemctl --user start openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service' },
-    { desc:'Stop all services', cmd:'systemctl --user stop openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service' },
+    { desc:'Start all services', cmd:'systemctl --user start openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service broker-log-extractor.service broker-broadcast-watcher.service' },
+    { desc:'Stop all services', cmd:'systemctl --user stop openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service broker-log-extractor.service broker-broadcast-watcher.service' },
     { desc:'Restart gateway only', cmd:'systemctl --user restart openclaw-gateway.service' },
-    { desc:'Check all service status', cmd:'systemctl --user status openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service' },
+    { desc:'Check all service status', cmd:'systemctl --user status openclaw-gateway.service cognee.service mem0.service qdrant.service litellm-proxy.service broker-log-extractor.service broker-broadcast-watcher.service' },
     { desc:'View gateway logs (live)', cmd:'journalctl --user -u openclaw-gateway.service -f' },
     { desc:'View cognee logs', cmd:'journalctl --user -u cognee.service -f' },
     { desc:'View LiteLLM logs', cmd:'journalctl --user -u litellm-proxy.service -f' },
     { desc:'View mem0 logs', cmd:'journalctl --user -u mem0.service -f' },
+    { desc:'View broker log extractor logs', cmd:'journalctl --user -u broker-log-extractor.service -f' },
   ]},
   { group:'🌐 OPENCLAW GATEWAY', private:false, items:[
     { desc:'Gateway status (detailed)', cmd:'openclaw gateway status' },
@@ -2248,7 +2276,7 @@ const COMMANDS = [
   { group:'MEMORY — COGNEE (:8000)', private:false, items:[
     { desc:'Get Cognee auth token', cmd:"TOKEN=$(curl -s -X POST http://127.0.0.1:8000/api/v1/auth/login \\\n  -d 'username=default_user&password=default_password' \\\n  | python3 -c 'import sys,json; print(json.load(sys.stdin)[\"access_token\"])')" },
     { desc:'List Cognee datasets', cmd:'curl -H "Authorization: Bearer $TOKEN" http://127.0.0.1:8000/api/v1/datasets' },
-    { desc:'Search Cognee knowledge', cmd:'curl -X POST http://127.0.0.1:8000/api/v1/search \\\n  -H "Authorization: Bearer $TOKEN" \\\n  -H "Content-Type: application/json" \\\n  -d \'{"query":"OpenClaw architecture","searchType":"insights","datasetIds":[]}\'' },
+    { desc:'Search Cognee knowledge', cmd:'curl -X POST http://127.0.0.1:8000/api/v1/search \\\n  -H "Authorization: Bearer $TOKEN" \\\n  -H "Content-Type: application/json" \\\n  -d \'{"query":"OpenClaw architecture","searchType":"GRAPH_COMPLETION","datasetIds":[]}\'' },
     { desc:'Re-index knowledge (cognify)', cmd:"curl -X POST http://127.0.0.1:8000/api/v1/cognify \\\n  -H 'Authorization: Bearer $TOKEN' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"datasetIds\":[\"openclaw-main\"],\"runInBackground\":true}'" },
   ]},
   { group:'📱 WHATSAPP CHANNEL', private:false, items:[
@@ -2552,20 +2580,6 @@ setTimeout(animateCounters,300);
       </div>
     </div>`).join('');
 
-  const cm=document.getElementById('codex-models');
-  cm.innerHTML=CODEX_MODELS.map(m=>`
-    <div style="display:flex;justify-content:space-between;align-items:center;
-      padding:6px 10px;margin-bottom:4px;background:rgba(0,0,0,.3);
-      border-radius:3px;border-left:2px solid var(--neon-orange)">
-      <div>
-        <div style="font-size:16px;color:var(--text-main)">${m.id}</div>
-        <div style="font-size:16px;color:var(--text-dim)">Reasoning: ${m.reasoning?'✓':'-'}</div>
-      </div>
-      <div style="text-align:right;font-size:16px;color:var(--text-dim)">
-        ctx:${m.ctx}<br>out:${m.maxOut}
-      </div>
-    </div>`).join('');
-
   // API key dots
   function renderDots(containerId, total, working){
     const el=document.getElementById(containerId);
@@ -2685,7 +2699,9 @@ setTimeout(animateCounters,300);
 ├── cognee.service  <span class="tag" style="background:rgba(224,64,251,.1);color:var(--neon-magenta)">:8000</span>
 ├── mem0.service  <span class="tag" style="background:rgba(255,109,0,.1);color:var(--neon-orange)">:8080</span>
 ├── qdrant.service  <span class="tag" style="background:rgba(105,255,71,.1);color:var(--neon-green)">:6333</span>
-└── litellm-proxy.service  <span class="tag" style="background:rgba(255,234,0,.1);color:var(--neon-yellow)">:4000</span>
+├── litellm-proxy.service  <span class="tag" style="background:rgba(255,234,0,.1);color:var(--neon-yellow)">:4000</span>
+├── broker-log-extractor.service  <span class="tag" style="background:rgba(180,0,255,.1);color:var(--neon-purple)">daemon</span>
+└── broker-broadcast-watcher.service  <span class="tag" style="background:rgba(255,109,0,.1);color:var(--neon-orange)">daemon</span>
 
 ~/.venvs/
 ├── cognee/ (Python 3.12, cognee 1.0.1)
@@ -2743,13 +2759,15 @@ function copyCmd(btn,e){
 // ═══════════════════════════════════════════════════════════════
 const STATIC_STATUS={
   last_updated: new Date().toISOString(),
-  gateway:{ status:'online', port:18789, pid:289 },
+  gateway:{ status:'online', port:18789, pid:107740 },
   services:{
-    'openclaw-gateway':{ active:true, cpu:1.8, mem:3.2, port:18789 },
-    'cognee':{ active:true, cpu:0.2, mem:1.8, port:8000 },
-    'mem0':{ active:true, cpu:0.5, mem:0.7, port:8080 },
-    'qdrant':{ active:true, cpu:0.2, mem:2.2, port:6333 },
-    'litellm-proxy':{ active:true, cpu:0.2, mem:1.6, port:4000 },
+    'openclaw-gateway':{ active:true, cpu:1.1, mem:3.9, port:18789 },
+    'cognee':{ active:true, cpu:0.3, mem:2.2, port:8000 },
+    'mem0':{ active:true, cpu:0.2, mem:0.6, port:8080 },
+    'qdrant':{ active:true, cpu:0.2, mem:3.1, port:6333 },
+    'litellm-proxy':{ active:true, cpu:1.2, mem:2.7, port:4000 },
+    'broker-log-extractor':{ active:true, cpu:0.0, mem:0.0 },
+    'broker-broadcast-watcher':{ active:true, cpu:0.0, mem:0.0 },
   },
   api:{
     gemma_chat:        { total:28, healthy:28, resting:0 },
@@ -2759,7 +2777,7 @@ const STATIC_STATUS={
     gemini_embedding:  { total:28, healthy:28, resting:0 },
     gemini_embedding_2:{ total:28, healthy:28, resting:0 },
   },
-  memory:{ mem0_openclaw_points:19, mem0_rest_points:9 },
+  memory:{ mem0_openclaw_points:61, mem0_rest_points:9 },
   litellm:{ healthy_endpoints:174, unhealthy_endpoints:0 },
   key_states:{
     schema_version:'1.1',
@@ -2901,9 +2919,9 @@ function renderApiMonitoring(d){
       ${hasResting?`<div style="margin-top:8px;font-size:15px;color:var(--neon-red)">⚠ ${restingCount} key${restingCount!==1?'s':''} at daily quota — resting until midnight PT</div>`:'<div style="margin-top:8px;font-size:15px;color:#39ff14">✓ All keys active</div>'}`;
   }
 
-  renderPool('apim-gemma-content',    'gemma-chat',         'Gemma 3 27B',       'gemma-chat · 28 keys · rpm:28 · PRIMARY');
-  renderPool('apim-fallback-content', 'gemma-fallback',     'Gemma 3 4B',        'gemma-fallback · 28 keys · rpm:18 · HYBRID');
-  renderPool('apim-internal-content', 'gemma-internal',     'Gemma 3 12B',       'gemma-internal · 28 keys · rpm:28 · Cognee + mem0');
+  renderPool('apim-gemma-content',    'gemma-chat',         'Gemma 4 31B',       'gemma-chat · 28 keys · rpm:28 · PRIMARY');
+  renderPool('apim-fallback-content', 'gemma-fallback',     'Gemma 4 26B A4B',   'gemma-fallback · 28 keys · rpm:18 · HYBRID');
+  renderPool('apim-internal-content', 'gemma-internal',     'Gemma 4 26B A4B',   'gemma-internal · 28 keys · rpm:28 · Cognee LLM + mem0 LLM');
   renderPool('apim-agentic-content',  'gemma-agentic',      'Gemma 4 31B',       'gemma-agentic · 28 keys · rpm:13 · future subagents');
   renderPool('apim-embed-content',    'gemini-embedding',   'Gemini Embedding 1','gemini-embedding · 28 keys · 3072d · rpm:98');
   renderPool('apim-embed2-content',   'gemini-embedding-2', 'Gemini Embedding 2','gemini-embedding-2 · 28 keys · 3072d · rpm:98');
@@ -2997,8 +3015,8 @@ loadLiveData();
       <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L3 · Ports &amp; procs</span><span class="flag-desc">LiteLLM :4000, Qdrant :6333, Cognee :8000, OpenClaw gateway :18789 — alive with PIDs</span></div>
       <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L4 · Filesystem</span><span class="flag-desc">openclaw.json, .env, extensions/, workspace/, mem0 history.db — exist and writable</span></div>
       <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L5 · Config deep</span><span class="flag-desc">openclaw.json schema: gateway bind, model routing, fallbacks, LiteLLM catalog, input-router models, mem0 embedder/LLM targets</span></div>
-      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L6 · LiteLLM proxy</span><span class="flag-desc">/health + /v1/models — all 8 model pools registered: gemma-chat/fallback/internal/agentic, both embeddings, openai aliases</span></div>
-      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L7 · Live inference</span><span class="flag-desc">Real API calls: gemma-chat (27B), gemma-fallback (4B), gemma-internal (12B) → response OK; gemini-embedding → 3072 dims</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L6 · LiteLLM proxy</span><span class="flag-desc">/health + /v1/models — all 13 model pools registered: gemma-chat/fallback/internal/agentic, both embeddings, openai/gemma-internal, openai/gemini-embedding, gemini-vision, mistral-chat/large/embed, codestral</span></div>
+      <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L7 · Live inference</span><span class="flag-desc">Real API calls: gemma-chat (31B), gemma-fallback (26B A4B), gemma-internal (26B A4B) → response OK; gemini-embedding → 3072 dims</span></div>
       <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L8 · Qdrant / mem0</span><span class="flag-desc">Collections: mem0-openclaw present, dim=3072; history.db exists</span></div>
       <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L8B · Cognee</span><span class="flag-desc">Cognee API responding at :8000</span></div>
       <div class="flag-row"><span class="flag-key" style="color:var(--neon-cyan)">L9 · Telegram</span><span class="flag-desc">Bot token valid, @dexclawbot_bot getMe OK, api.telegram.org reachable</span></div>
@@ -3017,7 +3035,7 @@ loadLiveData();
     <div class="script-path">~/.openclaw/scripts/quota-probe.py</div>
     <div class="script-desc">
       Multi-provider API rate-limit scanner. Directly probes Gemini (28 keys × 6 models) and
-      Mistral (6 keys × 1 model), bypassing LiteLLM. Three test modes:
+      Mistral (9 keys × 4 pools), bypassing LiteLLM. Three test modes:
       <b style="color:#00ffcc">Health</b> (1 req/key — alive or dead?),
       <b style="color:var(--neon-yellow)">Burst RPM</b> (N simultaneous — find empirical ceiling),
       <b style="color:var(--neon-orange)">TPM Stress</b> (16K-token payload — prove the 15K TPM wall).
@@ -3025,11 +3043,11 @@ loadLiveData();
     </div>
     <div class="script-flags">
       <div class="flag-row"><span class="flag-key">(no flags)</span><span class="flag-desc">Health scan all 28 Gemini + 6 Mistral keys across all models</span></div>
-      <div class="flag-row"><span class="flag-key">--burst</span><span class="flag-desc">+ empirical RPM ceiling — fires burst_n simultaneous requests per model (model-aware: 38 for Gemma-3, 20 for 31B, 110 for embeddings, 10 for Mistral)</span></div>
-      <div class="flag-row"><span class="flag-key">--tpm-stress</span><span class="flag-desc">+ TPM wall test — sends ~16K-token payload on one Gemma-3 key per model. Confirms 15K TPM/min limit. Costs ~16K tokens per tested model.</span></div>
+      <div class="flag-row"><span class="flag-key">--burst</span><span class="flag-desc">+ empirical RPM ceiling — fires burst_n simultaneous requests per model (model-aware: 38 for Gemma 4 26B A4B, 20 for 31B, 110 for embeddings, 10 for Mistral)</span></div>
+      <div class="flag-row"><span class="flag-key">--tpm-stress</span><span class="flag-desc">+ TPM wall test — sends ~16K-token payload on one Gemma 4 key per model. Confirms 15K TPM/min limit. Costs ~16K tokens per tested model.</span></div>
       <div class="flag-row"><span class="flag-key">--full</span><span class="flag-desc">Run all three tests (health + burst + tpm-stress) in one pass</span></div>
       <div class="flag-row"><span class="flag-key">--provider gemini|mistral</span><span class="flag-desc">Probe only one provider</span></div>
-      <div class="flag-row"><span class="flag-key">--model MODEL_ID</span><span class="flag-desc">Probe only this model (e.g. gemma-3-27b-it, mistral-large-latest)</span></div>
+      <div class="flag-row"><span class="flag-key">--model MODEL_ID</span><span class="flag-desc">Probe only this model (e.g. gemma-4-31b-it, mistral-large-latest)</span></div>
       <div class="flag-row"><span class="flag-key">--pool POOL_NAME</span><span class="flag-desc">Probe only this pool (e.g. gemma-chat, gemma-agentic, mistral-multimodal)</span></div>
       <div class="flag-row"><span class="flag-key">--key KEY_NAME</span><span class="flag-desc">Probe only one key (e.g. GEMINI_API_KEY_5) — useful to debug a specific key</span></div>
       <div class="flag-row"><span class="flag-key">--samples N</span><span class="flag-desc">Burst-test N keys per model instead of default 3 — use --samples 28 for full pool burst</span></div>
@@ -3039,7 +3057,7 @@ loadLiveData();
       <div class="cmd-block"><span class="cmd-desc">Full health scan — run this first after adding keys or after a 429 storm</span><code>! python3 ~/.openclaw/scripts/quota-probe.py</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
       <div class="cmd-block"><span class="cmd-desc">Burst RPM test — 3 keys per model, empirical ceiling</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --burst</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
       <div class="cmd-block"><span class="cmd-desc">All three tests in one run (takes ~3–4 min)</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --full</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
-      <div class="cmd-block"><span class="cmd-desc">Prove the 15K TPM wall on all Gemma-3 pools</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --tpm-stress --provider gemini</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
+      <div class="cmd-block"><span class="cmd-desc">Prove the 15K TPM wall on all Gemma 4 pools</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --tpm-stress --provider gemini</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
       <div class="cmd-block"><span class="cmd-desc">Check Mistral only with burst RPM</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --provider mistral --burst</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
       <div class="cmd-block"><span class="cmd-desc">Debug one specific key</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --key GEMINI_API_KEY_5</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
       <div class="cmd-block"><span class="cmd-desc">Machine-readable — pipe to jq for pool summaries</span><code>! python3 ~/.openclaw/scripts/quota-probe.py --json | jq '.pools["gemma-chat"].summary'</code><button class="copy-btn" onclick="copyCmd(this)">COPY</button></div>
@@ -3072,8 +3090,9 @@ loadLiveData();
     <div class="script-name">dex-watcher.sh &nbsp;<span class="script-tag tag-event">EVENT-DRIVEN</span></div>
     <div class="script-path">~/dex-dashboard/dex-watcher.sh</div>
     <div class="script-desc">
-      File watcher that detects changes to <code>data.json</code>, <code>key-states.json</code>,
-      and <code>quota-scan.json</code> and automatically commits + pushes to GitHub Pages.
+      inotify file watcher that monitors <code>~/.openclaw/</code> recursively for changes to
+      <code>.env</code>, <code>openclaw.json</code>, <code>*.plugin.json</code>, and <code>*.md</code> files.
+      Fires <code>on-config-change.sh</code> with debounce on any match and automatically commits + pushes to GitHub Pages.
       Run as a background process. Debounces pushes by 15 seconds to avoid rapid-fire commits.
     </div>
     <div class="script-examples">
@@ -3141,7 +3160,7 @@ loadLiveData();
       <tbody style="color:var(--text-main)">
         <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
           <td style="padding:6px 10px;color:var(--neon-cyan)">gemma-chat</td>
-          <td style="padding:6px 10px">Gemma 3 27B</td>
+          <td style="padding:6px 10px">Gemma 4 31B</td>
           <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">33</td>
           <td style="padding:6px 10px;text-align:right">30</td>
           <td style="padding:6px 10px;text-align:right;color:var(--neon-red)">15,000</td>
@@ -3150,7 +3169,7 @@ loadLiveData();
         </tr>
         <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
           <td style="padding:6px 10px;color:var(--neon-cyan)">gemma-fallback</td>
-          <td style="padding:6px 10px">Gemma 3 4B</td>
+          <td style="padding:6px 10px">Gemma 4 26B A4B</td>
           <td style="padding:6px 10px;text-align:right;color:var(--neon-yellow)">20</td>
           <td style="padding:6px 10px;text-align:right">30</td>
           <td style="padding:6px 10px;text-align:right;color:var(--neon-red)">15,000</td>
@@ -3159,7 +3178,7 @@ loadLiveData();
         </tr>
         <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
           <td style="padding:6px 10px;color:var(--neon-cyan)">gemma-internal</td>
-          <td style="padding:6px 10px">Gemma 3 12B</td>
+          <td style="padding:6px 10px">Gemma 4 26B A4B</td>
           <td style="padding:6px 10px;text-align:right;color:var(--neon-green)">31</td>
           <td style="padding:6px 10px;text-align:right">30</td>
           <td style="padding:6px 10px;text-align:right;color:var(--neon-red)">15,000</td>
@@ -3205,7 +3224,7 @@ loadLiveData();
       </tbody>
     </table>
     <div style="margin-top:10px;font-size:13px;color:var(--text-dim)">
-      TPM wall confirmed by <code style="color:#00ffcc">--tpm-stress</code> test · 4B real RPM=20 (not 30) confirmed by <code style="color:#00ffcc">--burst</code> · Config corrected 2026-04-28
+      TPM wall confirmed by <code style="color:#00ffcc">--tpm-stress</code> test · gemma-fallback (26B A4B) real RPM=20 (not 30) confirmed by <code style="color:#00ffcc">--burst</code> · Config corrected 2026-04-28
     </div>
   </div>
 
@@ -3321,7 +3340,7 @@ loadLiveData();
           <div>⚠️ <span style="color:#ff9f43">Stop gateway before editing openclaw.json</span> — file watcher race condition</div>
           <div><span class="bp-warn">gemini-2.0-flash</span> — BANNED, deprecated</div>
           <div><span class="bp-warn">gemini-2.0-flash-preview-image-generation</span> — REMOVED by Google, use gemini-2.5-flash-image</div>
-          <div><span class="bp-warn">gemma-internal 12B</span> — never primary (beta quota ~100-500 RPD)</div>
+          <div><span class="bp-ok">gemma-internal 26B A4B</span> — Cognee LLM + mem0 REST LLM only (not user-chat path)</div>
           <div><span class="bp-ok">gemma-agentic 31B</span> — internal agents only (∞ TPM)</div>
           <div><span style="color:var(--neon-magenta)">mistral-large</span> — explicit-only (multimodal/PDF)</div>
           <div><span style="color:#ff2d55">social-free</span> — Gemini keys from config.json · FB/IG tokens required for live posting</div>
@@ -3343,6 +3362,8 @@ loadLiveData();
         <tr><td>litellm-proxy.service</td><td style="color:var(--neon-yellow)">4000</td><td>Python uvicorn</td><td>Model routing proxy — all inference goes through here</td></tr>
         <tr><td style="color:#ffaa00">law-tracker.timer</td><td style="color:var(--text-dim)">—</td><td>systemd user timer</td><td>Runs law_tracker.py weekly Mon 06:00 — KGM bridge fee change detection</td></tr>
         <tr><td style="color:#ffaa00">law-tracker.service</td><td style="color:var(--text-dim)">—</td><td>Python one-shot</td><td>Fingerprints KGM fee page · updates TR_BRIDGE_FEES.md · logs to tracker_log.jsonl</td></tr>
+        <tr><td style="color:var(--neon-purple)">broker-log-extractor.service</td><td style="color:var(--text-dim)">—</td><td>Python daemon</td><td>Tails gateway log · detects "Proceeding to Broadcast" → fires create-mission.sh. Auto-starts on boot.</td></tr>
+        <tr><td style="color:var(--neon-orange)">broker-broadcast-watcher.service</td><td style="color:var(--text-dim)">—</td><td>Bash daemon</td><td>Watches broker workspace · auto-sends new missions to WhatsApp drivers group. After=openclaw-gateway. Auto-restarts on failure.</td></tr>
       </tbody>
     </table>
   </div>
@@ -3400,16 +3421,18 @@ loadLiveData();
 
   <!-- LITELLM POOLS -->
   <div class="bp-card bp-section">
-    <div class="bp-section-title">LiteLLM Pools — 11 active</div>
+    <div class="bp-section-title">LiteLLM Pools — 13 active</div>
     <table class="bp-table">
       <thead><tr><th>Pool alias</th><th>Model</th><th>Keys</th><th>RPM/key</th><th>RPD/key</th><th>TPM</th><th>Role</th></tr></thead>
       <tbody>
-        <tr><td style="color:#39ff14">gemma-chat</td><td>Gemma 3 27B</td><td>28</td><td>28</td><td>14,400</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Primary user chat</td></tr>
-        <tr><td style="color:var(--neon-magenta)">gemma-fallback</td><td>Gemma 3 4B</td><td>28</td><td>18</td><td>14,400</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Fast / short messages</td></tr>
-        <tr><td style="color:var(--text-dim)">gemma-internal</td><td>Gemma 3 12B</td><td>28</td><td>28</td><td>~100-500</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Passive fallback only (beta quota)</td></tr>
+        <tr><td style="color:#39ff14">gemma-chat</td><td>Gemma 4 31B</td><td>28</td><td>28</td><td>14,400</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Primary user chat</td></tr>
+        <tr><td style="color:var(--neon-magenta)">gemma-fallback</td><td>Gemma 4 26B A4B</td><td>28</td><td>18</td><td>14,400</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Fast / short messages</td></tr>
+        <tr><td style="color:var(--neon-orange)">gemma-internal</td><td>Gemma 4 26B A4B</td><td>28</td><td>28</td><td>14,400</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Cognee LLM + mem0 REST LLM</td></tr>
+        <tr><td style="color:var(--neon-cyan)">openai/gemma-internal</td><td>Gemma 4 26B A4B</td><td>28</td><td>28</td><td>14,400</td><td style="color:var(--neon-red)">15K ⚠️</td><td>Cognee alias — openai/ prefix · expanded 3→28</td></tr>
         <tr><td style="color:var(--neon-orange)">gemma-agentic</td><td>Gemma 4 31B</td><td>28</td><td>13</td><td>1,500</td><td style="color:var(--neon-green)">∞ TPM ✅</td><td>Internal agents (cognee · mem0 · slug-gen)</td></tr>
         <tr><td style="color:var(--neon-yellow)">gemini-embedding</td><td>Gemini Embedding</td><td>28</td><td>98</td><td>1,000</td><td>—</td><td>Primary embeddings (3072-dim)</td></tr>
         <tr><td style="color:var(--neon-yellow)">gemini-embedding-2</td><td>Gemini Embedding 2</td><td>28</td><td>98</td><td>1,000</td><td>—</td><td>Embedding fallback (independent quota)</td></tr>
+        <tr><td style="color:var(--neon-cyan)">openai/gemini-embedding</td><td>Gemini Embedding 001</td><td>28</td><td>98</td><td>1,000</td><td>—</td><td>Cognee embed alias — openai/ prefix · expanded 3→28</td></tr>
         <tr><td style="color:var(--neon-cyan)">mistral-chat</td><td>Ministral 8B</td><td>9</td><td>4</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Chat fallback (314ms SLA)</td></tr>
         <tr><td style="color:var(--neon-cyan)">mistral-large</td><td>Mistral Large</td><td>9</td><td>2</td><td>~2,880</td><td style="color:var(--neon-green)">500K ✅</td><td>Explicit-only: gemini-vision fallback + PDF</td></tr>
         <tr><td style="color:var(--neon-orange)">gemini-vision</td><td>Gemini 2.0 Flash</td><td>12</td><td>15</td><td>1,500</td><td>—</td><td>Media / images (input-router multimodalModel)</td></tr>
@@ -3439,8 +3462,8 @@ loadLiveData();
         <tr><td>4</td><td>modelProviderId ≠ litellm and ≠ mistral</td><td style="color:var(--text-dim)">pass-through</td><td class="bp-dim">Google, Anthropic — untouched</td></tr>
         <tr><td>5</td><td>Prompt matches [media attached…]</td><td style="color:var(--neon-cyan)">gemini-vision</td><td class="bp-dim">MEDIA_RE pattern</td></tr>
         <tr><td>6</td><td>Code detected (CODE_RE)</td><td style="color:#00ffcc">codestral</td><td class="bp-dim">Code fences, def/import/function/SyntaxError…</td></tr>
-        <tr><td>7</td><td>Length &gt; 60 chars OR contains ? ! ؟</td><td style="color:#39ff14">gemma-chat (27B)</td><td class="bp-dim">Complex text path</td></tr>
-        <tr><td>8</td><td>Short / greeting</td><td style="color:var(--neon-magenta)">gemma-fallback (4B)</td><td class="bp-dim">Fast path</td></tr>
+        <tr><td>7</td><td>Length &gt; 60 chars OR contains ? ! ؟</td><td style="color:#39ff14">gemma-chat (31B)</td><td class="bp-dim">Complex text path</td></tr>
+        <tr><td>8</td><td>Short / greeting</td><td style="color:var(--neon-magenta)">gemma-fallback (26B A4B)</td><td class="bp-dim">Fast path</td></tr>
       </tbody>
     </table>
   </div>
@@ -3587,8 +3610,8 @@ loadLiveData();
       <div style="color:#ff9f43;font-family:'Orbitron',monospace;font-size:13px;margin-bottom:8px;letter-spacing:1px">PHASE 1 — INFRASTRUCTURE</div>
       <div>① Install Node.js v24+ via nvm · Python 3.11+ · ffmpeg · imagemagick · jq · pip3 install openai google-genai</div>
       <div>② Clone / install OpenClaw gateway · set port 18789 · configure <code>~/.openclaw/openclaw.json</code></div>
-      <div>③ Install &amp; start: qdrant.service (6333) · mem0.service (8080) · cognee.service (8000) · litellm-proxy.service (4000)</div>
-      <div>④ Build LiteLLM pools: gemma-chat (27B · 28 keys) · gemma-fallback (4B) · gemma-agentic (31B) · gemini-embedding · mistral-chat · codestral (see Pools table above)</div>
+      <div>③ Install &amp; start: qdrant.service (6333) · mem0.service (8080) · cognee.service (8000) · litellm-proxy.service (4000) · broker-log-extractor.service · broker-broadcast-watcher.service</div>
+      <div>④ Build LiteLLM pools: gemma-chat (31B · 28 keys) · gemma-fallback (26B A4B · 28 keys) · gemma-internal (26B A4B · 28 keys) · gemma-agentic (31B · 28 keys) · openai/gemma-internal alias · openai/gemini-embedding alias · gemini-embedding + gemini-embedding-2 · gemini-vision · mistral-chat · mistral-large · mistral-embed · codestral (see Pools table above)</div>
       <div style="color:#ff9f43;font-family:'Orbitron',monospace;font-size:13px;margin:10px 0 8px;letter-spacing:1px">PHASE 2 — AGENTS</div>
       <div>⑤ Register broker agent: agent.md in <code>~/.openclaw/agents/broker/</code> · add auth-profiles.json / auth-state.json / models.json</div>
       <div>⑥ Register social-free agent: agent.md in <code>~/.openclaw/agents/social-free/</code> · same 3 auth files · workspace scripts in <code>~/.openclaw/workspace/social/</code></div>
