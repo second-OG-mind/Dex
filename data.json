@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-07T10:00:03Z",
+  "last_updated": "2026-05-07T10:15:04Z",
   "gateway": {
     "status": "offline",
     "port": 18789,
@@ -16,7 +16,7 @@
     },
     "cognee": {
       "active": true,
-      "cpu": 0.2,
+      "cpu": 0.3,
       "mem": 2.2,
       "port": 8000,
       "status": "online"
@@ -36,7 +36,7 @@
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 1.0,
+      "cpu": 1.1,
       "mem": 2.5,
       "port": 4000
     }
@@ -78,9 +78,9 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 205,
-    "unhealthy_endpoints": 42,
-    "total_endpoints": 247
+    "healthy_endpoints": 0,
+    "unhealthy_endpoints": 0,
+    "total_endpoints": 0
   },
   "key_states": {
     "schema_version": "1.1",
@@ -88,47 +88,47 @@
       "gemini-embedding": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T10:00:03Z",
+        "last_checked": "2026-05-07T10:15:04Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T10:00:03Z",
+        "last_checked": "2026-05-07T10:15:04Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T10:00:03Z",
+        "last_checked": "2026-05-07T10:15:04Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T10:00:03Z",
+        "last_checked": "2026-05-07T10:15:04Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-agentic": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T10:00:03Z",
+        "last_checked": "2026-05-07T10:15:04Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-05-07T10:00:03Z",
+        "last_checked": "2026-05-07T10:15:04Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-05-07T10:00:03Z"
+    "last_updated": "2026-05-07T10:15:04Z"
   },
   "config": {
     "key_counts": {
