@@ -1,18 +1,18 @@
 {
-  "last_updated": "2026-05-07T15:15:01Z",
+  "last_updated": "2026-05-07T15:23:25Z",
   "gateway": {
-    "status": "offline",
+    "status": "online",
     "port": 18789,
-    "pid": 0,
+    "pid": 107740,
     "version": "2026.4.27"
   },
   "services": {
     "openclaw-gateway": {
-      "active": false,
-      "cpu": 0.0,
-      "mem": 0.0,
+      "active": true,
+      "cpu": 1.1,
+      "mem": 3.9,
       "port": 18789,
-      "pid": 0
+      "pid": 107740
     },
     "cognee": {
       "active": true,
@@ -39,6 +39,16 @@
       "cpu": 1.2,
       "mem": 2.6,
       "port": 4000
+    },
+    "broker-broadcast-watcher": {
+      "active": true,
+      "cpu": 0.0,
+      "mem": 0.0
+    },
+    "broker-log-extractor": {
+      "active": true,
+      "cpu": 0.0,
+      "mem": 0.0
     }
   },
   "api": {
@@ -217,7 +227,7 @@
         "model": "mistral/mistral-embed"
       }
     ],
-    "pool_count": 11,
+    "pool_count": 13,
     "channels": {
       "telegram": {
         "dm_policy": "open",
