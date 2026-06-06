@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-06T22:30:01Z",
+  "last_updated": "2026-06-06T22:45:02Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -69,8 +69,8 @@
     },
     "gemma_agentic": {
       "total": 28,
-      "healthy": 26,
-      "resting": 2
+      "healthy": 25,
+      "resting": 3
     },
     "gemini_embedding": {
       "total": 28,
@@ -135,28 +135,28 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-06-06T22:30:01Z",
-        "healthy_keys": 24,
-        "unhealthy_keys": 4
+        "last_checked": "2026-06-06T22:45:02Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-06T22:30:01Z",
+        "last_checked": "2026-06-06T22:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-06T22:30:01Z",
+        "last_checked": "2026-06-06T22:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-06T22:30:01Z",
+        "last_checked": "2026-06-06T22:45:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -180,21 +180,30 @@
             "recover_at": "2026-06-07T07:00:00Z",
             "recover_epoch": 1780815600,
             "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_API_KEY_6",
+            "key_display": "AIzaSy...****fV1I",
+            "reason": "daily_quota",
+            "resting_since": "2026-06-06T22:45:02Z",
+            "recover_at": "2026-06-07T07:00:00Z",
+            "recover_epoch": 1780815600,
+            "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-06-06T22:30:01Z",
+        "last_checked": "2026-06-06T22:45:02Z",
         "healthy_keys": 27,
         "unhealthy_keys": 1
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-06T22:30:01Z",
-        "healthy_keys": 26,
-        "unhealthy_keys": 2
+        "last_checked": "2026-06-06T22:45:02Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-06-06T22:30:01Z"
+    "last_updated": "2026-06-06T22:45:02Z"
   },
   "config": {
     "key_counts": {
