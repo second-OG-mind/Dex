@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-09T19:45:01Z",
+  "last_updated": "2026-06-09T20:00:00Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -37,7 +37,7 @@
     "litellm-proxy": {
       "active": true,
       "cpu": 0.8,
-      "mem": 3.1,
+      "mem": 3.2,
       "port": 4000
     },
     "broker-broadcast-watcher": {
@@ -74,8 +74,8 @@
     },
     "gemini_embedding": {
       "total": 28,
-      "healthy": 27,
-      "resting": 1
+      "healthy": 24,
+      "resting": 4
     },
     "gemini_embedding_2": {
       "total": 28,
@@ -88,8 +88,8 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 236,
-    "unhealthy_endpoints": 36,
+    "healthy_endpoints": 249,
+    "unhealthy_endpoints": 23,
     "total_endpoints": 272
   },
   "key_states": {
@@ -106,30 +106,57 @@
             "recover_at": "2026-06-10T07:00:00Z",
             "recover_epoch": 1781074800,
             "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_API_KEY_6",
+            "key_display": "AIzaSy...****fV1I",
+            "reason": "daily_quota",
+            "resting_since": "2026-06-09T20:00:00Z",
+            "recover_at": "2026-06-10T07:00:00Z",
+            "recover_epoch": 1781074800,
+            "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_API_KEY_15",
+            "key_display": "AIzaSy...****Spg0",
+            "reason": "daily_quota",
+            "resting_since": "2026-06-09T20:00:00Z",
+            "recover_at": "2026-06-10T07:00:00Z",
+            "recover_epoch": 1781074800,
+            "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_MEM_KEY_1",
+            "key_display": "AIzaSy...****94iQ",
+            "reason": "daily_quota",
+            "resting_since": "2026-06-09T20:00:00Z",
+            "recover_at": "2026-06-10T07:00:00Z",
+            "recover_epoch": 1781074800,
+            "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-06-09T19:45:01Z",
-        "healthy_keys": 23,
-        "unhealthy_keys": 5
+        "last_checked": "2026-06-09T20:00:00Z",
+        "healthy_keys": 25,
+        "unhealthy_keys": 3
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-09T19:45:01Z",
+        "last_checked": "2026-06-09T20:00:00Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-09T19:45:01Z",
+        "last_checked": "2026-06-09T20:00:00Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-09T19:45:01Z",
+        "last_checked": "2026-06-09T20:00:00Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -308,9 +335,9 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-06-09T19:45:01Z",
-        "healthy_keys": 27,
-        "unhealthy_keys": 1
+        "last_checked": "2026-06-09T20:00:00Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
@@ -343,12 +370,12 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-06-09T19:45:01Z",
-        "healthy_keys": 25,
-        "unhealthy_keys": 3
+        "last_checked": "2026-06-09T20:00:00Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-06-09T19:45:01Z"
+    "last_updated": "2026-06-09T20:00:00Z"
   },
   "config": {
     "key_counts": {
