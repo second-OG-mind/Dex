@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-15T00:30:01Z",
+  "last_updated": "2026-06-15T00:45:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -74,8 +74,8 @@
     },
     "gemini_embedding": {
       "total": 28,
-      "healthy": 25,
-      "resting": 3
+      "healthy": 24,
+      "resting": 4
     },
     "gemini_embedding_2": {
       "total": 28,
@@ -88,8 +88,8 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 249,
-    "unhealthy_endpoints": 23,
+    "healthy_endpoints": 250,
+    "unhealthy_endpoints": 22,
     "total_endpoints": 272
   },
   "key_states": {
@@ -124,30 +124,39 @@
             "recover_at": "2026-06-15T07:00:00Z",
             "recover_epoch": 1781506800,
             "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_API_KEY_8",
+            "key_display": "AIzaSy...****mY0E",
+            "reason": "daily_quota",
+            "resting_since": "2026-06-15T00:45:01Z",
+            "recover_at": "2026-06-15T07:00:00Z",
+            "recover_epoch": 1781506800,
+            "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-06-15T00:30:01Z",
-        "healthy_keys": 19,
-        "unhealthy_keys": 9
+        "last_checked": "2026-06-15T00:45:01Z",
+        "healthy_keys": 27,
+        "unhealthy_keys": 1
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-15T00:30:01Z",
+        "last_checked": "2026-06-15T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-15T00:30:01Z",
+        "last_checked": "2026-06-15T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-15T00:30:01Z",
+        "last_checked": "2026-06-15T00:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -182,19 +191,19 @@
             "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-06-15T00:30:01Z",
-        "healthy_keys": 28,
-        "unhealthy_keys": 0
+        "last_checked": "2026-06-15T00:45:01Z",
+        "healthy_keys": 26,
+        "unhealthy_keys": 2
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-15T00:30:01Z",
-        "healthy_keys": 22,
-        "unhealthy_keys": 6
+        "last_checked": "2026-06-15T00:45:01Z",
+        "healthy_keys": 28,
+        "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-06-15T00:30:01Z"
+    "last_updated": "2026-06-15T00:45:01Z"
   },
   "config": {
     "key_counts": {
