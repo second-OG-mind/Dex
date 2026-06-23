@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-23T01:45:01Z",
+  "last_updated": "2026-06-23T02:00:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -69,8 +69,8 @@
     },
     "gemma_agentic": {
       "total": 28,
-      "healthy": 3,
-      "resting": 25
+      "healthy": 1,
+      "resting": 27
     },
     "gemini_embedding": {
       "total": 28,
@@ -88,8 +88,8 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 214,
-    "unhealthy_endpoints": 58,
+    "healthy_endpoints": 175,
+    "unhealthy_endpoints": 97,
     "total_endpoints": 272
   },
   "key_states": {
@@ -98,28 +98,28 @@
       "gemini-embedding": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-23T01:45:01Z",
+        "last_checked": "2026-06-23T02:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-23T01:45:01Z",
+        "last_checked": "2026-06-23T02:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-23T01:45:01Z",
+        "last_checked": "2026-06-23T02:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-23T01:45:01Z",
+        "last_checked": "2026-06-23T02:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
@@ -350,21 +350,39 @@
             "recover_at": "2026-06-23T07:00:00Z",
             "recover_epoch": 1782198000,
             "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_MEM_KEY_2",
+            "key_display": "AIzaSy...****aqbQ",
+            "reason": "daily_quota",
+            "resting_since": "2026-06-23T02:00:01Z",
+            "recover_at": "2026-06-23T07:00:00Z",
+            "recover_epoch": 1782198000,
+            "confirmed_daily": false
+          },
+          {
+            "key_name": "GEMINI_API_KEY_16",
+            "key_display": "AIzaSy...****igAU",
+            "reason": "daily_quota",
+            "resting_since": "2026-06-23T02:00:01Z",
+            "recover_at": "2026-06-23T07:00:00Z",
+            "recover_epoch": 1782198000,
+            "confirmed_daily": false
           }
         ],
-        "last_checked": "2026-06-23T01:45:01Z",
-        "healthy_keys": 10,
-        "unhealthy_keys": 18
+        "last_checked": "2026-06-23T02:00:01Z",
+        "healthy_keys": 7,
+        "unhealthy_keys": 21
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-06-23T01:45:01Z",
+        "last_checked": "2026-06-23T02:00:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-06-23T01:45:01Z"
+    "last_updated": "2026-06-23T02:00:01Z"
   },
   "config": {
     "key_counts": {
