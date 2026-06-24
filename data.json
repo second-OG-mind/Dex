@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-24T15:30:01Z",
+  "last_updated": "2026-06-24T15:45:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -88,8 +88,8 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 244,
-    "unhealthy_endpoints": 28,
+    "healthy_endpoints": 227,
+    "unhealthy_endpoints": 45,
     "total_endpoints": 272
   },
   "key_states": {
