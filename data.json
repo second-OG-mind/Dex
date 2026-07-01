@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-01T19:22:15Z",
+  "last_updated": "2026-07-01T19:25:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -9,45 +9,45 @@
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 128.0,
-      "mem": 2.0,
+      "cpu": 65.0,
+      "mem": 3.6,
       "port": 18789,
       "pid": 296
     },
     "cognee": {
       "active": true,
-      "cpu": 89.8,
-      "mem": 1.1,
+      "cpu": 5.5,
+      "mem": 1.7,
       "port": 8000,
       "status": "online"
     },
     "mem0": {
       "active": true,
-      "cpu": 64.2,
+      "cpu": 2.9,
       "mem": 0.6,
       "port": 8080,
       "status": "online"
     },
     "qdrant": {
       "active": true,
-      "cpu": 33.3,
+      "cpu": 1.6,
       "mem": 3.0,
       "port": 6333
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 77.9,
-      "mem": 1.2,
+      "cpu": 5.3,
+      "mem": 1.6,
       "port": 4000
     },
     "broker-broadcast-watcher": {
       "active": true,
-      "cpu": 0.4,
+      "cpu": 0.0,
       "mem": 0.0
     },
     "broker-log-extractor": {
       "active": true,
-      "cpu": 0.9,
+      "cpu": 0.0,
       "mem": 0.0
     }
   },
@@ -88,9 +88,9 @@
     "mem0_rest_points": 9
   },
   "litellm": {
-    "healthy_endpoints": 0,
-    "unhealthy_endpoints": 0,
-    "total_endpoints": 0
+    "healthy_endpoints": 245,
+    "unhealthy_endpoints": 27,
+    "total_endpoints": 272
   },
   "key_states": {
     "schema_version": "1.1",
