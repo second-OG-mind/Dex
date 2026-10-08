@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-08T11:10:02Z",
+  "last_updated": "2026-10-08T11:08:56Z",
   "gateway": {
     "status": "online",
     "port": 18789,
@@ -9,45 +9,45 @@
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 129.0,
-      "mem": 8.6,
+      "cpu": 140.0,
+      "mem": 3.7,
       "port": 18789,
       "pid": 318
     },
     "cognee": {
       "active": true,
-      "cpu": 11.4,
-      "mem": 1.7,
+      "cpu": 31.9,
+      "mem": 1.1,
       "port": 8000,
       "status": "online"
     },
     "mem0": {
       "active": true,
-      "cpu": 5.7,
+      "cpu": 19.6,
       "mem": 0.6,
       "port": 8080,
       "status": "online"
     },
     "qdrant": {
       "active": true,
-      "cpu": 3.5,
+      "cpu": 12.0,
       "mem": 3.0,
       "port": 6333
     },
     "litellm-proxy": {
       "active": true,
-      "cpu": 11.8,
+      "cpu": 41.3,
       "mem": 1.6,
       "port": 4000
     },
     "broker-broadcast-watcher": {
       "active": true,
-      "cpu": 0.0,
+      "cpu": 0.1,
       "mem": 0.0
     },
     "broker-log-extractor": {
       "active": true,
-      "cpu": 0.1,
+      "cpu": 0.3,
       "mem": 0.0
     }
   },
