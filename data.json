@@ -1,18 +1,18 @@
 {
-  "last_updated": "2026-10-13T08:00:01Z",
+  "last_updated": "2026-10-13T17:15:01Z",
   "gateway": {
     "status": "online",
     "port": 18789,
-    "pid": 299,
+    "pid": 154549,
     "version": "2026.4.27"
   },
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 1.4,
-      "mem": 4.1,
+      "cpu": 145.0,
+      "mem": 4.5,
       "port": 18789,
-      "pid": 299
+      "pid": 154549
     },
     "cognee": {
       "active": true,
@@ -37,7 +37,7 @@
     "litellm-proxy": {
       "active": true,
       "cpu": 1.2,
-      "mem": 2.9,
+      "mem": 3.0,
       "port": 4000
     },
     "broker-broadcast-watcher": {
@@ -98,47 +98,47 @@
       "gemini-embedding": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T08:00:01Z",
+        "last_checked": "2026-10-13T17:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T08:00:01Z",
+        "last_checked": "2026-10-13T17:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T08:00:01Z",
+        "last_checked": "2026-10-13T17:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T08:00:01Z",
+        "last_checked": "2026-10-13T17:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-agentic": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T08:00:01Z",
+        "last_checked": "2026-10-13T17:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T08:00:01Z",
+        "last_checked": "2026-10-13T17:45:01Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-10-13T08:00:01Z"
+    "last_updated": "2026-10-13T17:45:01Z"
   },
   "config": {
     "key_counts": {
