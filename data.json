@@ -1,18 +1,18 @@
 {
-  "last_updated": "2026-10-13T17:15:01Z",
+  "last_updated": "2026-10-13T19:00:02Z",
   "gateway": {
     "status": "online",
     "port": 18789,
-    "pid": 154549,
+    "pid": 157337,
     "version": "2026.4.27"
   },
   "services": {
     "openclaw-gateway": {
       "active": true,
-      "cpu": 145.0,
-      "mem": 4.5,
+      "cpu": 13.0,
+      "mem": 3.2,
       "port": 18789,
-      "pid": 154549
+      "pid": 157337
     },
     "cognee": {
       "active": true,
@@ -98,47 +98,47 @@
       "gemini-embedding": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T17:45:01Z",
+        "last_checked": "2026-10-13T19:00:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-chat": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T17:45:01Z",
+        "last_checked": "2026-10-13T19:00:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-fallback": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T17:45:01Z",
+        "last_checked": "2026-10-13T19:00:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-internal": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T17:45:01Z",
+        "last_checked": "2026-10-13T19:00:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemma-agentic": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T17:45:01Z",
+        "last_checked": "2026-10-13T19:00:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       },
       "gemini-embedding-2": {
         "total": 28,
         "resting_keys": [],
-        "last_checked": "2026-10-13T17:45:01Z",
+        "last_checked": "2026-10-13T19:00:02Z",
         "healthy_keys": 28,
         "unhealthy_keys": 0
       }
     },
-    "last_updated": "2026-10-13T17:45:01Z"
+    "last_updated": "2026-10-13T19:00:02Z"
   },
   "config": {
     "key_counts": {
